@@ -57,8 +57,8 @@ export default function Hero() {
             <div className="max-w-2xl rounded-md border border-white/15 bg-white/10 px-5 py-4 backdrop-blur-sm">
               <p className="text-sm leading-7 text-white/90 md:text-base">
                 <span className="font-semibold text-orange-300">Motto:</span>{" "}
-                <span className="italic">&ldquo;{siteData.motto}&rdquo;</span>
-                <span className="ml-2 text-white/60">— Always Ahead</span>
+                <span className="italic">{siteData.motto}</span>
+                
               </p>
             </div>
           </div>

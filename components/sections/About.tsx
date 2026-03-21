@@ -88,7 +88,7 @@ export default function About() {
               Vision, Mission & Values
             </h3>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="flex gap-5 overflow-x-auto pb-3 snap-x snap-mandatory lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0">
             {[
               {
                 icon: <Trophy size={20} />,
@@ -113,7 +113,7 @@ export default function About() {
             ].map((card) => (
               <div
                 key={card.title}
-                className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-[#d97706]/40 hover:shadow-md"
+                className="group w-[75vw] shrink-0 snap-start rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-[#d97706]/40 hover:shadow-md lg:w-auto lg:shrink"
               >
                 <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#d97706]/10 text-[#d97706] transition group-hover:bg-[#d97706] group-hover:text-white">
                   {card.icon}
@@ -163,7 +163,7 @@ export default function About() {
                 ))}
               </div>
               <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-[#d97706]/30 bg-[#fffaf2] px-5 py-2.5 text-sm font-semibold text-[#d97706]">
-                 Motto: Natuwe Mbele Daima 
+                 Motto: Natuwe Mbele Daima
               </div>
               <div className="flex flex-wrap gap-3">
                 <Link

@@ -2,15 +2,31 @@
 
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useState } from "react";
 import {
   Heart, LogOut, GraduationCap, Building2,
   Newspaper, ArrowRight, CheckCircle2,
   Monitor, Trophy, Hammer, Users,
   MessageCircle, Mail,
 } from "lucide-react";
+
+// ── Time-based greeting using browser local time ──────
+function getGreeting(): string {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 12) return "Good morning";
+  if (hour >= 12 && hour < 17) return "Good afternoon";
+  if (hour >= 17 && hour < 21) return "Good evening";
+  return "Good evening";
+}
+
+// ── Get first name cleanly ────────────────────────────
+function getFirstName(name: string | null | undefined): string {
+  if (!name) return "Donor";
+  // If it looks like a phone number, return "there"
+  if (name.match(/^\+?[\d\s]{7,}$/)) return "there";
+  return name.split(" ")[0];
+}
 
 const donationOptions = [
   {
@@ -47,7 +63,7 @@ const news = [
     tag: "Technology",
     title: "Computer Lab Upgrade — Goal: 20 New Computers",
     date: "February 2025",
-    body: "Our current lab has 8 computers for 400+ learners. We're fundraising to add 12 more machines and upgrade internet access.",
+    body: "Our current lab has 8 computers for 400+ learners. We are fundraising to add 12 more machines and upgrade internet access.",
     urgent: false,
   },
   {
@@ -63,7 +79,7 @@ const news = [
     tag: "Vision",
     title: "Sports Facilities — Building a Real Athletics Track",
     date: "December 2024",
-    body: "KES is highly competitive in athletics and Taekwondo. The school's vision is to build a proper athletics track and expand sports facilities.",
+    body: "KES is highly competitive in athletics and Taekwondo. The school vision is to build a proper athletics track and expand sports facilities.",
     urgent: false,
   },
 ];
@@ -72,11 +88,14 @@ export default function DonorDashboard() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [donated, setDonated] = useState<string | null>(null);
+  const [greeting, setGreeting] = useState("");
 
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/donors/portal");
     }
+    // Set greeting on client side so it uses the user's local time
+    setGreeting(getGreeting());
   }, [status, router]);
 
   const handleDonate = (id: string) => {
@@ -97,7 +116,7 @@ export default function DonorDashboard() {
 
   if (!session) return null;
 
-  const firstName = session.user?.name?.split(" ")[0] || "Donor";
+  const firstName = getFirstName(session.user?.name);
 
   return (
     <main className="min-h-screen bg-slate-50">
@@ -115,14 +134,10 @@ export default function DonorDashboard() {
 
           <div className="flex items-center gap-3">
             {session.user?.image ? (
-              <img
-                src={session.user.image}
-                alt={session.user.name || ""}
-                className="h-9 w-9 rounded-full border-2 border-[#d97706]"
-              />
+              <img src={session.user.image} alt={session.user.name || ""} className="h-9 w-9 rounded-full border-2 border-[#d97706]" />
             ) : (
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#d97706] text-sm font-bold text-white">
-                {session.user?.name?.charAt(0) || "D"}
+                {firstName.charAt(0).toUpperCase()}
               </div>
             )}
             <div className="hidden sm:block">
@@ -141,13 +156,13 @@ export default function DonorDashboard() {
 
       <div className="mx-auto max-w-[1200px] px-4 py-8 lg:px-6">
 
-        {/* Welcome */}
+        {/* ── Greeting ── */}
         <div className="mb-8">
           <h1 className="hero-title text-3xl text-slate-900">
-            Hi, {firstName}! 👋
+            {greeting}, {firstName}! 👋
           </h1>
           <p className="mt-1 text-sm text-slate-500">
-            Thank you for being part of the KES family. Here's how you can help today.
+            Thank you for being part of the KES family. Here is how you can help today.
           </p>
         </div>
 
@@ -183,10 +198,7 @@ export default function DonorDashboard() {
                     <p className="mb-5 text-sm leading-7 text-slate-500">{opt.desc}</p>
                     <div className="mb-4 flex flex-wrap gap-2">
                       {opt.amounts.map((amt) => (
-                        <span
-                          key={amt}
-                          className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700"
-                        >
+                        <span key={amt} className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700">
                           {amt}
                         </span>
                       ))}
@@ -242,8 +254,6 @@ export default function DonorDashboard() {
 
           {/* ── Right Sidebar ── */}
           <div className="space-y-5">
-
-            {/* What your gift does */}
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#d97706]/10 text-[#d97706]">
                 <GraduationCap size={20} />
@@ -265,7 +275,6 @@ export default function DonorDashboard() {
               </ul>
             </div>
 
-            {/* Contact Director */}
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <h3 className="mb-1 font-bold text-slate-900">Talk to the Director</h3>
               <p className="mb-4 text-sm leading-7 text-slate-500">

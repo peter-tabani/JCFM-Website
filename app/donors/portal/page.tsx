@@ -9,103 +9,156 @@ import {
   CheckCircle2, Heart,
 } from "lucide-react";
 
-// ── Stored donors (localStorage) ──
-const getStoredDonors = (): { name: string; email: string; password: string }[] => {
+// ── Donor storage helpers ─────────────────────────────
+type StoredDonor = {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  smsSent: boolean;
+  joinedAt: string;
+};
+
+const getDonors = (): StoredDonor[] => {
   if (typeof window === "undefined") return [];
   try { return JSON.parse(localStorage.getItem("kes_donors") || "[]"); }
   catch { return []; }
 };
 
-const saveDonor = (donor: { name: string; email: string; password: string }) => {
-  const donors = getStoredDonors();
-  donors.push({ ...donor, joinedAt: new Date().toISOString() } as never);
+const saveDonors = (donors: StoredDonor[]) =>
   localStorage.setItem("kes_donors", JSON.stringify(donors));
+
+const findByEmail = (email: string) =>
+  getDonors().find((d) => d.email?.toLowerCase() === email.toLowerCase());
+
+const findByPhone = (phone: string) => {
+  const clean = phone.replace(/\s/g, "").replace(/^0/, "+254");
+  return getDonors().find(
+    (d) => d.phone?.replace(/\s/g, "").replace(/^0/, "+254") === clean
+  );
 };
+
+const findByLoginId = (id: string) =>
+  id.match(/^\+?[\d\s]{7,}$/) ? findByPhone(id) : findByEmail(id);
 
 export default function DonorPortalPage() {
   const router = useRouter();
   const [tab, setTab] = useState<"login" | "register">("login");
 
   // Login
-  const [loginEmail, setLoginEmail] = useState("");
+  const [loginId, setLoginId] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [showLoginPass, setShowLoginPass] = useState(false);
   const [loginLoading, setLoginLoading] = useState(false);
   const [loginError, setLoginError] = useState("");
+  const [existingAccount, setExistingAccount] = useState(false);
 
   // Register
   const [regName, setRegName] = useState("");
   const [regEmail, setRegEmail] = useState("");
+  const [regPhone, setRegPhone] = useState("");
   const [regPassword, setRegPassword] = useState("");
   const [regConfirm, setRegConfirm] = useState("");
   const [showRegPass, setShowRegPass] = useState(false);
   const [regLoading, setRegLoading] = useState(false);
   const [regError, setRegError] = useState("");
   const [regSuccess, setRegSuccess] = useState(false);
-
-  // Google loading
   const [googleLoading, setGoogleLoading] = useState(false);
 
-  // ── Google Sign-In ──
   const handleGoogle = async () => {
     setGoogleLoading(true);
     await signIn("google", { callbackUrl: "/donors/portal/dashboard" });
   };
 
-  // ── Email Login ──
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginLoading(true);
     setLoginError("");
+    setExistingAccount(false);
 
-    const donors = getStoredDonors();
-    const donor = donors.find(
-      (d) => d.email === loginEmail && d.password === loginPassword
-    );
+    const donor = findByLoginId(loginId);
+    if (!donor) {
+      setLoginError("No account found with that email or phone number.");
+      setLoginLoading(false);
+      return;
+    }
+    if (donor.password !== loginPassword) {
+      setLoginError("Incorrect password. Please try again.");
+      setLoginLoading(false);
+      return;
+    }
 
-    if (donor) {
-      const result = await signIn("credentials", {
-        email: loginEmail,
-        password: loginPassword,
-        redirect: false,
-      });
-      if (result?.ok) {
-        router.push("/donors/portal/dashboard");
-      } else {
-        setLoginError("Sign in failed. Please try again.");
-        setLoginLoading(false);
-      }
+    const result = await signIn("credentials", {
+      email: donor.email || donor.phone,
+      password: loginPassword,
+      redirect: false,
+    });
+
+    if (result?.ok) {
+      router.push("/donors/portal/dashboard");
     } else {
-      setLoginError("Invalid email or password.");
+      setLoginError("Sign in failed. Please try again.");
       setLoginLoading(false);
     }
   };
 
-  // ── Register ──
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setRegError("");
 
+    if (!regName.trim()) { setRegError("Please enter your full name."); return; }
+    if (!regEmail && !regPhone) { setRegError("Please enter an email or phone number."); return; }
     if (regPassword !== regConfirm) { setRegError("Passwords do not match."); return; }
     if (regPassword.length < 6) { setRegError("Password must be at least 6 characters."); return; }
 
-    const existing = getStoredDonors().find((d) => d.email === regEmail);
-    if (existing) { setRegError("An account with this email already exists."); return; }
+    const existingByEmail = regEmail ? findByEmail(regEmail) : null;
+    const existingByPhone = regPhone ? findByPhone(regPhone) : null;
+
+    if (existingByEmail || existingByPhone) {
+      setExistingAccount(true);
+      setTab("login");
+      setLoginId(regEmail || regPhone);
+      return;
+    }
 
     setRegLoading(true);
     try {
-      saveDonor({ name: regName, email: regEmail, password: regPassword });
-
-      // Send welcome email
-      await fetch("/api/donor-welcome", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: regName, email: regEmail }),
-      });
-
-      // Sign in via NextAuth
-      await signIn("credentials", {
+      const donors = getDonors();
+      const newDonor: StoredDonor = {
+        name: regName,
         email: regEmail,
+        phone: regPhone,
+        password: regPassword,
+        smsSent: false,
+        joinedAt: new Date().toISOString(),
+      };
+      donors.push(newDonor);
+      saveDonors(donors);
+
+      if (regEmail) {
+        await fetch("/api/donor-welcome", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: regName, email: regEmail }),
+        });
+      }
+
+      if (regPhone && !newDonor.smsSent) {
+        const smsRes = await fetch("/api/donor-sms", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: regName, phone: regPhone }),
+        });
+        if (smsRes.ok) {
+          const updated = getDonors().map((d) =>
+            d.phone === regPhone ? { ...d, smsSent: true } : d
+          );
+          saveDonors(updated);
+        }
+      }
+
+      await signIn("credentials", {
+        email: regEmail || regPhone,
         password: regPassword,
         redirect: false,
       });
@@ -123,14 +176,7 @@ export default function DonorPortalPage() {
 
       {/* ── Left Branding Panel ── */}
       <div className="relative hidden flex-col justify-between overflow-hidden bg-[#0f172a] p-12 lg:flex lg:w-[42%]">
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: "radial-gradient(circle at 2px 2px, #d97706 1px, transparent 0)",
-            backgroundSize: "32px 32px",
-          }}
-        />
-
+        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, #d97706 1px, transparent 0)", backgroundSize: "32px 32px" }} />
         <Link href="/" className="relative flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#d97706] text-sm font-bold text-[#d97706]">K</div>
           <div>
@@ -138,19 +184,17 @@ export default function DonorPortalPage() {
             <p className="text-xs text-white/40">Kenya Excellent Centre & School</p>
           </div>
         </Link>
-
         <div className="relative">
           <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#d97706]/20 text-[#d97706]">
             <Heart size={28} />
           </div>
           <h1 className="hero-title mb-4 text-4xl font-medium leading-tight text-white">
-            Your giving
-            <br /><span className="text-[#d97706]">changes lives</span>
-            <br />in Likoni.
+            Your giving<br />
+            <span className="text-[#d97706]">changes lives</span><br />
+            in Likoni.
           </h1>
           <p className="mb-8 text-base leading-8 text-white/55">
-            Join our community of donors helping children access quality
-            education regardless of their background.
+            Join our community of donors helping children access quality education regardless of their background.
           </p>
           <div className="grid grid-cols-3 gap-3">
             {[
@@ -165,10 +209,7 @@ export default function DonorPortalPage() {
             ))}
           </div>
         </div>
-
-        <p className="relative text-xs text-white/25">
-          © {new Date().getFullYear()} Kenya Excellent Centre & School
-        </p>
+        <p className="relative text-xs text-white/25">© {new Date().getFullYear()} Kenya Excellent Centre & School</p>
       </div>
 
       {/* ── Right Form Panel ── */}
@@ -184,35 +225,42 @@ export default function DonorPortalPage() {
             </div>
           </Link>
 
+          {/* Existing account notice */}
+          {existingAccount && (
+            <div className="mb-5 flex items-start gap-3 rounded-2xl border border-[#d97706]/30 bg-[#fffaf2] p-4">
+              <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#d97706]" />
+              <div>
+                <p className="text-sm font-bold text-slate-900">Welcome back! 👋</p>
+                <p className="text-xs leading-6 text-slate-600">
+                  You already have an account. We have switched you to sign in — just enter your password below.
+                </p>
+              </div>
+            </div>
+          )}
+
           {/* Tabs */}
           <div className="mb-7 flex rounded-2xl border border-slate-200 bg-slate-50 p-1">
             <button
-              onClick={() => { setTab("login"); setLoginError(""); }}
-              className={`flex-1 rounded-xl py-2.5 text-sm font-semibold transition ${
-                tab === "login" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"
-              }`}
+              onClick={() => { setTab("login"); setLoginError(""); setExistingAccount(false); }}
+              className={`flex-1 rounded-xl py-2.5 text-sm font-semibold transition ${tab === "login" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"}`}
             >
               Sign In
             </button>
             <button
-              onClick={() => { setTab("register"); setRegError(""); }}
-              className={`flex-1 rounded-xl py-2.5 text-sm font-semibold transition ${
-                tab === "register" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"
-              }`}
+              onClick={() => { setTab("register"); setRegError(""); setExistingAccount(false); }}
+              className={`flex-1 rounded-xl py-2.5 text-sm font-semibold transition ${tab === "register" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"}`}
             >
               Create Account
             </button>
           </div>
 
-          {/* ── Google Button (both tabs) ── */}
+          {/* Google */}
           <button
             onClick={handleGoogle}
             disabled={googleLoading}
-            className="mb-5 flex w-full items-center justify-center gap-3 rounded-full border-2 border-slate-200 bg-white py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 hover:border-slate-300 disabled:opacity-60"
+            className="mb-5 flex w-full items-center justify-center gap-3 rounded-full border-2 border-slate-200 bg-white py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 disabled:opacity-60"
           >
-            {googleLoading ? (
-              <Loader2 size={18} className="animate-spin" />
-            ) : (
+            {googleLoading ? <Loader2 size={18} className="animate-spin" /> : (
               <svg width="18" height="18" viewBox="0 0 48 48">
                 <path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/>
                 <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 16 19 13 24 13c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.4 6.3 14.7z"/>
@@ -226,7 +274,7 @@ export default function DonorPortalPage() {
           {/* Divider */}
           <div className="mb-5 flex items-center gap-3">
             <div className="h-px flex-1 bg-slate-200" />
-            <span className="text-xs font-medium text-slate-400">or continue with email</span>
+            <span className="text-xs font-medium text-slate-400">or continue with email / phone</span>
             <div className="h-px flex-1 bg-slate-200" />
           </div>
 
@@ -235,13 +283,12 @@ export default function DonorPortalPage() {
             <>
               <form onSubmit={handleLogin} className="space-y-4">
                 <div>
-                  <label className="label">Email Address</label>
+                  <label className="label">Email or Phone Number</label>
                   <input
                     required
-                    type="email"
-                    value={loginEmail}
-                    onChange={(e) => setLoginEmail(e.target.value)}
-                    placeholder="your@email.com"
+                    value={loginId}
+                    onChange={(e) => setLoginId(e.target.value)}
+  
                     className="input"
                   />
                 </div>
@@ -253,7 +300,7 @@ export default function DonorPortalPage() {
                       type={showLoginPass ? "text" : "password"}
                       value={loginPassword}
                       onChange={(e) => setLoginPassword(e.target.value)}
-                      placeholder="Your password"
+                      
                       className="input pr-11"
                     />
                     <button
@@ -298,10 +345,11 @@ export default function DonorPortalPage() {
                   <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 text-green-600">
                     <CheckCircle2 size={40} />
                   </div>
-                  <h3 className="hero-title mb-3 text-3xl text-slate-900">You're in!</h3>
+                  <h3 className="hero-title mb-3 text-3xl text-slate-900">You&apos;re in!</h3>
                   <p className="max-w-sm text-sm leading-8 text-slate-600">
-                    Welcome, <strong>{regName}</strong>! A welcome email is heading to{" "}
-                    <span className="font-semibold">{regEmail}</span>.
+                    Welcome, <strong>{regName}</strong>!{" "}
+                    {regEmail && <>A welcome email is heading to <strong>{regEmail}</strong>.</>}{" "}
+                    {regPhone && <>A welcome SMS has been sent to <strong>{regPhone}</strong>.</>}{" "}
                     Taking you to your dashboard...
                   </p>
                   <Loader2 size={20} className="mt-4 animate-spin text-[#d97706]" />
@@ -310,28 +358,49 @@ export default function DonorPortalPage() {
                 <>
                   <form onSubmit={handleRegister} className="space-y-4">
                     <div>
-                      <label className="label">Full Name</label>
+                      <label className="label">Full Name *</label>
                       <input
                         required
                         value={regName}
                         onChange={(e) => setRegName(e.target.value)}
-                        placeholder="e.g. James Mitchell"
+                        
                         className="input"
                       />
                     </div>
+
+                    <div className="rounded-xl bg-slate-50 px-4 py-3 text-xs leading-6 text-slate-500">
+                      💡 You can register with <strong>email</strong>, <strong>phone</strong>, or <strong>both</strong>. At least one is required.
+                    </div>
+
                     <div>
                       <label className="label">Email Address</label>
                       <input
-                        required
                         type="email"
                         value={regEmail}
                         onChange={(e) => setRegEmail(e.target.value)}
-                        placeholder="your@email.com"
+                        
                         className="input"
                       />
                     </div>
+
                     <div>
-                      <label className="label">Password</label>
+                      <label className="label">Phone Number</label>
+                      <input
+                        type="tel"
+                        value={regPhone}
+                        onChange={(e) => setRegPhone(e.target.value)}
+                        
+                        className="input"
+                      />
+                      {regPhone && (
+                        <p className="mt-1.5 text-xs text-[#d97706]">
+                          📱 You will receive a welcome SMS — sent once only.
+                        </p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="label">Password *</label>
                       <div className="relative">
                         <input
                           required
@@ -350,8 +419,9 @@ export default function DonorPortalPage() {
                         </button>
                       </div>
                     </div>
+
                     <div>
-                      <label className="label">Confirm Password</label>
+                      <label className="label">Confirm Password *</label>
                       <input
                         required
                         type="password"
@@ -377,7 +447,7 @@ export default function DonorPortalPage() {
                     </button>
 
                     <p className="text-center text-xs text-slate-400">
-                      A welcome email will be sent to your inbox automatically.
+                      Welcome SMS is sent once on registration — never on future logins.
                     </p>
                   </form>
 
