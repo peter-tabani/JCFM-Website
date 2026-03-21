@@ -1,4 +1,6 @@
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { siteData } from "@/data/site";
 
 export default function Hero() {
   return (
@@ -25,42 +27,68 @@ export default function Hero() {
             </h2>
 
             <p className="mb-8 max-w-2xl text-base leading-8 text-white/90 md:text-xl">
-              A private school in Likoni, Mombasa offering a nurturing
-              learning journey from early childhood to  secondary,
-              grounded in academic excellence, discipline, and moral integrity.
+              A private school in Likoni–Shelley Beach, Mombasa, offering a
+              nurturing learning journey from early childhood to junior
+              secondary, grounded in academic excellence, discipline, and moral
+              integrity. Founded in 2013 to serve both sponsored and fee-paying
+              learners alike.
             </p>
 
             <div className="mb-8 flex flex-wrap gap-4">
-              <a
-                href="#admissions"
+              {/* ✅ Links to the full admissions page */}
+              <Link
+                href="/admissions"
                 className="inline-flex items-center gap-3 bg-[#d97706] px-7 py-4 text-base font-semibold text-white transition hover:bg-[#b45309]"
               >
                 Apply for Admission
                 <ArrowRight size={18} />
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="#programs"
                 className="inline-flex items-center gap-3 border border-white/40 bg-black/20 px-7 py-4 text-base font-semibold text-white transition hover:bg-white/10"
               >
                 Explore Programs
                 <ArrowRight size={18} />
-              </a>
+              </Link>
             </div>
 
+            {/* Motto Banner */}
             <div className="max-w-2xl rounded-md border border-white/15 bg-white/10 px-5 py-4 backdrop-blur-sm">
               <p className="text-sm leading-7 text-white/90 md:text-base">
-                <span className="font-semibold text-white">Motto:</span>{" "}
-                Where junior heroes are graduated to senior skilled-experts.
+                <span className="font-semibold text-orange-300">Motto:</span>{" "}
+                <span className="italic">&ldquo;{siteData.motto}&rdquo;</span>
+                <span className="ml-2 text-white/60">— Always Ahead</span>
               </p>
             </div>
           </div>
 
-          <div className="hidden justify-center lg:flex">
-            <button className="group relative flex h-24 w-24 items-center justify-center rounded-full bg-white text-[#d97706] shadow-2xl transition hover:scale-105">
-              <span className="absolute inset-[-16px] rounded-full border border-white/40" />
-              <span className="absolute inset-[-30px] rounded-full border border-white/20" />
-              <span className="ml-1 text-2xl">▶</span>
+          {/* Stats Panel */}
+          <div className="hidden lg:flex lg:flex-col lg:items-end lg:gap-6">
+            <div className="grid grid-cols-2 gap-4 w-full max-w-xs">
+              <div className="rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm p-5 text-center">
+                <p className="text-3xl font-bold text-orange-300">250+</p>
+                <p className="mt-1 text-xs text-white/75 leading-5">Sponsored<br/>Children</p>
+              </div>
+              <div className="rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm p-5 text-center">
+                <p className="text-3xl font-bold text-orange-300">150+</p>
+                <p className="mt-1 text-xs text-white/75 leading-5">Fee-Paying<br/>Learners</p>
+              </div>
+              <div className="rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm p-5 text-center">
+                <p className="text-3xl font-bold text-orange-300">2013</p>
+                <p className="mt-1 text-xs text-white/75 leading-5">Year<br/>Founded</p>
+              </div>
+              <div className="rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm p-5 text-center">
+                <p className="text-3xl font-bold text-orange-300">Gr. 9</p>
+                <p className="mt-1 text-xs text-white/75 leading-5">Highest<br/>Grade</p>
+              </div>
+            </div>
+
+            {/* Play button */}
+            <button className="group relative flex h-20 w-20 items-center justify-center rounded-full bg-white text-[#d97706] shadow-2xl transition hover:scale-105">
+              <span className="absolute inset-[-14px] rounded-full border border-white/40" />
+              <span className="absolute inset-[-28px] rounded-full border border-white/20" />
+              <span className="ml-1 text-xl">▶</span>
             </button>
           </div>
         </div>

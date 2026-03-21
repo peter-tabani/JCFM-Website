@@ -9,28 +9,23 @@ import {
   ArrowRight,
   ShieldCheck,
   Bus,
-  UtensilsCrossed,
-  HeartHandshake,
+  Monitor,
+  Music,
+  FlaskConical,
+  BookHeart,
 } from "lucide-react";
 
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-white text-slate-900">
-      {/* Extracted Layout Components */}
       <TopBar />
       <Header />
       <Navbar />
-
-      {/* Extracted Hero Component */}
       <Hero />
-
-      {/* Extracted About Component */}
       <About />
-
-      {/* Extracted Programs Component */}
       <Programs />
 
-      {/* Why Choose KECS */}
+      {/* Why Choose KES */}
       <section id="why-kecs" className="bg-white py-20">
         <div className="mx-auto max-w-[1400px] px-4 lg:px-6">
           <div className="mb-12 max-w-3xl">
@@ -42,15 +37,15 @@ export default function HomePage() {
             </h3>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             <div className="rounded-2xl border border-slate-200 p-6">
               <div className="mb-4 text-[#d97706]">
                 <ShieldCheck size={24} />
               </div>
-              <h4 className="mb-3 text-xl font-semibold">Discipline & Values</h4>
+              <h4 className="mb-3 text-xl font-semibold">Discipline & Integrity</h4>
               <p className="leading-8 text-slate-600">
-                Learners are guided in discipline, honesty, respect, and moral
-                responsibility.
+                High standards of discipline, hard work, and integrity are at
+                the heart of daily school life at KES.
               </p>
             </div>
 
@@ -60,30 +55,52 @@ export default function HomePage() {
               </div>
               <h4 className="mb-3 text-xl font-semibold">School Transport</h4>
               <p className="leading-8 text-slate-600">
-                Reliable transport support is available for families depending
-                on distance and route.
+                Reliable school bus/van service available to ensure safe and
+                convenient daily commuting for learners.
               </p>
             </div>
 
             <div className="rounded-2xl border border-slate-200 p-6">
               <div className="mb-4 text-[#d97706]">
-                <UtensilsCrossed size={24} />
+                <Monitor size={24} />
               </div>
-              <h4 className="mb-3 text-xl font-semibold">Meals Included</h4>
+              <h4 className="mb-3 text-xl font-semibold">ICT & Online Research</h4>
               <p className="leading-8 text-slate-600">
-                Breakfast and lunch support the daily school experience and help
-                learners stay active and focused.
+                A computer lab and dedicated Online Research Centre give
+                learners access to digital learning tools.
               </p>
             </div>
 
             <div className="rounded-2xl border border-slate-200 p-6">
               <div className="mb-4 text-[#d97706]">
-                <HeartHandshake size={24} />
+                <FlaskConical size={24} />
               </div>
-              <h4 className="mb-3 text-xl font-semibold">Supportive Care</h4>
+              <h4 className="mb-3 text-xl font-semibold">Science Lab</h4>
               <p className="leading-8 text-slate-600">
-                We believe in noticing each learner and helping them grow with
-                encouragement and attention.
+                Hands-on science experiments through our equipped science
+                laboratory support curiosity and STEM learning.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 p-6">
+              <div className="mb-4 text-[#d97706]">
+                <Music size={24} />
+              </div>
+              <h4 className="mb-3 text-xl font-semibold">Talent Development</h4>
+              <p className="leading-8 text-slate-600">
+                Music room, athletics, Taekwondo, and Scouting help learners
+                discover and grow their unique talents.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 p-6">
+              <div className="mb-4 text-[#d97706]">
+                <BookHeart size={24} />
+              </div>
+              <h4 className="mb-3 text-xl font-semibold">Guidance & Counselling</h4>
+              <p className="leading-8 text-slate-600">
+                Dedicated counselling support ensures every learner's
+                emotional wellbeing is cared for alongside academics.
               </p>
             </div>
           </div>
@@ -99,22 +116,46 @@ export default function HomePage() {
                 Admissions
               </p>
               <h3 className="hero-title mb-5 text-4xl leading-tight md:text-5xl">
-                Begin Your Child’s Journey at KES
+                Begin Your Child's Journey at KES
               </h3>
-              <p className="max-w-2xl text-base leading-8 text-white/85">
-                Admissions are open for learners joining our pre-primary,
-                primary, and secondary sections. Placeholder information
-                can later be updated with exact requirements, fee structure, and
-                reporting dates.
-              </p>
+              <div className="space-y-3 text-base leading-8 text-white/85">
+                <p>
+                  Admissions are open for learners joining ECDE (from age 3),
+                  Primary (Grade 1–6), and Junior Secondary (Grade 7–9).
+                </p>
+                <p>
+                  <span className="font-semibold text-white">Requirements:</span>{" "}
+                  For ECDE, learners must be 3 years and above. Transfer
+                  students must provide duly filled, signed, and stamped forms.
+                  Junior Secondary applicants must present a KPSEA certificate
+                  or pass an entry exam.
+                </p>
+                <p>
+                  <span className="font-semibold text-white">How to apply:</span>{" "}
+                  Visit the main office along Approved-Shelleybeach Road, Likoni,
+                  to obtain the fee structure and admission details. You can also
+                  call us directly.
+                </p>
+                <p>
+                  <span className="font-semibold text-white">Payment:</span>{" "}
+                  Fees accepted via M-Pesa Paybill or Bank deposit.
+                </p>
+              </div>
             </div>
 
-            <div className="mt-8 lg:mt-0">
+            <div className="mt-8 flex flex-col gap-3 lg:mt-0 lg:items-end">
               <a
-                href="#contact"
+                href="tel:+254722916174"
                 className="inline-flex items-center gap-3 rounded-full bg-[#d97706] px-7 py-4 font-semibold text-white transition hover:bg-[#b45309]"
               >
-                Request Admission Details
+                Call +254 722 916174
+                <ArrowRight size={18} />
+              </a>
+              <a
+                href="mailto:excellentkenya@gmail.com"
+                className="inline-flex items-center gap-3 rounded-full border border-white/30 px-7 py-4 font-semibold text-white transition hover:bg-white/10"
+              >
+                Email Us
                 <ArrowRight size={18} />
               </a>
             </div>
@@ -122,7 +163,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Extracted Footer Component */}
       <Footer />
     </main>
   );
