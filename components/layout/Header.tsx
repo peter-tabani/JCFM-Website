@@ -3,13 +3,13 @@ import { siteData } from "@/data/site";
 
 export default function Header() {
   return (
-    <section className="bg-[#fffaf2]">
+    // Hidden on mobile — logo & contact shown in mobile Navbar instead
+    <section className="hidden bg-[#fffaf2] lg:block">
       <div className="mx-auto flex max-w-[1400px] flex-col gap-6 px-4 py-6 lg:flex-row lg:items-center lg:justify-between lg:px-6">
         <div className="flex items-center gap-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#d97706] text-[#d97706] font-bold text-xl">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#d97706] text-xl font-bold text-[#d97706]">
             K
           </div>
-
           <div>
             <h1 className="text-2xl font-bold tracking-wide text-[#d97706] md:text-3xl">
               {siteData.shortName}

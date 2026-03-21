@@ -24,7 +24,8 @@ export const siteData = {
   },
   navLinks: [
     { label: "Home", href: "/" },
-    { label: "About Us", href: "#about" },
+    { label: "About Us", href: "/#about" },
+    { label: "Leadership", href: "/leadership" },
     { label: "Primary", href: "#programs" },
     { label: "Secondary", href: "#programs" },
     { label: "Admissions", href: "/admissions" }, // ✅ full page

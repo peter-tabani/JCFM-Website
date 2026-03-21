@@ -60,7 +60,14 @@ export default function Footer() {
       <div className="mx-auto mt-12 max-w-[1400px] border-t border-white/10 px-4 pt-6 lg:px-6">
         <div className="flex flex-col gap-2 text-sm text-white/40 sm:flex-row sm:justify-between">
           <p>© {new Date().getFullYear()} The Kenya Excellent Centre and School. All rights reserved.</p>
-          <p>Likoni – Shelley Beach, Mombasa County, Kenya</p>
+          <a
+            href="https://wa.me/254708905590?text=Hello%20Frank%2C%20I%20saw%20your%20work%20on%20the%20KES%20website%20and%20I%20am%20interested%20in%20working%20with%20you."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition hover:text-[#d97706]"
+          >
+            Developed by PF
+          </a>
         </div>
       </div>
     </footer>
