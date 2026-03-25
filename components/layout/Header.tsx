@@ -1,15 +1,20 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import { siteData } from "@/data/site";
 
+
 export default function Header() {
   return (
     // Hidden on mobile — logo & contact shown in mobile Navbar instead
     <section className="hidden bg-[#fffaf2] lg:block">
       <div className="mx-auto flex max-w-[1400px] flex-col gap-6 px-4 py-6 lg:flex-row lg:items-center lg:justify-between lg:px-6">
         <div className="flex items-center gap-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#d97706] text-xl font-bold text-[#d97706]">
-            K
-          </div>
+          <div className="flex h-16 w-16 items-center justify-center">
+  <img
+    src="/images/logo.png"   // your logo path
+    alt="KES Logo"
+    className="h-full w-full object-contain"
+  />
+</div>
           <div>
             <h1 className="text-2xl font-bold tracking-wide text-[#d97706] md:text-3xl">
               {siteData.shortName}

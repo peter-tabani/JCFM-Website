@@ -5,7 +5,7 @@ import TopBar from "@/components/layout/TopBar";
 import Header from "@/components/layout/Header";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { Mail, Phone, ArrowRight, X, ShieldCheck, HeartHandshake, Trophy, Users } from "lucide-react";
+import { Mail, Phone, ArrowRight, X } from "lucide-react";
 import Link from "next/link";
 
 const leaders = [
@@ -13,7 +13,7 @@ const leaders = [
     name: "Mr. Noah Mweruphe",
     role: "Director",
     tag: "Founder & Director",
-    image: null,
+    image: "/images/staff/director.png",
     initials: "NM",
     color: "bg-[#0f172a]",
     bio: "Mr. Noah Mweruphe is the visionary founder and director of the Kenya Excellent Centre and School. Since establishing KES in 2013, he has driven a mission to provide quality education to both fee-paying and sponsored learners from disadvantaged backgrounds. Under his leadership, the school has grown from 30 students to over 400 learners, with alumni gaining entry to some of Kenya's most competitive national schools.",
@@ -26,7 +26,7 @@ const leaders = [
     name: "Mr. Julius Mwaro",
     role: "Head of Institution — Primary School",
     tag: "Primary School",
-    image: null,
+    image: "/images/staff/mwaro.png",
     initials: "JM",
     color: "bg-[#d97706]",
     bio: "Mr. Julius Mwaro leads the Primary School (Grade 1–6), overseeing the implementation of the Competency-Based Curriculum (CBC) and ensuring every learner achieves their full potential. He is committed to creating a structured, nurturing environment where academic excellence and strong character development go hand in hand.",
@@ -38,7 +38,7 @@ const leaders = [
     name: "Mr. Idd Amani",
     role: "Head of Institution — Junior Secondary",
     tag: "Junior Secondary",
-    image: null,
+    image: "/images/staff/idd.png",
     initials: "IA",
     color: "bg-[#0f172a]",
     bio: "Mr. Idd Amani leads the Junior Secondary School (Grade 7–9), preparing learners for the Kenya Junior Secondary Education Assessment (KJSEA). His focus is on developing critical thinkers and responsible young adults who are ready for the next stage of their academic journey.",
@@ -50,7 +50,7 @@ const leaders = [
     name: "Md. Phoebe N. Mulama",
     role: "Head of Institution — Early Years",
     tag: "ECDE",
-    image: null,
+    image: "/images/staff/pheobe.png",
     initials: "PM",
     color: "bg-[#d97706]",
     bio: "Md. Phoebe N. Mulama leads the Early Years Education (ECDE) department, nurturing children from age 3 through PP1 and PP2. She creates a warm, stimulating environment where the youngest learners develop confidence, social skills, and a love for learning that carries them through their entire school journey.",
@@ -62,7 +62,7 @@ const leaders = [
     name: "Mr. Mazera Dena",
     role: "Academic Master",
     tag: "Academics",
-    image: null,
+    image: "/images/staff/mazera.png",
     initials: "MD",
     color: "bg-[#0f172a]",
     bio: "Mr. Mazera Dena serves as Academic Master at KES, overseeing academic programmes across all levels. He coordinates curriculum delivery, monitors learner performance, and ensures teaching standards remain high. His work is central to KES consistently producing competitive results at sub-county and national levels.",
@@ -91,17 +91,12 @@ function LeaderModal({ leader, onClose }: { leader: Leader; onClose: () => void 
         className="relative w-full max-h-[88vh] overflow-y-auto rounded-t-3xl bg-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Handle bar */}
         <div className="flex justify-center pt-3 pb-1">
           <div className="h-1 w-10 rounded-full bg-slate-200" />
         </div>
-
-        {/* Close */}
         <button onClick={onClose} className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500">
           <X size={16} />
         </button>
-
-        {/* Header */}
         <div className={`${leader.color} mx-4 mt-2 flex items-center gap-4 rounded-2xl px-5 py-5 mb-6`}>
           <Avatar image={leader.image} initials={leader.initials} color={leader.color} name={leader.name} size="sm" />
           <div>
@@ -110,8 +105,6 @@ function LeaderModal({ leader, onClose }: { leader: Leader; onClose: () => void 
             <p className="text-xs text-white/60">{leader.role}</p>
           </div>
         </div>
-
-        {/* Bio */}
         <div className="px-6 pb-10 space-y-5">
           <p className="text-sm leading-8 text-slate-600">{leader.bio}</p>
           <div className="rounded-2xl border-l-4 border-[#d97706] bg-[#fffaf2] px-5 py-4">
@@ -138,7 +131,6 @@ export default function LeadershipPage() {
       <Header />
       <Navbar />
 
-      {/* Modal — mobile only */}
       {activeLeader && <LeaderModal leader={activeLeader} onClose={() => setActiveLeader(null)} />}
 
       {/* ── Hero ── */}
@@ -152,11 +144,9 @@ export default function LeadershipPage() {
         </div>
       </section>
 
-      {/* ── DESKTOP: Full cards (unchanged from original) ── */}
+      {/* ── DESKTOP: Full cards ── */}
       <section className="hidden bg-[#fffaf2] px-4 py-16 lg:block lg:px-6">
         <div className="mx-auto max-w-[1400px]">
-
-          {/* Featured Director */}
           <div className="mb-12 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
             <div className="grid lg:grid-cols-[340px_1fr]">
               <div className={`${director.color} flex flex-col items-center justify-center gap-5 px-8 py-12 text-center`}>
@@ -185,7 +175,6 @@ export default function LeadershipPage() {
             </div>
           </div>
 
-          {/* Team grid */}
           <div className="mb-8">
             <p className="mb-2 text-sm font-bold uppercase tracking-[0.3em] text-[#d97706]">Leadership Team</p>
             <h2 className="hero-title text-3xl text-slate-900">Heads of Institution</h2>
@@ -213,61 +202,68 @@ export default function LeadershipPage() {
         </div>
       </section>
 
-      {/* ── MOBILE: Compact cards with Read More ── */}
+      {/* ── MOBILE: Preview cards with Read More ── */}
       <section className="bg-[#fffaf2] px-4 py-10 lg:hidden">
         <div className="mx-auto max-w-lg space-y-4">
 
-          {/* Director card */}
+          {/* Director */}
           <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            {/* Coloured top with photo, name, role */}
             <div className={`${director.color} flex items-center gap-4 px-5 py-5`}>
               <Avatar image={director.image} initials={director.initials} color="bg-[#1e293b]" name={director.name} size="sm" />
               <div className="flex-1 min-w-0">
-                <span className="mb-0.5 inline-block rounded-full bg-[#d97706] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">{director.tag}</span>
+                <span className="mb-0.5 inline-block rounded-full bg-[#d97706] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+                  {director.tag}
+                </span>
                 <p className="truncate font-bold text-white">{director.name}</p>
                 <p className="truncate text-xs text-white/60">{director.role}</p>
               </div>
+            </div>
+            {/* Quote preview + Read More */}
+            <div className="px-5 py-4">
+              <p className="mb-3 text-xs italic leading-6 text-slate-500 line-clamp-2">
+                &ldquo;{director.quote}&rdquo;
+              </p>
               <button
                 onClick={() => setActiveLeader(director)}
-                className="shrink-0 rounded-full bg-[#d97706] px-4 py-2 text-xs font-bold text-white"
+                className="rounded-full bg-[#d97706] px-4 py-2 text-xs font-bold text-white hover:bg-[#b45309] transition"
               >
                 Read More
               </button>
             </div>
           </div>
 
-          {/* Team cards */}
-          <p className="pt-2 text-xs font-bold uppercase tracking-widest text-slate-400">Heads of Institution</p>
+          {/* Team */}
+          <p className="pt-2 text-xs font-bold uppercase tracking-widest text-slate-400">
+            Heads of Institution
+          </p>
           {team.map((member) => (
             <div key={member.name} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              {/* Coloured top with photo, name, role */}
               <div className={`${member.color} flex items-center gap-4 px-5 py-5`}>
                 <Avatar image={member.image} initials={member.initials} color={member.color === "bg-[#d97706]" ? "bg-[#b45309]" : "bg-[#1e293b]"} name={member.name} size="sm" />
                 <div className="flex-1 min-w-0">
-                  <span className="mb-0.5 inline-block rounded-full bg-white/20 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">{member.tag}</span>
+                  <span className="mb-0.5 inline-block rounded-full bg-white/20 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+                    {member.tag}
+                  </span>
                   <p className="truncate font-bold text-white">{member.name}</p>
                   <p className="truncate text-xs text-white/60">{member.role}</p>
                 </div>
+              </div>
+              {/* Quote preview + Read More */}
+              <div className="px-5 py-4">
+                <p className="mb-3 text-xs italic leading-6 text-slate-500 line-clamp-2">
+                  &ldquo;{member.quote}&rdquo;
+                </p>
                 <button
                   onClick={() => setActiveLeader(member)}
-                  className="shrink-0 rounded-full bg-white/20 px-4 py-2 text-xs font-bold text-white hover:bg-[#d97706] transition"
+                  className="rounded-full border border-[#d97706] px-4 py-2 text-xs font-bold text-[#d97706] hover:bg-[#d97706] hover:text-white transition"
                 >
                   Read More
                 </button>
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* ── Photo notice ── */}
-      <section className="bg-white px-4 py-8 lg:px-6">
-        <div className="mx-auto max-w-[1400px]">
-          <div className="rounded-2xl border border-dashed border-[#d97706]/40 bg-[#fffaf2] p-5 text-center">
-            <p className="mb-1 text-sm font-bold uppercase tracking-widest text-[#d97706]">📸 Photos Coming Soon</p>
-            <p className="mx-auto max-w-md text-xs leading-7 text-slate-500">
-              Replace <code className="rounded bg-slate-100 px-1 py-0.5">image: null</code> with the staff photo path in{" "}
-              <code className="rounded bg-slate-100 px-1 py-0.5">app/leadership/page.tsx</code> to display real photos.
-            </p>
-          </div>
         </div>
       </section>
 

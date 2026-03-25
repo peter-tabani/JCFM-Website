@@ -189,12 +189,20 @@ export default function Navbar() {
       <section className="relative z-50 lg:hidden">
         <div className="flex items-center justify-between bg-white px-4 py-3 shadow-md">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#d97706] text-sm font-bold text-[#d97706]">K</div>
-            <div>
-              <p className="text-base font-bold text-[#d97706] leading-none">KES</p>
-              <p className="text-[9px] font-semibold uppercase tracking-wider text-slate-500 leading-none mt-0.5">Natuwe Mbele Daima</p>
-            </div>
-          </Link>
+  <div className="flex h-11 w-11 items-center justify-center">
+    <img
+      src="/images/logo.png"
+      alt="KES Logo"
+      className="h-full w-full object-contain"
+    />
+  </div>
+  <div>
+    <p className="text-base font-bold text-[#d97706] leading-none">KES</p>
+    <p className="text-[9px] font-semibold uppercase tracking-wider text-slate-500 leading-none mt-0.5">
+      Natuwe Mbele Daima
+    </p>
+  </div>
+</Link>
           <div className="flex items-center gap-2">
             <a
               href="https://wa.me/254722916174"

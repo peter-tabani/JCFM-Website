@@ -13,7 +13,7 @@ export default function TopBar() {
           <Link href="/login/staff" className="hover:text-orange-300">Staff</Link>
           <Link href="/login/alumni" className="hover:text-orange-300">Alumni</Link>
           <Link href="/login/parents" className="hover:text-orange-300">Parents</Link>
-          <Link href="/login/community" className="hover:text-orange-300">Community</Link>
+          
         </div>
 
         <div className="flex items-center gap-5">
