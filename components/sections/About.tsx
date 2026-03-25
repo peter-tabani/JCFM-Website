@@ -152,7 +152,7 @@ export default function About() {
                   { badge: "Academics", text: "Best in Academics at sub-county level — consistently posting competitive KJSEA results." },
                   { badge: "Scouting", text: "Top performers in Scouting at sub-county level, building leadership and teamwork." },
                   { badge: "Sports", text: "Highly competitive in Athletics and Taekwondo, representing Likoni at county level." },
-                  { badge: "Alumni", text: "Graduates admitted to Maranda High, Nyuki School, Kwale High and Matuga Girls." },
+                  { badge: "Alumni", text: "Graduates admitted to Maranda High, Nanyuki High , Kwale High and Matuga Girls." },
                 ].map((item) => (
                   <div key={item.badge} className="flex items-start gap-4">
                     <span className="mt-0.5 shrink-0 rounded-full bg-[#d97706] px-3 py-0.5 text-xs font-bold text-white">
