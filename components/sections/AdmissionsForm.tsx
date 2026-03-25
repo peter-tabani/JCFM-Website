@@ -398,9 +398,7 @@ export default function AdmissionsForm() {
                 )}
               </button>
 
-              <p className="text-center text-xs text-slate-400">
-                Your information is kept private and only shared with the KES admissions team.
-              </p>
+              
             </form>
           )}
         </div>

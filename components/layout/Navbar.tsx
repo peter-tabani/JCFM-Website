@@ -286,7 +286,7 @@ export default function Navbar() {
               { label: "Staff", href: "/login/staff" },
               { label: "Alumni", href: "/login/alumni" },
               { label: "Parents", href: "/login/parents" },
-              { label: "Community", href: "/login/community" },
+              
             ].map((item) => (
               <Link key={item.label} href={item.href} onClick={() => setDrawerOpen(false)} className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50">
                 {item.label}<ChevronRight size={16} className="text-slate-300" />

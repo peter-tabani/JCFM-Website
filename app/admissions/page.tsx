@@ -65,7 +65,7 @@ export default function AdmissionsPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a] via-[#0f172a]/90 to-transparent" />
         <div className="relative mx-auto max-w-[1400px] px-4 lg:px-6">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-orange-300">
-            Admissions — 2025 / 2026
+            Admissions 
           </p>
           <h1 className="hero-title mb-4 text-4xl font-medium leading-tight md:text-6xl">
             Begin Your Child's
