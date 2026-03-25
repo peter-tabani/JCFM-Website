@@ -392,11 +392,7 @@ export default function DonorPortalPage() {
                         
                         className="input"
                       />
-                      {regPhone && (
-                        <p className="mt-1.5 text-xs text-[#d97706]">
-                          📱 You will receive a welcome SMS — sent once only.
-                        </p>
-                      )}
+                      
                     </div>
 
                     <div>
@@ -446,9 +442,7 @@ export default function DonorPortalPage() {
                         : <><Heart size={17} /> Create My Account</>}
                     </button>
 
-                    <p className="text-center text-xs text-slate-400">
-                      Welcome SMS is sent once on registration — never on future logins.
-                    </p>
+                    
                   </form>
 
                   <p className="mt-5 text-center text-sm text-slate-500">
