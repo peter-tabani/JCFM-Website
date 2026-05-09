@@ -54,7 +54,7 @@ export default function MySponsorships() {
         {/* Stats */}
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           <Stat icon={Sprout} tone="rose" label="Children Sponsored" value={String(childSponsorships.length)} sub="In school today" />
-          <Stat icon={HeartHandshake} tone="amber" label="Project Backings" value={String(projectSponsorships.length)} sub="Active commitments" />
+          <Stat icon={HeartHandshake} tone="navy" label="Project Backings" value={String(projectSponsorships.length)} sub="Active commitments" />
           <Stat icon={CalendarDays} tone="emerald" label="Monthly Commitment" value={fmtKSh(totalMonthly)} sub="Sum of recurring" />
           <Stat icon={CalendarDays} tone="sky" label="Given to Date" value={fmtKSh(totalToDate)} sub="Across all sponsorships" />
         </div>
