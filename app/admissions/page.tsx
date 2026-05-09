@@ -6,9 +6,9 @@ import AdmissionsForm from "@/components/sections/AdmissionsForm";
 import { ArrowRight, CheckCircle2, MessageCircle } from "lucide-react";
 
 export const metadata = {
-  title: "Admissions – Kenya Excellent Centre & School",
+  title: "Admissions – Jesus Christ Founder Ministry",
   description:
-    "Apply for admission at KES – Likoni, Mombasa. Open for ECDE, Primary, and Junior Secondary learners.",
+    "Apply for admission at JCFM School – Likoni, Mombasa. Open for ECDE, Primary, and Junior Secondary learners.",
 };
 
 const requirements = [
@@ -20,8 +20,8 @@ const requirements = [
       "Passport photo of child",
       "Parent/guardian ID copy",
     ],
-    badge: "bg-[#d97706] text-white",
-    border: "border-orange-200 bg-orange-50",
+    badge: "bg-[#2563eb] text-white",
+    border: "border-blue-200 bg-blue-50",
   },
   {
     level: "Primary (Grade 1–6)",
@@ -39,13 +39,13 @@ const requirements = [
     level: "Junior Secondary (Grade 7–9)",
     age: "As per CBC guidelines",
     docs: [
-      "KPSEA certificate OR pass KES entry exam",
+      "KPSEA certificate OR pass JCFM entry exam",
       "Birth certificate (copy)",
       "Transfer forms (duly filled, signed & stamped)",
       "Passport photo",
     ],
-    badge: "bg-[#d97706] text-white",
-    border: "border-orange-200 bg-orange-50",
+    badge: "bg-[#7c3aed] text-white",
+    border: "border-purple-200 bg-purple-50",
   },
 ];
 
@@ -57,19 +57,19 @@ export default function AdmissionsPage() {
       <Navbar />
 
       {/* ── Hero — compact on mobile ── */}
-      <section className="relative overflow-hidden bg-[#0f172a] py-14 text-white md:py-24">
+      <section className="relative overflow-hidden bg-[#1e3a5f] py-14 text-white md:py-24">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-15"
-          style={{ backgroundImage: "url('/images/hero/kecs-gate.webp')" }}
+          style={{ backgroundImage: "url('/images/hero/jcfm-gate.webp')" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a] via-[#0f172a]/90 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1e3a5f] via-[#1e3a5f]/90 to-transparent" />
         <div className="relative mx-auto max-w-[1400px] px-4 lg:px-6">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-orange-300">
-            Admissions 
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#a5f3fc]">
+            Admissions
           </p>
           <h1 className="hero-title mb-4 text-4xl font-medium leading-tight md:text-6xl">
             Begin Your Child's
-            <br className="hidden md:block" /> Journey at KES
+            <br className="hidden md:block" /> Journey at JCFM
           </h1>
           <p className="mb-6 max-w-xl text-base leading-8 text-white/80 md:mb-8 md:text-lg">
             Open for learners from age 3 through Grade 9 in Likoni, Mombasa.
@@ -79,7 +79,7 @@ export default function AdmissionsPage() {
           {/* Mobile: show WhatsApp CTA prominently in hero */}
           <div className="flex flex-wrap gap-3">
             <a
-              href="https://wa.me/254722916174?text=Hello%20KES%2C%20I%20would%20like%20to%20enquire%20about%20admissions."
+              href="https://wa.me/254722916174?text=Hello%20JCFM%2C%20I%20would%20like%20to%20enquire%20about%20admissions."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-semibold text-white transition hover:bg-[#1ebe5d]"
@@ -89,7 +89,7 @@ export default function AdmissionsPage() {
             </a>
             <a
               href="#apply"
-              className="inline-flex items-center gap-2 rounded-full bg-[#d97706] px-6 py-3 font-semibold text-white transition hover:bg-[#b45309]"
+              className="inline-flex items-center gap-2 rounded-full bg-[#7c3aed] px-6 py-3 font-semibold text-white transition hover:bg-[#6d28d9]"
             >
               Apply Online
               <ArrowRight size={18} />
@@ -102,7 +102,7 @@ export default function AdmissionsPage() {
       <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-[1400px] px-4 lg:px-6">
           <div className="mb-10 max-w-2xl">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#d97706]">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#2563eb]">
               What You Need
             </p>
             <h2 className="hero-title text-3xl leading-tight text-slate-900 md:text-5xl">
@@ -127,7 +127,7 @@ export default function AdmissionsPage() {
                 <ul className="space-y-2">
                   {req.docs.map((doc) => (
                     <li key={doc} className="flex items-start gap-2 text-sm leading-6 text-slate-700">
-                      <CheckCircle2 size={14} className="mt-0.5 shrink-0 text-[#d97706]" />
+                      <CheckCircle2 size={14} className="mt-0.5 shrink-0 text-[#16a34a]" />
                       {doc}
                     </li>
                   ))}
@@ -139,10 +139,10 @@ export default function AdmissionsPage() {
       </section>
 
       {/* ── Fees ── */}
-      <section className="bg-[#fffaf2] py-12 md:py-16">
+      <section className="bg-[#fdfbf7] py-12 md:py-16">
         <div className="mx-auto max-w-[1400px] px-4 lg:px-6">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#d97706]">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#16a34a]">
               Fee Payments
             </p>
             <h2 className="hero-title mb-6 text-3xl text-slate-900 md:text-4xl">
@@ -166,7 +166,7 @@ export default function AdmissionsPage() {
             </div>
             <p className="mt-5 text-sm text-slate-500">
               For the full fee structure, visit our office or call{" "}
-              <a href="tel:+254722916174" className="font-semibold text-[#d97706]">
+              <a href="tel:+254722916174" className="font-semibold text-[#2563eb]">
                 +254 722 916174
               </a>
             </p>
@@ -178,7 +178,7 @@ export default function AdmissionsPage() {
       <section id="apply" className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-[1400px] px-4 lg:px-6">
           <div className="mb-10 max-w-2xl">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#d97706]">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#7c3aed]">
               Apply Now
             </p>
             <h2 className="hero-title text-3xl leading-tight text-slate-900 md:text-5xl">

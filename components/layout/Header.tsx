@@ -1,58 +1,61 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Clock, MapPin, Phone } from "lucide-react";
 import { siteData } from "@/data/site";
-
 
 export default function Header() {
   return (
-    // Hidden on mobile — logo & contact shown in mobile Navbar instead
-    <section className="hidden bg-[#fffaf2] lg:block">
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-6 px-4 py-6 lg:flex-row lg:items-center lg:justify-between lg:px-6">
-        <div className="flex items-center gap-4">
-          <div className="flex h-16 w-16 items-center justify-center">
-  <img
-    src="/images/logo.png"   // your logo path
-    alt="KES Logo"
-    className="h-full w-full object-contain"
-  />
-</div>
-          <div>
-            <h1 className="text-2xl font-bold tracking-wide text-[#d97706] md:text-3xl">
-              {siteData.shortName}
+    <section className="hidden border-b border-slate-200 bg-white lg:block">
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-10 px-6 py-7">
+        {/* Crest / Title lockup */}
+        <div className="flex items-center gap-5">
+          <div className="flex h-20 w-20 shrink-0 items-center justify-center border-2 border-[#4c1d95] bg-white p-1.5">
+            <img
+              src="/images/logo.png"
+              alt="Jesus Christ Founder Ministry — Official Seal"
+              className="h-full w-full object-contain"
+            />
+          </div>
+          <div className="border-l-2 border-[#7c3aed] pl-5">
+            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#dc2626]">
+              Republic of Kenya · Headquarters · Nzoia, Bungoma
+            </p>
+            <h1 className="font-serif text-[26px] font-semibold uppercase leading-tight tracking-[0.04em] text-[#4c1d95] md:text-[30px]">
+              {siteData.orgName}
             </h1>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-600 md:text-sm">
-              Knowledge • Integrity • Excellence
+            <p className="mt-0.5 text-[11px] font-medium uppercase tracking-[0.22em] text-slate-600">
+              {siteData.motto}
             </p>
           </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="flex items-start gap-3 border-l border-slate-200 pl-4">
-            <div className="mt-1 rounded-sm border border-slate-200 bg-white p-2 text-[#d97706]">
-              <MapPin size={17} />
-            </div>
+        {/* Contact panel */}
+        <div className="flex items-stretch divide-x divide-slate-200 border border-slate-200 bg-white">
+          <div className="flex items-center gap-3 px-5 py-3">
+            <MapPin size={18} className="shrink-0 text-[#4c1d95]" strokeWidth={1.75} />
             <div>
-              <p className="text-sm text-slate-500">Address</p>
-              <p className="font-semibold text-slate-800">{siteData.location}</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">
+                Location
+              </p>
+              <p className="text-sm font-semibold text-[#4c1d95]">{siteData.location}</p>
             </div>
           </div>
 
-          <div className="flex items-start gap-3 border-l border-slate-200 pl-4">
-            <div className="mt-1 rounded-sm border border-slate-200 bg-white p-2 text-[#d97706]">
-              <Mail size={17} />
-            </div>
+          <div className="flex items-center gap-3 px-5 py-3">
+            <Clock size={18} className="shrink-0 text-[#4c1d95]" strokeWidth={1.75} />
             <div>
-              <p className="text-sm text-slate-500">School Hours</p>
-              <p className="font-semibold text-slate-800">{siteData.hours}</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">
+                Service Hours
+              </p>
+              <p className="text-sm font-semibold text-[#4c1d95]">Sun 9:00 AM – 1:00 PM</p>
             </div>
           </div>
 
-          <div className="flex items-start gap-3 border-l border-slate-200 pl-4">
-            <div className="mt-1 rounded-sm border border-slate-200 bg-white p-2 text-[#d97706]">
-              <Phone size={17} />
-            </div>
+          <div className="flex items-center gap-3 px-5 py-3">
+            <Phone size={18} className="shrink-0 text-[#4c1d95]" strokeWidth={1.75} />
             <div>
-              <p className="text-sm text-slate-500">Phone Number</p>
-              <p className="font-semibold text-slate-800">{siteData.phone}</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">
+                Telephone
+              </p>
+              <p className="text-sm font-semibold text-[#4c1d95]">{siteData.contacts.bishop.phone}</p>
             </div>
           </div>
         </div>

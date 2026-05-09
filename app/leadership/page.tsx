@@ -10,16 +10,16 @@ import Link from "next/link";
 
 const leaders = [
   {
-    name: "Mr. Noah Mweruphe",
-    role: "Director",
-    tag: "Founder & Director",
+    name: "Rev. Noah Mweruphe",
+    role: "Senior Pastor & Founder",
+    tag: "Founder & Pastor",
     image: "/images/staff/director.png",
     initials: "NM",
-    color: "bg-[#0f172a]",
-    bio: "Mr. Noah Mweruphe is the visionary founder and director of the Kenya Excellent Centre and School. Since establishing KES in 2013, he has driven a mission to provide quality education to both fee-paying and sponsored learners from disadvantaged backgrounds. Under his leadership, the school has grown from 30 students to over 400 learners, with alumni gaining entry to some of Kenya's most competitive national schools.",
-    quote: "Education is the greatest equalizer. Our doors are open to every child — regardless of their background.",
+    color: "bg-[#1e3a5f]",
+    bio: "Rev. Noah Mweruphe is the visionary founder and senior pastor of Jesus Christ Founder Ministry. Since establishing JCFM in 2013, he has led a mission to build lives through Christ — nurturing souls through worship and educating minds from early childhood through junior secondary. Under his leadership, the ministry has grown into a vibrant church community of 500+ members and a school serving over 400 learners.",
+    quote: "Our calling is to build lives through Christ — in the church, in the classroom, and in the community.",
     phone: "+254 722 916174",
-    email: "excellentkenya@gmail.com",
+    email: "info@jcfm.org",
     featured: true,
   },
   {
@@ -28,11 +28,11 @@ const leaders = [
     tag: "Primary School",
     image: "/images/staff/mwaro.png",
     initials: "JM",
-    color: "bg-[#d97706]",
-    bio: "Mr. Julius Mwaro leads the Primary School (Grade 1–6), overseeing the implementation of the Competency-Based Curriculum (CBC) and ensuring every learner achieves their full potential. He is committed to creating a structured, nurturing environment where academic excellence and strong character development go hand in hand.",
-    quote: "A strong primary foundation is the launchpad for everything a child will achieve in life.",
+    color: "bg-[#2563eb]",
+    bio: "Mr. Julius Mwaro leads the Primary School (Grade 1–6), overseeing the implementation of the Competency-Based Curriculum (CBC) and ensuring every learner achieves their full potential. He is committed to creating a structured, nurturing environment where academic excellence and strong Biblical character development go hand in hand.",
+    quote: "A strong primary foundation rooted in faith is the launchpad for everything a child will achieve in life.",
     phone: "+254 722 916174",
-    email: "excellentkenya@gmail.com",
+    email: "info@jcfm.org",
   },
   {
     name: "Mr. Idd Amani",
@@ -40,11 +40,11 @@ const leaders = [
     tag: "Junior Secondary",
     image: "/images/staff/idd.png",
     initials: "IA",
-    color: "bg-[#0f172a]",
-    bio: "Mr. Idd Amani leads the Junior Secondary School (Grade 7–9), preparing learners for the Kenya Junior Secondary Education Assessment (KJSEA). His focus is on developing critical thinkers and responsible young adults who are ready for the next stage of their academic journey.",
-    quote: "Junior secondary is where young people discover who they are. Our job is to give them the tools to become who they want to be.",
+    color: "bg-[#1e3a5f]",
+    bio: "Mr. Idd Amani leads the Junior Secondary School (Grade 7–9), preparing learners for the Kenya Junior Secondary Education Assessment (KJSEA). His focus is on developing critical thinkers and responsible young adults grounded in Christian values who are ready for the next stage of their academic journey.",
+    quote: "Junior secondary is where young people discover who they are in Christ. Our job is to give them the tools to become who God created them to be.",
     phone: "+254 722 916174",
-    email: "excellentkenya@gmail.com",
+    email: "info@jcfm.org",
   },
   {
     name: "Md. Phoebe N. Mulama",
@@ -52,11 +52,11 @@ const leaders = [
     tag: "ECDE",
     image: "/images/staff/pheobe.png",
     initials: "PM",
-    color: "bg-[#d97706]",
-    bio: "Md. Phoebe N. Mulama leads the Early Years Education (ECDE) department, nurturing children from age 3 through PP1 and PP2. She creates a warm, stimulating environment where the youngest learners develop confidence, social skills, and a love for learning that carries them through their entire school journey.",
-    quote: "The early years shape everything. Every smile, every discovery, every small step matters deeply.",
+    color: "bg-[#16a34a]",
+    bio: "Md. Phoebe N. Mulama leads the Early Years Education (ECDE) department, nurturing children from age 3 through PP1 and PP2. She creates a warm, Christ-centered environment where the youngest learners develop confidence, social skills, and a love for learning that carries them through their entire school journey.",
+    quote: "The early years shape everything. Every smile, every discovery, every small step in faith matters deeply.",
     phone: "+254 722 916174",
-    email: "excellentkenya@gmail.com",
+    email: "info@jcfm.org",
   },
   {
     name: "Mr. Mazera Dena",
@@ -64,11 +64,11 @@ const leaders = [
     tag: "Academics",
     image: "/images/staff/mazera.png",
     initials: "MD",
-    color: "bg-[#0f172a]",
-    bio: "Mr. Mazera Dena serves as Academic Master at KES, overseeing academic programmes across all levels. He coordinates curriculum delivery, monitors learner performance, and ensures teaching standards remain high. His work is central to KES consistently producing competitive results at sub-county and national levels.",
-    quote: "Academic excellence is not about pressure — it is about building a culture where every learner believes they can achieve.",
+    color: "bg-[#1e3a5f]",
+    bio: "Mr. Mazera Dena serves as Academic Master at JCFM School, overseeing academic programmes across all levels. He coordinates curriculum delivery, monitors learner performance, and ensures teaching standards remain high. His work is central to JCFM consistently producing competitive results at sub-county and national levels.",
+    quote: "Academic excellence rooted in faith is not about pressure — it is about building a culture where every learner believes they can achieve.",
     phone: "+254 722 916174",
-    email: "excellentkenya@gmail.com",
+    email: "info@jcfm.org",
   },
 ];
 
@@ -137,9 +137,9 @@ export default function LeadershipPage() {
       <section className="bg-[#0f172a] px-4 py-14 text-white md:py-20 lg:px-6">
         <div className="mx-auto max-w-[1400px]">
           <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-[#d97706]">Our People</p>
-          <h1 className="hero-title mb-3 text-4xl font-medium leading-tight md:text-5xl">The Team Behind KES</h1>
+          <h1 className="hero-title mb-3 text-4xl font-medium leading-tight md:text-5xl">The Team Behind Fountain of Hope Academy</h1>
           <p className="max-w-xl text-base leading-8 text-white/60">
-            Meet the dedicated leaders committed to providing quality education and care to every learner at Kenya Excellent Centre and School.
+            Meet the dedicated leaders committed to providing quality education and care to every learner at Fountain of Hope Academy.
           </p>
         </div>
       </section>
@@ -273,7 +273,7 @@ export default function LeadershipPage() {
           <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="hero-title mb-1 text-2xl md:text-3xl">Want to join our team?</h2>
-              <p className="text-sm text-white/60">KES is always looking for passionate educators who believe in our mission.</p>
+              <p className="text-sm text-white/60">Fountain of Hope Academy is always looking for passionate educators who believe in our mission.</p>
             </div>
             <div className="flex flex-wrap gap-3">
               <a href="mailto:excellentkenya@gmail.com?subject=Teaching Position Enquiry" className="inline-flex items-center gap-2 rounded-full bg-[#d97706] px-6 py-3 text-sm font-bold text-white hover:bg-[#b45309] transition">

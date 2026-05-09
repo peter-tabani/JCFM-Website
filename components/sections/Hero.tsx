@@ -1,98 +1,206 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar, GraduationCap, MapPin, BookOpen, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { siteData } from "@/data/site";
+import ReadMore from "@/components/ui/ReadMore";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[78vh] overflow-hidden">
-      <div
-        className="absolute inset-0 bg-cover bg-[center_35%]"
-        style={{
-          backgroundImage: "url('/images/hero/kecs-gate.webp')",
-        }}
-      />
-      <div className="absolute inset-0 bg-[#0f172a]/72" />
+    <>
+      {/* ── Announcement strip ── */}
+      <div className="border-b border-[#15803d]/30 bg-white">
+        <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3 px-6 py-2.5 text-[12px]">
+          <p className="flex items-center gap-2 text-slate-700">
+            <span className="inline-block h-2 w-2 rounded-full bg-[#15803d]" />
+            <span className="font-bold uppercase tracking-[0.18em] text-[#15803d]">
+              Notice
+            </span>
+            <span className="hidden sm:inline">—</span>
+            <span>
+              Sunday Worship Service this week at 9:00 AM. You are welcome.
+            </span>
+          </p>
+          <Link
+            href="/#sermons"
+            className="font-semibold uppercase tracking-[0.18em] text-[#4c1d95] transition hover:text-[#dc2626]"
+          >
+            View Latest Sermon →
+          </Link>
+        </div>
+      </div>
 
-      <div className="relative mx-auto flex min-h-[78vh] max-w-[1400px] items-center px-4 py-12 lg:px-6">
-        <div className="grid w-full gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-          <div className="max-w-3xl text-white">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-orange-300">
-              Welcome to KES
-            </p>
+      {/* ── Main banner ── */}
+      <section className="relative overflow-hidden bg-[#4c1d95]">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/JCFM_Hero.jpg')" }}
+        />
+        {/* Light purple overlay — image stays visible */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#4c1d95]/80 via-[#4c1d95]/65 to-[#4c1d95]/40" />
 
-            <h2 className="hero-title mb-6 text-5xl font-medium leading-[0.95] md:text-7xl">
-              Kenya Excellent
+        <div className="relative mx-auto max-w-[1400px] px-5 py-8 sm:px-6 sm:py-12 md:py-16">
+          <div className="max-w-4xl">
+            {/* Eyebrow */}
+            <div className="mb-6 flex items-center gap-4">
+              <span className="h-[3px] w-12 bg-[#15803d]" />
+              <p className="font-serif text-[28px] font-bold uppercase tracking-[0.28em] text-white sm:text-[32px] md:text-[36px]">
+                JCFM
+              </p>
+              <span className="h-[3px] w-12 bg-[#15803d]" />
+            </div>
+
+            {/* Title — serif, formal */}
+            <h2 className="font-serif text-[32px] font-semibold uppercase leading-[1.05] tracking-[0.02em] text-white sm:text-4xl md:text-6xl lg:text-[68px]">
+              Jesus Christ
               <br />
-              Centre & School
+              Founder Ministry
             </h2>
 
-            <p className="mb-8 max-w-2xl text-base leading-8 text-white/90 md:text-xl">
-              A private school in Likoni–Shelley Beach, Mombasa, offering a
-              nurturing learning journey from early childhood to junior
-              secondary, grounded in academic excellence, discipline, and moral
-              integrity. Founded in 2013 to serve both sponsored and fee-paying
-              learners alike.
+            {/* Gold separator */}
+            <div className="mt-5 mb-5 h-[2px] w-20 bg-[#15803d] md:mt-7 md:mb-7 md:w-24" />
+
+            {/* Motto */}
+            <p className="mb-3 font-serif text-lg italic text-[#c4b5fd] sm:text-xl md:text-2xl">
+              &ldquo;{siteData.motto}.&rdquo;
             </p>
 
-            <div className="mb-8 flex flex-wrap gap-4">
-              {/* ✅ Links to the full admissions page */}
-              <Link
-                href="/admissions"
-                className="inline-flex items-center gap-3 bg-[#d97706] px-7 py-4 text-base font-semibold text-white transition hover:bg-[#b45309]"
-              >
-                Apply for Admission
-                <ArrowRight size={18} />
-              </Link>
+            {/* Subtitle — mission, church-led (collapsed on mobile) */}
+            <ReadMore
+              showAllFrom="md"
+              tone="gold"
+              openLabel="Read More"
+              closeLabel="Show Less"
+              className="mb-8 md:mb-10"
+              more={
+                <p className="max-w-2xl text-[15px] leading-7 text-white/85 md:text-lg md:leading-8">
+                  A Christ-centered ministry headquartered in Nzoia, Bungoma,
+                  with a growing network of branches across Kenya. Under the
+                  leadership of{" "}
+                  <span className="font-semibold text-white">
+                    {siteData.generalOverseer}
+                  </span>
+                  , we exist to expand the Kingdom of God by establishing
+                  socially and economically empowered communities.
+                </p>
+              }
+            >
+              <p className="max-w-2xl text-[15px] leading-7 text-white/85 md:hidden">
+                A Christ-centered ministry headquartered in Nzoia, Bungoma,
+                with a growing network of branches across Kenya.
+              </p>
+            </ReadMore>
 
+            {/* CTAs — primary church, secondary academy */}
+            <div className="flex flex-wrap items-center gap-0">
               <Link
-                href="#programs"
-                className="inline-flex items-center gap-3 border border-white/40 bg-black/20 px-7 py-4 text-base font-semibold text-white transition hover:bg-white/10"
+                href="/#church"
+                className="flex items-center gap-3 bg-[#7c3aed] px-8 py-4 text-[12px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#6d28d9]"
               >
-                Explore Programs
-                <ArrowRight size={18} />
+                Worship With Us
+                <ArrowRight size={15} strokeWidth={2.5} />
+              </Link>
+              <Link
+                href="/#branches"
+                className="flex items-center gap-3 border-2 border-white px-8 py-[14px] text-[12px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-white hover:text-[#4c1d95]"
+              >
+                Find a Branch
+                <ArrowRight size={15} strokeWidth={2.5} />
               </Link>
             </div>
 
-            {/* Motto Banner */}
-            <div className="max-w-2xl rounded-md border border-white/15 bg-white/10 px-5 py-4 backdrop-blur-sm">
-              <p className="text-sm leading-7 text-white/90 md:text-base">
-                <span className="font-semibold text-orange-300">Motto:</span>{" "}
-                <span className="italic">{siteData.motto}</span>
-                
+            {/* Subtle academy link — secondary, not equal */}
+            <Link
+              href={siteData.schoolHref}
+              className="mt-6 inline-flex items-center gap-2 border-b border-[#fbbf24]/60 pb-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#fbbf24] transition hover:border-[#fcd34d] hover:text-[#fde68a]"
+            >
+              Looking for our school? Visit {siteData.schoolName} →
+            </Link>
+
+            {/* Bible verse footer */}
+            <div className="mt-12 max-w-2xl border-l-2 border-[#15803d] pl-5">
+              <p className="font-serif text-base italic leading-8 text-white/80 md:text-lg">
+                &ldquo;Go therefore and make disciples of all nations… teaching
+                them to observe all that I have commanded you.&rdquo;
+              </p>
+              <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.22em] text-[#c4b5fd]">
+                — Matthew 28:19–20
               </p>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Stats Panel */}
-          <div className="hidden lg:flex lg:flex-col lg:items-end lg:gap-6">
-            <div className="grid grid-cols-2 gap-4 w-full max-w-xs">
-              <div className="rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm p-5 text-center">
-                <p className="text-3xl font-bold text-orange-300">250+</p>
-                <p className="mt-1 text-xs text-white/75 leading-5">Sponsored<br/>Children</p>
-              </div>
-              <div className="rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm p-5 text-center">
-                <p className="text-3xl font-bold text-orange-300">150+</p>
-                <p className="mt-1 text-xs text-white/75 leading-5">Fee-Paying<br/>Learners</p>
-              </div>
-              <div className="rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm p-5 text-center">
-                <p className="text-3xl font-bold text-orange-300">2013</p>
-                <p className="mt-1 text-xs text-white/75 leading-5">Year<br/>Founded</p>
-              </div>
-              <div className="rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm p-5 text-center">
-                <p className="text-3xl font-bold text-orange-300">Gr. 9</p>
-                <p className="mt-1 text-xs text-white/75 leading-5">Highest<br/>Grade</p>
-              </div>
-            </div>
-
-            {/* Play button */}
-            <button className="group relative flex h-20 w-20 items-center justify-center rounded-full bg-white text-[#d97706] shadow-2xl transition hover:scale-105">
-              <span className="absolute inset-[-14px] rounded-full border border-white/40" />
-              <span className="absolute inset-[-28px] rounded-full border border-white/20" />
-              <span className="ml-1 text-xl">▶</span>
-            </button>
+      {/* ── Quick services bar ── */}
+      <section className="border-b border-slate-200 bg-white">
+        {/* Mobile: horizontal swipe-snap row */}
+        <div className="md:hidden">
+          <div className="flex items-center justify-between border-b border-slate-200 bg-white px-5 py-2.5">
+            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#15803d]">
+              Quick Links
+            </p>
+            <p className="text-[10px] uppercase tracking-[0.22em] text-slate-500">
+              Swipe →
+            </p>
           </div>
         </div>
-      </div>
-    </section>
+        <div className="mx-auto flex max-w-[1400px] snap-x snap-mandatory overflow-x-auto md:grid md:grid-cols-2 md:divide-x md:divide-slate-200 md:overflow-visible lg:grid-cols-4 [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
+          {[
+            {
+              icon: Calendar,
+              eyebrow: "Sundays · 9:00 AM",
+              title: "Worship Service",
+              desc: "Weekly worship at the Nzoia HQ and all branches.",
+              href: "/#church",
+            },
+            {
+              icon: MapPin,
+              eyebrow: "Mission teams & visits",
+              title: "Mission Trips to Kenya",
+              desc: "Come preach, serve, and walk with JCFM on a focused mission visit.",
+              href: "/mission-trips",
+            },
+            {
+              icon: BookOpen,
+              eyebrow: "Watch · Listen",
+              title: "Latest Sermons",
+              desc: "Past messages from our pastors and ministry leaders.",
+              href: "/#sermons",
+            },
+            {
+              icon: GraduationCap,
+              eyebrow: "Education Ministry",
+              title: siteData.schoolName,
+              desc: "Our faith-based school under the JCFM Ministry.",
+              href: siteData.schoolHref,
+            },
+          ].map((item) => (
+            <Link
+              key={item.title}
+              href={item.href}
+              className="group flex w-[78vw] shrink-0 snap-center items-start gap-4 border-r border-slate-200 p-5 transition hover:bg-white md:w-auto md:shrink md:border-r-0 md:p-6"
+            >
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#4c1d95] bg-[#4c1d95] text-[#c4b5fd] transition group-hover:bg-[#7c3aed] group-hover:text-white">
+                  <item.icon size={20} strokeWidth={1.75} />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#15803d]">
+                    {item.eyebrow}
+                  </p>
+                  <p className="mt-1 font-serif text-lg font-semibold text-[#4c1d95]">
+                    {item.title}
+                  </p>
+                  <p className="mt-1 text-[13px] leading-6 text-slate-600">
+                    {item.desc}
+                  </p>
+                  <p className="mt-2 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.22em] text-[#4c1d95] group-hover:text-[#dc2626]">
+                    Learn More <ChevronRight size={13} strokeWidth={2.5} />
+                  </p>
+                </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+    </>
   );
 }

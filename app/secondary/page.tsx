@@ -6,8 +6,8 @@ import Link from "next/link";
 import { Download, ArrowRight, MessageCircle, CheckCircle2 } from "lucide-react";
 
 export const metadata = {
-  title: "Junior Secondary – Kenya Excellent Centre & School",
-  description: "Junior Secondary School (Grade 7–9) at KES, Likoni Mombasa. CBC curriculum. KJSEA. Download fee structure.",
+  title: "Junior Secondary – Fountain of Hope Academy",
+  description: "Junior Secondary School (Grade 7–9) at Fountain of Hope Academy, Likoni Mombasa. CBC curriculum. KJSEA. Download fee structure.",
 };
 
 export default function SecondaryPage() {
@@ -27,8 +27,9 @@ export default function SecondaryPage() {
             Junior Secondary School
           </h1>
           <p className="mb-8 max-w-xl text-base leading-8 text-white/60">
-            KES currently offers Junior Secondary up to Grade 9, following
-            the CBC curriculum and preparing learners for the KJSEA assessment.
+            Fountain of Hope Academy currently offers Junior Secondary up to
+            Grade 9, following the CBC curriculum and preparing learners for
+            the KJSEA assessment.
           </p>
           <div className="flex flex-wrap gap-3">
             <a
@@ -82,7 +83,7 @@ export default function SecondaryPage() {
               </h2>
               <div className="space-y-4">
                 {[
-                  "KPSEA certificate OR pass KES entry assessment",
+                  "KPSEA certificate OR pass the entry assessment",
                   "Duly filled, signed and stamped transfer forms",
                   "Birth certificate (copy)",
                   "Passport-size photo of learner",
@@ -122,7 +123,7 @@ export default function SecondaryPage() {
                 <Download size={18} /> Download Fee Structure PDF
               </a>
               <a
-                href="https://wa.me/254722916174?text=Hello%20KES%2C%20I%20would%20like%20to%20enquire%20about%20Junior%20Secondary%20fees."
+                href="https://wa.me/254722916174?text=Hello%20Fountain%20of%20Hope%20Academy%2C%20I%20would%20like%20to%20enquire%20about%20Junior%20Secondary%20fees."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3.5 font-bold text-slate-700 hover:border-[#d97706] transition"
@@ -141,10 +142,10 @@ export default function SecondaryPage() {
             <div>
               <h2 className="hero-title mb-2 text-2xl md:text-3xl">Our Alumni Speak for Themselves</h2>
               <p className="max-w-xl text-sm leading-8 text-white/60">
-                KES Junior Secondary graduates have gained entry to competitive
+                Fountain of Hope Academy Junior Secondary graduates have gained entry to competitive
                 national schools including Maranda High School, Nyuki School,
                 Kwale High and Matuga Girls — proof that excellence is possible
-                for every learner at KES.
+                for every learner.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">

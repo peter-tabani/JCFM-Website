@@ -10,9 +10,9 @@ const programs = [
     title: "ECDE",
     subtitle: "PP1 – PP2",
     image: "/images/programs/ecde.jpg",
-    fallbackColor: "from-amber-600 to-orange-500",
+    fallbackColor: "from-blue-600 to-indigo-500",
     description:
-      "Early childhood development focused on play-based learning, literacy, numeracy, confidence, and social skills. We welcome children from age 3 in a warm, stimulating environment that builds a lifelong love for learning.",
+      "Early childhood development focused on play-based learning, literacy, numeracy, confidence, and social skills. We welcome children from age 3 in a warm, Christ-centered environment that builds a lifelong love for learning.",
     details: ["Ages 3 and above", "PP1 & PP2", "CBC Curriculum"],
   },
   {
@@ -22,7 +22,7 @@ const programs = [
     image: "/images/programs/primary.jpg",
     fallbackColor: "from-blue-700 to-blue-500",
     description:
-      "A balanced CBC-based programme emphasising Mathematics, Science, Social Studies, Communication, and character formation. Learners are guided to grow academically and develop strong moral values.",
+      "A balanced CBC-based programme emphasising Mathematics, Science, Social Studies, Communication, and Biblical character formation. Learners are guided to grow academically and develop strong moral values rooted in faith.",
     details: ["Grade 1 – 6", "CBC Curriculum", "KPSEA Assessment"],
   },
   {
@@ -37,13 +37,13 @@ const programs = [
   },
   {
     id: "islamic",
-    title: "Islamic Curriculum",
-    subtitle: "Madrasa Programme",
+    title: "Integrated Faith",
+    subtitle: "Spiritual Growth",
     image: "/images/programs/islamic.jpg",
-    fallbackColor: "from-emerald-700 to-teal-600",
+    fallbackColor: "from-purple-700 to-indigo-600",
     description:
-      "An integrated Madrasa programme offering Islamic studies alongside the standard CBC curriculum. Muslim learners receive a holistic education that nurtures both their academic and spiritual growth.",
-    details: ["All levels", "Integrated with CBC", "Islamic Studies"],
+      "A Christ-centered approach to education where spiritual growth goes hand in hand with academic excellence. Morning devotions, Bible lessons, and chapel services nurture each child's relationship with God.",
+    details: ["All levels", "Morning Devotions", "Bible Studies"],
   },
 ];
 
@@ -109,16 +109,16 @@ function FlipCard({ program }: { program: typeof programs[0] }) {
 
         {/* ── BACK ── */}
         <div
-          className="absolute inset-0 overflow-hidden rounded-3xl bg-[#0f172a] p-7 shadow-lg"
+          className="absolute inset-0 overflow-hidden rounded-3xl bg-[#1e3a5f] p-7 shadow-lg"
           style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
           }}
         >
-          {/* Orange accent top bar */}
-          <div className="mb-5 h-1 w-12 rounded-full bg-[#d97706]" />
+          {/* Purple accent top bar */}
+          <div className="mb-5 h-1 w-12 rounded-full bg-[#7c3aed]" />
 
-          <span className="mb-4 inline-block rounded-full bg-[#d97706]/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#d97706]">
+          <span className="mb-4 inline-block rounded-full bg-[#7c3aed]/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#c4b5fd]">
             {program.subtitle}
           </span>
 
@@ -143,7 +143,7 @@ function FlipCard({ program }: { program: typeof programs[0] }) {
           <Link
             href="/admissions"
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center gap-2 rounded-full bg-[#d97706] px-5 py-2.5 text-xs font-bold text-white hover:bg-[#b45309] transition"
+            className="inline-flex items-center gap-2 rounded-full bg-[#2563eb] px-5 py-2.5 text-xs font-bold text-white hover:bg-[#1d4ed8] transition"
           >
             Apply Now <ArrowRight size={13} />
           </Link>
@@ -155,12 +155,12 @@ function FlipCard({ program }: { program: typeof programs[0] }) {
 
 export default function Programs() {
   return (
-    <section id="programs" className="bg-[#fffaf2] py-20">
+    <section id="school" className="bg-[#fdfbf7] py-20">
       <div className="mx-auto max-w-[1400px] px-4 lg:px-6">
 
         {/* Header */}
         <div className="mb-14 text-center">
-          <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-[#d97706]">
+          <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-[#16a34a]">
             Our Learning Path — CBC Curriculum
           </p>
           <h2 className="hero-title text-4xl leading-tight text-slate-900 md:text-5xl">
@@ -168,7 +168,7 @@ export default function Programs() {
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base leading-8 text-slate-500">
             From early childhood through Junior Secondary — tap or hover each
-            card to discover what we offer.
+            card to discover what we offer at JCFM School.
           </p>
         </div>
 

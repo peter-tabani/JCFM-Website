@@ -33,7 +33,7 @@ export async function POST(req: Request) {
     );
 
     await client.messages.create({
-      body: `Hello ${name}! 🎓 Welcome to the KES Donor Family. You can now log in to your portal at any time to support our children in Likoni, Mombasa. Thank you for making a difference! — Kenya Excellent Centre & School`,
+      body: `Hello ${name}! 🎓 Welcome to the Fountain of Hope Academy donor family. You can now log in to your portal at any time to support our children in Likoni, Mombasa. Thank you for making a difference! — Fountain of Hope Academy`,
       from: process.env.TWILIO_PHONE_NUMBER,
       to: formattedPhone,
     });

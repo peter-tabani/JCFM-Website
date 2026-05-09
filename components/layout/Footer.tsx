@@ -2,29 +2,30 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-[#0f172a] py-16 text-white">
+    <footer id="contact" className="bg-[#4c1d95] py-16 text-white">
       <div className="mx-auto grid max-w-[1400px] gap-10 px-4 lg:grid-cols-4 lg:px-6">
 
         {/* Brand */}
         <div>
-          <h4 className="mb-1 text-2xl font-bold text-[#d97706]">KES</h4>
+          <h4 className="mb-1 text-2xl font-bold text-[#86efac]">JCFM</h4>
           <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-white/50">
-            Natuwe Mbele Daima
+            Expanding the Kingdom, One Community at a Time
           </p>
           <p className="mt-4 leading-8 text-white/65">
-            The Kenya Excellent Centre and School — committed to raising
-            learners in excellence, discipline, and integrity since 2013.
+            Jesus Christ Founder Ministry — a Christ-centered ministry
+            headquartered in Nzoia, Bungoma, with branches across Kenya.
           </p>
         </div>
 
-        {/* Programs */}
+        {/* Ministry */}
         <div>
-          <h5 className="mb-4 text-lg font-semibold text-white">Programs</h5>
+          <h5 className="mb-4 text-lg font-semibold text-white">Ministry</h5>
           <div className="space-y-3 text-white/65">
-            <p>ECDE (PP1 – PP2)</p>
-            <p>Primary School (Grade 1–6)</p>
-            <p>Junior Secondary (Grade 7–9)</p>
-            <p>Islamic Curriculum (Madrasa)</p>
+            <p>Sunday Worship Services</p>
+            <p>Youth, Women & Children</p>
+            <p>Bible Study & Prayer</p>
+            <p>Outreach & Evangelism</p>
+            <p>Branch Network across Kenya</p>
           </div>
         </div>
 
@@ -32,14 +33,17 @@ export default function Footer() {
         <div>
           <h5 className="mb-4 text-lg font-semibold text-white">Contact</h5>
           <div className="space-y-3 text-white/65">
-            <p>Along Approved-Shelleybeach Road,<br />Likoni, Mombasa</p>
-            <a href="tel:+254722916174" className="block hover:text-[#d97706]">
-              +254 722 916174
+            <p>Headquarters · Nzoia, Bungoma, Kenya</p>
+            <a href="tel:+254721683397" className="block transition hover:text-[#86efac]">
+              Bishop Nelson Barasa · +254 721 683 397
             </a>
-            <a href="mailto:excellentkenya@gmail.com" className="block hover:text-[#d97706]">
-              excellentkenya@gmail.com
+            <a href="tel:+254722660690" className="block transition hover:text-[#86efac]">
+              Pst. Sarah Wekesa · +254 722 660 690
             </a>
-            <p>School Hours: 6:00 AM – 6:00 PM</p>
+            <a href="mailto:info@jcfm.org" className="block transition hover:text-[#86efac]">
+              info@jcfm.org
+            </a>
+            <p>Sunday Service: 9:00 AM – 1:00 PM</p>
           </div>
         </div>
 
@@ -47,24 +51,24 @@ export default function Footer() {
         <div>
           <h5 className="mb-4 text-lg font-semibold text-white">Quick Links</h5>
           <div className="space-y-3 text-white/65">
-            <p><Link href="#about" className="hover:text-[#d97706]">About Us</Link></p>
-            <p><Link href="#admissions" className="hover:text-[#d97706]">Admissions</Link></p>
-            <p><Link href="#why-kecs" className="hover:text-[#d97706]">School Life</Link></p>
-            <p><Link href="#contact" className="hover:text-[#d97706]">Contact</Link></p>
-            <p><Link href="/login/donors" className="hover:text-[#d97706]">Donors</Link></p>
+            <p><Link href="/#about" className="transition hover:text-[#c4b5fd]">About JCFM</Link></p>
+            <p><Link href="/#branches" className="transition hover:text-[#c4b5fd]">Our Branches</Link></p>
+            <p><Link href="/#church" className="transition hover:text-[#c4b5fd]">Church Life</Link></p>
+            <p><Link href="/school" className="transition hover:text-[#c4b5fd]">Fountain of Hope Academy</Link></p>
+            <p><Link href="/#contact" className="transition hover:text-[#c4b5fd]">Contact</Link></p>
           </div>
         </div>
       </div>
 
       {/* Bottom bar */}
-      <div className="mx-auto mt-12 max-w-[1400px] border-t border-white/10 px-4 pt-6 lg:px-6">
+      <div className="mx-auto mt-12 max-w-[1400px] border-t border-[#15803d]/40 px-4 pt-6 lg:px-6">
         <div className="flex flex-col gap-2 text-sm text-white/40 sm:flex-row sm:justify-between">
-          <p>© {new Date().getFullYear()} The Kenya Excellent Centre and School. All rights reserved.</p>
+          <p> {new Date().getFullYear()} Jesus Christ Founder Ministry. All rights reserved.</p>
           <a
-            href="https://wa.me/254708905590?text=Hello%20Frank%2C%20I%20saw%20your%20work%20on%20the%20KES%20website%20and%20I%20am%20interested%20in%20working%20with%20you."
+            href="https://wa.me/254708905590?text=Hello%20Frank%2C%20I%20saw%20your%20work%20on%20the%20JCFM%20website%20and%20I%20am%20interested%20in%20working%20with%20you."
             target="_blank"
             rel="noopener noreferrer"
-            className="transition hover:text-[#d97706]"
+            className="transition hover:text-[#c4b5fd]"
           >
             Developed by PF
           </a>

@@ -46,7 +46,7 @@ const steps = [
   { num: "2", title: "Get Fee Structure", desc: "Visit our office on Shelleybeach Road, Likoni." },
   { num: "3", title: "Submit Documents", desc: "Bring all required documents for your child's level." },
   { num: "4", title: "Assessment (JSS only)", desc: "Grade 7–9 applicants without KPSEA sit an entry test." },
-  { num: "5", title: "Confirm & Join", desc: "Pay fees and receive your reporting date. Welcome to KES!" },
+  { num: "5", title: "Confirm & Join", desc: "Pay fees and receive your reporting date. Welcome to Fountain of Hope Academy!" },
 ];
 
 type FormState = {
@@ -119,7 +119,7 @@ export default function AdmissionsForm() {
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Hello KES! I would like to enquire about admission for my child.\n\nParent Name: ${form.parent_name || "..."}\nChild Name: ${form.child_name || "..."}\nApplying for: ${form.applying_level || "..."}`
+    `Hello Fountain of Hope Academy! I would like to enquire about admission for my child.\n\nParent Name: ${form.parent_name || "..."}\nChild Name: ${form.child_name || "..."}\nApplying for: ${form.applying_level || "..."}`
   );
 
   return (
@@ -147,7 +147,7 @@ export default function AdmissionsForm() {
             Call Us
           </a>
           <a
-            href="mailto:excellentkenya@gmail.com?subject=Admissions Enquiry – KES"
+            href="mailto:excellentkenya@gmail.com?subject=Admissions Enquiry – Fountain of Hope Academy"
             className="col-span-2 flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-[#fffaf2] py-4 font-semibold text-slate-800 shadow-sm active:scale-95"
           >
             <Mail size={20} className="text-[#d97706]" />
@@ -161,7 +161,7 @@ export default function AdmissionsForm() {
             onClick={() => setStepsOpen((o) => !o)}
             className="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-slate-900"
           >
-            <span>How to Join KES — 5 Steps</span>
+            <span>How to Join Fountain of Hope Academy — 5 Steps</span>
             {stepsOpen ? <ChevronUp size={18} className="text-[#d97706]" /> : <ChevronDown size={18} className="text-[#d97706]" />}
           </button>
           {stepsOpen && (
@@ -200,7 +200,7 @@ export default function AdmissionsForm() {
                 Application Submitted!
               </h3>
               <p className="max-w-md text-base leading-8 text-slate-600">
-                Thank you! The KES admissions team will contact you within 1–2
+                Thank you! The Fountain of Hope Academy admissions team will contact you within 1–2
                 business days on{" "}
                 <span className="font-semibold text-slate-800">
                   {form.parent_phone || "your phone"}
@@ -346,7 +346,7 @@ export default function AdmissionsForm() {
                     />
                   </div>
                   <div>
-                    <label className="label">How did you hear about KES?</label>
+                    <label className="label">How did you hear about Fountain of Hope Academy?</label>
                     <select
                       name="how_heard"
                       value={form.how_heard}
@@ -436,7 +436,7 @@ export default function AdmissionsForm() {
           </a>
 
           <a
-            href="mailto:excellentkenya@gmail.com?subject=Admissions Enquiry – KES"
+            href="mailto:excellentkenya@gmail.com?subject=Admissions Enquiry – Fountain of Hope Academy"
             className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-[#fffaf2] p-6 shadow-sm transition hover:shadow-md"
           >
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#d97706]/10 text-[#d97706]">
@@ -452,7 +452,7 @@ export default function AdmissionsForm() {
           {/* Desktop: How to Join steps (always visible) */}
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <p className="mb-4 text-sm font-bold uppercase tracking-wider text-slate-500">
-              How to Join — 5 Steps
+              How to Join Fountain of Hope Academy — 5 Steps
             </p>
             <ol className="space-y-4">
               {steps.map((s) => (
@@ -504,7 +504,7 @@ export default function AdmissionsForm() {
           <span className="text-xs font-bold">Call Now</span>
         </a>
         <a
-          href="mailto:excellentkenya@gmail.com?subject=Admissions Enquiry – KES"
+          href="mailto:excellentkenya@gmail.com?subject=Admissions Enquiry – Fountain of Hope Academy"
           className="flex flex-1 flex-col items-center justify-center gap-1 bg-[#d97706] py-3 text-white active:opacity-80"
         >
           <Mail size={22} />

@@ -6,8 +6,8 @@ import Link from "next/link";
 import { Download, ArrowRight, MessageCircle } from "lucide-react";
 
 export const metadata = {
-  title: "Primary School – Kenya Excellent Centre & School",
-  description: "Primary School (Grade 1–6) at KES, Likoni Mombasa. CBC curriculum. Download fee structure.",
+  title: "Primary School – Fountain of Hope Academy",
+  description: "Primary School (Grade 1–6) at Fountain of Hope Academy, Likoni Mombasa. CBC curriculum. Download fee structure.",
 };
 
 export default function PrimaryPage() {
@@ -27,8 +27,9 @@ export default function PrimaryPage() {
             Primary School
           </h1>
           <p className="mb-8 max-w-xl text-base leading-8 text-white/60">
-            A CBC-based programme at KES, Likoni — nurturing learners from
-            Grade 1 through Grade 6 in a disciplined, supportive environment.
+            A CBC-based programme at Fountain of Hope Academy, Likoni —
+            nurturing learners from Grade 1 through Grade 6 in a disciplined,
+            supportive environment.
           </p>
           <div className="flex flex-wrap gap-3">
             <a
@@ -89,7 +90,7 @@ export default function PrimaryPage() {
                 <Download size={18} /> Download Fee Structure PDF
               </a>
               <a
-                href="https://wa.me/254722916174?text=Hello%20KES%2C%20I%20would%20like%20to%20enquire%20about%20Primary%20School%20fees."
+                href="https://wa.me/254722916174?text=Hello%20Fountain%20of%20Hope%20Academy%2C%20I%20would%20like%20to%20enquire%20about%20Primary%20School%20fees."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-[#fffaf2] px-8 py-4 font-bold text-slate-700 hover:border-[#d97706] transition"

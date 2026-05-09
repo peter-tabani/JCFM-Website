@@ -1,0 +1,164 @@
+import { MapPin, Crown } from "lucide-react";
+import { siteData } from "@/data/site";
+import ReadMore from "@/components/ui/ReadMore";
+
+type Branch = (typeof siteData.branches)[number];
+
+function BranchRow({ b, num, isHq, striped }: { b: Branch; num: string; isHq: boolean; striped: boolean }) {
+  return (
+    <tr className={isHq ? "bg-white" : striped ? "bg-white" : "bg-slate-50"}>
+      <td className="border-b border-slate-200 px-5 py-5 align-top font-serif text-base font-semibold text-[#dc2626]">
+        {num}
+      </td>
+      <td className="border-b border-slate-200 px-5 py-5 align-top">
+        <div className="flex items-center gap-2">
+          <p className="font-serif text-base font-semibold uppercase tracking-wide text-[#4c1d95]">
+            {b.name}
+          </p>
+          {isHq && (
+            <span className="inline-flex items-center gap-1 border border-[#7c3aed] bg-[#7c3aed]/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.22em] text-[#4c1d95]">
+              <Crown size={10} strokeWidth={2.5} />
+              HQ
+            </span>
+          )}
+        </div>
+      </td>
+      <td className="border-b border-slate-200 px-5 py-5 align-top text-[14px] text-slate-700">
+        {b.pastor}
+      </td>
+      <td className="border-b border-slate-200 px-5 py-5 align-top">
+        <span className="inline-flex items-center gap-2 text-[14px] text-slate-700">
+          <MapPin size={13} className="text-[#15803d]" strokeWidth={2} />
+          {b.location}
+        </span>
+      </td>
+    </tr>
+  );
+}
+
+function BranchCard({ b, num, isHq }: { b: Branch; num: string; isHq: boolean }) {
+  return (
+    <article className={`relative flex gap-4 border ${isHq ? "border-[#7c3aed] bg-white" : "border-slate-200 bg-white"} p-4`}>
+      <div className={`flex h-12 w-12 shrink-0 flex-col items-center justify-center border ${isHq ? "border-[#7c3aed] bg-[#7c3aed] text-white" : "border-[#4c1d95] bg-[#4c1d95] text-white"}`}>
+        <span className="font-serif text-base font-semibold leading-none">{num}</span>
+      </div>
+      <div className="min-w-0 flex-1">
+        <div className="flex items-start justify-between gap-2">
+          <h4 className="font-serif text-base font-semibold uppercase leading-tight tracking-wide text-[#4c1d95]">
+            {b.name}
+          </h4>
+          {isHq && (
+            <span className="inline-flex shrink-0 items-center gap-1 border border-[#7c3aed] bg-[#7c3aed]/10 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.22em] text-[#4c1d95]">
+              <Crown size={9} strokeWidth={2.5} />
+              HQ
+            </span>
+          )}
+        </div>
+        <p className="mt-1.5 inline-flex items-center gap-1.5 text-[12px] text-slate-600">
+          <MapPin size={11} className="text-[#15803d]" strokeWidth={2} />
+          {b.location}
+        </p>
+        <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-500">
+          Led by · <span className="text-[#4c1d95]">{b.pastor}</span>
+        </p>
+      </div>
+    </article>
+  );
+}
+
+export default function Branches() {
+  const branches = siteData.branches;
+  const initial = branches.slice(0, 3);
+  const rest = branches.slice(3);
+
+  return (
+    <section id="branches" className="border-b border-slate-200 bg-white">
+
+      {/* Visual header banner */}
+      <div
+        className="relative h-[200px] w-full overflow-hidden md:h-[260px]"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1607453998774-d533f65dac99?w=1600&q=80')",
+          backgroundSize: "cover",
+          backgroundPosition: "center 40%",
+        }}
+      >
+        <div className="absolute inset-0 bg-[#4c1d95]/75" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+          <div className="flex items-center justify-center gap-3">
+            <span className="h-[1px] w-12 bg-[#86efac] md:w-16" />
+            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#86efac]">
+              Our Network
+            </p>
+            <span className="h-[1px] w-12 bg-[#86efac] md:w-16" />
+          </div>
+          <h2 className="mt-4 font-serif text-[28px] font-semibold uppercase leading-tight tracking-[0.02em] text-white sm:text-3xl md:text-5xl">
+            Branches Across Kenya
+          </h2>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-[1400px] px-5 py-12 sm:px-6 md:py-16">
+        <div />
+
+        {/* Desktop: full table */}
+        <div className="hidden overflow-x-auto border border-slate-300 bg-white md:block">
+          <table className="w-full border-collapse text-left">
+            <thead>
+              <tr className="bg-[#4c1d95] text-white">
+                <th className="border-b border-[#3b0f80] px-5 py-3 text-[10px] font-bold uppercase tracking-[0.22em]">№</th>
+                <th className="border-b border-[#3b0f80] px-5 py-3 text-[10px] font-bold uppercase tracking-[0.22em]">Branch</th>
+                <th className="border-b border-[#3b0f80] px-5 py-3 text-[10px] font-bold uppercase tracking-[0.22em]">Lead Pastor</th>
+                <th className="border-b border-[#3b0f80] px-5 py-3 text-[10px] font-bold uppercase tracking-[0.22em]">Location</th>
+              </tr>
+            </thead>
+            <tbody>
+              {branches.map((b, i) => (
+                <BranchRow
+                  key={b.name}
+                  b={b}
+                  num={String(i + 1).padStart(2, "0")}
+                  isHq={!!b.isHq}
+                  striped={i % 2 === 0}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Mobile: card list with progressive disclosure */}
+        <div className="md:hidden">
+          <ReadMore
+            showAllFrom="md"
+            tone="navy"
+            openLabel={`Show All ${branches.length} Branches`}
+            closeLabel="Show Less"
+            more={
+              <div className="mt-3 flex flex-col gap-3">
+                {rest.map((b, i) => (
+                  <BranchCard
+                    key={b.name}
+                    b={b}
+                    num={String(i + 4).padStart(2, "0")}
+                    isHq={!!b.isHq}
+                  />
+                ))}
+              </div>
+            }
+          >
+            <div className="flex flex-col gap-3">
+              {initial.map((b, i) => (
+                <BranchCard
+                  key={b.name}
+                  b={b}
+                  num={String(i + 1).padStart(2, "0")}
+                  isHq={!!b.isHq}
+                />
+              ))}
+            </div>
+          </ReadMore>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,33 +1,58 @@
-import { ChevronDown, MessageCircleQuestion, User } from "lucide-react";
+import { Mail, Phone, User, HelpCircle } from "lucide-react";
 import Link from "next/link";
 
 export default function TopBar() {
   return (
-    // Hidden completely on mobile — these links move into the hamburger menu
-    <section className="hidden bg-[#0f172a] text-white lg:block">
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-4 py-3 text-sm lg:px-6">
-        <div className="flex items-center gap-7">
-          <Link href="/donors/portal" className="flex items-center gap-1.5 hover:text-orange-300">
-            Donors <ChevronDown size={15} />
-          </Link>
-          <Link href="/login/staff" className="hover:text-orange-300">Staff</Link>
-          <Link href="/login/alumni" className="hover:text-orange-300">Alumni</Link>
-          <Link href="/login/parents" className="hover:text-orange-300">Parents</Link>
-          
-        </div>
+    <>
+      {/* Accent stripe */}
+      <div className="hidden h-[3px] w-full bg-[#15803d] lg:block" />
 
-        <div className="flex items-center gap-5">
-          <Link href="/login/staff" className="flex items-center gap-2 hover:text-orange-300">
-            <User size={15} />
-            Login / Register
-          </Link>
-          <span className="text-white/40">|</span>
-          <a href="#contact" className="flex items-center gap-2 hover:text-orange-300">
-            <MessageCircleQuestion size={15} />
-            FAQ
-          </a>
+      {/* Utility bar */}
+      <section className="hidden border-b border-slate-200 bg-white text-slate-700 lg:block">
+        <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-2 text-[12px] tracking-wide">
+          {/* Left: Official label + contact */}
+          <div className="flex items-center divide-x divide-slate-200">
+            <span className="pr-5 font-semibold uppercase tracking-[0.18em] text-[#4c1d95]">
+              Official Website
+            </span>
+            <a
+              href="tel:+254721683397"
+              className="flex items-center gap-2 px-5 text-slate-600 transition hover:text-[#15803d]"
+            >
+              <Phone size={12} strokeWidth={2.25} />
+              +254 721 683 397
+            </a>
+            <a
+              href="mailto:info@jcfm.org"
+              className="flex items-center gap-2 pl-5 text-slate-600 transition hover:text-[#15803d]"
+            >
+              <Mail size={12} strokeWidth={2.25} />
+              info@jcfm.org
+            </a>
+          </div>
+
+          {/* Right: Portal links */}
+          <div className="flex items-center divide-x divide-slate-200">
+            <Link href="/members" className="px-4 text-slate-600 transition hover:text-[#4c1d95]">
+              Members
+            </Link>
+            <Link
+              href="/login"
+              className="flex items-center gap-1.5 px-4 text-slate-600 transition hover:text-[#4c1d95]"
+            >
+              <User size={12} strokeWidth={2.25} />
+              Sign In
+            </Link>
+            <a
+              href="#contact"
+              className="flex items-center gap-1.5 pl-4 text-slate-600 transition hover:text-[#15803d]"
+            >
+              <HelpCircle size={12} strokeWidth={2.25} />
+              Help
+            </a>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

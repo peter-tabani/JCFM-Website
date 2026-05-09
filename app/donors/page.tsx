@@ -19,9 +19,9 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Support Our Children – Kenya Excellent Centre & School",
+  title: "Support Our Children – Fountain of Hope Academy",
   description:
-    "Help us educate and care for orphans and disadvantaged children in Likoni, Mombasa. Your donation changes lives.",
+    "Help us educate and care for vulnerable children in Likoni, Mombasa. Your donation changes lives.",
 };
 
 const impactStats = [
@@ -35,7 +35,7 @@ const tiers = [
   {
     name: "School Supplies",
     amount: "$10 / month",
-    amountKes: "≈ KES 1,300",
+    amountKes: "≈ KSh 1,300",
     description:
       "Covers exercise books, pens, pencils and basic stationery for one child for a full month.",
     icon: <BookOpen size={24} />,
@@ -46,7 +46,7 @@ const tiers = [
   {
     name: "Uniform & Meals",
     amount: "$25 / month",
-    amountKes: "≈ KES 3,200",
+    amountKes: "≈ KSh 3,200",
     description:
       "Provides a full school uniform and daily meals so a child can focus on learning.",
     icon: <Shirt size={24} />,
@@ -58,7 +58,7 @@ const tiers = [
   {
     name: "Full Sponsorship",
     amount: "$50 / month",
-    amountKes: "≈ KES 6,500",
+    amountKes: "≈ KSh 6,500",
     description:
       "Completely covers one child's education — tuition, meals, uniform, supplies and more.",
     icon: <GraduationCap size={24} />,
@@ -73,7 +73,7 @@ const oneTimeTiers = [
   { amount: "$100", desc: "Funds a month of meals for 10 children" },
   { amount: "$250", desc: "Equips a classroom with new learning materials" },
   { amount: "$500", desc: "Sponsors a child's full term of education" },
-  { amount: "$1,000", desc: "Funds a school computer or science equipment" },
+  { amount: "$1,000", desc: "Funds classroom equipment and learning tools" },
   { amount: "Custom", desc: "Give any amount — every contribution matters" },
 ];
 
@@ -101,8 +101,8 @@ const supplies = [
   "School uniforms & shoes",
   "Textbooks (CBC curriculum)",
   "Sports equipment",
-  "Computer lab equipment",
-  "Science lab materials",
+  "Playground equipment",
+  "Classroom furniture (desks & chairs)",
   "Musical instruments",
   "Art & craft supplies",
 ];
@@ -139,11 +139,11 @@ export default function DonorsPage() {
             </h1>
 
             <p className="mb-4 max-w-2xl text-lg leading-9 text-white/80">
-              In 2013, the Kenya Excellent Centre & School opened its doors
-              in Likoni, Mombasa — not just as a school, but as a lifeline.
-              Founded with a heart for orphans and children from the most
-              disadvantaged families, KES set an ambitious goal: that 75% of
-              its learners would be fully sponsored.
+              In 2013, Fountain of Hope Academy opened its doors in Likoni,
+              Mombasa — not just as a school, but as a lifeline. Founded with a
+              heart for orphans and children from the most disadvantaged
+              families, Fountain of Hope Academy set an ambitious goal: that
+              75% of its learners would be fully sponsored.
             </p>
             <p className="mb-10 max-w-2xl text-lg leading-9 text-white/80">
               Today, over <span className="font-bold text-white">250 children</span> who
@@ -225,11 +225,12 @@ export default function DonorsPage() {
                 gates every morning.
               </p>
               <p className="mb-8 text-base leading-9 text-slate-600">
-                Alumni from KES have gone on to join competitive national
-                schools including <strong>Maranda High School</strong>,
-                <strong> Nyuki School</strong>, <strong>Kwale High</strong>,
-                and <strong>Matuga Girls</strong> — proof that when you invest
-                in a child, the returns are extraordinary.
+                Alumni from Fountain of Hope Academy have gone on to join
+                competitive national schools including
+                <strong>Maranda High School</strong>,
+                <strong> Nyuki School</strong>, <strong>Kwale High</strong>, and
+                <strong>Matuga Girls</strong> — proof that when you invest in a
+                child, the returns are extraordinary.
               </p>
               <div className="rounded-2xl border-l-4 border-[#d97706] bg-[#fffaf2] p-5">
                 <p className="text-base italic leading-8 text-slate-700">
@@ -237,7 +238,7 @@ export default function DonorsPage() {
                   the fortunate and less fortunate, educated together, as equals."
                 </p>
                 <p className="mt-3 text-sm font-semibold text-slate-500">
-                  — Mr. Noah Mweruphe, Director, KES
+                  — Mr. Noah Mweruphe, Director, Fountain of Hope Academy
                 </p>
               </div>
             </div>
@@ -427,8 +428,9 @@ export default function DonorsPage() {
               Corporate & Organisation Partnership
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base leading-8 text-white/70">
-              Partner with KES as part of your CSR programme. Make a measurable
-              difference in children's lives while gaining recognition.
+              Partner with Fountain of Hope Academy as part of your CSR
+              programme. Make a measurable difference in children's lives while
+              gaining recognition.
             </p>
           </div>
 
@@ -512,7 +514,7 @@ export default function DonorsPage() {
                 All donation arrangements are handled personally by
                 Director <strong>Mr. Noah Mweruphe</strong>. Fill in the form
                 and he will respond within 48 hours to discuss how you can
-                best support the children of KES.
+                best support the children of Fountain of Hope Academy.
               </p>
 
               <div className="space-y-5">
@@ -551,10 +553,10 @@ export default function DonorsPage() {
                 <div className="rounded-2xl border border-slate-200 bg-[#fffaf2] p-5">
                   <p className="mb-1 font-semibold text-slate-900">Trust & Transparency</p>
                   <p className="text-sm leading-7 text-slate-600">
-                    KES operates with full commitment to child protection,
-                    safeguarding, discipline policy, and health & safety
-                    standards. All donations are used directly for the
-                    children's education and welfare.
+                    Fountain of Hope Academy operates with full commitment to
+                    child protection, safeguarding, discipline policy, and
+                    health & safety standards. All donations are used directly
+                    for the children's education and welfare.
                   </p>
                 </div>
               </div>

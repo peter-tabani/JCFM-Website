@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev",
       to: email,
-      subject: "Welcome to the KES Donor Family 🎓",
+      subject: "Welcome to the Fountain of Hope Academy Donor Family 🎓",
       html: `
         <!DOCTYPE html>
         <html>
@@ -28,16 +28,16 @@ export async function POST(req: Request) {
             
             <!-- Header -->
             <div style="background: #0f172a; padding: 40px 40px 32px;">
-              <div style="display: inline-block; border: 2px solid #d97706; border-radius: 50%; width: 48px; height: 48px; text-align: center; line-height: 48px; color: #d97706; font-weight: bold; font-size: 20px; margin-bottom: 16px;">K</div>
-              <h1 style="color: #d97706; margin: 0 0 4px; font-size: 28px; font-weight: 600;">Kenya Excellent Centre & School</h1>
-              <p style="color: rgba(255,255,255,0.5); margin: 0; font-size: 13px; letter-spacing: 2px; text-transform: uppercase;">Natuwe Mbele Daima</p>
+              <div style="display: inline-block; border: 2px solid #d97706; border-radius: 50%; width: 48px; height: 48px; text-align: center; line-height: 48px; color: #d97706; font-weight: bold; font-size: 20px; margin-bottom: 16px;">F</div>
+              <h1 style="color: #d97706; margin: 0 0 4px; font-size: 28px; font-weight: 600;">Fountain of Hope Academy</h1>
+              <p style="color: rgba(255,255,255,0.5); margin: 0; font-size: 13px; letter-spacing: 2px; text-transform: uppercase;">Integrity, Courage, Excellence</p>
             </div>
 
             <!-- Body -->
             <div style="padding: 40px;">
               <h2 style="color: #0f172a; font-size: 24px; margin: 0 0 16px;">Welcome, ${name}! 🙏</h2>
               <p style="color: #475569; line-height: 1.8; margin: 0 0 16px;">
-                Thank you for joining our donor family. Your decision to support KES means everything to us — and to the children who walk through our gates every morning.
+                Thank you for joining our donor family. Your decision to support Fountain of Hope Academy means everything to us — and to the children who walk through our gates every morning.
               </p>
               <p style="color: #475569; line-height: 1.8; margin: 0 0 32px;">
                 You can now log in to your donor portal to choose how you'd like to support us — whether by sponsoring a child, making a direct donation, or following our school's growth journey.
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
             <!-- Footer -->
             <div style="background: #f8fafc; padding: 24px 40px; border-top: 1px solid #e2e8f0;">
               <p style="color: #94a3b8; font-size: 12px; margin: 0; line-height: 1.8;">
-                Kenya Excellent Centre & School<br/>
+                Fountain of Hope Academy<br/>
                 Along Approved-Shelleybeach Road, Likoni – Shelley Beach, Mombasa<br/>
                 <a href="mailto:excellentkenya@gmail.com" style="color: #d97706;">excellentkenya@gmail.com</a>
               </p>

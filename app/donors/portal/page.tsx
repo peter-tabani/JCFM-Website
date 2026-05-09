@@ -19,14 +19,16 @@ type StoredDonor = {
   joinedAt: string;
 };
 
+const DONORS_STORAGE_KEY = "fha_donors";
+
 const getDonors = (): StoredDonor[] => {
   if (typeof window === "undefined") return [];
-  try { return JSON.parse(localStorage.getItem("kes_donors") || "[]"); }
+  try { return JSON.parse(localStorage.getItem(DONORS_STORAGE_KEY) || "[]"); }
   catch { return []; }
 };
 
 const saveDonors = (donors: StoredDonor[]) =>
-  localStorage.setItem("kes_donors", JSON.stringify(donors));
+  localStorage.setItem(DONORS_STORAGE_KEY, JSON.stringify(donors));
 
 const findByEmail = (email: string) =>
   getDonors().find((d) => d.email?.toLowerCase() === email.toLowerCase());
@@ -178,12 +180,13 @@ export default function DonorPortalPage() {
       <div className="relative hidden flex-col justify-between overflow-hidden bg-[#0f172a] p-12 lg:flex lg:w-[42%]">
         <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, #d97706 1px, transparent 0)", backgroundSize: "32px 32px" }} />
         <Link href="/" className="relative flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#d97706] text-sm font-bold text-[#d97706]">K</div>
+          <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#d97706] text-sm font-bold text-[#d97706]">F</div>
           <div>
-            <p className="font-bold text-white">KES</p>
-            <p className="text-xs text-white/40">Kenya Excellent Centre & School</p>
+            <p className="font-bold text-white">Fountain of Hope Academy</p>
+            <p className="text-xs text-white/40">Donor Portal</p>
           </div>
         </Link>
+
         <div className="relative">
           <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#d97706]/20 text-[#d97706]">
             <Heart size={28} />
@@ -209,7 +212,7 @@ export default function DonorPortalPage() {
             ))}
           </div>
         </div>
-        <p className="relative text-xs text-white/25">© {new Date().getFullYear()} Kenya Excellent Centre & School</p>
+        <p className="relative text-xs text-white/25"> {new Date().getFullYear()} Fountain of Hope Academy</p>
       </div>
 
       {/* ── Right Form Panel ── */}
@@ -218,10 +221,10 @@ export default function DonorPortalPage() {
 
           {/* Mobile logo */}
           <Link href="/" className="mb-8 flex items-center gap-2 lg:hidden">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#d97706] text-sm font-bold text-[#d97706]">K</div>
+            <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#d97706] text-sm font-bold text-[#d97706]">F</div>
             <div>
-              <p className="font-bold text-slate-800">KES Donor Portal</p>
-              <p className="text-xs text-slate-400">Kenya Excellent Centre & School</p>
+              <p className="font-bold text-slate-800">Fountain of Hope Academy Donor Portal</p>
+              <p className="text-xs text-slate-400">Support children through giving</p>
             </div>
           </Link>
 
@@ -369,7 +372,7 @@ export default function DonorPortalPage() {
                     </div>
 
                     <div className="rounded-xl bg-slate-50 px-4 py-3 text-xs leading-6 text-slate-500">
-                      💡 You can register with <strong>email</strong>, <strong>phone</strong>, or <strong>both</strong>. At least one is required.
+                      You can register with <strong>email</strong>, <strong>phone</strong>, or <strong>both</strong>. At least one is required.
                     </div>
 
                     <div>
@@ -457,7 +460,7 @@ export default function DonorPortalPage() {
           )}
 
           <p className="mt-8 text-center text-xs text-slate-400">
-            <Link href="/" className="hover:text-[#d97706]">← Back to KES website</Link>
+            <Link href="/" className="hover:text-[#d97706]">← Back to the main website</Link>
           </p>
         </div>
       </div>
