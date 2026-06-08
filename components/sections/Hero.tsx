@@ -29,14 +29,14 @@ export default function Hero() {
       </div>
 
       {/* ── Main banner ── */}
-      <section className="relative overflow-hidden bg-[#4c1d95]">
+      <section className="relative overflow-hidden bg-[#0f172a]">
         {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url('/images/JCFM_Hero.jpg')" }}
         />
-        {/* Light purple overlay — image stays visible */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#4c1d95]/80 via-[#4c1d95]/65 to-[#4c1d95]/40" />
+        {/* Neutral dark overlay — keeps image natural, text readable */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/85 via-[#0f172a]/60 to-[#0f172a]/25" />
 
         <div className="relative mx-auto max-w-[1400px] px-5 py-8 sm:px-6 sm:py-12 md:py-16">
           <div className="max-w-4xl">
@@ -60,7 +60,7 @@ export default function Hero() {
             <div className="mt-5 mb-5 h-[2px] w-20 bg-[#15803d] md:mt-7 md:mb-7 md:w-24" />
 
             {/* Motto */}
-            <p className="mb-3 font-serif text-lg italic text-[#c4b5fd] sm:text-xl md:text-2xl">
+            <p className="mb-3 font-serif text-lg italic text-white/90 sm:text-xl md:text-2xl">
               &ldquo;{siteData.motto}.&rdquo;
             </p>
 
@@ -122,7 +122,7 @@ export default function Hero() {
                 &ldquo;Go therefore and make disciples of all nations… teaching
                 them to observe all that I have commanded you.&rdquo;
               </p>
-              <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.22em] text-[#c4b5fd]">
+              <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.22em] text-[#86efac]">
                 — Matthew 28:19–20
               </p>
             </div>
