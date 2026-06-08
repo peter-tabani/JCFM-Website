@@ -6,28 +6,28 @@ type Branch = (typeof siteData.branches)[number];
 
 function BranchRow({ b, num, isHq, striped }: { b: Branch; num: string; isHq: boolean; striped: boolean }) {
   return (
-    <tr className={isHq ? "bg-white" : striped ? "bg-white" : "bg-slate-50"}>
-      <td className="border-b border-slate-200 px-5 py-5 align-top font-serif text-base font-semibold text-[#dc2626]">
+    <tr className={isHq ? "bg-[#151f34]" : striped ? "bg-[#0f172a]" : "bg-[#101827]"}>
+      <td className="border-b border-white/10 px-5 py-5 align-top font-serif text-base font-semibold text-[#fbbf24]">
         {num}
       </td>
-      <td className="border-b border-slate-200 px-5 py-5 align-top">
+      <td className="border-b border-white/10 px-5 py-5 align-top">
         <div className="flex items-center gap-2">
-          <p className="font-serif text-base font-semibold uppercase tracking-wide text-[#4c1d95]">
+          <p className="font-serif text-base font-semibold uppercase tracking-wide text-white">
             {b.name}
           </p>
           {isHq && (
-            <span className="inline-flex items-center gap-1 border border-[#7c3aed] bg-[#7c3aed]/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.22em] text-[#4c1d95]">
+            <span className="inline-flex items-center gap-1 border border-[#7c3aed] bg-[#7c3aed]/20 px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.22em] text-[#c4b5fd]">
               <Crown size={10} strokeWidth={2.5} />
               HQ
             </span>
           )}
         </div>
       </td>
-      <td className="border-b border-slate-200 px-5 py-5 align-top text-[14px] text-slate-700">
+      <td className="border-b border-white/10 px-5 py-5 align-top text-[14px] text-white/68">
         {b.pastor}
       </td>
-      <td className="border-b border-slate-200 px-5 py-5 align-top">
-        <span className="inline-flex items-center gap-2 text-[14px] text-slate-700">
+      <td className="border-b border-white/10 px-5 py-5 align-top">
+        <span className="inline-flex items-center gap-2 text-[14px] text-white/68">
           <MapPin size={13} className="text-[#15803d]" strokeWidth={2} />
           {b.location}
         </span>
@@ -38,28 +38,28 @@ function BranchRow({ b, num, isHq, striped }: { b: Branch; num: string; isHq: bo
 
 function BranchCard({ b, num, isHq }: { b: Branch; num: string; isHq: boolean }) {
   return (
-    <article className={`relative flex gap-4 border ${isHq ? "border-[#7c3aed] bg-white" : "border-slate-200 bg-white"} p-4`}>
+    <article className={`relative flex gap-4 border ${isHq ? "border-[#7c3aed]/70 bg-[#151f34]" : "border-white/10 bg-[#0f172a]"} p-4`}>
       <div className={`flex h-12 w-12 shrink-0 flex-col items-center justify-center border ${isHq ? "border-[#7c3aed] bg-[#7c3aed] text-white" : "border-[#4c1d95] bg-[#4c1d95] text-white"}`}>
         <span className="font-serif text-base font-semibold leading-none">{num}</span>
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex items-start justify-between gap-2">
-          <h4 className="font-serif text-base font-semibold uppercase leading-tight tracking-wide text-[#4c1d95]">
+          <h4 className="font-serif text-base font-semibold uppercase leading-tight tracking-wide text-white">
             {b.name}
           </h4>
           {isHq && (
-            <span className="inline-flex shrink-0 items-center gap-1 border border-[#7c3aed] bg-[#7c3aed]/10 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.22em] text-[#4c1d95]">
+            <span className="inline-flex shrink-0 items-center gap-1 border border-[#7c3aed] bg-[#7c3aed]/20 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.22em] text-[#c4b5fd]">
               <Crown size={9} strokeWidth={2.5} />
               HQ
             </span>
           )}
         </div>
-        <p className="mt-1.5 inline-flex items-center gap-1.5 text-[12px] text-slate-600">
+        <p className="mt-1.5 inline-flex items-center gap-1.5 text-[12px] text-white/62">
           <MapPin size={11} className="text-[#15803d]" strokeWidth={2} />
           {b.location}
         </p>
-        <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-500">
-          Led by · <span className="text-[#4c1d95]">{b.pastor}</span>
+        <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.22em] text-white/42">
+          Led by · <span className="text-[#c4b5fd]">{b.pastor}</span>
         </p>
       </div>
     </article>
@@ -72,7 +72,7 @@ export default function Branches() {
   const rest = branches.slice(3);
 
   return (
-    <section id="branches" className="border-b border-slate-200 bg-white">
+    <section id="branches" className="border-b border-white/10 bg-[#080b16]">
 
       {/* Visual header banner */}
       <div
@@ -83,7 +83,7 @@ export default function Branches() {
           backgroundPosition: "center 40%",
         }}
       >
-        <div className="absolute inset-0 bg-[#4c1d95]/75" />
+        <div className="absolute inset-0 bg-[#080b16]/80" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <div className="flex items-center justify-center gap-3">
             <span className="h-[1px] w-12 bg-[#86efac] md:w-16" />
@@ -102,14 +102,14 @@ export default function Branches() {
         <div />
 
         {/* Desktop: full table */}
-        <div className="hidden overflow-x-auto border border-slate-300 bg-white md:block">
+        <div className="hidden overflow-x-auto border border-white/10 bg-[#0f172a] shadow-[0_22px_55px_rgba(0,0,0,0.35)] md:block">
           <table className="w-full border-collapse text-left">
             <thead>
               <tr className="bg-[#4c1d95] text-white">
-                <th className="border-b border-[#3b0f80] px-5 py-3 text-[10px] font-bold uppercase tracking-[0.22em]">№</th>
-                <th className="border-b border-[#3b0f80] px-5 py-3 text-[10px] font-bold uppercase tracking-[0.22em]">Branch</th>
-                <th className="border-b border-[#3b0f80] px-5 py-3 text-[10px] font-bold uppercase tracking-[0.22em]">Lead Pastor</th>
-                <th className="border-b border-[#3b0f80] px-5 py-3 text-[10px] font-bold uppercase tracking-[0.22em]">Location</th>
+                <th className="border-b border-white/10 px-5 py-3 text-[10px] font-bold uppercase tracking-[0.22em]">№</th>
+                <th className="border-b border-white/10 px-5 py-3 text-[10px] font-bold uppercase tracking-[0.22em]">Branch</th>
+                <th className="border-b border-white/10 px-5 py-3 text-[10px] font-bold uppercase tracking-[0.22em]">Lead Pastor</th>
+                <th className="border-b border-white/10 px-5 py-3 text-[10px] font-bold uppercase tracking-[0.22em]">Location</th>
               </tr>
             </thead>
             <tbody>

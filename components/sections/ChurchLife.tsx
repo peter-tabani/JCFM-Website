@@ -31,17 +31,17 @@ const MINISTRIES = [
 
 export default function ChurchLife() {
   return (
-    <section id="church" className="bg-white">
+    <section id="church" className="bg-[#080b16]">
 
       {/* ── Section Header ── */}
-      <div className="border-b border-slate-200 bg-white">
+      <div className="border-b border-white/10 bg-[#0f172a]">
         <div className="grid lg:grid-cols-2 lg:min-h-[360px]">
           {/* Left: text */}
           <div className="mx-auto flex w-full max-w-2xl flex-col justify-center px-5 py-10 sm:px-10 md:py-16">
-            <h2 className="mt-4 font-serif text-3xl font-semibold uppercase leading-tight tracking-[0.02em] text-[#4c1d95] md:text-5xl">
+            <h2 className="mt-4 font-serif text-3xl font-semibold uppercase leading-tight tracking-[0.02em] text-white md:text-5xl">
               Church Life at JCFM
             </h2>
-            <p className="mt-5 max-w-xl text-[15px] leading-8 text-slate-600">
+            <p className="mt-5 max-w-xl text-[15px] leading-8 text-white/66">
               Whether at the headquarters in Nzoia or at any of our
               branches across Kenya, every congregation keeps the same
               weekly rhythm of worship, the Word, and warm fellowship.
@@ -49,7 +49,7 @@ export default function ChurchLife() {
             </p>
             <Link
               href="/#contact"
-              className="mt-6 inline-flex items-center gap-3 rounded-full bg-[#4c1d95] px-7 py-3 text-[11px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#3b0f80]"
+              className="mt-6 inline-flex items-center gap-3 rounded-full bg-[#7c3aed] px-7 py-3 text-[11px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#6d28d9]"
             >
               <MapPin size={16} strokeWidth={2} className="text-white" />
               Leardership at JCFM
@@ -65,40 +65,40 @@ export default function ChurchLife() {
       </div>
 
       {/* ── Weekly Schedule ── */}
-      <div className="border-b border-slate-200 bg-white">
+      <div className="border-b border-white/10 bg-[#080b16]">
         <div className="mx-auto max-w-[1400px] px-6 py-14">
           <div className="mb-8 flex items-end justify-between">
             <div>
               <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-[#dc2626]">
                 Order of Worship
               </p>
-              <h3 className="mt-2 font-serif text-2xl font-semibold uppercase tracking-wide text-[#4c1d95] md:text-3xl">
+              <h3 className="mt-2 font-serif text-2xl font-semibold uppercase tracking-wide text-white md:text-3xl">
                 Weekly Schedule
               </h3>
             </div>
-            <Calendar size={28} className="hidden text-[#4c1d95] md:block" strokeWidth={1.5} />
+            <Calendar size={28} className="hidden text-[#c4b5fd] md:block" strokeWidth={1.5} />
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-slate-300">
+            <table className="w-full border-collapse border border-white/10 bg-[#0f172a]">
               <thead>
                 <tr className="bg-[#4c1d95] text-white">
-                  <th className="border-b border-[#3b0f80] px-5 py-3 text-left text-[10px] font-bold uppercase tracking-[0.22em]">
+                  <th className="border-b border-white/10 px-5 py-3 text-left text-[10px] font-bold uppercase tracking-[0.22em]">
                     Day
                   </th>
-                  <th className="border-b border-[#3b0f80] px-5 py-3 text-left text-[10px] font-bold uppercase tracking-[0.22em]">
+                  <th className="border-b border-white/10 px-5 py-3 text-left text-[10px] font-bold uppercase tracking-[0.22em]">
                     Time
                   </th>
-                  <th className="border-b border-[#3b0f80] px-5 py-3 text-left text-[10px] font-bold uppercase tracking-[0.22em]">
+                  <th className="border-b border-white/10 px-5 py-3 text-left text-[10px] font-bold uppercase tracking-[0.22em]">
                     Activity
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {SCHEDULE.map((row, i) => (
-                  <tr key={row.day} className={row.primary ? "bg-white" : i % 2 === 0 ? "bg-white" : "bg-slate-50"}>
-                    <td className="border-b border-slate-200 px-5 py-4 align-top">
-                      <p className="font-serif text-base font-semibold text-[#4c1d95]">
+                  <tr key={row.day} className={row.primary ? "bg-[#151f34]" : i % 2 === 0 ? "bg-[#0f172a]" : "bg-[#101827]"}>
+                    <td className="border-b border-white/10 px-5 py-4 align-top">
+                      <p className="font-serif text-base font-semibold text-white">
                         {row.day}
                       </p>
                       {row.primary && (
@@ -107,10 +107,10 @@ export default function ChurchLife() {
                         </p>
                       )}
                     </td>
-                    <td className="border-b border-slate-200 px-5 py-4 align-top text-[14px] text-slate-700">
+                    <td className="border-b border-white/10 px-5 py-4 align-top text-[14px] text-white/68">
                       {row.time}
                     </td>
-                    <td className="border-b border-slate-200 px-5 py-4 align-top text-[14px] text-slate-700">
+                    <td className="border-b border-white/10 px-5 py-4 align-top text-[14px] text-white/68">
                       {row.activity}
                     </td>
                   </tr>
@@ -122,22 +122,22 @@ export default function ChurchLife() {
       </div>
 
       {/* ── Ministries Grid ── */}
-      <div className="border-b border-slate-200 bg-white">
+      <div className="border-b border-white/10 bg-[#0f172a]">
         <div className="mx-auto max-w-[1400px] px-5 py-10 sm:px-6 md:py-16">
           <div className="mb-10 max-w-2xl">
             <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-[#dc2626]">
               Ministries & Fellowships
             </p>
-            <h3 className="mt-2 font-serif text-2xl font-semibold uppercase tracking-wide text-[#4c1d95] md:text-4xl">
+            <h3 className="mt-2 font-serif text-2xl font-semibold uppercase tracking-wide text-white md:text-4xl">
               Find Your Place to Serve
             </h3>
             <div className="mt-4 h-[2px] w-16 bg-[#15803d]" />
           </div>
 
           {/* Desktop: full 6-card grid */}
-          <div className="hidden grid-cols-1 divide-y divide-slate-200 border border-slate-200 bg-white md:grid md:grid-cols-2 md:divide-y-0 md:[&>*:nth-child(odd)]:border-r md:[&>*:nth-child(odd)]:border-slate-200 md:[&>*:nth-child(-n+4)]:border-b md:[&>*:nth-child(-n+4)]:border-slate-200 lg:grid-cols-3 lg:[&>*:nth-child(odd)]:border-r-0 lg:[&>*:nth-child(3n+1)]:border-r lg:[&>*:nth-child(3n+2)]:border-r lg:[&>*:nth-child(3n+1)]:border-slate-200 lg:[&>*:nth-child(3n+2)]:border-slate-200 lg:[&>*:nth-child(-n+3)]:border-b lg:[&>*:nth-child(-n+3)]:border-slate-200">
+          <div className="hidden grid-cols-1 divide-y divide-white/10 border border-white/10 bg-[#080b16] md:grid md:grid-cols-2 md:divide-y-0 md:[&>*:nth-child(odd)]:border-r md:[&>*:nth-child(odd)]:border-white/10 md:[&>*:nth-child(-n+4)]:border-b md:[&>*:nth-child(-n+4)]:border-white/10 lg:grid-cols-3 lg:[&>*:nth-child(odd)]:border-r-0 lg:[&>*:nth-child(3n+1)]:border-r lg:[&>*:nth-child(3n+2)]:border-r lg:[&>*:nth-child(3n+1)]:border-white/10 lg:[&>*:nth-child(3n+2)]:border-white/10 lg:[&>*:nth-child(-n+3)]:border-b lg:[&>*:nth-child(-n+3)]:border-white/10">
             {MINISTRIES.map((m, i) => (
-              <div key={m.name} className="group flex gap-5 p-7 transition hover:bg-white">
+              <div key={m.name} className="group flex gap-5 p-7 transition hover:bg-white/[0.04]">
                 <div className={`flex h-12 w-12 shrink-0 items-center justify-center border text-white ${
                   i % 2 === 0 ? "border-[#4c1d95] bg-[#4c1d95]" : "border-[#15803d] bg-[#15803d]"
                 }`}>
@@ -147,14 +147,14 @@ export default function ChurchLife() {
                   <p className="font-serif text-[10px] font-bold uppercase tracking-[0.32em] text-[#15803d]">
                     № 0{i + 1}
                   </p>
-                  <h4 className="mt-1 font-serif text-lg font-semibold uppercase tracking-wide text-[#4c1d95]">
+                  <h4 className="mt-1 font-serif text-lg font-semibold uppercase tracking-wide text-white">
                     {m.name}
                   </h4>
-                  <p className="mt-2 text-[13px] leading-6 text-slate-600">
+                  <p className="mt-2 text-[13px] leading-6 text-white/62">
                     {m.desc}
                   </p>
-                  <p className="mt-3 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-500">
-                    Led by · <span className="text-[#4c1d95]">{m.lead}</span>
+                  <p className="mt-3 text-[10px] font-bold uppercase tracking-[0.22em] text-white/42">
+                    Led by · <span className="text-[#c4b5fd]">{m.lead}</span>
                   </p>
                 </div>
               </div>
@@ -169,7 +169,7 @@ export default function ChurchLife() {
               openLabel={`Show All ${MINISTRIES.length} Ministries`}
               closeLabel="Show Less"
               more={
-                <div className="flex flex-col divide-y divide-slate-200 border-x border-b border-slate-200 bg-white">
+                <div className="flex flex-col divide-y divide-white/10 border-x border-b border-white/10 bg-[#0f172a]">
                   {MINISTRIES.slice(3).map((m, i) => (
                     <div key={m.name} className="flex gap-4 p-5">
                       <div className={`flex h-11 w-11 shrink-0 items-center justify-center border text-white ${
@@ -181,14 +181,14 @@ export default function ChurchLife() {
                         <p className="font-serif text-[10px] font-bold uppercase tracking-[0.32em] text-[#15803d]">
                           № 0{i + 4}
                         </p>
-                        <h4 className="mt-1 font-serif text-base font-semibold uppercase tracking-wide text-[#4c1d95]">
+                        <h4 className="mt-1 font-serif text-base font-semibold uppercase tracking-wide text-white">
                           {m.name}
                         </h4>
-                        <p className="mt-1.5 text-[13px] leading-6 text-slate-600">
+                        <p className="mt-1.5 text-[13px] leading-6 text-white/62">
                           {m.desc}
                         </p>
-                        <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-500">
-                          Led by · <span className="text-[#4c1d95]">{m.lead}</span>
+                        <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.22em] text-white/42">
+                          Led by · <span className="text-[#c4b5fd]">{m.lead}</span>
                         </p>
                       </div>
                     </div>
@@ -196,7 +196,7 @@ export default function ChurchLife() {
                 </div>
               }
             >
-              <div className="flex flex-col divide-y divide-slate-200 border border-slate-200 bg-white">
+              <div className="flex flex-col divide-y divide-white/10 border border-white/10 bg-[#0f172a]">
                 {MINISTRIES.slice(0, 3).map((m, i) => (
                   <div key={m.name} className="flex gap-4 p-5">
                     <div className={`flex h-11 w-11 shrink-0 items-center justify-center border text-white ${
@@ -208,14 +208,14 @@ export default function ChurchLife() {
                       <p className="font-serif text-[10px] font-bold uppercase tracking-[0.32em] text-[#15803d]">
                         № 0{i + 1}
                       </p>
-                      <h4 className="mt-1 font-serif text-base font-semibold uppercase tracking-wide text-[#4c1d95]">
+                      <h4 className="mt-1 font-serif text-base font-semibold uppercase tracking-wide text-white">
                         {m.name}
                       </h4>
-                      <p className="mt-1.5 text-[13px] leading-6 text-slate-600">
+                      <p className="mt-1.5 text-[13px] leading-6 text-white/62">
                         {m.desc}
                       </p>
-                      <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-500">
-                        Led by · <span className="text-[#4c1d95]">{m.lead}</span>
+                      <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.22em] text-white/42">
+                        Led by · <span className="text-[#c4b5fd]">{m.lead}</span>
                       </p>
                     </div>
                   </div>

@@ -10,21 +10,21 @@ const FACTSHEET = [
 
 export default function About() {
   return (
-    <section id="about" className="bg-white">
+    <section id="about" className="bg-[#080b16]">
 
       {/* ── PART 1 · Tight gazette masthead ── */}
-      <div className="border-b border-slate-200 bg-white">
+      <div className="border-b border-white/10 bg-[#080b16]">
         <div className="mx-auto max-w-[1100px] px-5 pt-10 pb-10 sm:px-6 sm:pt-14 md:pt-20 md:pb-14">
           {/* Masthead title */}
           <div className="mt-8 text-center md:mt-10">
-            <h2 className="mt-3 font-serif text-[32px] font-semibold uppercase leading-[1.05] tracking-[0.03em] text-[#4c1d95] sm:text-4xl md:text-6xl">
+            <h2 className="mt-3 font-serif text-[32px] font-semibold uppercase leading-[1.05] tracking-[0.03em] text-white sm:text-4xl md:text-6xl">
               Jesus Christ
               <br />
               Founder Ministry
             </h2>
             <div className="mx-auto mt-5 flex items-center justify-center gap-3 md:mt-6">
               <span className="h-[2px] w-10 bg-[#15803d] md:w-12" />
-              <p className="font-serif text-sm italic text-slate-600">
+              <p className="font-serif text-sm italic text-white/62">
                 {siteData.motto}
               </p>
               <span className="h-[2px] w-10 bg-[#15803d] md:w-12" />
@@ -32,30 +32,30 @@ export default function About() {
           </div>
 
           {/* Double rule */}
-          <div className="mt-8 border-t-2 border-b border-[#4c1d95] py-1 md:mt-10" />
+          <div className="mt-8 border-t-2 border-b border-[#7c3aed] py-1 md:mt-10" />
 
           {/* Compact factsheet — 4 facts */}
           <dl className="grid grid-cols-1 gap-x-10 gap-y-2 px-2 py-5 sm:grid-cols-2">
             {FACTSHEET.map((item) => (
               <div
                 key={item.k}
-                className="flex items-baseline justify-between gap-4 border-b border-dotted border-slate-300 py-2"
+                className="flex items-baseline justify-between gap-4 border-b border-dotted border-white/20 py-2"
               >
                 <dt className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#15803d]">
                   {item.k}
                 </dt>
-                <dd className="font-serif text-[14px] text-slate-700 md:text-[15px]">
+                <dd className="font-serif text-[14px] text-white/70 md:text-[15px]">
                   {item.v}
                 </dd>
               </div>
             ))}
           </dl>
 
-          <div className="border-b border-t-2 border-[#4c1d95] py-1" />
+          <div className="border-b border-t-2 border-[#7c3aed] py-1" />
 
           {/* Tight, magnetic intro — single short paragraph */}
           <div className="mt-8 mx-auto max-w-3xl text-center md:mt-10">
-            <p className="font-serif text-[17px] leading-[1.75] text-slate-800 first-letter:mr-2 first-letter:float-left first-letter:font-serif first-letter:text-[64px] first-letter:leading-[0.9] first-letter:font-semibold first-letter:text-[#4c1d95] md:text-[19px] md:leading-[1.8]">
+            <p className="font-serif text-[17px] leading-[1.75] text-white/78 first-letter:mr-2 first-letter:float-left first-letter:font-serif first-letter:text-[64px] first-letter:leading-[0.9] first-letter:font-semibold first-letter:text-[#c4b5fd] md:text-[19px] md:leading-[1.8]">
               From a humble beginning in a village called Sikalame in Bungoma to a
               network of {siteData.branches.length} branches and an academy. The story
               of Jesus Christ Founder Ministry is, simply, a story of grace. And we
@@ -66,7 +66,7 @@ export default function About() {
             <div className="mt-8 flex flex-col items-center justify-center gap-0 md:mt-10">
               <Link
                 href="/journey"
-                className="group flex items-center gap-3 bg-[#4c1d95] px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#3b0f80] sm:px-8 sm:py-4"
+                className="group flex items-center gap-3 bg-[#7c3aed] px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#6d28d9] sm:px-8 sm:py-4"
               >
                 <BookOpen size={14} strokeWidth={2.25} />
                 Read Our Journey
@@ -82,14 +82,14 @@ export default function About() {
       </div>
 
       {/* ── PART 2 · Pastor's Welcome Letter (kept; emotional invitation) ── */}
-      <div className="bg-white">
+      <div className="bg-gradient-to-b from-[#0f172a] to-[#080b16]">
         <div className="mx-auto max-w-[1400px] px-5 py-10 sm:px-6 md:py-20">
           <div className="grid gap-0 lg:grid-cols-[0.85fr_1.15fr]">
 
             {/* Portrait column */}
-            <div className="relative bg-[#4c1d95] p-8 md:p-10">
+            <div className="relative bg-[#4c1d95] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.35)] md:p-10">
               <div className="mx-auto max-w-[320px]">
-                <div className="border-4 border-[#c4b5fd] bg-white">
+                <div className="border-4 border-[#c4b5fd] bg-white/10">
                   <img
                     src="/images/staff/B and P.png"
                     alt="Bishop Nelson Barasa Wanjala and Pastor Sarah N. Wekesa"
@@ -119,18 +119,18 @@ export default function About() {
             </div>
 
             {/* Welcome letter — concise version */}
-            <div className="border border-slate-200 bg-white p-7 md:p-12">
+            <div className="border border-white/10 bg-white/[0.04] p-7 shadow-[0_20px_60px_rgba(0,0,0,0.35)] md:p-12">
               <div className="mb-6 flex items-center justify-between">
                 <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#dc2626]">
                   A Welcome Letter
                 </p>
               </div>
 
-              <h3 className="font-serif text-2xl font-semibold uppercase leading-tight tracking-[0.02em] text-[#4c1d95] sm:text-3xl md:text-[38px]">
+              <h3 className="font-serif text-2xl font-semibold uppercase leading-tight tracking-[0.02em] text-white sm:text-3xl md:text-[38px]">
                 Welcome to Our Family
               </h3>
 
-              <div className="mt-5 space-y-4 font-serif text-[15px] leading-7 text-slate-700 md:mt-6 md:leading-8">
+              <div className="mt-5 space-y-4 font-serif text-[15px] leading-7 text-white/70 md:mt-6 md:leading-8">
                 <p>Dear friend,</p>
                 <p>
                   Welcome to our website. Jesus Christ Founder Ministry is a
@@ -149,18 +149,18 @@ export default function About() {
               </div>
 
               {/* Signature */}
-              <div className="mt-7 border-t border-slate-200 pt-5 md:mt-8 md:pt-6">
-                <p className="font-serif text-xl italic text-[#4c1d95] md:text-2xl">
+              <div className="mt-7 border-t border-white/10 pt-5 md:mt-8 md:pt-6">
+                <p className="font-serif text-xl italic text-[#c4b5fd] md:text-2xl">
                   Bishop Nelson Barasa Wanjala
                 </p>
-                <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.22em] text-slate-600">
+                <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.22em] text-white/45">
                   Founder &amp; Bishop · JCFM
                 </p>
-                <div className="mt-4 border-t border-slate-200 pt-5 md:pt-6">
-                  <p className="font-serif text-xl italic text-[#4c1d95] md:text-2xl">
+                <div className="mt-4 border-t border-white/10 pt-5 md:pt-6">
+                  <p className="font-serif text-xl italic text-[#c4b5fd] md:text-2xl">
                     Pastor Sarah N. Wekesa
                   </p>
-                  <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.22em] text-slate-600">
+                  <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.22em] text-white/45">
                     Co-Founder &amp; Pastor · JCFM
                   </p>
                 </div>

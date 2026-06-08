@@ -7,7 +7,7 @@ export default function Header() {
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-10 px-6 py-7">
         {/* Crest / Title lockup */}
         <div className="flex items-center gap-5">
-          <div className="flex h-20 w-20 shrink-0 items-center justify-center border-2 border-[#4c1d95] bg-white p-1.5">
+          <div className="flex h-20 w-20 shrink-0 items-center justify-center border border-slate-200 bg-white p-1.5">
             <img
               src="/images/logo.png"
               alt="Jesus Christ Founder Ministry — Official Seal"

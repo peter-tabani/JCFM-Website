@@ -1,6 +1,3 @@
-import TopBar from "@/components/layout/TopBar";
-import Header from "@/components/layout/Header";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
@@ -16,11 +13,7 @@ import Contact from "@/components/sections/Contact";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-white text-slate-900">
-      <TopBar />
-      <Header />
-      <Navbar />
-
+    <main className="min-h-screen bg-[#080b16] text-white">
       {/* Church identity, motto & soft Academy link */}
       <Hero />
 

@@ -95,7 +95,7 @@ export default function MediaGallery() {
   const active = lightboxIndex !== null ? filtered[lightboxIndex] : null;
 
   return (
-    <section id="gallery" className="border-b border-slate-200 bg-[#0b0b1a]">
+    <section id="gallery" className="border-b border-white/10 bg-[#0b0b1a]">
 
       {/* ── Parallax hero strip ── */}
       <div

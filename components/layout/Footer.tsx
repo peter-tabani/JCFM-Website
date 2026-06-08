@@ -2,12 +2,12 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-[#4c1d95] py-16 text-white">
+    <footer id="contact" className="border-t border-white/10 bg-[#050713] py-16 text-white">
       <div className="mx-auto grid max-w-[1400px] gap-10 px-4 lg:grid-cols-4 lg:px-6">
 
         {/* Brand */}
         <div>
-          <h4 className="mb-1 text-2xl font-bold text-[#86efac]">JCFM</h4>
+          <h4 className="mb-1 text-2xl font-bold text-[#c4b5fd]">JCFM</h4>
           <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-white/50">
             Expanding the Kingdom, One Community at a Time
           </p>
@@ -61,7 +61,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="mx-auto mt-12 max-w-[1400px] border-t border-[#15803d]/40 px-4 pt-6 lg:px-6">
+      <div className="mx-auto mt-12 max-w-[1400px] border-t border-white/10 px-4 pt-6 lg:px-6">
         <div className="flex flex-col gap-2 text-sm text-white/40 sm:flex-row sm:justify-between">
           <p> {new Date().getFullYear()} Jesus Christ Founder Ministry. All rights reserved.</p>
           <a

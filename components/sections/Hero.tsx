@@ -1,149 +1,120 @@
 import { ArrowRight, Calendar, GraduationCap, MapPin, BookOpen, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { siteData } from "@/data/site";
-import ReadMore from "@/components/ui/ReadMore";
+
+const demoHeroImage =
+  "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=2400&q=85";
 
 export default function Hero() {
   return (
     <>
-      {/* ── Announcement strip ── */}
-      <div className="border-b border-[#15803d]/30 bg-white">
-        <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-3 px-6 py-2.5 text-[12px]">
-          <p className="flex items-center gap-2 text-slate-700">
-            <span className="inline-block h-2 w-2 rounded-full bg-[#15803d]" />
-            <span className="font-bold uppercase tracking-[0.18em] text-[#15803d]">
-              Notice
-            </span>
-            <span className="hidden sm:inline">—</span>
-            <span>
-              Sunday Worship Service this week at 9:00 AM. You are welcome.
-            </span>
-          </p>
-          <Link
-            href="/#sermons"
-            className="font-semibold uppercase tracking-[0.18em] text-[#4c1d95] transition hover:text-[#dc2626]"
-          >
-            View Latest Sermon →
-          </Link>
-        </div>
-      </div>
-
       {/* ── Main banner ── */}
-      <section className="relative overflow-hidden bg-[#0f172a]">
-        {/* Background image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/JCFM_Hero.jpg')" }}
+      <section className="relative isolate min-h-screen overflow-hidden bg-[#0f172a]">
+        <img
+          src={demoHeroImage}
+          alt="Church community worship gathering"
+          className="absolute inset-0 h-full w-full scale-[1.03] object-cover object-center brightness-[0.72] contrast-[1.06] saturate-[1.05]"
         />
-        {/* Neutral dark overlay — keeps image natural, text readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/85 via-[#0f172a]/60 to-[#0f172a]/25" />
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/65 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-black/65 to-transparent" />
 
-        <div className="relative mx-auto max-w-[1400px] px-5 py-8 sm:px-6 sm:py-12 md:py-16">
-          <div className="max-w-4xl">
-            {/* Eyebrow */}
-            <div className="mb-6 flex items-center gap-4">
-              <span className="h-[3px] w-12 bg-[#15803d]" />
-              <p className="font-serif text-[28px] font-bold uppercase tracking-[0.28em] text-white sm:text-[32px] md:text-[36px]">
-                JCFM
-              </p>
-              <span className="h-[3px] w-12 bg-[#15803d]" />
+        <header className="relative z-20 mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-5 py-5 sm:px-8 lg:py-7">
+          <Link href="/" className="flex items-center gap-3">
+            <span className="flex h-14 w-14 items-center justify-center rounded-full border border-white/25 bg-white/90 p-1.5 shadow-lg sm:h-16 sm:w-16">
+              <img
+                src="/images/logo.png"
+                alt="JCFM Seal"
+                className="h-full w-full object-contain"
+              />
+            </span>
+            <span className="hidden text-[11px] font-bold uppercase leading-tight tracking-[0.22em] text-white sm:block">
+              {siteData.shortName}
+              <span className="block text-white/65">Kenya</span>
+            </span>
+          </Link>
+
+          <nav className="hidden items-center gap-7 lg:flex">
+            {siteData.navLinks
+              .filter((link) => link.label !== "Home")
+              .map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-[12px] font-black uppercase tracking-[0.12em] text-white transition hover:text-[#c4b5fd]"
+                >
+                  {link.label}
+                </Link>
+              ))}
+          </nav>
+
+          <details className="group relative lg:hidden">
+            <summary className="flex cursor-pointer list-none items-center border border-white/50 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white marker:hidden">
+              Menu
+            </summary>
+            <div className="absolute right-0 mt-3 w-64 border border-white/20 bg-[#0f172a]/95 p-3 shadow-2xl backdrop-blur">
+              {siteData.navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="block border-b border-white/10 px-3 py-3 text-[12px] font-bold uppercase tracking-[0.18em] text-white last:border-0"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
+          </details>
+        </header>
 
-            {/* Title — serif, formal */}
-            <h2 className="font-serif text-[32px] font-semibold uppercase leading-[1.05] tracking-[0.02em] text-white sm:text-4xl md:text-6xl lg:text-[68px]">
-              Jesus Christ
-              <br />
-              Founder Ministry
-            </h2>
-
-            {/* Gold separator */}
-            <div className="mt-5 mb-5 h-[2px] w-20 bg-[#15803d] md:mt-7 md:mb-7 md:w-24" />
-
-            {/* Motto */}
-            <p className="mb-3 font-serif text-lg italic text-white/90 sm:text-xl md:text-2xl">
-              &ldquo;{siteData.motto}.&rdquo;
+        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-106px)] max-w-[1400px] flex-col items-center justify-center px-5 pb-16 text-center sm:px-6">
+          <div className="max-w-5xl">
+            <h1 className="font-serif text-[42px] font-semibold leading-none tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[86px]">
+              {siteData.shortName}
+            </h1>
+            <p className="mt-4 text-sm font-black uppercase tracking-[0.3em] text-white sm:text-base">
+              Welcome Home
             </p>
 
-            {/* Subtitle — mission, church-led (collapsed on mobile) */}
-            <ReadMore
-              showAllFrom="md"
-              tone="gold"
-              openLabel="Read More"
-              closeLabel="Show Less"
-              className="mb-8 md:mb-10"
-              more={
-                <p className="max-w-2xl text-[15px] leading-7 text-white/85 md:text-lg md:leading-8">
-                  A Christ-centered ministry headquartered in Nzoia, Bungoma,
-                  with a growing network of branches across Kenya. Under the
-                  leadership of{" "}
-                  <span className="font-semibold text-white">
-                    {siteData.generalOverseer}
-                  </span>
-                  , we exist to expand the Kingdom of God by establishing
-                  socially and economically empowered communities.
-                </p>
-              }
-            >
-              <p className="max-w-2xl text-[15px] leading-7 text-white/85 md:hidden">
-                A Christ-centered ministry headquartered in Nzoia, Bungoma,
-                with a growing network of branches across Kenya.
-              </p>
-            </ReadMore>
-
-            {/* CTAs — primary church, secondary academy */}
-            <div className="flex flex-wrap items-center gap-0">
+            <div className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
                 href="/#church"
-                className="flex items-center gap-3 bg-[#7c3aed] px-8 py-4 text-[12px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#6d28d9]"
+                className="inline-flex items-center justify-center gap-3 bg-[#7c3aed] px-8 py-4 text-[12px] font-bold uppercase tracking-[0.22em] text-white shadow-[0_18px_35px_rgba(15,23,42,0.28)] transition hover:bg-[#6d28d9]"
               >
                 Worship With Us
                 <ArrowRight size={15} strokeWidth={2.5} />
               </Link>
               <Link
                 href="/#branches"
-                className="flex items-center gap-3 border-2 border-white px-8 py-[14px] text-[12px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-white hover:text-[#4c1d95]"
+                className="inline-flex items-center justify-center gap-3 border-2 border-white px-8 py-[14px] text-[12px] font-bold uppercase tracking-[0.22em] text-white backdrop-blur-sm transition hover:bg-white hover:text-[#4c1d95]"
               >
                 Find a Branch
                 <ArrowRight size={15} strokeWidth={2.5} />
               </Link>
-            </div>
-
-            {/* Subtle academy link — secondary, not equal */}
-            <Link
-              href={siteData.schoolHref}
-              className="mt-6 inline-flex items-center gap-2 border-b border-[#fbbf24]/60 pb-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#fbbf24] transition hover:border-[#fcd34d] hover:text-[#fde68a]"
-            >
-              Looking for our school? Visit {siteData.schoolName} →
-            </Link>
-
-            {/* Bible verse footer */}
-            <div className="mt-12 max-w-2xl border-l-2 border-[#15803d] pl-5">
-              <p className="font-serif text-base italic leading-8 text-white/80 md:text-lg">
-                &ldquo;Go therefore and make disciples of all nations… teaching
-                them to observe all that I have commanded you.&rdquo;
-              </p>
-              <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.22em] text-[#86efac]">
-                — Matthew 28:19–20
-              </p>
+              <Link
+                href={siteData.schoolHref}
+                className="inline-flex items-center justify-center border-b border-[#fbbf24]/70 bg-black/30 px-4 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-[#fbbf24] backdrop-blur-sm transition hover:border-[#fcd34d] hover:bg-black/45 hover:text-[#fde68a] sm:ml-1"
+              >
+                Looking for our school? Visit {siteData.schoolName} →
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── Quick services bar ── */}
-      <section className="border-b border-slate-200 bg-white">
+      <section className="border-b border-white/10 bg-[#080b16]">
         {/* Mobile: horizontal swipe-snap row */}
         <div className="md:hidden">
-          <div className="flex items-center justify-between border-b border-slate-200 bg-white px-5 py-2.5">
+          <div className="flex items-center justify-between border-b border-white/10 bg-[#080b16] px-5 py-2.5">
             <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#15803d]">
               Quick Links
             </p>
-            <p className="text-[10px] uppercase tracking-[0.22em] text-slate-500">
+            <p className="text-[10px] uppercase tracking-[0.22em] text-white/45">
               Swipe →
             </p>
           </div>
         </div>
-        <div className="mx-auto flex max-w-[1400px] snap-x snap-mandatory overflow-x-auto md:grid md:grid-cols-2 md:divide-x md:divide-slate-200 md:overflow-visible lg:grid-cols-4 [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
+        <div className="mx-auto flex max-w-[1400px] snap-x snap-mandatory overflow-x-auto md:grid md:grid-cols-2 md:divide-x md:divide-white/10 md:overflow-visible lg:grid-cols-4 [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
           {[
             {
               icon: Calendar,
@@ -177,27 +148,59 @@ export default function Hero() {
             <Link
               key={item.title}
               href={item.href}
-              className="group flex w-[78vw] shrink-0 snap-center items-start gap-4 border-r border-slate-200 p-5 transition hover:bg-white md:w-auto md:shrink md:border-r-0 md:p-6"
+              className="group flex w-[78vw] shrink-0 snap-center items-start gap-4 border-r border-white/10 bg-[#0f172a] p-5 transition hover:bg-[#151f34] md:w-auto md:shrink md:border-r-0 md:bg-transparent md:p-6"
             >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#4c1d95] bg-[#4c1d95] text-[#c4b5fd] transition group-hover:bg-[#7c3aed] group-hover:text-white">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#7c3aed]/60 bg-[#7c3aed]/20 text-[#c4b5fd] transition group-hover:bg-[#7c3aed] group-hover:text-white">
                   <item.icon size={20} strokeWidth={1.75} />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#15803d]">
                     {item.eyebrow}
                   </p>
-                  <p className="mt-1 font-serif text-lg font-semibold text-[#4c1d95]">
+                  <p className="mt-1 font-serif text-lg font-semibold text-white">
                     {item.title}
                   </p>
-                  <p className="mt-1 text-[13px] leading-6 text-slate-600">
+                  <p className="mt-1 text-[13px] leading-6 text-white/62">
                     {item.desc}
                   </p>
-                  <p className="mt-2 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.22em] text-[#4c1d95] group-hover:text-[#dc2626]">
+                  <p className="mt-2 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.22em] text-[#c4b5fd] group-hover:text-[#fbbf24]">
                     Learn More <ChevronRight size={13} strokeWidth={2.5} />
                   </p>
                 </div>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* ── Ministry updates intro ── */}
+      <section className="border-b border-white/10 bg-gradient-to-b from-[#0f172a] to-[#080b16]">
+        <div className="mx-auto grid max-w-[1400px] gap-8 px-5 py-12 sm:px-6 md:grid-cols-[1.1fr_0.9fr] md:items-center md:py-16">
+          <div>
+            <h2 className="font-serif text-[32px] font-semibold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
+              Stay Connected to the Mission
+            </h2>
+            <div className="mt-5 h-[3px] w-24 bg-[#15803d]" />
+            <p className="mt-6 max-w-3xl text-base leading-8 text-white/68 md:text-lg">
+              From worship services in Nzoia and the branch network across
+              Kenya to the daily work at {siteData.schoolName}, follow the
+              people, stories, and moments shaping the work God has entrusted
+              to this ministry.
+            </p>
+          </div>
+
+          <div className="border border-white/10 bg-white/[0.04] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.35)] md:p-8">
+            <p className="font-serif text-xl italic leading-9 text-white md:text-2xl">
+              &ldquo;{siteData.motto}.&rdquo;
+            </p>
+            <div className="my-6 h-px bg-white/10" />
+            <p className="font-serif text-base italic leading-8 text-white/68">
+              &ldquo;Go therefore and make disciples of all nations… teaching them
+              to observe all that I have commanded you.&rdquo;
+            </p>
+            <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.22em] text-[#15803d]">
+              Matthew 28:19–20
+            </p>
+          </div>
         </div>
       </section>
 

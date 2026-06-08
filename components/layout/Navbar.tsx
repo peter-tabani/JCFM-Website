@@ -91,7 +91,7 @@ export default function Navbar() {
   return (
     <>
       {/* ── DESKTOP NAVBAR ── */}
-      <section className="relative z-20 hidden border-b border-[#6d28d9] bg-[#7c3aed] lg:block">
+      <section className="relative z-20 hidden border-b-[3px] border-[#7c3aed] bg-[#4c1d95] lg:block">
         <div className="mx-auto max-w-[1400px] px-6">
           <div className="flex items-stretch">
             {/* Nav links */}
@@ -100,16 +100,16 @@ export default function Navbar() {
                 <Link
                   key={i}
                   href={link.href}
-                  className="group relative flex items-center px-5 py-[18px] text-[12px] font-semibold uppercase tracking-[0.18em] text-white transition hover:text-[#ddd6fe]"
+                  className="group relative flex items-center px-5 py-[18px] text-[12px] font-semibold uppercase tracking-[0.18em] text-white/85 transition hover:text-white"
                 >
                   {link.label}
-                  <span className="absolute bottom-0 left-3 right-3 h-[3px] origin-center scale-x-0 bg-white transition-transform duration-200 group-hover:scale-x-100" />
+                  <span className="absolute bottom-0 left-3 right-3 h-[3px] origin-center scale-x-0 bg-[#c4b5fd] transition-transform duration-200 group-hover:scale-x-100" />
                 </Link>
               ))}
             </nav>
 
             {/* Search */}
-            <div ref={searchRef} className="relative flex shrink-0 items-center border-l border-white/20">
+            <div ref={searchRef} className="relative flex shrink-0 items-center border-l border-white/15">
               {searchOpen ? (
                 <div className="flex items-center gap-2 bg-white px-3">
                   <Search size={15} className="shrink-0 text-[#4c1d95]" />
@@ -128,7 +128,7 @@ export default function Navbar() {
               ) : (
                 <button
                   onClick={openSearch}
-                  className="flex items-center gap-2 px-5 py-[18px] text-[12px] font-semibold uppercase tracking-[0.18em] text-white transition hover:text-[#ddd6fe]"
+                  className="flex items-center gap-2 px-5 py-[18px] text-[12px] font-semibold uppercase tracking-[0.18em] text-white/85 transition hover:text-white"
                 >
                   <Search size={14} strokeWidth={2.25} />
                   Search
@@ -180,7 +180,7 @@ export default function Navbar() {
             {/* Visit CTA — soft, non-transactional */}
             <Link
               href="/#contact"
-              className="flex shrink-0 items-center gap-2 border-l border-white/20 bg-[#15803d] px-6 py-[18px] text-[12px] font-bold uppercase tracking-[0.2em] text-white transition hover:bg-[#0f5f2c]"
+              className="flex shrink-0 items-center gap-2 border-l border-white/15 bg-[#7c3aed] px-6 py-[18px] text-[12px] font-bold uppercase tracking-[0.2em] text-white transition hover:bg-[#6d28d9]"
             >
               <MapPin size={14} strokeWidth={2.25} />
               Visit Us
@@ -192,10 +192,10 @@ export default function Navbar() {
       {/* ── MOBILE NAVBAR ── */}
       <section className="relative z-50 lg:hidden">
         {/* Accent stripe */}
-        <div className="h-[3px] w-full bg-[#a78bfa]" />
-        <div className="flex items-center justify-between border-b border-slate-200 bg-[#7c3aed] px-4 py-3">
+        <div className="h-[3px] w-full bg-[#7c3aed]" />
+        <div className="flex items-center justify-between border-b border-slate-200 bg-[#4c1d95] px-4 py-3">
           <Link href="/" className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center border border-white/30 bg-white p-1">
+            <div className="flex h-11 w-11 items-center justify-center border border-slate-200 bg-white p-1">
               <img
                 src="/images/logo.png"
                 alt="JCFM Seal"
@@ -223,7 +223,7 @@ export default function Navbar() {
         <div className="fixed inset-0 z-50 bg-black/60 lg:hidden" onClick={() => setDrawerOpen(false)} />
       )}
       <div className={`fixed right-0 top-0 z-50 flex h-full w-[320px] max-w-[90vw] flex-col bg-white shadow-2xl transition-transform duration-300 lg:hidden ${drawerOpen ? "translate-x-0" : "translate-x-full"}`}>
-        <div className="border-b-[3px] border-[#a78bfa] bg-[#7c3aed] px-5 py-5">
+        <div className="border-b-[3px] border-[#7c3aed] bg-[#4c1d95] px-5 py-5">
           <div className="flex items-start justify-between">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#c4b5fd]">
@@ -265,7 +265,7 @@ export default function Navbar() {
 
         <div className="flex-1 overflow-y-auto">
           <div className="grid grid-cols-2 border-b border-slate-200">
-            <a href="tel:+254721683397" onClick={() => setDrawerOpen(false)} className="flex items-center justify-center gap-2 border-r border-slate-200 bg-[#7c3aed] py-4 text-white">
+            <a href="tel:+254721683397" onClick={() => setDrawerOpen(false)} className="flex items-center justify-center gap-2 border-r border-slate-200 bg-[#4c1d95] py-4 text-white">
               <Phone size={16} /><span className="text-xs font-bold uppercase tracking-wider">Call</span>
             </a>
             <a href="https://wa.me/254721683397" target="_blank" rel="noopener noreferrer" onClick={() => setDrawerOpen(false)} className="flex items-center justify-center gap-2 bg-[#15803d] py-4 text-white">
