@@ -293,7 +293,12 @@ export default function Navbar() {
             <p className="border-b border-slate-200 bg-white px-5 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#4c1d95]">
               Portals
             </p>
-            {[/* ... */].map((item) => (
+            {[
+              { label: "Donor Portal", href: "/login/donors" },
+              { label: "Parent Portal", href: "/login/parents" },
+              { label: "Staff Portal", href: "/login/staff" },
+              { label: "Alumni Portal", href: "/login/alumni" },
+            ].map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
