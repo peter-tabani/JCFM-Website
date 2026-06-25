@@ -192,34 +192,28 @@ export default function Hero() {
 
           {/* Message */}
           <div className="text-left">
-            <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-[#15803d]">
-              A Message From Our Bishop
-            </p>
-            <h2 className="mt-3 font-serif text-[28px] font-semibold leading-tight tracking-[0.01em] text-white sm:text-[34px] lg:text-[40px]">
-              Welcome to Our Family
+            <h2 className="font-serif text-[28px] font-semibold leading-tight tracking-[0.01em] text-white sm:text-[34px] lg:text-[40px]">
+              Meet Bishop Nelson Barasa and Pastor Sarah Wekesa
             </h2>
             <div className="mt-5 h-px w-14 bg-[#15803d]" />
             <p className="mt-6 max-w-xl text-[15px] leading-[1.65] text-white/80">
-              Jesus Christ Founder Ministry is a community of believers walking
-              together in faith — growing from a small beginning in Bungoma to
-              branches across Kenya. Whether you are looking for a place to
-              worship, a school for your child, or are simply curious about what
-              God is doing here, we are glad you stopped by. We would love to
-              meet you in person. God bless you.
+              We started small in Bungoma and have grown to branches across
+              Kenya. What began as a few families gathering to worship is now a
+              community of believers serving together. Whether you are looking
+              for a church home, a school for your child, or just want to see
+              what God is doing here — you are welcome. We would love to meet
+              you.
             </p>
             <div className="mt-8 flex flex-col items-start">
               <p className="font-serif text-lg italic text-white">
                 {siteData.generalOverseer} &amp; {siteData.coLeader}
-              </p>
-              <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.22em] text-white/55">
-                Founder &amp; Bishop · Co-Founder &amp; Pastor
               </p>
             </div>
             <Link
               href="/#contact"
               className="group mt-7 inline-flex items-center gap-3 rounded-full bg-[#15803d] px-6 py-[11px] text-[11px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#166534]"
             >
-              Talk to the Bishop
+              Talk to us
               <ArrowRight size={14} strokeWidth={2.5} className="transition group-hover:translate-x-1" />
             </Link>
           </div>

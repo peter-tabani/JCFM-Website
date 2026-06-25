@@ -15,8 +15,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Fountain of Hope Academy",
-  description: "Fountain of Hope Academy — a Christ-centered church community under God-first leadership, serving families through faith, education, and outreach.",
+  title: "Jesus Christ Founder Ministry",
+  description: "Jesus Christ Founder Ministry (JCFM) — a Christ-centred church community rooted in Nzoia, Bungoma, reaching across Kenya through faith, education, and outreach.",
 };
 
 export default function RootLayout({

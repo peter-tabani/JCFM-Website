@@ -68,32 +68,26 @@ const GALLERY = [
   {
     src: "/images/mission-trip.jpeg",
     alt: "Visiting team and JCFM family in Kenya",
-    caption: "The visiting team and JCFM family — Nzoia headquarters, Bungoma County",
   },
   {
     src: "/images/staff/together1.jpeg",
     alt: "Outdoor service in the villages of Bungoma County",
-    caption: "Outdoor service in the villages of Bungoma County",
   },
   {
     src: "/images/staff/pulpit.jpeg",
     alt: "Preaching at the headquarters",
-    caption: "Preaching and pastor encouragement at the headquarters",
   },
   {
     src: "/images/staff/clinic1.jpeg",
     alt: "Medical outreach in the settlements",
-    caption: "Medical outreach and eye care in the settlements",
   },
   {
     src: "/images/staff/charles1.jpeg",
     alt: "Serving alongside the JCFM family",
-    caption: "Walking and serving alongside the JCFM family",
   },
   {
     src: "/images/staff/blevins1.jpeg",
     alt: "Spending time with the children",
-    caption: "Pouring into the next generation at Fountain of Hope Academy",
   },
 ];
 
