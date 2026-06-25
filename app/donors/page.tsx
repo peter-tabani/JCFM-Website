@@ -534,18 +534,16 @@ export default function DonorsPage() {
                 </div>
 
                 <div className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-[#fffaf2] p-5">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#25D366]/10 text-[#25D366]">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#d97706]/10 text-[#d97706]">
                     <Globe size={22} />
                   </div>
                   <div>
-                    <p className="font-semibold text-slate-900">International Callers</p>
+                    <p className="font-semibold text-slate-900">International Donors</p>
                     <a
-                      href="https://wa.me/254722916174"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-[#25D366] hover:underline"
+                      href="mailto:excellentkenya@gmail.com"
+                      className="text-sm text-[#d97706] hover:underline"
                     >
-                      WhatsApp: +254 722 916174
+                      excellentkenya@gmail.com
                     </a>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import { Phone, MessageCircle, Mail, MapPin, Clock } from "lucide-react";
+import { Mail, MapPin, Clock } from "lucide-react";
 import { siteData } from "@/data/site";
 
 const LEADERSHIP = [
@@ -12,10 +12,6 @@ const ACCENTS: Record<string, { bar: string; chip: string; chipText: string }> =
   gold: { bar: "bg-[#15803d]", chip: "bg-[#15803d]", chipText: "text-white" },
   red: { bar: "bg-[#dc2626]", chip: "bg-[#dc2626]", chipText: "text-white" },
 };
-
-function digits(p: string) {
-  return p.replace(/\s+/g, "").replace(/^\+/, "");
-}
 
 export default function Contact() {
   return (
@@ -74,23 +70,12 @@ export default function Contact() {
                   <div className="my-4 h-[2px] w-10 bg-[#15803d]" />
                   <div className="mt-auto flex flex-col gap-0">
                     <a
-                      href={`tel:${digits(p.phone)}`}
+                      href={`mailto:${siteData.email}`}
                       className="flex items-center justify-between gap-3 border border-[#7c3aed]/70 bg-white/[0.04] px-4 py-3 text-[13px] font-semibold text-[#c4b5fd] transition hover:bg-[#7c3aed] hover:text-white"
                     >
                       <span className="flex items-center gap-3">
-                        <Phone size={14} strokeWidth={2.25} />
-                        {p.phone}
-                      </span>
-                    </a>
-                    <a
-                      href={`https://wa.me/${digits(p.phone)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between gap-3 border-x border-b border-[#4c1d95] bg-[#15803d] px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#0f5f2c]"
-                    >
-                      <span className="flex items-center gap-2">
-                        <MessageCircle size={13} strokeWidth={2.5} />
-                        WhatsApp
+                        <Mail size={14} strokeWidth={2.25} />
+                        Email the Office
                       </span>
                     </a>
                   </div>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, ArrowUpRight } from "lucide-react";
+import { Mail, MapPin, ArrowUpRight } from "lucide-react";
 import { siteData } from "@/data/site";
 
 export default function SchoolFooter() {
@@ -99,24 +99,6 @@ export default function SchoolFooter() {
               <li className="flex items-start gap-2 text-white/80">
                 <MapPin size={14} strokeWidth={2} className="mt-0.5 shrink-0 text-[#15803d]" />
                 {s.location}
-              </li>
-              <li>
-                <a
-                  href={`tel:${s.contacts.office.replace(/\s+/g, "")}`}
-                  className="flex items-start gap-2 text-white/80 transition hover:text-white"
-                >
-                  <Phone size={14} strokeWidth={2} className="mt-0.5 shrink-0 text-[#15803d]" />
-                  {s.contacts.office}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`tel:${s.contacts.admissions.replace(/\s+/g, "")}`}
-                  className="flex items-start gap-2 text-white/80 transition hover:text-white"
-                >
-                  <Phone size={14} strokeWidth={2} className="mt-0.5 shrink-0 text-[#15803d]" />
-                  {s.contacts.admissions} <span className="text-[10px] uppercase tracking-[0.18em] text-[#c9a961]">· Admissions</span>
-                </a>
               </li>
               <li>
                 <a

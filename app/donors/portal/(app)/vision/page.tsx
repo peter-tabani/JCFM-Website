@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Sparkles, Compass, HandHeart, MessageCircle } from "lucide-react";
+import { Sparkles, Compass, HandHeart, Mail } from "lucide-react";
 import {
   PageHeader,
   Card,
@@ -31,13 +31,11 @@ export default function VisionPage() {
         description="Honest dreams with honest numbers. Nothing here has started yet — but each one could, with the right partner."
         actions={
           <a
-            href="https://wa.me/254722916174?text=Hello%20Mr.%20Mweruphe%2C%20I%20saw%20a%20vision%20item%20I%27d%20like%20to%20discuss."
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:excellentkenya@gmail.com?subject=A%20vision%20item%20I%27d%20like%20to%20discuss"
             className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-2.5 text-[13px] font-semibold text-white transition hover:bg-emerald-700"
           >
-            <MessageCircle size={15} strokeWidth={2.25} />
-            Talk to the Director
+            <Mail size={15} strokeWidth={2.25} />
+            Email the Director
           </a>
         }
       />
@@ -150,12 +148,10 @@ export default function VisionPage() {
                       Help start this
                     </PrimaryButton>
                     <a
-                      href={`https://wa.me/254722916174?text=Hello%20Mr.%20Mweruphe%2C%20I%27d%20like%20to%20discuss%20%22${encodeURIComponent(v.title)}%22.`}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href={`mailto:excellentkenya@gmail.com?subject=${encodeURIComponent(`I'd like to discuss "${v.title}"`)}`}
                       className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-4 py-2 text-[12px] font-semibold text-slate-700 hover:bg-slate-50"
                     >
-                      <MessageCircle size={12} strokeWidth={2.25} />
+                      <Mail size={12} strokeWidth={2.25} />
                       Ask the Director
                     </a>
                   </div>

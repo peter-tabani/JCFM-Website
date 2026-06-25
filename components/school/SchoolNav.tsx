@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X, ArrowLeft, Phone, Mail, ChevronRight } from "lucide-react";
+import { Menu, X, ArrowLeft, Mail, ChevronRight } from "lucide-react";
 import { siteData } from "@/data/site";
 
 export default function SchoolNav() {
@@ -23,15 +23,8 @@ export default function SchoolNav() {
           </Link>
           <div className="flex items-center divide-x divide-white/15">
             <a
-              href={`tel:${s.contacts.office.replace(/\s+/g, "")}`}
-              className="flex items-center gap-2 px-5 text-white/80 transition hover:text-white"
-            >
-              <Phone size={12} strokeWidth={2.25} />
-              {s.contacts.office}
-            </a>
-            <a
               href={`mailto:${s.contacts.email}`}
-              className="flex items-center gap-2 pl-5 text-white/80 transition hover:text-white"
+              className="flex items-center gap-2 px-5 text-white/80 transition hover:text-white"
             >
               <Mail size={12} strokeWidth={2.25} />
               {s.contacts.email}
@@ -172,15 +165,8 @@ export default function SchoolNav() {
               School Office
             </p>
             <a
-              href={`tel:${s.contacts.office.replace(/\s+/g, "")}`}
-              className="mt-2 flex items-center gap-2 text-[13px] font-semibold text-[#0b2545]"
-            >
-              <Phone size={13} strokeWidth={2.25} />
-              {s.contacts.office}
-            </a>
-            <a
               href={`mailto:${s.contacts.email}`}
-              className="mt-1 flex items-center gap-2 text-[12px] text-slate-600"
+              className="mt-2 flex items-center gap-2 text-[13px] font-semibold text-[#0b2545]"
             >
               <Mail size={12} strokeWidth={2.25} />
               {s.contacts.email}

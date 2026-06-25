@@ -3,13 +3,11 @@
 import { useState } from "react";
 import {
   Send,
-  MessageCircle,
   Mail,
   CheckCircle2,
   Loader2,
   AlertCircle,
   User,
-  Phone,
   BookOpen,
   FileText,
   ChevronDown,
@@ -42,7 +40,7 @@ const hearOptions = [
 ];
 
 const steps = [
-  { num: "1", title: "Enquire", desc: "Call, WhatsApp, or fill the form below." },
+  { num: "1", title: "Enquire", desc: "Email us or fill the form below." },
   { num: "2", title: "Get Fee Structure", desc: "Visit our office on Shelleybeach Road, Likoni." },
   { num: "3", title: "Submit Documents", desc: "Bring all required documents for your child's level." },
   { num: "4", title: "Assessment (JSS only)", desc: "Grade 7–9 applicants without KPSEA sit an entry test." },
@@ -118,10 +116,6 @@ export default function AdmissionsForm() {
     }
   };
 
-  const whatsappMessage = encodeURIComponent(
-    `Hello Fountain of Hope Academy! I would like to enquire about admission for my child.\n\nParent Name: ${form.parent_name || "..."}\nChild Name: ${form.child_name || "..."}\nApplying for: ${form.applying_level || "..."}`
-  );
-
   return (
     <>
       {/* ── MOBILE: Quick Contact Buttons (shown FIRST, above form) ── */}
@@ -129,26 +123,10 @@ export default function AdmissionsForm() {
         <p className="mb-4 text-sm font-bold uppercase tracking-widest text-slate-500">
           Quickest Ways to Reach Us
         </p>
-        <div className="grid grid-cols-2 gap-3">
-          <a
-            href={`https://wa.me/254722916174?text=${whatsappMessage}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 rounded-2xl bg-[#25D366] py-4 font-semibold text-white shadow-md active:scale-95"
-          >
-            <MessageCircle size={20} />
-            WhatsApp
-          </a>
-          <a
-            href="tel:+254722916174"
-            className="flex items-center justify-center gap-2 rounded-2xl bg-[#0f172a] py-4 font-semibold text-white shadow-md active:scale-95"
-          >
-            <Phone size={20} />
-            Call Us
-          </a>
+        <div className="grid grid-cols-1 gap-3">
           <a
             href="mailto:excellentkenya@gmail.com?subject=Admissions Enquiry – Fountain of Hope Academy"
-            className="col-span-2 flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-[#fffaf2] py-4 font-semibold text-slate-800 shadow-sm active:scale-95"
+            className="flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-[#fffaf2] py-4 font-semibold text-slate-800 shadow-sm active:scale-95"
           >
             <Mail size={20} className="text-[#d97706]" />
             Email: excellentkenya@gmail.com
@@ -377,7 +355,7 @@ export default function AdmissionsForm() {
                 <div className="flex items-center gap-3 rounded-xl bg-red-50 p-4 text-red-700">
                   <AlertCircle size={18} />
                   <p className="text-sm">
-                    Something went wrong. Please try WhatsApp or call us directly.
+                    Something went wrong. Please email us directly.
                   </p>
                 </div>
               )}
@@ -405,36 +383,6 @@ export default function AdmissionsForm() {
 
         {/* ── Desktop Sidebar (hidden on mobile) ── */}
         <div className="hidden lg:flex lg:flex-col lg:gap-5">
-          <a
-            href={`https://wa.me/254722916174?text=${whatsappMessage}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-4 rounded-2xl bg-[#25D366] p-6 text-white shadow-lg transition hover:bg-[#1ebe5d] hover:shadow-xl"
-          >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/20">
-              <MessageCircle size={24} />
-            </div>
-            <div>
-              <p className="font-bold">Chat on WhatsApp</p>
-              <p className="text-sm text-white/80">Quick response guaranteed</p>
-              <p className="mt-1 text-sm font-semibold">+254 722 916174</p>
-            </div>
-          </a>
-
-          <a
-            href="tel:+254722916174"
-            className="flex items-center gap-4 rounded-2xl bg-[#0f172a] p-6 text-white shadow-lg transition hover:bg-[#1e293b] hover:shadow-xl"
-          >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10">
-              <Phone size={24} />
-            </div>
-            <div>
-              <p className="font-bold">Call Us</p>
-              <p className="text-sm text-white/70">Mon – Sat, 6 AM – 6 PM</p>
-              <p className="mt-1 text-sm font-semibold">+254 722 916174</p>
-            </div>
-          </a>
-
           <a
             href="mailto:excellentkenya@gmail.com?subject=Admissions Enquiry – Fountain of Hope Academy"
             className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-[#fffaf2] p-6 shadow-sm transition hover:shadow-md"
@@ -488,27 +436,11 @@ export default function AdmissionsForm() {
       {/* ── STICKY BOTTOM BAR — mobile only ── */}
       <div className="fixed bottom-0 left-0 right-0 z-50 flex border-t border-slate-200 bg-white shadow-2xl lg:hidden">
         <a
-          href={`https://wa.me/254722916174?text=${whatsappMessage}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex flex-1 flex-col items-center justify-center gap-1 bg-[#25D366] py-3 text-white active:opacity-80"
-        >
-          <MessageCircle size={22} />
-          <span className="text-xs font-bold">WhatsApp</span>
-        </a>
-        <a
-          href="tel:+254722916174"
-          className="flex flex-1 flex-col items-center justify-center gap-1 bg-[#0f172a] py-3 text-white active:opacity-80"
-        >
-          <Phone size={22} />
-          <span className="text-xs font-bold">Call Now</span>
-        </a>
-        <a
           href="mailto:excellentkenya@gmail.com?subject=Admissions Enquiry – Fountain of Hope Academy"
           className="flex flex-1 flex-col items-center justify-center gap-1 bg-[#d97706] py-3 text-white active:opacity-80"
         >
           <Mail size={22} />
-          <span className="text-xs font-bold">Email</span>
+          <span className="text-xs font-bold">Email Us</span>
         </a>
       </div>
 

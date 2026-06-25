@@ -151,18 +151,16 @@ export default function AccountPage() {
                 </p>
                 <p className="text-[12.5px] text-amber-800/80">
                   Mr. Noah Mweruphe personally handles donor requests. He&apos;ll
-                  reply on WhatsApp, usually within the hour.
+                  reply by email, usually within the day.
                 </p>
               </div>
             </div>
             <a
-              href="https://wa.me/254722916174?text=Hello%20Mr.%20Mweruphe%2C%20I%20need%20a%20hand%20with%20my%20donor%20account."
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:excellentkenya@gmail.com?subject=Help%20with%20my%20donor%20account"
               className="inline-flex shrink-0 items-center gap-2 rounded-full bg-emerald-600 px-5 py-2.5 text-[13px] font-semibold text-white hover:bg-emerald-700"
             >
               <Heart size={14} strokeWidth={2.25} />
-              WhatsApp the Director
+              Email the Director
             </a>
           </div>
         </div>

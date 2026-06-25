@@ -65,10 +65,10 @@ export default function SchoolWhy() {
             </p>
           </div>
           <a
-            href={`tel:${s.contacts.office.replace(/\s+/g, "")}`}
+            href={`mailto:${s.contacts.email}`}
             className="shrink-0 bg-[#15803d] px-6 py-3 text-[11px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#106030]"
           >
-            Call to Book a Visit
+            Email to Book a Visit
           </a>
         </div>
       </div>

@@ -31,10 +31,10 @@ export default function SchoolAdmissions() {
 
           <div className="flex flex-col gap-0 md:justify-self-end">
             <a
-              href={`tel:${s.contacts.admissions.replace(/\s+/g, "")}`}
+              href={`mailto:${s.contacts.email}`}
               className="flex items-center justify-between gap-4 bg-[#15803d] px-6 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#106030]"
             >
-              Call Admissions Office
+              Email Admissions Office
               <ArrowRight size={14} strokeWidth={2.5} />
             </a>
             <a
@@ -45,7 +45,7 @@ export default function SchoolAdmissions() {
               <Download size={13} strokeWidth={2.5} />
             </a>
             <p className="mt-3 text-center text-[10px] uppercase tracking-[0.22em] text-white/60">
-              {s.contacts.admissions} · {s.contacts.email}
+              {s.contacts.email}
             </p>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import {
+  ArrowRight,
   BookOpen,
   Cross,
   Eye,
@@ -8,15 +9,12 @@ import {
   Home,
   Music,
   Pill,
-  Sparkles,
   Stethoscope,
   Users,
-  Utensils,
 } from "lucide-react";
-import TopBar from "@/components/layout/TopBar";
-import Header from "@/components/layout/Header";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import ImageCarousel from "@/components/ui/ImageCarousel";
+import { siteData } from "@/data/site";
 
 export const metadata = {
   title: "Mission Trips | Jesus Christ Founder Ministry",
@@ -25,9 +23,9 @@ export const metadata = {
 };
 
 // ─────────────────────────────────────────────────────────────
-// Editorial palette — kept distinct from the home page so this
-// page reads as a magazine spread, not another landing banner.
-// Headings: deep navy-teal #0b3a53. Accent: teal #0e6e87.
+// JCFM brand palette — matches the home page dark theme.
+// Backgrounds: #080b16 / black. Text: white. Accent: green #15803d.
+// Primary CTA: #7c3aed (hover #6d28d9). Light accent: #c4b5fd.
 // ─────────────────────────────────────────────────────────────
 
 const SERVICES = [
@@ -64,6 +62,41 @@ const TRIPS = [
   },
 ];
 
+// Add or remove photos here — just drop a file into /public/images
+// and add an entry below. The carousel slides through them automatically.
+const GALLERY = [
+  {
+    src: "/images/mission-trip.jpeg",
+    alt: "Visiting team and JCFM family in Kenya",
+    caption: "The visiting team and JCFM family — Nzoia headquarters, Bungoma County",
+  },
+  {
+    src: "/images/staff/together1.jpeg",
+    alt: "Outdoor service in the villages of Bungoma County",
+    caption: "Outdoor service in the villages of Bungoma County",
+  },
+  {
+    src: "/images/staff/pulpit.jpeg",
+    alt: "Preaching at the headquarters",
+    caption: "Preaching and pastor encouragement at the headquarters",
+  },
+  {
+    src: "/images/staff/clinic1.jpeg",
+    alt: "Medical outreach in the settlements",
+    caption: "Medical outreach and eye care in the settlements",
+  },
+  {
+    src: "/images/staff/charles1.jpeg",
+    alt: "Serving alongside the JCFM family",
+    caption: "Walking and serving alongside the JCFM family",
+  },
+  {
+    src: "/images/staff/blevins1.jpeg",
+    alt: "Spending time with the children",
+    caption: "Pouring into the next generation at Fountain of Hope Academy",
+  },
+];
+
 const TESTIMONIALS = [
   {
     quote:
@@ -83,55 +116,113 @@ const TESTIMONIALS = [
 
 export default function MissionTripsPage() {
   return (
-    <main className="min-h-screen bg-white text-slate-800">
-      <TopBar />
-      <Header />
-      <Navbar />
+    <main className="min-h-screen bg-[#080b16] text-white">
 
       {/* ─────────────────────────────────────────────────────────
-          1.  Page header — sentence-case title with a thin rule.
-              No banner. No overlay. Just an opening.
+          1.  Hero banner — same as the JCFM home page hero:
+              embedded nav, full-bleed image, dark overlay, CTAs.
           ───────────────────────────────────────────────────────── */}
-      <header className="bg-white">
-        <div className="mx-auto max-w-[920px] px-6 pt-20 pb-8 text-center sm:pt-24 md:pt-28">
-          <h1 className="font-serif text-[34px] font-normal leading-tight text-[#0b3a53] sm:text-[42px] md:text-[52px]">
-            Mission Trips
-          </h1>
-          <div className="mx-auto mt-5 h-px w-14 bg-[#0b3a53]/40" />
-          <p className="mx-auto mt-7 max-w-[640px] font-serif text-[15px] leading-[1.85] text-slate-600 md:text-[16px]">
-            Jesus Christ Founder Ministry builds relationships in Kenyan
-            communities through preaching, education, medical outreach, and
-            children&rsquo;s programmes. You are all welcome to experience the
-            Kingdom of God at work in Kenya.
-          </p>
-        </div>
+      <section className="relative isolate min-h-screen overflow-hidden bg-[#0f172a]">
+        <img
+          src="/images/mission-trip.jpeg"
+          alt="Mission team gathered in Kenya"
+          className="absolute inset-0 h-full w-full scale-[1.03] object-cover object-center brightness-[0.9] contrast-[1.04] saturate-[1.05]"
+        />
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/55 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-black/55 to-transparent" />
 
-        <div className="mx-auto max-w-[1280px] px-6">
-          <figure>
-            <div className="relative overflow-hidden">
+        <header className="relative z-20 mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-5 py-5 sm:px-8 lg:py-7">
+          <Link href="/" className="flex items-center gap-3">
+            <span className="flex h-14 w-14 items-center justify-center rounded-full border border-white/25 bg-white/90 p-1.5 shadow-lg sm:h-16 sm:w-16">
               <img
-                src="/images/mission-trip.jpeg"
-                alt="Mission team gathered in Kenya"
-                className="h-[280px] w-full object-cover sm:h-[360px] md:h-[460px] lg:h-[520px]"
+                src="/images/logo.png"
+                alt="JCFM Seal"
+                className="h-full w-full object-contain"
               />
-              <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white via-white/70 to-transparent md:h-44" />
+            </span>
+            <span className="hidden text-[11px] font-bold uppercase leading-tight tracking-[0.22em] text-white sm:block">
+              {siteData.shortName}
+              <span className="block text-white/65">Kenya</span>
+            </span>
+          </Link>
+
+          <nav className="hidden items-center gap-7 lg:flex">
+            {siteData.navLinks
+              .filter((link) => link.label !== "Home")
+              .map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-[12px] font-black uppercase tracking-[0.12em] text-white transition hover:text-[#c4b5fd]"
+                >
+                  {link.label}
+                </Link>
+              ))}
+          </nav>
+
+          <details className="group relative lg:hidden">
+            <summary className="flex cursor-pointer list-none items-center border border-white/50 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white marker:hidden">
+              Menu
+            </summary>
+            <div className="absolute right-0 mt-3 w-64 border border-white/20 bg-[#0f172a]/95 p-3 shadow-2xl backdrop-blur">
+              {siteData.navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="block border-b border-white/10 px-3 py-3 text-[12px] font-bold uppercase tracking-[0.18em] text-white last:border-0"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
-            <figcaption className="mt-3 text-center font-serif text-[12px] italic text-slate-500">
-              Visiting team and JCFM family — Nzoia headquarters, Bungoma County
-            </figcaption>
-          </figure>
+          </details>
+        </header>
+
+        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-106px)] max-w-[1400px] flex-col items-center justify-center px-5 pb-16 text-center sm:px-6">
+          <div className="max-w-4xl [text-shadow:0_2px_16px_rgba(0,0,0,0.55)]">
+            <p className="text-sm font-black uppercase tracking-[0.3em] text-white sm:text-base">
+              Come &amp; Serve in Kenya
+            </p>
+            <h1 className="mt-4 font-serif text-[42px] font-semibold leading-none tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[80px]">
+              Mission Trips
+            </h1>
+            <div className="mx-auto mt-6 h-px w-14 bg-[#15803d]" />
+            <p className="mx-auto mt-7 max-w-2xl text-[15px] leading-7 text-white/85 sm:text-base sm:leading-8">
+              Jesus Christ Founder Ministry builds relationships in Kenyan
+              communities through preaching, education, medical outreach, and
+              children&rsquo;s programmes. You are all welcome to experience the
+              Kingdom of God at work in Kenya.
+            </p>
+
+            <div className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <Link
+                href="mailto:info@jcfm.org"
+                className="inline-flex items-center justify-center gap-3 bg-[#7c3aed] px-8 py-4 text-[12px] font-bold uppercase tracking-[0.22em] text-white shadow-[0_18px_35px_rgba(15,23,42,0.28)] transition hover:bg-[#6d28d9]"
+              >
+                Plan Your Visit
+                <ArrowRight size={15} strokeWidth={2.5} />
+              </Link>
+              <Link
+                href="/"
+                className="inline-flex items-center justify-center gap-3 border-2 border-white px-8 py-[14px] text-[12px] font-bold uppercase tracking-[0.22em] text-white backdrop-blur-sm transition hover:bg-white hover:text-[#4c1d95]"
+              >
+                Back to JCFM Home
+                <ArrowRight size={15} strokeWidth={2.5} />
+              </Link>
+            </div>
+          </div>
         </div>
-      </header>
+      </section>
 
       {/* ─────────────────────────────────────────────────────────
           2.  Opening narrative — long flowing prose, single column.
-              This is the heart of the page.  Magazine readability.
           ───────────────────────────────────────────────────────── */}
-      <section className="bg-white">
+      <section className="border-b border-white/10 bg-[#080b16]">
         <div className="mx-auto max-w-[760px] px-6 py-16 md:py-24">
-          <p className="font-serif text-[19px] leading-[1.9] text-slate-800 md:text-[20px] md:leading-[2]">
+          <p className="font-serif text-[19px] leading-[1.9] text-white/80 md:text-[20px] md:leading-[2]">
             Visits are arranged through{" "}
-            <span className="text-[#0b3a53]">Bishop Nelson Barasa Wanjala</span>{" "}
+            <span className="text-[#c4b5fd]">Bishop Nelson Barasa Wanjala</span>{" "}
             and Pastor Sarah N. Wekesa, and you are free to come with your own
             plan for ministry. Many guests spend their days preaching in our
             branches, walking through the villages for evangelism, helping with
@@ -141,16 +232,13 @@ export default function MissionTripsPage() {
             work is complete, we can help you add a gentle visit to places like
             Amboseli, Maasai Mara, or other Kenyan landmarks if you wish.
           </p>
-
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────────────────
           3.  "Change a life, including your own"
-              Two stacked photos on the LEFT, headed paragraph and
-              bullet list on the RIGHT.  Direct mirror of image 3.
           ───────────────────────────────────────────────────────── */}
-      <section className="bg-white">
+      <section className="border-b border-white/10 bg-black">
         <div className="mx-auto max-w-[1180px] px-6 py-12 md:py-20">
           <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr] md:gap-14 lg:gap-20">
             {/* Stacked photos */}
@@ -173,13 +261,14 @@ export default function MissionTripsPage() {
 
             {/* Heading + body + bullet list */}
             <div className="md:pt-2">
-              <h2 className="font-serif text-[28px] font-normal leading-tight text-[#0e6e87] sm:text-[32px] md:text-[38px]">
+              <h2 className="font-serif text-[28px] font-semibold leading-tight text-white sm:text-[32px] md:text-[38px]">
                 Change a life,
                 <br />
                 including your own.
               </h2>
+              <div className="mt-5 h-px w-14 bg-[#15803d]" />
 
-              <ul className="mt-7 space-y-3 font-serif text-[15px] leading-[1.85] text-slate-700 md:text-[16px]">
+              <ul className="mt-7 space-y-3 font-serif text-[15px] leading-[1.85] text-white/80 md:text-[16px]">
                 {[
                   "Preach and teach in Sunday services, midweek gatherings, and open-air meetings across our branches",
                   "Walk the villages for evangelism, home visits, and prayer with families, elders, and new believers",
@@ -190,7 +279,7 @@ export default function MissionTripsPage() {
                   <li key={point} className="flex gap-3">
                     <span
                       aria-hidden
-                      className="mt-[10px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#0e6e87]"
+                      className="mt-[10px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#15803d]"
                     />
                     <span>{point}</span>
                   </li>
@@ -202,17 +291,16 @@ export default function MissionTripsPage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────
-          4.  Service icon grid — line icons + simple labels,
-              centered title, lots of whitespace.  Mirrors image 1.
+          4.  Service icon grid
           ───────────────────────────────────────────────────────── */}
-      <section className="bg-[#faf8f3]">
+      <section className="border-b border-white/10 bg-[#080b16]">
         <div className="mx-auto max-w-[1180px] px-6 py-16 md:py-24">
           <div className="text-center">
-            <h2 className="font-serif text-[28px] font-normal leading-tight text-[#0b3a53] sm:text-[32px] md:text-[38px]">
+            <h2 className="font-serif text-[28px] font-semibold leading-tight text-white sm:text-[32px] md:text-[38px]">
               What we do on the ground
             </h2>
-            <div className="mx-auto mt-5 h-px w-12 bg-[#0b3a53]/40" />
-            <p className="mx-auto mt-6 max-w-[600px] font-serif text-[15px] leading-[1.85] text-slate-600 md:text-[16px]">
+            <div className="mx-auto mt-5 h-px w-12 bg-[#15803d]" />
+            <p className="mx-auto mt-6 max-w-[600px] font-serif text-[15px] leading-[1.85] text-white/66 md:text-[16px]">
               Every trip is shaped around the people we are serving and the
               gifts the team is bringing. These are the rhythms of ministry
               we move in.
@@ -225,9 +313,9 @@ export default function MissionTripsPage() {
                 <s.icon
                   size={42}
                   strokeWidth={1.4}
-                  className="text-[#0b3a53]"
+                  className="text-[#c4b5fd]"
                 />
-                <p className="mt-5 font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0b3a53]">
+                <p className="mt-5 font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80">
                   {s.label}
                 </p>
               </div>
@@ -237,34 +325,32 @@ export default function MissionTripsPage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────
-          5.  Wide atmospheric break — single photograph, no text.
-              Lets the page breathe between dense sections.
+          5.  Photo gallery — auto-sliding carousel of field moments.
           ───────────────────────────────────────────────────────── */}
-      <section className="bg-white">
-        <div className="mx-auto max-w-[1280px] px-6 pt-16 md:pt-20">
-          <figure className="relative overflow-hidden">
-            <img
-              src="/images/staff/together1.jpeg"
-              alt="Outdoor service in the villages of Bungoma County"
-              className="h-[260px] w-full object-cover sm:h-[340px] md:h-[440px] lg:h-[500px]"
-            />
-            <figcaption className="mt-3 text-center font-serif text-[12px] italic text-slate-500">
-              Outdoor service in the villages of Bungoma County
-            </figcaption>
-          </figure>
+      <section className="border-b border-white/10 bg-black">
+        <div className="mx-auto max-w-[1280px] px-6 py-16 md:py-20">
+          <div className="mb-8 text-center md:mb-10">
+            <h2 className="font-serif text-[24px] font-semibold leading-tight text-white sm:text-[28px] md:text-[32px]">
+              Moments from the field
+            </h2>
+            <div className="mx-auto mt-4 h-px w-12 bg-[#15803d]" />
+          </div>
+          <ImageCarousel
+            images={GALLERY}
+            className="h-[280px] w-full sm:h-[380px] md:h-[480px] lg:h-[540px]"
+          />
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────────────────
-          7.  Recent / featured trips — three cards, image with
-              soft title bar, simple line under each.  Image 2.
+          6.  Recent / featured trips — three cards.
           ───────────────────────────────────────────────────────── */}
-      <section className="bg-white">
+      <section className="border-b border-white/10 bg-[#080b16]">
         <div className="mx-auto max-w-[1180px] px-6 py-12 md:py-20">
-          <h2 className="font-serif text-[24px] font-normal leading-tight text-[#0b3a53] sm:text-[28px] md:text-[32px]">
+          <h2 className="font-serif text-[24px] font-semibold leading-tight text-white sm:text-[28px] md:text-[32px]">
             Recent trips
           </h2>
-          <div className="mt-4 h-px w-12 bg-[#0b3a53]/40" />
+          <div className="mt-4 h-px w-12 bg-[#15803d]" />
 
           <div className="mt-10 grid gap-8 md:grid-cols-3 md:gap-7">
             {TRIPS.map((t) => (
@@ -275,7 +361,7 @@ export default function MissionTripsPage() {
                     alt={t.title}
                     className="h-[210px] w-full object-cover md:h-[230px]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b3a53]/85 via-[#0b3a53]/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
                   <figcaption className="absolute bottom-0 left-0 right-0 p-5">
                     <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.22em] text-white/85">
                       JCFM · Kenya
@@ -285,10 +371,10 @@ export default function MissionTripsPage() {
                     </p>
                   </figcaption>
                 </figure>
-                <p className="mt-4 font-serif text-[15px] font-semibold text-[#0b3a53]">
+                <p className="mt-4 font-serif text-[15px] font-semibold text-white">
                   {t.title}
                 </p>
-                <p className="mt-3 font-serif text-[14px] leading-[1.8] text-slate-600 md:text-[15px]">
+                <p className="mt-3 font-serif text-[14px] leading-[1.8] text-white/66 md:text-[15px]">
                   {t.blurb}
                 </p>
               </article>
@@ -298,17 +384,18 @@ export default function MissionTripsPage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────
-          8.  Application / contact — simple invitation card
+          7.  Application / contact — invitation block.
           ───────────────────────────────────────────────────────── */}
-      <section className="bg-[#faf8f3]">
+      <section className="border-b border-white/10 bg-black">
         <div className="mx-auto max-w-[940px] px-6 py-14 text-center md:py-20">
-          <p className="font-sans text-[11px] uppercase tracking-[0.34em] text-[#0b3a53]">
+          <p className="font-sans text-[11px] uppercase tracking-[0.34em] text-[#15803d]">
             Application
           </p>
-          <h2 className="mt-4 font-serif text-[30px] font-normal leading-tight text-[#0b3a53] sm:text-[36px] md:text-[42px]">
+          <h2 className="mt-4 font-serif text-[30px] font-semibold leading-tight text-white sm:text-[36px] md:text-[42px]">
             Ready to plan your visit?
           </h2>
-          <p className="mx-auto mt-6 max-w-[640px] font-serif text-[16px] leading-[1.9] text-slate-700 md:text-[17px]">
+          <div className="mx-auto mt-5 h-px w-14 bg-[#15803d]" />
+          <p className="mx-auto mt-6 max-w-[640px] font-serif text-[16px] leading-[1.9] text-white/80 md:text-[17px]">
             Send a short note with your name, church, preferred dates, and the
             kind of ministry you feel called to bring. Our missions team will
             respond with the next steps and hosting details.
@@ -316,21 +403,15 @@ export default function MissionTripsPage() {
 
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
-              href="https://wa.me/254721683397"
-              className="inline-flex items-center justify-center bg-[#0b3a53] px-8 py-3 font-sans text-[13px] font-semibold uppercase tracking-[0.24em] text-white transition hover:bg-[#0e6e87]"
+              href="mailto:info@jcfm.org"
+              className="inline-flex items-center justify-center bg-[#7c3aed] px-8 py-3 font-sans text-[13px] font-semibold uppercase tracking-[0.24em] text-white transition hover:bg-[#6d28d9]"
             >
-              WhatsApp our missions team
-            </Link>
-            <Link
-              href="tel:+254721683397"
-              className="inline-flex items-center justify-center border border-[#0b3a53] px-8 py-3 font-sans text-[13px] font-semibold uppercase tracking-[0.24em] text-[#0b3a53] transition hover:bg-white"
-            >
-              Call +254 721 683 397
+              Email our missions team
             </Link>
           </div>
 
-          <p className="mx-auto mt-6 max-w-[500px] font-serif text-[14px] leading-[1.9] text-slate-600">
-            Email works too: <span className="font-semibold">info@jcfm.org</span>.
+          <p className="mx-auto mt-6 max-w-[500px] font-serif text-[14px] leading-[1.9] text-white/66">
+            Write to us at <span className="font-semibold text-white">info@jcfm.org</span>.
             Let us know how many people are coming and any practical needs so we
             can prepare well.
           </p>
@@ -338,29 +419,29 @@ export default function MissionTripsPage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────
-          9.  Testimonies — editorial quotes with soft styling
+          8.  Testimonies
           ───────────────────────────────────────────────────────── */}
-      <section className="bg-white">
+      <section className="border-b border-white/10 bg-[#080b16]">
         <div className="mx-auto max-w-[1080px] px-6 py-16 md:py-24">
           <div className="text-center">
-            <h2 className="mt-3 font-serif text-[30px] font-normal leading-tight text-[#0b3a53] sm:text-[34px] md:text-[40px]">
+            <h2 className="font-serif text-[30px] font-semibold leading-tight text-white sm:text-[34px] md:text-[40px]">
               Testimonies
             </h2>
-            <div className="mx-auto mt-4 h-px w-16 bg-[#0b3a53]/30" />
+            <div className="mx-auto mt-4 h-px w-16 bg-[#15803d]" />
           </div>
 
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             {TESTIMONIALS.map((t) => (
               <article
                 key={t.name}
-                className="flex h-full flex-col rounded-[14px] border border-slate-200 bg-white/80 p-8 shadow-[0_20px_60px_rgba(15,37,56,0.04)]"
+                className="flex h-full flex-col rounded-[14px] border border-white/10 bg-white/[0.04] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
               >
-                <p className="font-serif text-[18px] leading-[1.9] text-[#0b3a53] md:text-[19px]">
+                <p className="font-serif text-[18px] leading-[1.9] text-white/85 md:text-[19px]">
                   &ldquo;{t.quote}&rdquo;
                 </p>
                 <div className="mt-6 flex items-center gap-4">
                   {t.image ? (
-                    <div className="h-14 w-14 overflow-hidden rounded-full border border-slate-200 bg-slate-100">
+                    <div className="h-14 w-14 overflow-hidden rounded-full border border-white/15 bg-white/10">
                       <img
                         src={t.image}
                         alt={t.name}
@@ -368,16 +449,16 @@ export default function MissionTripsPage() {
                       />
                     </div>
                   ) : (
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full border border-slate-200 bg-slate-50 font-serif text-[18px] text-[#0b3a53]">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/15 bg-white/5 font-serif text-[18px] text-[#c4b5fd]">
                       {t.name
                         .split(" ")
                         .map((part) => part.charAt(0))
                         .join("")}
                     </div>
                   )}
-                  <p className="font-serif text-[16px] text-slate-900">{t.name}</p>
+                  <p className="font-serif text-[16px] text-white">{t.name}</p>
                 </div>
-                <p className="mt-1 font-sans text-[12px] uppercase tracking-[0.24em] text-slate-500">
+                <p className="mt-1 font-sans text-[12px] uppercase tracking-[0.24em] text-white/55">
                   {t.role}
                 </p>
               </article>

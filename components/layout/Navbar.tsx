@@ -3,8 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import {
-  ArrowRight, Search, Menu, X, Phone,
-  MessageCircle, ChevronRight, GraduationCap,
+  ArrowRight, Search, Menu, X, Mail,
+  ChevronRight, GraduationCap,
   BookOpen, Users, Heart, MapPin, FileText, Home, Church, Radio,
 } from "lucide-react";
 import { siteData } from "@/data/site";
@@ -19,8 +19,7 @@ const searchIndex = [
   { title: "Sermons", desc: "Watch or listen to past messages", href: "/#sermons", icon: <Radio size={16} />, tags: ["sermons", "messages", "preaching", "watch", "listen", "media"] },
   { title: "Stories", desc: "Voices from our communities", href: "/#stories", icon: <Heart size={16} />, tags: ["stories", "testimony", "witness", "voices"] },
   { title: "Contact Us", desc: "Talk to the Ministry leadership", href: "/#contact", icon: <MapPin size={16} />, tags: ["contact", "location", "address", "nzoia", "bungoma", "talk"] },
-  { title: "Bishop Nelson Barasa", desc: "+254 721 683 397", href: "tel:+254721683397", icon: <Phone size={16} />, tags: ["call", "phone", "bishop", "overseer", "nelson"] },
-  { title: "WhatsApp JCFM", desc: "Chat with us on WhatsApp", href: "https://wa.me/254721683397", icon: <MessageCircle size={16} />, tags: ["whatsapp", "chat", "message", "wa"] },
+  { title: "Email JCFM", desc: "info@jcfm.org", href: "mailto:info@jcfm.org", icon: <Mail size={16} />, tags: ["email", "mail", "write", "contact", "info"] },
   { title: "Headquarters", desc: "Nzoia, Bungoma County, Kenya", href: "/#contact", icon: <MapPin size={16} />, tags: ["location", "where", "address", "nzoia", "bungoma", "hq", "headquarters"] },
   { title: "Sunday Service", desc: "Sundays · 9:00 AM – 1:00 PM", href: "/#church", icon: <BookOpen size={16} />, tags: ["hours", "time", "sunday", "service", "schedule", "when"] },
 ];
@@ -264,12 +263,9 @@ export default function Navbar() {
         </div>
 
         <div className="flex-1 overflow-y-auto">
-          <div className="grid grid-cols-2 border-b border-slate-200">
-            <a href="tel:+254721683397" onClick={() => setDrawerOpen(false)} className="flex items-center justify-center gap-2 border-r border-slate-200 bg-[#4c1d95] py-4 text-white">
-              <Phone size={16} /><span className="text-xs font-bold uppercase tracking-wider">Call</span>
-            </a>
-            <a href="https://wa.me/254721683397" target="_blank" rel="noopener noreferrer" onClick={() => setDrawerOpen(false)} className="flex items-center justify-center gap-2 bg-[#15803d] py-4 text-white">
-              <MessageCircle size={16} /><span className="text-xs font-bold uppercase tracking-wider">WhatsApp</span>
+          <div className="border-b border-slate-200">
+            <a href="mailto:info@jcfm.org" onClick={() => setDrawerOpen(false)} className="flex items-center justify-center gap-2 bg-[#4c1d95] py-4 text-white">
+              <Mail size={16} /><span className="text-xs font-bold uppercase tracking-wider">Email Us</span>
             </a>
           </div>
 

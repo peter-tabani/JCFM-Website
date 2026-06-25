@@ -1,4 +1,4 @@
-import { Clock, MapPin, Phone } from "lucide-react";
+import { Clock, MapPin, Mail } from "lucide-react";
 import { siteData } from "@/data/site";
 
 export default function Header() {
@@ -50,12 +50,12 @@ export default function Header() {
           </div>
 
           <div className="flex items-center gap-3 px-5 py-3">
-            <Phone size={18} className="shrink-0 text-[#4c1d95]" strokeWidth={1.75} />
+            <Mail size={18} className="shrink-0 text-[#4c1d95]" strokeWidth={1.75} />
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">
-                Telephone
+                Email
               </p>
-              <p className="text-sm font-semibold text-[#4c1d95]">{siteData.contacts.bishop.phone}</p>
+              <a href={`mailto:${siteData.email}`} className="text-sm font-semibold text-[#4c1d95] transition hover:text-[#15803d]">{siteData.email}</a>
             </div>
           </div>
         </div>

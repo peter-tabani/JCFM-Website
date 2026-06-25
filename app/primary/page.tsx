@@ -3,7 +3,7 @@ import Header from "@/components/layout/Header";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
-import { Download, ArrowRight, MessageCircle } from "lucide-react";
+import { Download, ArrowRight, Mail } from "lucide-react";
 
 export const metadata = {
   title: "Primary School – Fountain of Hope Academy",
@@ -59,7 +59,7 @@ export default function PrimaryPage() {
               { label: "School Type", value: "Day School — Mixed" },
               { label: "Location", value: "Likoni – Shelley Beach, Mombasa" },
               { label: "School Hours", value: "6:00 AM – 6:00 PM" },
-              { label: "Enquiries", value: "+254 722 916174" },
+              { label: "Enquiries", value: "info@fountainofhope.ac.ke" },
             ].map((item) => (
               <div key={item.label} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                 <p className="mb-1 text-xs font-bold uppercase tracking-wider text-slate-400">{item.label}</p>
@@ -90,12 +90,10 @@ export default function PrimaryPage() {
                 <Download size={18} /> Download Fee Structure PDF
               </a>
               <a
-                href="https://wa.me/254722916174?text=Hello%20Fountain%20of%20Hope%20Academy%2C%20I%20would%20like%20to%20enquire%20about%20Primary%20School%20fees."
-                target="_blank"
-                rel="noopener noreferrer"
+                href="mailto:info@fountainofhope.ac.ke?subject=Primary%20School%20Fees%20Enquiry"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-[#fffaf2] px-8 py-4 font-bold text-slate-700 hover:border-[#d97706] transition"
               >
-                <MessageCircle size={18} className="text-[#25D366]" /> Ask on WhatsApp
+                <Mail size={18} className="text-[#d97706]" /> Email the Office
               </a>
             </div>
           </div>
@@ -114,8 +112,8 @@ export default function PrimaryPage() {
               <Link href="/admissions" className="inline-flex items-center gap-2 rounded-full bg-[#d97706] px-6 py-3 text-sm font-bold text-white hover:bg-[#b45309] transition">
                 Apply Now <ArrowRight size={15} />
               </Link>
-              <a href="tel:+254722916174" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-bold text-white hover:bg-white/10 transition">
-                Call Us
+              <a href="mailto:info@fountainofhope.ac.ke" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-bold text-white hover:bg-white/10 transition">
+                Email Us
               </a>
             </div>
           </div>

@@ -74,26 +74,35 @@ export default function Branches() {
   return (
     <section id="branches" className="border-b border-white/10 bg-[#080b16]">
 
-      {/* Visual header banner */}
-      <div
-        className="relative h-[200px] w-full overflow-hidden md:h-[260px]"
-        style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1607453998774-d533f65dac99?w=1600&q=80')",
-          backgroundSize: "cover",
-          backgroundPosition: "center 40%",
-        }}
-      >
-        <div className="absolute inset-0 bg-[#080b16]/80" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+      {/* Visual header banner — world map highlighting Kenya */}
+      <div className="relative w-full overflow-hidden border-b border-white/10 bg-[#0b1322]">
+        <div className="mx-auto flex max-w-[1400px] flex-col items-center px-5 py-8 text-center md:py-10">
           <div className="flex items-center justify-center gap-3">
-            <span className="h-[1px] w-12 bg-[#86efac] md:w-16" />
+            <span className="h-[1px] w-10 bg-[#86efac] md:w-14" />
             <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#86efac]">
               Our Network
             </p>
-            <span className="h-[1px] w-12 bg-[#86efac] md:w-16" />
+            <span className="h-[1px] w-10 bg-[#86efac] md:w-14" />
           </div>
-          <h2 className="mt-4 font-serif text-[28px] font-semibold uppercase leading-tight tracking-[0.02em] text-white sm:text-3xl md:text-5xl">
-            Branches Across Kenya
+
+          {/* Map with Kenya marker */}
+          <div className="relative mt-5">
+            <img
+              src="/images/world-map.svg"
+              alt="JCFM branches highlighted on Kenya, East Africa"
+              className="h-[140px] w-auto opacity-95 drop-shadow-[0_10px_30px_rgba(0,0,0,0.4)] md:h-[200px]"
+            />
+            {/* Pulsing pin over Kenya */}
+            <span className="absolute" style={{ left: "58.4%", top: "54.7%" }}>
+              <span className="relative flex -translate-x-1/2 -translate-y-1/2">
+                <span className="absolute inline-flex h-4 w-4 animate-ping rounded-full bg-[#22c55e]/70" />
+                <span className="relative inline-flex h-4 w-4 items-center justify-center rounded-full bg-[#86efac] ring-2 ring-[#15803d]" />
+              </span>
+            </span>
+          </div>
+
+          <h2 className="mt-5 font-serif text-[22px] font-semibold uppercase leading-tight tracking-[0.06em] text-white md:text-3xl">
+            9 Branches Across Kenya
           </h2>
         </div>
       </div>

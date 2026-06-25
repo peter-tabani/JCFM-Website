@@ -34,12 +34,6 @@ export default function Footer() {
           <h5 className="mb-4 text-lg font-semibold text-white">Contact</h5>
           <div className="space-y-3 text-white/65">
             <p>Headquarters · Nzoia, Bungoma, Kenya</p>
-            <a href="tel:+254721683397" className="block transition hover:text-[#86efac]">
-              Bishop Nelson Barasa · +254 721 683 397
-            </a>
-            <a href="tel:+254722660690" className="block transition hover:text-[#86efac]">
-              Pst. Sarah Wekesa · +254 722 660 690
-            </a>
             <a href="mailto:info@jcfm.org" className="block transition hover:text-[#86efac]">
               info@jcfm.org
             </a>

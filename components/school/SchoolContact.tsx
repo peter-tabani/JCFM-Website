@@ -1,11 +1,9 @@
-import { Phone, Mail, MapPin, Clock, MessageCircle, ArrowRight } from "lucide-react";
+import { Mail, MapPin, Clock, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { siteData } from "@/data/site";
 
 export default function SchoolContact() {
   const s = siteData.school;
-  const officeDigits = s.contacts.office.replace(/\s+/g, "").replace(/^\+/, "");
-  const admissionsDigits = s.contacts.admissions.replace(/\s+/g, "").replace(/^\+/, "");
 
   return (
     <section id="contact" className="border-b border-[#d4d0c4] bg-white">
@@ -49,23 +47,12 @@ export default function SchoolContact() {
 
               <div className="mt-auto flex flex-col gap-0 pt-6">
                 <a
-                  href={`tel:${officeDigits}`}
+                  href={`mailto:${s.contacts.email}`}
                   className="flex items-center justify-between gap-3 border border-[#0b2545] bg-white px-4 py-3 text-[13px] font-semibold text-[#0b2545] transition hover:bg-[#0b2545] hover:text-white"
                 >
                   <span className="flex items-center gap-3">
-                    <Phone size={14} strokeWidth={2.25} />
-                    {s.contacts.office}
-                  </span>
-                </a>
-                <a
-                  href={`https://wa.me/${officeDigits}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between gap-3 border-x border-b border-[#0b2545] bg-[#15803d] px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#106030]"
-                >
-                  <span className="flex items-center gap-2">
-                    <MessageCircle size={13} strokeWidth={2.5} />
-                    WhatsApp the Office
+                    <Mail size={14} strokeWidth={2.25} />
+                    Email the Office
                   </span>
                 </a>
               </div>
@@ -90,23 +77,12 @@ export default function SchoolContact() {
 
               <div className="mt-auto flex flex-col gap-0 pt-6">
                 <a
-                  href={`tel:${admissionsDigits}`}
+                  href={`mailto:${s.contacts.email}`}
                   className="flex items-center justify-between gap-3 border border-[#15803d] bg-white px-4 py-3 text-[13px] font-semibold text-[#15803d] transition hover:bg-[#15803d] hover:text-white"
                 >
                   <span className="flex items-center gap-3">
-                    <Phone size={14} strokeWidth={2.25} />
-                    {s.contacts.admissions}
-                  </span>
-                </a>
-                <a
-                  href={`https://wa.me/${admissionsDigits}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between gap-3 border-x border-b border-[#15803d] bg-[#15803d] px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#106030]"
-                >
-                  <span className="flex items-center gap-2">
-                    <MessageCircle size={13} strokeWidth={2.5} />
-                    WhatsApp Admissions
+                    <Mail size={14} strokeWidth={2.25} />
+                    Email Admissions
                   </span>
                 </a>
               </div>

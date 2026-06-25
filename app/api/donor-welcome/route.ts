@@ -60,8 +60,8 @@ export async function POST(req: Request) {
               </div>
 
               <p style="color: #475569; line-height: 1.8; margin: 24px 0 0;">
-                If you have any questions, reply to this email or WhatsApp us on 
-                <a href="https://wa.me/254722916174" style="color: #d97706;">+254 722 916174</a>.
+                If you have any questions, simply reply to this email and we
+                will get back to you.
               </p>
             </div>
 

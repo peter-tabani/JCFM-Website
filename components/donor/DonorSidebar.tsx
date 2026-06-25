@@ -166,9 +166,7 @@ export default function DonorSidebar({
       {/* Help footer */}
       <div className="border-t border-slate-100 px-5 py-4">
         <a
-          href="https://wa.me/254722916174?text=Hello%20Mr.%20Mweruphe%2C%20I%20am%20a%20Fountain%20of%20Hope%20donor%20and%20would%20like%20some%20help."
-          target="_blank"
-          rel="noopener noreferrer"
+          href="mailto:info@jcfm.org"
           className="flex items-center gap-3 rounded-xl bg-slate-50 px-3 py-2.5 transition hover:bg-slate-100"
         >
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-blue-800">
@@ -176,7 +174,7 @@ export default function DonorSidebar({
           </div>
           <div>
             <p className="text-[12px] font-semibold text-slate-900">Need a hand?</p>
-            <p className="text-[10.5px] text-slate-500">Talk to the Director on WhatsApp</p>
+            <p className="text-[10.5px] text-slate-500">Email the office for help</p>
           </div>
         </a>
       </div>

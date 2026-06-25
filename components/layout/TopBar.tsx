@@ -1,4 +1,4 @@
-import { Mail, Phone, User, HelpCircle } from "lucide-react";
+import { Mail, User, HelpCircle } from "lucide-react";
 import Link from "next/link";
 
 export default function TopBar() {
@@ -16,15 +16,8 @@ export default function TopBar() {
               Official Website
             </span>
             <a
-              href="tel:+254721683397"
-              className="flex items-center gap-2 px-5 text-slate-600 transition hover:text-[#15803d]"
-            >
-              <Phone size={12} strokeWidth={2.25} />
-              +254 721 683 397
-            </a>
-            <a
               href="mailto:info@jcfm.org"
-              className="flex items-center gap-2 pl-5 text-slate-600 transition hover:text-[#15803d]"
+              className="flex items-center gap-2 px-5 text-slate-600 transition hover:text-[#15803d]"
             >
               <Mail size={12} strokeWidth={2.25} />
               info@jcfm.org

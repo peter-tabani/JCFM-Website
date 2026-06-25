@@ -1,4 +1,4 @@
-import { ArrowRight, Calendar, GraduationCap, MapPin, BookOpen, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { siteData } from "@/data/site";
 
@@ -101,105 +101,127 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* ── Quick services bar ── */}
-      <section className="border-b border-white/10 bg-[#080b16]">
-        {/* Mobile: horizontal swipe-snap row */}
-        <div className="md:hidden">
-          <div className="flex items-center justify-between border-b border-white/10 bg-[#080b16] px-5 py-2.5">
-            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#15803d]">
-              Quick Links
-            </p>
-            <p className="text-[10px] uppercase tracking-[0.22em] text-white/45">
-              Swipe →
-            </p>
-          </div>
+      {/* ── Welcome / About intro ── */}
+      <section className="border-b border-white/10 bg-black">
+        <div className="mx-auto max-w-3xl px-6 py-12 text-center sm:py-14">
+          <h2 className="font-serif text-3xl font-semibold tracking-[0.02em] text-white sm:text-[34px] lg:text-[38px]">
+            Welcome to JCFM
+          </h2>
+          <div className="mx-auto mt-4 h-px w-12 bg-[#15803d]" />
+          <p className="mx-auto mt-6 max-w-2xl text-[14px] leading-7 text-white sm:text-[15px] sm:leading-8">
+            Jesus Christ Founder Ministry is a Christ-centred family rooted in
+            Nzoia, Bungoma and reaching across Kenya through nine growing
+            branches. Since {siteData.founded} we have worshipped, served and
+            grown together — expanding the Kingdom of God, one community at a
+            time. Wherever you join us, there is a place for you here. You are
+            welcome home.
+          </p>
         </div>
-        <div className="mx-auto flex max-w-[1400px] snap-x snap-mandatory overflow-x-auto md:grid md:grid-cols-2 md:divide-x md:divide-white/10 md:overflow-visible lg:grid-cols-4 [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
+      </section>
+
+      {/* ── Pathways: full-image overlay cards ── */}
+      <section className="border-b border-white/10 bg-[#080b16]">
+        <div className="mx-auto grid max-w-[1600px] grid-cols-1 md:grid-cols-3">
           {[
             {
-              icon: Calendar,
-              eyebrow: "Sundays · 9:00 AM",
-              title: "Worship Service",
-              desc: "Weekly worship at the Nzoia HQ and all branches.",
+              image: "/images/staff/together1.jpeg",
+              title: "Worship With Us",
+              cta: "Find a Branch",
+              accent: "#dc2626",
               href: "/#church",
             },
             {
-              icon: MapPin,
-              eyebrow: "Mission teams & visits",
+              image: "/images/mission-trip.jpeg",
               title: "Mission Trips to Kenya",
-              desc: "Come preach, serve, and walk with JCFM on a focused mission visit.",
+              cta: "Walk With JCFM",
+              accent: "#15803d",
               href: "/mission-trips",
             },
             {
-              icon: BookOpen,
-              eyebrow: "Watch · Listen",
-              title: "Latest Sermons",
-              desc: "Past messages from our pastors and ministry leaders.",
-              href: "/#sermons",
-            },
-            {
-              icon: GraduationCap,
-              eyebrow: "Education Ministry",
+              image: "/images/programs/junior.jpg",
               title: siteData.schoolName,
-              desc: "Our faith-based school under the JCFM Ministry.",
+              cta: "Visit the School",
+              accent: "#fbbf24",
               href: siteData.schoolHref,
             },
           ].map((item) => (
             <Link
               key={item.title}
               href={item.href}
-              className="group flex w-[78vw] shrink-0 snap-center items-start gap-4 border-r border-white/10 bg-[#0f172a] p-5 transition hover:bg-[#151f34] md:w-auto md:shrink md:border-r-0 md:bg-transparent md:p-6"
+              className="group relative block h-[400px] overflow-hidden md:h-[460px] lg:h-[520px]"
             >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#7c3aed]/60 bg-[#7c3aed]/20 text-[#c4b5fd] transition group-hover:bg-[#7c3aed] group-hover:text-white">
-                  <item.icon size={20} strokeWidth={1.75} />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#15803d]">
-                    {item.eyebrow}
-                  </p>
-                  <p className="mt-1 font-serif text-lg font-semibold text-white">
-                    {item.title}
-                  </p>
-                  <p className="mt-1 text-[13px] leading-6 text-white/62">
-                    {item.desc}
-                  </p>
-                  <p className="mt-2 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.22em] text-[#c4b5fd] group-hover:text-[#fbbf24]">
-                    Learn More <ChevronRight size={13} strokeWidth={2.5} />
-                  </p>
-                </div>
+              <img
+                src={item.image}
+                alt={item.title}
+                className="absolute inset-0 h-full w-full object-cover brightness-[0.82] transition duration-700 group-hover:scale-[1.05] group-hover:brightness-[0.7]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-7 sm:p-9">
+                <h3 className="font-serif text-3xl font-semibold leading-[1.05] text-white drop-shadow-lg sm:text-[34px] lg:text-[38px]">
+                  {item.title}
+                </h3>
+                <span className="mt-4 inline-flex flex-col">
+                  <span className="inline-flex items-center gap-2 text-[15px] font-bold uppercase tracking-[0.12em] text-white sm:text-base">
+                    {item.cta}
+                    <ArrowRight size={16} strokeWidth={2.5} className="transition group-hover:translate-x-1" />
+                  </span>
+                  <span
+                    className="mt-1.5 h-[3px] w-full origin-left transition-transform duration-300 group-hover:scale-x-110"
+                    style={{ backgroundColor: item.accent }}
+                  />
+                </span>
+              </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* ── Ministry updates intro ── */}
-      <section className="border-b border-white/10 bg-gradient-to-b from-[#0f172a] to-[#080b16]">
-        <div className="mx-auto grid max-w-[1400px] gap-8 px-5 py-12 sm:px-6 md:grid-cols-[1.1fr_0.9fr] md:items-center md:py-16">
-          <div>
-            <h2 className="font-serif text-[32px] font-semibold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
-              Stay Connected to the Mission
-            </h2>
-            <div className="mt-5 h-[3px] w-24 bg-[#15803d]" />
-            <p className="mt-6 max-w-3xl text-base leading-8 text-white/68 md:text-lg">
-              From worship services in Nzoia and the branch network across
-              Kenya to the daily work at {siteData.schoolName}, follow the
-              people, stories, and moments shaping the work God has entrusted
-              to this ministry.
-            </p>
+      {/* ── Welcome from leadership ── */}
+      <section className="border-b border-white/10 bg-black">
+        <div className="mx-auto grid max-w-[1200px] items-center gap-10 px-6 py-14 md:grid-cols-[0.85fr_1fr] md:gap-14 md:py-20">
+
+          {/* Portrait */}
+          <div className="relative mx-auto w-full max-w-sm md:max-w-none">
+            <div className="absolute -left-3 -top-3 h-full w-full border border-[#15803d]/50" aria-hidden />
+            <img
+              src="/images/staff/B and P.png"
+              alt="Bishop Nelson Barasa Wanjala & Pastor Sarah N Wekesa"
+              className="relative z-10 h-full w-full object-cover shadow-[0_25px_60px_rgba(0,0,0,0.55)]"
+            />
           </div>
 
-          <div className="border border-white/10 bg-white/[0.04] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.35)] md:p-8">
-            <p className="font-serif text-xl italic leading-9 text-white md:text-2xl">
-              &ldquo;{siteData.motto}.&rdquo;
+          {/* Message */}
+          <div className="text-left">
+            <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-[#15803d]">
+              A Message From Our Bishop
             </p>
-            <div className="my-6 h-px bg-white/10" />
-            <p className="font-serif text-base italic leading-8 text-white/68">
-              &ldquo;Go therefore and make disciples of all nations… teaching them
-              to observe all that I have commanded you.&rdquo;
+            <h2 className="mt-3 font-serif text-[28px] font-semibold leading-tight tracking-[0.01em] text-white sm:text-[34px] lg:text-[40px]">
+              Welcome to Our Family
+            </h2>
+            <div className="mt-5 h-px w-14 bg-[#15803d]" />
+            <p className="mt-6 max-w-xl text-[15px] leading-[1.65] text-white/80">
+              Jesus Christ Founder Ministry is a community of believers walking
+              together in faith — growing from a small beginning in Bungoma to
+              branches across Kenya. Whether you are looking for a place to
+              worship, a school for your child, or are simply curious about what
+              God is doing here, we are glad you stopped by. We would love to
+              meet you in person. God bless you.
             </p>
-            <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.22em] text-[#15803d]">
-              Matthew 28:19–20
-            </p>
+            <div className="mt-8 flex flex-col items-start">
+              <p className="font-serif text-lg italic text-white">
+                {siteData.generalOverseer} &amp; {siteData.coLeader}
+              </p>
+              <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.22em] text-white/55">
+                Founder &amp; Bishop · Co-Founder &amp; Pastor
+              </p>
+            </div>
+            <Link
+              href="/#contact"
+              className="group mt-7 inline-flex items-center gap-3 rounded-full bg-[#15803d] px-6 py-[11px] text-[11px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#166534]"
+            >
+              Talk to the Bishop
+              <ArrowRight size={14} strokeWidth={2.5} className="transition group-hover:translate-x-1" />
+            </Link>
           </div>
         </div>
       </section>

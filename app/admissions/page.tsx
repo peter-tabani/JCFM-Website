@@ -3,7 +3,7 @@ import Header from "@/components/layout/Header";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AdmissionsForm from "@/components/sections/AdmissionsForm";
-import { ArrowRight, CheckCircle2, MessageCircle } from "lucide-react";
+import { ArrowRight, CheckCircle2, Mail } from "lucide-react";
 
 export const metadata = {
   title: "Admissions – Jesus Christ Founder Ministry",
@@ -73,19 +73,17 @@ export default function AdmissionsPage() {
           </h1>
           <p className="mb-6 max-w-xl text-base leading-8 text-white/80 md:mb-8 md:text-lg">
             Open for learners from age 3 through Grade 9 in Likoni, Mombasa.
-            Reach us instantly via WhatsApp or fill the form below.
+            Email us or fill the form below.
           </p>
 
-          {/* Mobile: show WhatsApp CTA prominently in hero */}
+          {/* Mobile: show email CTA prominently in hero */}
           <div className="flex flex-wrap gap-3">
             <a
-              href="https://wa.me/254722916174?text=Hello%20JCFM%2C%20I%20would%20like%20to%20enquire%20about%20admissions."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-semibold text-white transition hover:bg-[#1ebe5d]"
+              href="mailto:info@fountainofhope.ac.ke?subject=Admissions%20Enquiry"
+              className="inline-flex items-center gap-2 rounded-full bg-[#16a34a] px-6 py-3 font-semibold text-white transition hover:bg-[#15803d]"
             >
-              <MessageCircle size={18} />
-              WhatsApp Us Now
+              <Mail size={18} />
+              Email Us Now
             </a>
             <a
               href="#apply"
@@ -165,9 +163,9 @@ export default function AdmissionsPage() {
               </div>
             </div>
             <p className="mt-5 text-sm text-slate-500">
-              For the full fee structure, visit our office or call{" "}
-              <a href="tel:+254722916174" className="font-semibold text-[#2563eb]">
-                +254 722 916174
+              For the full fee structure, visit our office or email{" "}
+              <a href="mailto:info@fountainofhope.ac.ke" className="font-semibold text-[#2563eb]">
+                info@fountainofhope.ac.ke
               </a>
             </p>
           </div>
@@ -186,7 +184,7 @@ export default function AdmissionsPage() {
             </h2>
             <p className="mt-4 text-base leading-8 text-slate-600">
               Complete the form and we'll get back to you within 1–2 business
-              days. On mobile? Use the WhatsApp or Call buttons for instant help.
+              days. On mobile? Use the Email button for instant help.
             </p>
           </div>
 

@@ -16,9 +16,9 @@ export const siteData = {
   schoolName: "Fountain of Hope Academy",
   schoolHref: "/school",
   contacts: {
-    bishop: { name: "Bishop Nelson Barasa Wanjala", role: "General Overseer", phone: "+254 721 683 397" },
-    coordinator: { name: "Pastor Sarah N Wekesa", role: "Co-Founder & Pastor", phone: "+254 722 660 690" },
-    associate: { name: "Pst. Irene M. Wafula", role: "Associate Pastor", phone: "+254 725 146 063" },
+    bishop: { name: "Bishop Nelson Barasa Wanjala", role: "General Overseer" },
+    coordinator: { name: "Pastor Sarah N Wekesa", role: "Co-Founder & Pastor" },
+    associate: { name: "Pst. Irene M. Wafula", role: "Associate Pastor" },
   },
   email: "info@jcfm.org",
   hours: "Sundays · 9:00 AM – 1:00 PM",
@@ -81,8 +81,6 @@ export const siteData = {
       photo: "/images/staff/director.png",
     },
     contacts: {
-      office: "+254 722 660 690",
-      admissions: "+254 725 146 063",
       email: "info@fountainofhope.ac.ke",
     },
     schoolNav: [
