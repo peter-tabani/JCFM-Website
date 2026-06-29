@@ -1,0 +1,90 @@
+import Link from "next/link";
+import { ArrowLeft, ShieldCheck } from "lucide-react";
+
+// Minimal, distraction-free checkout chrome for the donate flow.
+// Mirrors the focused look of the existing login/portal pages without
+// touching the site's global navigation.
+export default function DonateChrome({
+  children,
+  backHref = "/",
+  backLabel = "Back to site",
+}: {
+  children: React.ReactNode;
+  backHref?: string;
+  backLabel?: string;
+}) {
+  return (
+    <div className="flex min-h-screen flex-col bg-[#f8fafc] text-slate-900">
+      <header className="border-b border-slate-200 bg-white">
+        <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
+          <Link
+            href={backHref}
+            className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 transition hover:text-[#d97706]"
+          >
+            <ArrowLeft size={16} />
+            {backLabel}
+          </Link>
+          <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+            <ShieldCheck size={14} className="text-emerald-600" />
+            Secure Donation
+          </div>
+        </div>
+      </header>
+
+      <main className="flex flex-1 flex-col">
+        <div className="mx-auto w-full max-w-xl px-4 py-8 sm:py-12">{children}</div>
+      </main>
+
+      <footer className="border-t border-slate-200 bg-white py-5">
+        <p className="mx-auto max-w-3xl px-4 text-center text-xs text-slate-400">
+          Jesus Christ Founder Ministry · Payments processed securely by Stripe
+          &amp; PayPal. Card details never touch our servers.
+        </p>
+      </footer>
+    </div>
+  );
+}
+
+// A compact step indicator. `current` is 1-based.
+export function Stepper({
+  steps,
+  current,
+}: {
+  steps: string[];
+  current: number;
+}) {
+  return (
+    <ol className="mb-8 flex items-center gap-2">
+      {steps.map((label, i) => {
+        const n = i + 1;
+        const done = n < current;
+        const active = n === current;
+        return (
+          <li key={label} className="flex flex-1 items-center gap-2">
+            <div
+              className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[11px] font-bold transition ${
+                active
+                  ? "bg-[#d97706] text-white"
+                  : done
+                    ? "bg-emerald-500 text-white"
+                    : "bg-slate-200 text-slate-500"
+              }`}
+            >
+              {done ? "✓" : n}
+            </div>
+            <span
+              className={`hidden text-[11px] font-semibold uppercase tracking-wider sm:block ${
+                active ? "text-slate-900" : "text-slate-400"
+              }`}
+            >
+              {label}
+            </span>
+            {n < steps.length && (
+              <span className="h-px flex-1 bg-slate-200" />
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  );
+}

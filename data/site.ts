@@ -42,6 +42,7 @@ export const siteData = {
     { label: "Church Life", href: "/#church" },
     { label: "Sermons", href: "/#sermons" },
     { label: "Academy", href: "/school" },
+    { label: "Donate", href: "/donate" },
     { label: "Contact", href: "/#contact" },
   ],
   eventPosters: [
