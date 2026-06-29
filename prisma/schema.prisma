@@ -98,6 +98,23 @@ model Event {
   @@index([published, date])
 }
 
+model TeamMember {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  tag       String?
+  bio       String
+  quote     String?
+  photo     String?
+  email     String?
+  featured  Boolean  @default(false)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([sortOrder])
+}
+
 model Donation {
   id           String          @id @default(cuid())
   user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)

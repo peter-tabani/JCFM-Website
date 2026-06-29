@@ -9,6 +9,7 @@ import {
   Mic2,
   Calendar,
   Users,
+  UserSquare,
   Banknote,
   GraduationCap,
   Settings,
@@ -28,6 +29,7 @@ const MINISTRY: NavItem[] = [
   { label: "Sermons", href: "/admin/sermons", icon: Mic2 },
   { label: "Events", href: "/admin/events", icon: Calendar },
   { label: "Members", href: "/admin/members", icon: Users },
+  { label: "Leadership", href: "/admin/team", icon: UserSquare },
 ];
 
 const FINANCE: NavItem[] = [
