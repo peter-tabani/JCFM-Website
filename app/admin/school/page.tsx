@@ -19,6 +19,7 @@ import {
   StatusPill,
   PrimaryButton,
   GhostButton,
+  SampleDataBadge,
 } from "@/components/admin/ui";
 
 const ENROLMENT_BY_LEVEL = [
@@ -68,6 +69,8 @@ export default function AdminSchool() {
       />
 
       <div className="mx-auto max-w-[1400px] space-y-6 px-5 py-7 md:px-8 md:py-10">
+        <SampleDataBadge note="school enrolment, fees and applications are placeholders managed by the school office." />
+
         {/* Identity strip */}
         <Card kicker="Profile" title="School at a Glance" padded={false}>
           <dl className="grid grid-cols-2 gap-x-8 gap-y-3 px-5 py-5 sm:grid-cols-3 lg:grid-cols-6">

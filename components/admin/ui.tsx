@@ -95,15 +95,17 @@ export function Card({
   action,
   children,
   padded = true,
+  className = "",
 }: {
   title: string;
   kicker?: string;
   action?: React.ReactNode;
   children: React.ReactNode;
   padded?: boolean;
+  className?: string;
 }) {
   return (
-    <section className="overflow-hidden rounded-lg border border-slate-200 bg-white">
+    <section className={`overflow-hidden rounded-lg border border-slate-200 bg-white ${className}`}>
       <header className="flex items-center justify-between border-b border-slate-200 bg-white px-5 py-3.5">
         <div>
           {kicker && (
@@ -136,7 +138,7 @@ export function PrimaryButton({
   type?: "button" | "submit";
 }) {
   const cls =
-    "inline-flex items-center gap-2 rounded-md bg-slate-900 px-3.5 py-2 text-[12.5px] font-medium text-white transition hover:bg-slate-800";
+    "inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md bg-slate-900 px-4 py-2.5 text-[13px] font-medium text-white transition hover:bg-slate-800 sm:min-h-0 sm:px-3.5 sm:py-2 sm:text-[12.5px]";
   const content = (
     <>
       {Icon && <Icon size={14} strokeWidth={2} />}
@@ -169,7 +171,7 @@ export function GhostButton({
   icon?: LucideIcon;
 }) {
   const cls =
-    "inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3.5 py-2 text-[12.5px] font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50";
+    "inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md border border-slate-200 bg-white px-4 py-2.5 text-[13px] font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 sm:min-h-0 sm:px-3.5 sm:py-2 sm:text-[12.5px]";
   const content = (
     <>
       {Icon && <Icon size={14} strokeWidth={2} />}
@@ -187,6 +189,20 @@ export function GhostButton({
     <button type="button" onClick={onClick} className={cls}>
       {content}
     </button>
+  );
+}
+
+// Clear, consistent banner for pages/sections still showing placeholder data.
+export function SampleDataBadge({ note }: { note?: string }) {
+  return (
+    <div className="flex items-start gap-2 rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-[12px] leading-5 text-amber-800">
+      <span className="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500" />
+      <span>
+        <span className="font-semibold uppercase tracking-wide">Sample data</span>
+        {" — "}
+        {note ?? "this section is not yet connected to the database."}
+      </span>
+    </div>
   );
 }
 

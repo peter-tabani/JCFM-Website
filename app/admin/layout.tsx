@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import AuthGuard from "@/components/admin/AuthGuard";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminTopbar from "@/components/admin/AdminTopbar";
+import AdminBottomNav from "@/components/admin/AdminBottomNav";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -45,8 +46,12 @@ function Shell({ children }: { children: React.ReactNode }) {
       {/* ── Main column ── */}
       <div className="flex min-w-0 flex-1 flex-col">
         <AdminTopbar user={data?.user} onOpenSidebar={() => setOpen(true)} />
-        <main className="flex-1">{children}</main>
+        {/* Bottom padding on mobile so content clears the bottom nav. */}
+        <main className="flex-1 pb-[72px] lg:pb-0">{children}</main>
       </div>
+
+      {/* Mobile bottom navigation */}
+      <AdminBottomNav onOpenMenu={() => setOpen(true)} />
     </div>
   );
 }
