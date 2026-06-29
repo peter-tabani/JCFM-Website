@@ -24,14 +24,17 @@ import {
   SeeMore,
 } from "@/components/donor/ui";
 import {
-  me,
-  donations,
   sponsorships,
-  projects,
   stories,
-  fmtKSh,
   categories,
+  getProject,
+  fmtKSh,
 } from "@/data/donor";
+import {
+  useMyDonations,
+  fmtUSD,
+  fmtDate,
+} from "@/components/donor/useMyDonations";
 
 function greet() {
   const h = new Date().getHours();
@@ -42,15 +45,28 @@ function greet() {
 
 export default function DonorDashboard() {
   const { data: session } = useSession();
-  const firstName =
-    (session?.user?.name?.split(" ")[0] || me.shortName) ?? "Friend";
+  const { data } = useMyDonations();
+  const firstName = session?.user?.name?.split(" ")[0] || "Friend";
 
-  // Most recent 3 gifts, top 2 sponsorships, top 3 projects this donor has touched
-  const recentGifts = donations.slice(0, 3);
-  const topSponsorships = sponsorships.slice(0, 2);
-  const myProjects = projects
-    .filter((p) => donations.some((d) => d.projectId === p.id))
+  // Real donation history for this user.
+  const myDonations = data?.donations ?? [];
+  const recentGifts = myDonations.slice(0, 3);
+
+  // Distinct projects this donor has actually given to (excludes general fund).
+  const supportedSlugs = Array.from(
+    new Set(
+      myDonations
+        .filter((d) => d.status === "succeeded" && d.designation !== "general")
+        .map((d) => d.designation)
+    )
+  );
+  const myProjects = supportedSlugs
+    .map((slug) => getProject(slug))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p))
     .slice(0, 3);
+
+  // Demo content (separate portal features, not part of donation history).
+  const topSponsorships = sponsorships.slice(0, 2);
   const latestStory = stories[0];
 
   return (
@@ -61,7 +77,7 @@ export default function DonorDashboard() {
         description="A simple, honest view of your giving — every shilling, every child, every brick. Choose where to look next."
         actions={
           <>
-            <PrimaryButton href="/donors/portal/projects" icon={HandHeart}>
+            <PrimaryButton href="/donate" icon={HandHeart}>
               Give Again
             </PrimaryButton>
             <GhostButton href="/donors/portal/giving" icon={Receipt}>
@@ -78,29 +94,29 @@ export default function DonorDashboard() {
             icon={HeartHandshake}
             tone="navy"
             label="Lifetime Giving"
-            value={fmtKSh(me.totalGiven)}
-            sub={`Since ${me.joined}`}
+            value={fmtUSD(data?.totals.lifetimeCents ?? 0)}
+            sub={data ? `Since ${fmtDate(data.memberSince)}` : ""}
           />
           <Stat
             icon={CalendarHeart}
             tone="emerald"
             label="This Year"
-            value={fmtKSh(me.thisYear)}
-            sub="Across all categories"
+            value={fmtUSD(data?.totals.thisYearCents ?? 0)}
+            sub="So far"
           />
           <Stat
             icon={Sprout}
             tone="rose"
-            label="Active Sponsorships"
-            value={String(me.activeSponsorships)}
-            sub="Children & projects"
+            label="Completed Gifts"
+            value={String(data?.totals.count ?? 0)}
+            sub="All-time"
           />
           <Stat
             icon={FolderHeart}
             tone="sky"
-            label="Projects Backed"
-            value={String(me.projectsBacked)}
-            sub="Lifetime"
+            label="Projects Supported"
+            value={String(supportedSlugs.length)}
+            sub="Distinct projects"
           />
         </div>
 
@@ -171,6 +187,19 @@ export default function DonorDashboard() {
               action={<SeeMore href="/donors/portal/projects">All projects</SeeMore>}
               padded={false}
             >
+              {myProjects.length === 0 ? (
+                <div className="px-5 py-8 text-center">
+                  <p className="text-[13px] text-slate-500">
+                    Once you give to a specific project, it will show up here.
+                  </p>
+                  <Link
+                    href="/donate"
+                    className="mt-2 inline-block text-[12px] font-semibold text-blue-800 hover:text-blue-900"
+                  >
+                    Browse projects →
+                  </Link>
+                </div>
+              ) : (
               <ul className="divide-y divide-slate-100">
                 {myProjects.map((p) => (
                   <li key={p.id} className="px-5 py-4">
@@ -200,6 +229,7 @@ export default function DonorDashboard() {
                   </li>
                 ))}
               </ul>
+              )}
             </Card>
           </div>
 
@@ -211,25 +241,41 @@ export default function DonorDashboard() {
               action={<SeeMore href="/donors/portal/giving">All gifts</SeeMore>}
               padded={false}
             >
-              <ul className="divide-y divide-slate-100">
-                {recentGifts.map((g) => (
-                  <li key={g.id} className="px-5 py-3.5">
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="min-w-0">
-                        <p className="truncate text-[13px] font-semibold text-slate-900">
-                          {g.allocation}
-                        </p>
-                        <p className="mt-0.5 text-[11px] text-slate-500">
-                          {g.date} · {g.channel}
+              {recentGifts.length === 0 ? (
+                <div className="px-5 py-8 text-center">
+                  <p className="text-[13px] text-slate-500">
+                    You haven&apos;t given yet.
+                  </p>
+                  <Link
+                    href="/donate"
+                    className="mt-2 inline-block text-[12px] font-semibold text-blue-800 hover:text-blue-900"
+                  >
+                    Make your first gift →
+                  </Link>
+                </div>
+              ) : (
+                <ul className="divide-y divide-slate-100">
+                  {recentGifts.map((g) => (
+                    <li key={g.id} className="px-5 py-3.5">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="min-w-0">
+                          <p className="truncate text-[13px] font-semibold text-slate-900">
+                            {g.designationLabel}
+                          </p>
+                          <p className="mt-0.5 text-[11px] text-slate-500">
+                            {fmtDate(g.createdAt)} ·{" "}
+                            {g.provider === "paypal" ? "PayPal" : "Card / Cash App"}
+                            {g.status === "pending" ? " · pending" : ""}
+                          </p>
+                        </div>
+                        <p className="shrink-0 font-mono text-[13px] font-semibold text-slate-900">
+                          {fmtUSD(g.amountCents)}
                         </p>
                       </div>
-                      <p className="shrink-0 font-mono text-[13px] font-semibold text-slate-900">
-                        {fmtKSh(g.amount)}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </Card>
 
             {latestStory && (
