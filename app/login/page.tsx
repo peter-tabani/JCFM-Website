@@ -292,17 +292,15 @@ function LoginInner() {
             </button>
           </form>
 
-          {/* Demo creds footnote */}
+          {/* Security note */}
           <div className="mt-8 border border-dashed border-[#c9a961] bg-[#c9a961]/10 p-4">
             <p className="text-[9px] font-bold uppercase tracking-[0.32em] text-[#a8201a]">
-              Demo Credentials
+              Secure Sign-In
             </p>
-            <p className="mt-2 font-mono text-[12px] text-[#0b2545]">
-              admin@jcfm.org · any password
-            </p>
-            <p className="mt-1 text-[11px] italic text-slate-600">
-              Real authentication is wired via NextAuth — swap to your
-              production user database when ready.
+            <p className="mt-2 text-[11px] italic leading-6 text-slate-600">
+              Accounts are stored in the database with hashed passwords. Admin
+              access is granted only to authorised emails. If you don&apos;t have
+              an account yet, ask the coordinator to create one.
             </p>
           </div>
 

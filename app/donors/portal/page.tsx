@@ -1,54 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
   Eye, EyeOff, ArrowRight, Loader2,
   CheckCircle2, Heart,
 } from "lucide-react";
 
-// ── Donor storage helpers ─────────────────────────────
-type StoredDonor = {
-  name: string;
-  email: string;
-  phone: string;
-  password: string;
-  smsSent: boolean;
-  joinedAt: string;
-};
-
-const DONORS_STORAGE_KEY = "fha_donors";
-
-const getDonors = (): StoredDonor[] => {
-  if (typeof window === "undefined") return [];
-  try { return JSON.parse(localStorage.getItem(DONORS_STORAGE_KEY) || "[]"); }
-  catch { return []; }
-};
-
-const saveDonors = (donors: StoredDonor[]) =>
-  localStorage.setItem(DONORS_STORAGE_KEY, JSON.stringify(donors));
-
-const findByEmail = (email: string) =>
-  getDonors().find((d) => d.email?.toLowerCase() === email.toLowerCase());
-
-const findByPhone = (phone: string) => {
-  const clean = phone.replace(/\s/g, "").replace(/^0/, "+254");
-  return getDonors().find(
-    (d) => d.phone?.replace(/\s/g, "").replace(/^0/, "+254") === clean
-  );
-};
-
-const findByLoginId = (id: string) =>
-  id.match(/^\+?[\d\s]{7,}$/) ? findByPhone(id) : findByEmail(id);
-
 export default function DonorPortalPage() {
+  return (
+    <Suspense fallback={null}>
+      <DonorPortalInner />
+    </Suspense>
+  );
+}
+
+function DonorPortalInner() {
   const router = useRouter();
+  const search = useSearchParams();
+  // Where to go after auth — the donate flow passes ?callbackUrl=/donate/...
+  const callbackUrl = search.get("callbackUrl") || "/donors/portal/dashboard";
+
   const [tab, setTab] = useState<"login" | "register">("login");
 
   // Login
-  const [loginId, setLoginId] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [showLoginPass, setShowLoginPass] = useState(false);
   const [loginLoading, setLoginLoading] = useState(false);
@@ -69,7 +47,7 @@ export default function DonorPortalPage() {
 
   const handleGoogle = async () => {
     setGoogleLoading(true);
-    await signIn("google", { callbackUrl: "/donors/portal/dashboard" });
+    await signIn("google", { callbackUrl });
   };
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -78,28 +56,16 @@ export default function DonorPortalPage() {
     setLoginError("");
     setExistingAccount(false);
 
-    const donor = findByLoginId(loginId);
-    if (!donor) {
-      setLoginError("No account found with that email or phone number.");
-      setLoginLoading(false);
-      return;
-    }
-    if (donor.password !== loginPassword) {
-      setLoginError("Incorrect password. Please try again.");
-      setLoginLoading(false);
-      return;
-    }
-
     const result = await signIn("credentials", {
-      email: donor.email || donor.phone,
+      email: loginEmail.toLowerCase().trim(),
       password: loginPassword,
       redirect: false,
     });
 
     if (result?.ok) {
-      router.push("/donors/portal/dashboard");
+      router.push(callbackUrl);
     } else {
-      setLoginError("Sign in failed. Please try again.");
+      setLoginError("Incorrect email or password. Please try again.");
       setLoginLoading(false);
     }
   };
@@ -109,64 +75,69 @@ export default function DonorPortalPage() {
     setRegError("");
 
     if (!regName.trim()) { setRegError("Please enter your full name."); return; }
-    if (!regEmail && !regPhone) { setRegError("Please enter an email or phone number."); return; }
+    if (!regEmail.trim()) { setRegError("Please enter your email address."); return; }
     if (regPassword !== regConfirm) { setRegError("Passwords do not match."); return; }
-    if (regPassword.length < 6) { setRegError("Password must be at least 6 characters."); return; }
-
-    const existingByEmail = regEmail ? findByEmail(regEmail) : null;
-    const existingByPhone = regPhone ? findByPhone(regPhone) : null;
-
-    if (existingByEmail || existingByPhone) {
-      setExistingAccount(true);
-      setTab("login");
-      setLoginId(regEmail || regPhone);
-      return;
-    }
+    if (regPassword.length < 8) { setRegError("Password must be at least 8 characters."); return; }
 
     setRegLoading(true);
     try {
-      const donors = getDonors();
-      const newDonor: StoredDonor = {
-        name: regName,
-        email: regEmail,
-        phone: regPhone,
-        password: regPassword,
-        smsSent: false,
-        joinedAt: new Date().toISOString(),
-      };
-      donors.push(newDonor);
-      saveDonors(donors);
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: regName,
+          email: regEmail,
+          phone: regPhone,
+          password: regPassword,
+        }),
+      });
 
-      if (regEmail) {
-        await fetch("/api/donor-welcome", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name: regName, email: regEmail }),
-        });
+      if (res.status === 409) {
+        // Account already exists — switch them to sign in.
+        setExistingAccount(true);
+        setTab("login");
+        setLoginEmail(regEmail);
+        setRegLoading(false);
+        return;
       }
 
-      if (regPhone && !newDonor.smsSent) {
-        const smsRes = await fetch("/api/donor-sms", {
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setRegError(data.error || "Something went wrong. Please try again.");
+        setRegLoading(false);
+        return;
+      }
+
+      // Best-effort welcome messages (non-blocking for sign-in).
+      fetch("/api/donor-welcome", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: regName, email: regEmail }),
+      }).catch(() => {});
+      if (regPhone) {
+        fetch("/api/donor-sms", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name: regName, phone: regPhone }),
-        });
-        if (smsRes.ok) {
-          const updated = getDonors().map((d) =>
-            d.phone === regPhone ? { ...d, smsSent: true } : d
-          );
-          saveDonors(updated);
-        }
+        }).catch(() => {});
       }
 
-      await signIn("credentials", {
-        email: regEmail || regPhone,
+      const result = await signIn("credentials", {
+        email: regEmail.toLowerCase().trim(),
         password: regPassword,
         redirect: false,
       });
 
+      if (!result?.ok) {
+        setRegError("Account created, but sign-in failed. Please sign in.");
+        setTab("login");
+        setLoginEmail(regEmail);
+        setRegLoading(false);
+        return;
+      }
+
       setRegSuccess(true);
-      setTimeout(() => router.push("/donors/portal/dashboard"), 2500);
+      setTimeout(() => router.push(callbackUrl), 2000);
     } catch {
       setRegError("Something went wrong. Please try again.");
       setRegLoading(false);
@@ -286,12 +257,13 @@ export default function DonorPortalPage() {
             <>
               <form onSubmit={handleLogin} className="space-y-4">
                 <div>
-                  <label className="label">Email or Phone Number</label>
+                  <label className="label">Email Address</label>
                   <input
                     required
-                    value={loginId}
-                    onChange={(e) => setLoginId(e.target.value)}
-  
+                    type="email"
+                    value={loginEmail}
+                    onChange={(e) => setLoginEmail(e.target.value)}
+                    autoComplete="email"
                     className="input"
                   />
                 </div>
@@ -371,31 +343,27 @@ export default function DonorPortalPage() {
                       />
                     </div>
 
-                    <div className="rounded-xl bg-slate-50 px-4 py-3 text-xs leading-6 text-slate-500">
-                      You can register with <strong>email</strong>, <strong>phone</strong>, or <strong>both</strong>. At least one is required.
-                    </div>
-
                     <div>
-                      <label className="label">Email Address</label>
+                      <label className="label">Email Address *</label>
                       <input
+                        required
                         type="email"
                         value={regEmail}
                         onChange={(e) => setRegEmail(e.target.value)}
-                        
+                        autoComplete="email"
                         className="input"
                       />
                     </div>
 
                     <div>
-                      <label className="label">Phone Number</label>
+                      <label className="label">Phone Number (optional)</label>
                       <input
                         type="tel"
                         value={regPhone}
                         onChange={(e) => setRegPhone(e.target.value)}
-                        
+                        autoComplete="tel"
                         className="input"
                       />
-                      
                     </div>
 
                     <div>
@@ -406,7 +374,7 @@ export default function DonorPortalPage() {
                           type={showRegPass ? "text" : "password"}
                           value={regPassword}
                           onChange={(e) => setRegPassword(e.target.value)}
-                          placeholder="Min. 6 characters"
+                          placeholder="Min. 8 characters"
                           className="input pr-11"
                         />
                         <button
