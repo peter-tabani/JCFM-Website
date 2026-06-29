@@ -1,0 +1,66 @@
+// Prisma schema for JCFM donations + accounts.
+// Datasource: PostgreSQL (paste your connection string into DATABASE_URL).
+// See docs/PAYMENTS_SETUP.md for setup.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  user
+  admin
+}
+
+enum DonationStatus {
+  pending
+  succeeded
+  failed
+}
+
+enum PaymentProvider {
+  stripe
+  paypal
+}
+
+model User {
+  id           String     @id @default(cuid())
+  name         String?
+  email        String     @unique
+  // bcrypt hash. Null for accounts created via OAuth (Google) only.
+  passwordHash String?
+  phone        String?
+  role         Role       @default(user)
+  image        String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  donations    Donation[]
+}
+
+model Donation {
+  id           String          @id @default(cuid())
+  user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+  // Amount in the smallest currency unit (cents). Always validated server-side.
+  amountCents  Int
+  currency     String          @default("usd")
+  provider     PaymentProvider
+  // Stripe PaymentIntent id or PayPal order/capture id. Unique to prevent
+  // duplicate fulfilment from repeated webhook deliveries.
+  providerRef  String          @unique
+  status       DonationStatus  @default(pending)
+  // Project slug from data/donor.ts, or "general" for the general fund.
+  designation  String          @default("general")
+  // Human-readable snapshot of what was supported, stored at creation time
+  // so history stays correct even if project content later changes.
+  designationLabel String
+  receiptEmail String?
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  @@index([userId, createdAt])
+}
