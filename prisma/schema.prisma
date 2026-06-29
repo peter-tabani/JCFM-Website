@@ -27,6 +27,18 @@ enum PaymentProvider {
   paypal
 }
 
+enum SermonStatus {
+  published
+  draft
+  scheduled
+}
+
+enum MemberStatus {
+  active
+  visitor
+  inactive
+}
+
 model User {
   id           String     @id @default(cuid())
   name         String?
@@ -39,6 +51,51 @@ model User {
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
   donations    Donation[]
+}
+
+model Sermon {
+  id        String       @id @default(cuid())
+  title     String
+  series    String?
+  preacher  String
+  branch    String?
+  date      DateTime?
+  status    SermonStatus @default(published)
+  mediaUrl  String?
+  notes     String?
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  @@index([status, date])
+}
+
+model Member {
+  id        String       @id @default(cuid())
+  name      String
+  branch    String
+  role      String       @default("Member")
+  phone     String?
+  email     String?
+  status    MemberStatus @default(active)
+  joinedAt  DateTime?
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  @@index([branch])
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  location    String?
+  date        DateTime?
+  imageUrl    String?
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([published, date])
 }
 
 model Donation {

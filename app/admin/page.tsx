@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import {
   MapPin,
@@ -17,7 +18,12 @@ import {
   Activity,
 } from "lucide-react";
 import { siteData } from "@/data/site";
-import { PageHeader, StatCard, Card, StatusPill, PrimaryButton, GhostButton } from "@/components/admin/ui";
+import { PageHeader, StatCard, Card, StatusPill, PrimaryButton, GhostButton, SampleDataBadge } from "@/components/admin/ui";
+
+const fmtUSD = (cents: number) =>
+  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(cents / 100);
+
+type AdminStats = { members: number; sermonsPublished: number; sermonsTotal: number; givingMonthCents: number };
 
 const ACTIVITY = [
   { t: "1 hr ago", who: "Bishop N. Barasa", what: "Published sermon", target: "“Walking by faith — Hebrews 11”", tone: "info" as const },
@@ -37,6 +43,14 @@ const UPCOMING = [
 export default function AdminOverview() {
   const { data } = useSession();
   const firstName = (data?.user?.name || "Friend").split(" ")[0];
+  const [stats, setStats] = useState<AdminStats | null>(null);
+
+  useEffect(() => {
+    fetch("/api/admin/stats")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => d && setStats(d))
+      .catch(() => {});
+  }, []);
   const greeting = (() => {
     const h = new Date().getHours();
     if (h < 12) return "Good morning";
@@ -77,27 +91,26 @@ export default function AdminOverview() {
             icon={Users}
             accent="gold"
             label="Members on Roll"
-            value="528"
-            sub="Across 5 counties"
-            delta={{ value: "+24 (30d)", up: true }}
+            value={stats ? String(stats.members) : "—"}
+            sub="In the directory"
           />
           <StatCard
             icon={Mic2}
             accent="green"
             label="Sermons Published"
-            value="142"
-            sub="3 awaiting upload"
-            delta={{ value: "+6 (30d)", up: true }}
+            value={stats ? String(stats.sermonsPublished) : "—"}
+            sub={stats ? `${stats.sermonsTotal} total` : "Live on the site"}
           />
           <StatCard
             icon={Banknote}
             accent="red"
             label="Giving · This Month"
-            value="KSh 248,500"
-            sub="Tithes · Offerings · Projects"
-            delta={{ value: "+12%", up: true }}
+            value={stats ? fmtUSD(stats.givingMonthCents) : "—"}
+            sub="Online gifts (USD)"
           />
         </div>
+
+        <SampleDataBadge note="the activity feed, calendar and per-branch attendance numbers below are still sample data." />
 
         {/* ── Two-col layout ── */}
         <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">

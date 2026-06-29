@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   MapPin,
   Mic2,
+  Calendar,
   Users,
   Banknote,
   GraduationCap,
@@ -25,6 +26,7 @@ const PRIMARY: NavItem[] = [
 const MINISTRY: NavItem[] = [
   { label: "Branches", href: "/admin/branches", icon: MapPin },
   { label: "Sermons", href: "/admin/sermons", icon: Mic2 },
+  { label: "Events", href: "/admin/events", icon: Calendar },
   { label: "Members", href: "/admin/members", icon: Users },
 ];
 
