@@ -7,7 +7,6 @@ import {
   HandHeart,
   Sprout,
   FolderHeart,
-  Newspaper,
   Compass,
   UserCircle2,
   X,
@@ -36,12 +35,6 @@ const SECTIONS: { title: string; items: NavItem[] }[] = [
     items: [
       { href: "/donors/portal/projects", label: "Active Projects", icon: FolderHeart, sub: "Where help is needed now" },
       { href: "/donors/portal/vision", label: "Future Vision", icon: Compass, sub: "What we hope to build" },
-    ],
-  },
-  {
-    title: "Updates",
-    items: [
-      { href: "/donors/portal/stories", label: "Stories & Progress", icon: Newspaper, sub: "Before & after, milestones" },
     ],
   },
   {

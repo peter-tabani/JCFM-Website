@@ -133,7 +133,6 @@ export default function AdminSettingsPage() {
                 <div className="space-y-3">
                   <Toggle label="Show donation banner on home page" defaultChecked={false} />
                   <Toggle label="Display upcoming events" defaultChecked />
-                  <Toggle label="Allow public story submissions" defaultChecked />
                   <Toggle label="Show school admissions banner" defaultChecked />
                 </div>
               </Card>
@@ -148,7 +147,6 @@ export default function AdminSettingsPage() {
                   <div className="mt-3 space-y-3">
                     <Toggle label="New member registrations" defaultChecked />
                     <Toggle label="Donation receipts" defaultChecked />
-                    <Toggle label="Story submissions awaiting review" defaultChecked />
                     <Toggle label="Weekly attendance summary" defaultChecked={false} />
                   </div>
                 </div>

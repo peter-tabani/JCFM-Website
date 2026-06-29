@@ -25,7 +25,6 @@ import {
 } from "@/components/donor/ui";
 import {
   sponsorships,
-  stories,
   categories,
   getProject,
   fmtKSh,
@@ -65,9 +64,8 @@ export default function DonorDashboard() {
     .filter((p): p is NonNullable<typeof p> => Boolean(p))
     .slice(0, 3);
 
-  // Demo content (separate portal features, not part of donation history).
+  // Demo content (separate portal feature, not part of donation history).
   const topSponsorships = sponsorships.slice(0, 2);
-  const latestStory = stories[0];
 
   return (
     <div>
@@ -277,36 +275,6 @@ export default function DonorDashboard() {
                 </ul>
               )}
             </Card>
-
-            {latestStory && (
-              <Card
-                eyebrow="Latest Update"
-                title="Stories & Progress"
-                action={<SeeMore href="/donors/portal/stories">All stories</SeeMore>}
-                padded={false}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={latestStory.photo}
-                  alt={latestStory.title}
-                  className="h-44 w-full object-cover"
-                />
-                <div className="space-y-2 p-5">
-                  <div className="flex items-center gap-2">
-                    <CategoryPill category={latestStory.category} />
-                    <span className="text-[11px] text-slate-400">
-                      {latestStory.date}
-                    </span>
-                  </div>
-                  <h3 className="text-[15px] font-semibold leading-snug text-slate-900">
-                    {latestStory.title}
-                  </h3>
-                  <p className="text-[12.5px] leading-6 text-slate-600">
-                    {latestStory.body}
-                  </p>
-                </div>
-              </Card>
-            )}
           </div>
         </div>
 

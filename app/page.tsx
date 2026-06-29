@@ -2,7 +2,6 @@ import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import UpcomingEvents from "@/components/sections/UpcomingEvents";
 import ChurchLife from "@/components/sections/ChurchLife";
-import Stories from "@/components/sections/Stories";
 import MediaGallery from "@/components/sections/MediaGallery";
 import AcademyCallout from "@/components/sections/TwoPillars";
 import Newsletter from "@/components/sections/Newsletter";
@@ -21,9 +20,6 @@ export default function HomePage() {
 
       {/* Sunday services, ministries, sermon preview */}
       <ChurchLife />
-
-      {/* Voices from the branches — witness, no ask */}
-      <Stories />
 
       {/* Images & video gallery */}
       <MediaGallery />

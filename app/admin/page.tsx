@@ -10,7 +10,6 @@ import {
   PlusCircle,
   ArrowRight,
   Mic,
-  BookOpenText,
   Banknote as BanknoteIcon,
   UserPlus,
   Calendar,
@@ -21,12 +20,11 @@ import { siteData } from "@/data/site";
 import { PageHeader, StatCard, Card, StatusPill, PrimaryButton, GhostButton } from "@/components/admin/ui";
 
 const ACTIVITY = [
-  { t: "2 min ago", who: "Pst. Sarah Wekesa", what: "Approved testimony", target: "“God restored our home”", tone: "success" as const },
   { t: "1 hr ago", who: "Bishop N. Barasa", what: "Published sermon", target: "“Walking by faith — Hebrews 11”", tone: "info" as const },
   { t: "3 hr ago", who: "Office HQ", what: "Logged donation", target: "KSh 25,000 · Water Project", tone: "success" as const },
   { t: "Yesterday", who: "Pst. Festas Soita", what: "Updated branch", target: "Mombasa · Jomvu", tone: "neutral" as const },
   { t: "2 days ago", who: "School Office", what: "Marked fees received", target: "12 pupils · Term 2", tone: "success" as const },
-  { t: "3 days ago", who: "Pst. Irene Wafula", what: "Submitted testimony", target: "Awaiting review", tone: "warn" as const },
+  { t: "3 days ago", who: "Pst. Sarah Wekesa", what: "Added member", target: "Tembelela branch", tone: "success" as const },
 ];
 
 const UPCOMING = [
@@ -148,7 +146,6 @@ export default function AdminOverview() {
               <ul className="divide-y divide-slate-200">
                 {[
                   { icon: Mic, label: "Upload Sermon", href: "/admin/sermons", note: "Audio · Video · Notes" },
-                  { icon: BookOpenText, label: "Approve a Testimony", href: "/admin/stories", note: "3 awaiting review" },
                   { icon: UserPlus, label: "Add a Member", href: "/admin/members", note: "Choose a branch" },
                   { icon: BanknoteIcon, label: "Record a Donation", href: "/admin/donations", note: "Tithe · Offering · Project" },
                 ].map((q) => (

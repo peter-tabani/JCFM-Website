@@ -5,7 +5,7 @@ import Link from "next/link";
 import {
   ArrowRight, Search, Menu, X, Mail,
   ChevronRight, GraduationCap,
-  BookOpen, Users, Heart, MapPin, FileText, Home, Church, Radio,
+  BookOpen, Users, MapPin, FileText, Home, Church, Radio,
 } from "lucide-react";
 import { siteData } from "@/data/site";
 
@@ -17,7 +17,6 @@ const searchIndex = [
   { title: "Fountain of Hope Academy", desc: "The school under JCFM Ministry", href: "/school", icon: <GraduationCap size={16} />, tags: ["school", "academy", "fountain", "hope", "education", "primary", "cbc"] },
   { title: "Ministries", desc: "Youth, children, women & outreach", href: "/#ministries", icon: <Users size={16} />, tags: ["ministries", "youth", "children", "women", "outreach"] },
   { title: "Sermons", desc: "Watch or listen to past messages", href: "/#sermons", icon: <Radio size={16} />, tags: ["sermons", "messages", "preaching", "watch", "listen", "media"] },
-  { title: "Stories", desc: "Voices from our communities", href: "/#stories", icon: <Heart size={16} />, tags: ["stories", "testimony", "witness", "voices"] },
   { title: "Contact Us", desc: "Talk to the Ministry leadership", href: "/#contact", icon: <MapPin size={16} />, tags: ["contact", "location", "address", "nzoia", "bungoma", "talk"] },
   { title: "Email JCFM", desc: "info@jcfm.org", href: "mailto:info@jcfm.org", icon: <Mail size={16} />, tags: ["email", "mail", "write", "contact", "info"] },
   { title: "Headquarters", desc: "Nzoia, Bungoma County, Kenya", href: "/#contact", icon: <MapPin size={16} />, tags: ["location", "where", "address", "nzoia", "bungoma", "hq", "headquarters"] },
