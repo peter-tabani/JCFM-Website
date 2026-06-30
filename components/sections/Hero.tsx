@@ -15,9 +15,9 @@ export default function Hero() {
           alt="Church community worship gathering"
           className="absolute inset-0 h-full w-full scale-[1.03] object-cover object-center brightness-[0.72] contrast-[1.06] saturate-[1.05]"
         />
-        <div className="absolute inset-0 bg-black/35" />
-        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/65 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-black/65 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-black/35" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-black/85 via-black/45 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-black/65 to-transparent" />
 
         <header className="relative z-20 mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-5 py-5 sm:px-8 lg:py-7">
           <Link href="/" className="flex items-center gap-3">
@@ -41,7 +41,7 @@ export default function Hero() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-[12px] font-black uppercase tracking-[0.12em] text-white transition hover:text-[#c4b5fd]"
+                  className="text-[12px] font-black uppercase tracking-[0.12em] text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)] transition hover:text-[#c4b5fd]"
                 >
                   {link.label}
                 </Link>
