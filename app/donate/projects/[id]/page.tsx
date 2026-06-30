@@ -44,11 +44,11 @@ export default async function PublicProjectDetail({
         >
           {category.label}
         </span>
-        <h1 className="mt-3 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+        <h1 className="mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl">
           {project.title}
         </h1>
 
-        <div className="mt-4 flex flex-wrap gap-4 text-sm text-slate-500">
+        <div className="mt-4 flex flex-wrap gap-4 text-sm text-white/45">
           <span className="inline-flex items-center gap-1.5">
             <Users size={15} /> {project.beneficiaries}
           </span>
@@ -62,11 +62,11 @@ export default async function PublicProjectDetail({
 
         {/* Currency-agnostic progress (donations are charged in USD) */}
         <div className="mt-5">
-          <div className="mb-1.5 flex items-center justify-between text-xs font-semibold text-slate-500">
+          <div className="mb-1.5 flex items-center justify-between text-xs font-semibold text-white/45">
             <span>{pct}% funded</span>
             <span>{project.donors} donors so far</span>
           </div>
-          <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
+          <div className="h-2.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
             <div
               className="h-full rounded-full bg-[#7c3aed]"
               style={{ width: `${Math.max(3, pct)}%` }}
@@ -74,23 +74,23 @@ export default async function PublicProjectDetail({
           </div>
         </div>
 
-        <p className="mt-6 text-[15px] leading-8 text-slate-700">
+        <p className="mt-6 text-[15px] leading-8 text-white/70">
           {project.longDesc}
         </p>
 
         {/* Milestones */}
         {project.milestones?.length > 0 && (
           <div className="mt-8">
-            <h2 className="text-sm font-bold uppercase tracking-[0.18em] text-slate-400">
+            <h2 className="text-sm font-bold uppercase tracking-[0.18em] text-white/35">
               Progress so far
             </h2>
-            <ol className="mt-4 space-y-4 border-l-2 border-slate-100 pl-5">
+            <ol className="mt-4 space-y-4 border-l-2 border-white/10 pl-5">
               {project.milestones.map((m, i) => (
                 <li key={i} className="relative">
-                  <span className="absolute -left-[27px] top-1 flex h-4 w-4 items-center justify-center rounded-full border-2 border-[#7c3aed] bg-white" />
+                  <span className="absolute -left-[27px] top-1 flex h-4 w-4 items-center justify-center rounded-full border-2 border-[#7c3aed] bg-[#0f1626]" />
                   <p className="text-xs font-semibold text-[#7c3aed]">{m.date}</p>
-                  <p className="font-semibold text-slate-900">{m.title}</p>
-                  <p className="mt-0.5 text-sm leading-6 text-slate-600">{m.body}</p>
+                  <p className="font-semibold text-white">{m.title}</p>
+                  <p className="mt-0.5 text-sm leading-6 text-white/60">{m.body}</p>
                 </li>
               ))}
             </ol>
@@ -99,7 +99,7 @@ export default async function PublicProjectDetail({
       </div>
 
       {/* Sticky-ish CTA */}
-      <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-5">
+      <div className="mt-8 rounded-2xl border border-white/10 bg-[#0f1626] p-5">
         {fundable ? (
           <>
             <Link
@@ -110,14 +110,14 @@ export default async function PublicProjectDetail({
             </Link>
             <Link
               href="/donate?step=cause"
-              className="mt-3 flex items-center justify-center gap-1.5 text-sm font-medium text-slate-500 transition hover:text-slate-900"
+              className="mt-3 flex items-center justify-center gap-1.5 text-sm font-medium text-white/45 transition hover:text-white"
             >
               <ArrowLeft size={15} /> Choose a different cause
             </Link>
           </>
         ) : (
           <div className="text-center">
-            <p className="text-sm font-semibold text-slate-900">
+            <p className="text-sm font-semibold text-white">
               This project is fully funded — thank you!
             </p>
             <Link

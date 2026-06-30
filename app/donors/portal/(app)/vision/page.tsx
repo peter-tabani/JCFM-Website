@@ -48,7 +48,7 @@ export default function VisionPage() {
             className={`rounded-full border px-4 py-1.5 text-[12px] font-semibold transition ${
               cat === "All"
                 ? "border-slate-900 bg-slate-900 text-white"
-                : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
+                : "border-white/10 bg-[#0f1626] text-white/60 hover:border-white/15"
             }`}
           >
             All future plans
@@ -63,7 +63,7 @@ export default function VisionPage() {
                 className={`rounded-full border px-4 py-1.5 text-[12px] font-semibold transition ${
                   active
                     ? c.tone
-                    : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
+                    : "border-white/10 bg-[#0f1626] text-white/60 hover:border-white/15"
                 }`}
               >
                 {c.label}
@@ -74,7 +74,7 @@ export default function VisionPage() {
 
         {filtered.length === 0 ? (
           <Card>
-            <div className="py-10 text-center text-slate-500">
+            <div className="py-10 text-center text-white/45">
               <Compass size={28} className="mx-auto text-slate-300" />
               <p className="mt-3 text-[13px]">No items in this category yet.</p>
             </div>
@@ -84,7 +84,7 @@ export default function VisionPage() {
             {filtered.map((v) => (
               <article
                 key={v.id}
-                className="overflow-hidden rounded-2xl border border-slate-200 bg-white"
+                className="overflow-hidden rounded-2xl border border-white/10 bg-[#0f1626]"
               >
                 <div className="relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -102,10 +102,10 @@ export default function VisionPage() {
                 </div>
 
                 <div className="p-5">
-                  <h2 className="text-lg font-bold leading-snug text-slate-900">
+                  <h2 className="text-lg font-bold leading-snug text-white">
                     {v.title}
                   </h2>
-                  <p className="mt-2 text-[13px] leading-7 text-slate-600">
+                  <p className="mt-2 text-[13px] leading-7 text-white/60">
                     {v.blurb}
                   </p>
 
@@ -113,7 +113,7 @@ export default function VisionPage() {
                     {v.bullets.map((b, i) => (
                       <li
                         key={i}
-                        className="flex items-start gap-2 text-[13px] text-slate-700"
+                        className="flex items-start gap-2 text-[13px] text-white/70"
                       >
                         <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
                         {b}
@@ -121,23 +121,23 @@ export default function VisionPage() {
                     ))}
                   </ul>
 
-                  <div className="mt-5 grid grid-cols-2 gap-3 rounded-xl border border-slate-100 bg-slate-50 p-3">
+                  <div className="mt-5 grid grid-cols-2 gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-3">
                     <div>
-                      <p className="text-[10px] uppercase tracking-wider text-slate-400">
+                      <p className="text-[10px] uppercase tracking-wider text-white/35">
                         Estimated cost
                       </p>
-                      <p className="mt-0.5 font-mono text-[13px] font-bold text-slate-900">
+                      <p className="mt-0.5 font-mono text-[13px] font-bold text-white">
                         {fmtKSh(v.estimateFrom)}
                       </p>
-                      <p className="text-[10.5px] text-slate-500">
+                      <p className="text-[10.5px] text-white/45">
                         to {fmtKSh(v.estimateTo)}
                       </p>
                     </div>
                     <div>
-                      <p className="text-[10px] uppercase tracking-wider text-slate-400">
+                      <p className="text-[10px] uppercase tracking-wider text-white/35">
                         Earliest start
                       </p>
-                      <p className="mt-0.5 text-[13px] font-bold text-slate-900">
+                      <p className="mt-0.5 text-[13px] font-bold text-white">
                         {v.earliestStart}
                       </p>
                     </div>
@@ -149,7 +149,7 @@ export default function VisionPage() {
                     </PrimaryButton>
                     <a
                       href={`mailto:excellentkenya@gmail.com?subject=${encodeURIComponent(`I'd like to discuss "${v.title}"`)}`}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-4 py-2 text-[12px] font-semibold text-slate-700 hover:bg-slate-50"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-4 py-2 text-[12px] font-semibold text-white/70 hover:bg-white/[0.03]"
                     >
                       <Mail size={12} strokeWidth={2.25} />
                       Ask the Director
@@ -162,9 +162,9 @@ export default function VisionPage() {
         )}
 
         {/* Encouraging footer */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center">
-          <p className="text-[13px] text-slate-600">
-            <span className="font-semibold text-slate-900">
+        <div className="rounded-2xl border border-white/10 bg-[#0f1626] p-6 text-center">
+          <p className="text-[13px] text-white/60">
+            <span className="font-semibold text-white">
               These plans don&apos;t need a single big donor.
             </span>{" "}
             Many small partners walking together is how every project on the

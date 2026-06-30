@@ -13,25 +13,25 @@ export default function DonorTopbar({
 }) {
   const initial = (user?.name?.[0] || "D").toUpperCase();
   return (
-    <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b border-white/10 bg-white/90 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-[1280px] items-center gap-3 px-5 md:px-8">
         {/* Mobile menu */}
         <button
           onClick={onOpenSidebar}
-          className="rounded-full p-2 text-slate-500 hover:bg-slate-50 hover:text-slate-900 lg:hidden"
+          className="rounded-full p-2 text-white/45 hover:bg-white/[0.03] hover:text-white lg:hidden"
           aria-label="Open menu"
         >
           <Menu size={18} />
         </button>
 
-        <p className="hidden text-[12px] text-slate-500 md:block">
+        <p className="hidden text-[12px] text-white/45 md:block">
           Welcome back{user?.name ? `, ${user.name.split(" ")[0]}` : ""}.
         </p>
 
         <div className="ml-auto flex items-center gap-2">
           <Link
             href="/"
-            className="hidden items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-[12px] font-semibold text-slate-600 hover:bg-slate-50 sm:inline-flex"
+            className="hidden items-center gap-1.5 rounded-full border border-white/10 px-3 py-1.5 text-[12px] font-semibold text-white/60 hover:bg-white/[0.03] sm:inline-flex"
           >
             <ExternalLink size={12} strokeWidth={2.25} />
             Public Site
@@ -54,7 +54,7 @@ export default function DonorTopbar({
 
           <button
             onClick={() => signOut({ callbackUrl: "/donors/portal" })}
-            className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-[12px] font-semibold text-slate-600 hover:bg-slate-50"
+            className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1.5 text-[12px] font-semibold text-white/60 hover:bg-white/[0.03]"
             title="Sign out"
           >
             <LogOut size={12} strokeWidth={2.25} />

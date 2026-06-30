@@ -14,17 +14,17 @@ export default function DonateChrome({
   backLabel?: string;
 }) {
   return (
-    <div className="flex min-h-screen flex-col bg-[#f8fafc] text-slate-900">
-      <header className="border-b border-slate-200 bg-white">
+    <div className="flex min-h-screen flex-col bg-[#080b16] text-white">
+      <header className="border-b border-white/10 bg-[#0f1626]">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
           <Link
             href={backHref}
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 transition hover:text-[#7c3aed]"
+            className="inline-flex items-center gap-2 text-sm font-medium text-white/45 transition hover:text-[#7c3aed]"
           >
             <ArrowLeft size={16} />
             {backLabel}
           </Link>
-          <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+          <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/45">
             <ShieldCheck size={14} className="text-emerald-600" />
             Secure Donation
           </div>
@@ -35,8 +35,8 @@ export default function DonateChrome({
         <div className="mx-auto w-full max-w-xl px-4 py-8 sm:py-12">{children}</div>
       </main>
 
-      <footer className="border-t border-slate-200 bg-white py-5">
-        <p className="mx-auto max-w-3xl px-4 text-center text-xs text-slate-400">
+      <footer className="border-t border-white/10 bg-[#0f1626] py-5">
+        <p className="mx-auto max-w-3xl px-4 text-center text-xs text-white/35">
           Jesus Christ Founder Ministry · Payments processed securely by Stripe
           &amp; PayPal. Card details never touch our servers.
         </p>
@@ -67,14 +67,14 @@ export function Stepper({
                   ? "bg-[#7c3aed] text-white"
                   : done
                     ? "bg-emerald-500 text-white"
-                    : "bg-slate-200 text-slate-500"
+                    : "bg-slate-200 text-white/45"
               }`}
             >
               {done ? "✓" : n}
             </div>
             <span
               className={`hidden text-[11px] font-semibold uppercase tracking-wider sm:block ${
-                active ? "text-slate-900" : "text-slate-400"
+                active ? "text-white" : "text-white/35"
               }`}
             >
               {label}

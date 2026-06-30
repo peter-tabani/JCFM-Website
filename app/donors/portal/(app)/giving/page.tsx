@@ -144,7 +144,7 @@ export default function MyDonations() {
         </div>
 
         {loading ? (
-          <div className="flex items-center justify-center py-20 text-slate-400">
+          <div className="flex items-center justify-center py-20 text-white/35">
             <Loader2 className="animate-spin" />
           </div>
         ) : error ? (
@@ -170,13 +170,13 @@ export default function MyDonations() {
                     <Search
                       size={14}
                       strokeWidth={2}
-                      className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-700"
+                      className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/70"
                     />
                     <input
                       value={q}
                       onChange={(e) => setQ(e.target.value)}
                       placeholder="Search a gift or reference"
-                      className="h-10 w-full rounded-full border border-slate-200 bg-white pl-9 pr-4 text-[13px] outline-none transition focus:border-violet-500"
+                      className="h-10 w-full rounded-full border border-white/10 bg-[#0f1626] pl-9 pr-4 text-[13px] outline-none transition focus:border-violet-500"
                     />
                   </div>
 
@@ -185,7 +185,7 @@ export default function MyDonations() {
                     onChange={(e) =>
                       setStatus(e.target.value as "All" | MyDonation["status"])
                     }
-                    className="h-10 rounded-full border border-slate-200 bg-white px-4 text-[12px] font-semibold text-slate-700 outline-none focus:border-violet-500"
+                    className="h-10 rounded-full border border-white/10 bg-[#0f1626] px-4 text-[12px] font-semibold text-white/70 outline-none focus:border-violet-500"
                   >
                     <option value="All">All statuses</option>
                     <option value="succeeded">Received</option>
@@ -196,7 +196,7 @@ export default function MyDonations() {
                   <select
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
-                    className="h-10 rounded-full border border-slate-200 bg-white px-4 text-[12px] font-semibold text-slate-700 outline-none focus:border-violet-500"
+                    className="h-10 rounded-full border border-white/10 bg-[#0f1626] px-4 text-[12px] font-semibold text-white/70 outline-none focus:border-violet-500"
                   >
                     <option value="All">All years</option>
                     {years.map((y) => (
@@ -206,13 +206,13 @@ export default function MyDonations() {
                     ))}
                   </select>
                 </div>
-                <div className="flex items-center gap-3 text-[12px] text-slate-500">
-                  <Filter size={13} strokeWidth={2.25} className="text-slate-700" />
+                <div className="flex items-center gap-3 text-[12px] text-white/45">
+                  <Filter size={13} strokeWidth={2.25} className="text-white/70" />
                   <span>
                     Showing{" "}
-                    <span className="font-bold text-slate-900">{filtered.length}</span>{" "}
+                    <span className="font-bold text-white">{filtered.length}</span>{" "}
                     of {donations.length} ·{" "}
-                    <span className="font-mono font-bold text-slate-900">
+                    <span className="font-mono font-bold text-white">
                       {fmtUSD(filteredTotal)}
                     </span>
                   </span>
@@ -235,15 +235,15 @@ export default function MyDonations() {
                     .reduce((s, d) => s + d.amountCents, 0);
                   return (
                     <Card key={month} padded={false}>
-                      <header className="flex items-center justify-between border-b border-slate-100 px-5 py-3">
-                        <p className="text-[12px] font-bold uppercase tracking-wider text-slate-500">
+                      <header className="flex items-center justify-between border-b border-white/10 px-5 py-3">
+                        <p className="text-[12px] font-bold uppercase tracking-wider text-white/45">
                           {month}
                         </p>
-                        <p className="font-mono text-[12px] font-semibold text-slate-700">
+                        <p className="font-mono text-[12px] font-semibold text-white/70">
                           {fmtUSD(monthTotal)}
                         </p>
                       </header>
-                      <ul className="divide-y divide-slate-100">
+                      <ul className="divide-y divide-white/10">
                         {list.map((d) => {
                           const Icon = providerIcon(d.provider);
                           return (
@@ -255,21 +255,21 @@ export default function MyDonations() {
                                 <Icon size={16} strokeWidth={2} />
                               </div>
                               <div className="min-w-0">
-                                <p className="text-[14px] font-semibold text-slate-900">
+                                <p className="text-[14px] font-semibold text-white">
                                   {d.designationLabel}
                                 </p>
                                 <div className="mt-1 flex flex-wrap items-center gap-2">
-                                  <span className="text-[11px] text-slate-700">
+                                  <span className="text-[11px] text-white/70">
                                     {fmtDate(d.createdAt)} · {providerLabel(d.provider)}
                                   </span>
-                                  <span className="font-mono text-[11px] text-slate-500">
+                                  <span className="font-mono text-[11px] text-white/45">
                                     Ref · {d.id.slice(0, 10)}
                                   </span>
                                   <DonationStatusPill status={d.status} />
                                 </div>
                               </div>
                               <div className="text-right">
-                                <p className="font-mono text-[15px] font-bold text-slate-900">
+                                <p className="font-mono text-[15px] font-bold text-white">
                                   {fmtUSD(d.amountCents)}
                                 </p>
                               </div>

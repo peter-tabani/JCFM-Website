@@ -79,17 +79,17 @@ export default function DonorDashboard() {
         {/* ── Recent gifts (compact) ── */}
         {recentGifts.length > 0 && (
           <Card eyebrow="Lately" title="Your recent gifts" padded={false}>
-            <ul className="divide-y divide-slate-100">
+            <ul className="divide-y divide-white/10">
               {recentGifts.map((g) => (
                 <li key={g.id} className="flex items-center justify-between gap-3 px-5 py-3">
                   <div className="min-w-0">
-                    <p className="truncate text-[13px] font-semibold text-slate-900">{g.designationLabel}</p>
-                    <p className="text-[11px] text-slate-500">
+                    <p className="truncate text-[13px] font-semibold text-white">{g.designationLabel}</p>
+                    <p className="text-[11px] text-white/45">
                       {fmtDate(g.createdAt)} · {g.provider === "paypal" ? "PayPal" : "Card / Cash App"}
                       {g.status === "pending" ? " · pending" : ""}
                     </p>
                   </div>
-                  <p className="shrink-0 font-mono text-[13px] font-semibold text-slate-900">{fmtUSD(g.amountCents)}</p>
+                  <p className="shrink-0 font-mono text-[13px] font-semibold text-white">{fmtUSD(g.amountCents)}</p>
                 </li>
               ))}
             </ul>
@@ -98,7 +98,7 @@ export default function DonorDashboard() {
 
         {/* ── Instagram-style project feed ── */}
         <div>
-          <h2 className="mb-3 px-1 text-[12px] font-bold uppercase tracking-[0.18em] text-slate-400">
+          <h2 className="mb-3 px-1 text-[12px] font-bold uppercase tracking-[0.18em] text-white/35">
             Projects to support
           </h2>
           <div className="space-y-5">
@@ -109,7 +109,7 @@ export default function DonorDashboard() {
               return (
                 <article
                   key={p.id}
-                  className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+                  className="overflow-hidden rounded-2xl border border-white/10 bg-[#0f1626] shadow-sm"
                 >
                   {/* Post header — small title on top */}
                   <div className="flex items-center gap-3 px-4 py-3">
@@ -119,11 +119,11 @@ export default function DonorDashboard() {
                     <div className="min-w-0 flex-1">
                       <Link
                         href={`/donors/portal/projects/${p.id}`}
-                        className="block truncate text-[14px] font-semibold leading-tight text-slate-900 hover:text-violet-800"
+                        className="block truncate text-[14px] font-semibold leading-tight text-white hover:text-violet-800"
                       >
                         {p.title}
                       </Link>
-                      <p className="truncate text-[11px] text-slate-400">{category.label}</p>
+                      <p className="truncate text-[11px] text-white/35">{category.label}</p>
                     </div>
                     {supported && (
                       <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-emerald-700">
@@ -144,14 +144,14 @@ export default function DonorDashboard() {
 
                   {/* Description below + progress + action */}
                   <div className="space-y-3 px-4 py-4">
-                    <p className="text-[13.5px] leading-6 text-slate-600">{p.shortDesc}</p>
+                    <p className="text-[13.5px] leading-6 text-white/60">{p.shortDesc}</p>
 
                     <div>
-                      <div className="mb-1 flex items-center justify-between text-[11px] font-semibold text-slate-500">
+                      <div className="mb-1 flex items-center justify-between text-[11px] font-semibold text-white/45">
                         <span>{pct}% funded</span>
                         <span>{p.donors} donors</span>
                       </div>
-                      <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
+                      <div className="h-2 w-full overflow-hidden rounded-full bg-white/[0.06]">
                         <div className="h-full rounded-full bg-[#7c3aed]" style={{ width: `${Math.max(3, pct)}%` }} />
                       </div>
                     </div>
@@ -165,7 +165,7 @@ export default function DonorDashboard() {
                       </Link>
                       <Link
                         href={`/donors/portal/projects/${p.id}`}
-                        className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-full border border-slate-200 px-4 text-[13px] font-semibold text-slate-700 transition hover:bg-slate-50"
+                        className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-full border border-white/10 px-4 text-[13px] font-semibold text-white/70 transition hover:bg-white/[0.03]"
                       >
                         Details <ArrowRight size={14} />
                       </Link>

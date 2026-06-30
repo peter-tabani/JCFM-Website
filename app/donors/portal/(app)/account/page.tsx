@@ -67,10 +67,10 @@ export default function AccountPage() {
               </div>
             )}
             <div>
-              <p className="text-lg font-bold text-slate-900">
+              <p className="text-lg font-bold text-white">
                 {session?.user?.name || me.name}
               </p>
-              <p className="text-[12px] text-slate-500">
+              <p className="text-[12px] text-white/45">
                 Donor ID · <span className="font-mono">{me.id}</span> · Member since{" "}
                 {me.joined}
               </p>
@@ -126,10 +126,10 @@ export default function AccountPage() {
                 <ShieldCheck size={18} strokeWidth={2} />
               </div>
               <div>
-                <p className="text-[14px] font-semibold text-slate-900">
+                <p className="text-[14px] font-semibold text-white">
                   Password
                 </p>
-                <p className="text-[12px] text-slate-500">
+                <p className="text-[12px] text-white/45">
                   Last changed a long time ago. We recommend a refresh.
                 </p>
               </div>
@@ -142,7 +142,7 @@ export default function AccountPage() {
         <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-start gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-amber-700">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0f1626] text-amber-700">
                 <HelpCircle size={18} strokeWidth={2} />
               </div>
               <div>
@@ -182,15 +182,15 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="text-[10.5px] font-bold uppercase tracking-wider text-slate-500">
+      <span className="text-[10.5px] font-bold uppercase tracking-wider text-white/45">
         {label}
       </span>
-      <div className="mt-1.5 flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2.5 transition focus-within:border-amber-400">
-        <Icon size={14} className="text-slate-400" strokeWidth={2} />
+      <div className="mt-1.5 flex items-center gap-2 rounded-xl border border-white/10 bg-[#0f1626] px-3 py-2.5 transition focus-within:border-amber-400">
+        <Icon size={14} className="text-white/35" strokeWidth={2} />
         <input
           type={type}
           defaultValue={defaultValue}
-          className="w-full bg-transparent text-[13px] text-slate-900 outline-none"
+          className="w-full bg-transparent text-[13px] text-white outline-none"
         />
       </div>
     </label>
@@ -206,9 +206,9 @@ function Toggle({
 }) {
   const [on, setOn] = useState(!!defaultChecked);
   return (
-    <label className="flex items-center justify-between gap-4 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3">
-      <span className="flex items-center gap-2 text-[13px] text-slate-700">
-        <Bell size={13} strokeWidth={2} className="text-slate-400" />
+    <label className="flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
+      <span className="flex items-center gap-2 text-[13px] text-white/70">
+        <Bell size={13} strokeWidth={2} className="text-white/35" />
         {label}
       </span>
       <button
@@ -220,7 +220,7 @@ function Toggle({
         aria-pressed={on}
       >
         <span
-          className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-all ${
+          className={`absolute top-0.5 h-5 w-5 rounded-full bg-[#0f1626] shadow transition-all ${
             on ? "left-[22px]" : "left-0.5"
           }`}
         />
@@ -231,11 +231,11 @@ function Toggle({
 
 function Snapshot({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl border border-slate-100 bg-slate-50 p-3">
-      <p className="text-[10.5px] font-bold uppercase tracking-wider text-slate-500">
+    <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
+      <p className="text-[10.5px] font-bold uppercase tracking-wider text-white/45">
         {label}
       </p>
-      <p className="mt-1 font-mono text-base font-bold text-slate-900">{value}</p>
+      <p className="mt-1 font-mono text-base font-bold text-white">{value}</p>
     </div>
   );
 }

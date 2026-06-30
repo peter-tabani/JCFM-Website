@@ -187,15 +187,15 @@ function DonorPortalInner() {
       </div>
 
       {/* ── Right Form Panel ── */}
-      <div className="flex flex-1 items-center justify-center bg-white px-5 py-10 sm:px-8">
+      <div className="flex flex-1 items-center justify-center bg-[#0f1626] px-5 py-10 sm:px-8">
         <div className="w-full max-w-md">
 
           {/* Mobile logo */}
           <Link href="/" className="mb-8 flex items-center gap-2 lg:hidden">
             <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#7c3aed] text-sm font-bold text-[#7c3aed]">F</div>
             <div>
-              <p className="font-bold text-slate-800">Fountain of Hope Academy Donor Portal</p>
-              <p className="text-xs text-slate-400">Support children through giving</p>
+              <p className="font-bold text-white/90">Fountain of Hope Academy Donor Portal</p>
+              <p className="text-xs text-white/35">Support children through giving</p>
             </div>
           </Link>
 
@@ -204,8 +204,8 @@ function DonorPortalInner() {
             <div className="mb-5 flex items-start gap-3 rounded-2xl border border-[#7c3aed]/30 bg-[#f5f3ff] p-4">
               <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#7c3aed]" />
               <div>
-                <p className="text-sm font-bold text-slate-900">Welcome back! 👋</p>
-                <p className="text-xs leading-6 text-slate-600">
+                <p className="text-sm font-bold text-white">Welcome back! 👋</p>
+                <p className="text-xs leading-6 text-white/60">
                   You already have an account. We have switched you to sign in — just enter your password below.
                 </p>
               </div>
@@ -213,16 +213,16 @@ function DonorPortalInner() {
           )}
 
           {/* Tabs */}
-          <div className="mb-7 flex rounded-2xl border border-slate-200 bg-slate-50 p-1">
+          <div className="mb-7 flex rounded-2xl border border-white/10 bg-white/[0.03] p-1">
             <button
               onClick={() => { setTab("login"); setLoginError(""); setExistingAccount(false); }}
-              className={`flex-1 rounded-xl py-2.5 text-sm font-semibold transition ${tab === "login" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"}`}
+              className={`flex-1 rounded-xl py-2.5 text-sm font-semibold transition ${tab === "login" ? "bg-[#0f1626] text-white shadow-sm" : "text-white/45"}`}
             >
               Sign In
             </button>
             <button
               onClick={() => { setTab("register"); setRegError(""); setExistingAccount(false); }}
-              className={`flex-1 rounded-xl py-2.5 text-sm font-semibold transition ${tab === "register" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"}`}
+              className={`flex-1 rounded-xl py-2.5 text-sm font-semibold transition ${tab === "register" ? "bg-[#0f1626] text-white shadow-sm" : "text-white/45"}`}
             >
               Create Account
             </button>
@@ -232,7 +232,7 @@ function DonorPortalInner() {
           <button
             onClick={handleGoogle}
             disabled={googleLoading}
-            className="mb-5 flex w-full items-center justify-center gap-3 rounded-full border-2 border-slate-200 bg-white py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 disabled:opacity-60"
+            className="mb-5 flex w-full items-center justify-center gap-3 rounded-full border-2 border-white/10 bg-[#0f1626] py-3.5 text-sm font-semibold text-white/70 shadow-sm transition hover:bg-white/[0.03] disabled:opacity-60"
           >
             {googleLoading ? <Loader2 size={18} className="animate-spin" /> : (
               <svg width="18" height="18" viewBox="0 0 48 48">
@@ -248,7 +248,7 @@ function DonorPortalInner() {
           {/* Divider */}
           <div className="mb-5 flex items-center gap-3">
             <div className="h-px flex-1 bg-slate-200" />
-            <span className="text-xs font-medium text-slate-400">or continue with email / phone</span>
+            <span className="text-xs font-medium text-white/35">or continue with email / phone</span>
             <div className="h-px flex-1 bg-slate-200" />
           </div>
 
@@ -281,7 +281,7 @@ function DonorPortalInner() {
                     <button
                       type="button"
                       onClick={() => setShowLoginPass((s) => !s)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-white/35 hover:text-white/60"
                     >
                       {showLoginPass ? <EyeOff size={16} /> : <Eye size={16} />}
                     </button>
@@ -303,7 +303,7 @@ function DonorPortalInner() {
                 </button>
               </form>
 
-              <p className="mt-5 text-center text-sm text-slate-500">
+              <p className="mt-5 text-center text-sm text-white/45">
                 No account?{" "}
                 <button onClick={() => setTab("register")} className="font-semibold text-[#7c3aed] hover:underline">
                   Create one free →
@@ -320,8 +320,8 @@ function DonorPortalInner() {
                   <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 text-green-600">
                     <CheckCircle2 size={40} />
                   </div>
-                  <h3 className="hero-title mb-3 text-3xl text-slate-900">You&apos;re in!</h3>
-                  <p className="max-w-sm text-sm leading-8 text-slate-600">
+                  <h3 className="hero-title mb-3 text-3xl text-white">You&apos;re in!</h3>
+                  <p className="max-w-sm text-sm leading-8 text-white/60">
                     Welcome, <strong>{regName}</strong>!{" "}
                     {regEmail && <>A welcome email is heading to <strong>{regEmail}</strong>.</>}{" "}
                     {regPhone && <>A welcome SMS has been sent to <strong>{regPhone}</strong>.</>}{" "}
@@ -380,7 +380,7 @@ function DonorPortalInner() {
                         <button
                           type="button"
                           onClick={() => setShowRegPass((s) => !s)}
-                          className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"
+                          className="absolute right-4 top-1/2 -translate-y-1/2 text-white/35"
                         >
                           {showRegPass ? <EyeOff size={16} /> : <Eye size={16} />}
                         </button>
@@ -416,7 +416,7 @@ function DonorPortalInner() {
                     
                   </form>
 
-                  <p className="mt-5 text-center text-sm text-slate-500">
+                  <p className="mt-5 text-center text-sm text-white/45">
                     Already have an account?{" "}
                     <button onClick={() => setTab("login")} className="font-semibold text-[#7c3aed] hover:underline">
                       Sign in →
@@ -427,7 +427,7 @@ function DonorPortalInner() {
             </>
           )}
 
-          <p className="mt-8 text-center text-xs text-slate-400">
+          <p className="mt-8 text-center text-xs text-white/35">
             <Link href="/" className="hover:text-[#7c3aed]">← Back to the main website</Link>
           </p>
         </div>

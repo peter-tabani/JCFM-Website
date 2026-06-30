@@ -54,24 +54,24 @@ export default function PaymentStep({
     <div>
       <button
         onClick={onBack}
-        className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition hover:text-slate-900"
+        className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-white/45 transition hover:text-white"
       >
         <ArrowLeft size={15} /> Back
       </button>
-      <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+      <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
         Complete your donation
       </h1>
 
       <OrderSummary label={label} amountCents={amountCents} />
 
       {/* Method switch */}
-      <div className="mt-6 flex rounded-2xl border border-slate-200 bg-slate-50 p-1">
+      <div className="mt-6 flex rounded-2xl border border-white/10 bg-white/[0.03] p-1">
         <button
           onClick={() => setMethod("stripe")}
           className={`flex flex-1 items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold transition ${
             method === "stripe"
-              ? "bg-white text-slate-900 shadow-sm"
-              : "text-slate-500"
+              ? "bg-[#0f1626] text-white shadow-sm"
+              : "text-white/45"
           }`}
         >
           <CreditCard size={15} /> Card / Cash App
@@ -80,8 +80,8 @@ export default function PaymentStep({
           onClick={() => setMethod("paypal")}
           className={`flex flex-1 items-center justify-center rounded-xl py-2.5 text-sm font-semibold transition ${
             method === "paypal"
-              ? "bg-white text-slate-900 shadow-sm"
-              : "text-slate-500"
+              ? "bg-[#0f1626] text-white shadow-sm"
+              : "text-white/45"
           }`}
         >
           PayPal
@@ -152,7 +152,7 @@ function StripeSection({
   return (
     <Elements
       stripe={stripePromise}
-      options={{ clientSecret, appearance: { theme: "stripe" } }}
+      options={{ clientSecret, appearance: { theme: "night", labels: "floating" } }}
     >
       <StripeForm returnUrl={returnUrl} amountCents={amountCents} />
     </Elements>
@@ -272,7 +272,7 @@ function PayPalSection({
 // ── Small shared UI ──
 function Spinner() {
   return (
-    <div className="flex items-center justify-center py-10 text-slate-400">
+    <div className="flex items-center justify-center py-10 text-white/35">
       <Loader2 className="animate-spin" />
     </div>
   );

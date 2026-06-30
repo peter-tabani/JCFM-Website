@@ -135,7 +135,7 @@ function DonateWizard() {
       )}
 
       {step === "payment" && status !== "authenticated" && (
-        <div className="flex items-center justify-center py-16 text-slate-400">
+        <div className="flex items-center justify-center py-16 text-white/35">
           <Loader2 className="animate-spin" />
         </div>
       )}
@@ -152,10 +152,10 @@ function CauseStep({ onSelect }: { onSelect: (slug: string) => void }) {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+      <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
         What would you like to support?
       </h1>
-      <p className="mt-2 text-sm leading-7 text-slate-600">
+      <p className="mt-2 text-sm leading-7 text-white/60">
         Give to a specific project, or let us direct your gift to where it&apos;s
         needed most across the church and school.
       </p>
@@ -169,15 +169,15 @@ function CauseStep({ onSelect }: { onSelect: (slug: string) => void }) {
           <Heart size={20} />
         </div>
         <div className="min-w-0 flex-1">
-          <p className="font-semibold text-slate-900">General Fund</p>
-          <p className="mt-0.5 text-sm leading-6 text-slate-600">
+          <p className="font-semibold text-white">General Fund</p>
+          <p className="mt-0.5 text-sm leading-6 text-white/60">
             {GENERAL_FUND.blurb}
           </p>
         </div>
         <ArrowRight size={18} className="mt-1 shrink-0 text-[#7c3aed]" />
       </button>
 
-      <p className="mt-8 mb-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
+      <p className="mt-8 mb-3 text-xs font-bold uppercase tracking-[0.18em] text-white/35">
         Or support a project
       </p>
 
@@ -185,10 +185,10 @@ function CauseStep({ onSelect }: { onSelect: (slug: string) => void }) {
         {projects.map((c) => (
           <li
             key={c.slug}
-            className="rounded-2xl border border-slate-200 bg-white p-5"
+            className="rounded-2xl border border-white/10 bg-[#0f1626] p-5"
           >
-            <p className="font-semibold text-slate-900">{c.label}</p>
-            <p className="mt-1 text-sm leading-6 text-slate-600">{c.blurb}</p>
+            <p className="font-semibold text-white">{c.label}</p>
+            <p className="mt-1 text-sm leading-6 text-white/60">{c.blurb}</p>
             <div className="mt-4 flex items-center gap-3">
               <button
                 onClick={() => onSelect(c.slug)}
@@ -255,11 +255,11 @@ function AmountStep({
   return (
     <div>
       <BackLink onClick={onBack} />
-      <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+      <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
         How much would you like to give?
       </h1>
-      <p className="mt-2 text-sm leading-7 text-slate-600">
-        You&apos;re giving to <span className="font-semibold text-slate-900">{label}</span>.
+      <p className="mt-2 text-sm leading-7 text-white/60">
+        You&apos;re giving to <span className="font-semibold text-white">{label}</span>.
         This is a one-time gift in US dollars.
       </p>
 
@@ -278,7 +278,7 @@ function AmountStep({
               className={`rounded-2xl border-2 py-5 text-xl font-bold transition ${
                 active
                   ? "border-[#7c3aed] bg-[#f5f3ff] text-[#7c3aed]"
-                  : "border-slate-200 bg-white text-slate-900 hover:border-slate-300"
+                  : "border-white/10 bg-[#0f1626] text-white hover:border-white/15"
               }`}
             >
               ${d}
@@ -288,11 +288,11 @@ function AmountStep({
       </div>
 
       <div className="mt-4">
-        <label className="mb-1.5 block text-sm font-medium text-slate-700">
+        <label className="mb-1.5 block text-sm font-medium text-white/70">
           Or enter a custom amount
         </label>
         <div className="relative">
-          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/35">
             $
           </span>
           <input
@@ -307,7 +307,7 @@ function AmountStep({
               setError("");
             }}
             placeholder="0"
-            className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-8 pr-4 text-lg outline-none transition focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]"
+            className="w-full rounded-xl border border-white/15 bg-[#0f1626] py-3 pl-8 pr-4 text-lg outline-none transition focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]"
           />
         </div>
       </div>
@@ -346,7 +346,7 @@ function AccountStep({
 }) {
   if (status === "loading" || status === "authenticated") {
     return (
-      <div className="flex items-center justify-center py-16 text-slate-400">
+      <div className="flex items-center justify-center py-16 text-white/35">
         <Loader2 className="animate-spin" />
       </div>
     );
@@ -355,10 +355,10 @@ function AccountStep({
   return (
     <div>
       <BackLink onClick={onBack} />
-      <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+      <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
         Create an account to continue
       </h1>
-      <p className="mt-2 text-sm leading-7 text-slate-600">
+      <p className="mt-2 text-sm leading-7 text-white/60">
         Donations are tied to a free account so you get a dashboard with your
         full giving history and receipts. It takes a moment.
       </p>
@@ -372,7 +372,7 @@ function AccountStep({
         <UserCircle2 size={18} />
         Create account or sign in
       </Link>
-      <p className="mt-3 text-center text-xs text-slate-400">
+      <p className="mt-3 text-center text-xs text-white/35">
         You&apos;ll come right back here to finish your donation.
       </p>
     </div>
@@ -393,17 +393,17 @@ function Confirmation() {
       <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 text-green-600">
         <CheckCircle2 size={44} />
       </div>
-      <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+      <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
         Thank you for your gift!
       </h1>
-      <p className="mx-auto mt-3 max-w-sm text-sm leading-7 text-slate-600">
+      <p className="mx-auto mt-3 max-w-sm text-sm leading-7 text-white/60">
         {cents ? (
           <>
             Your donation of{" "}
-            <span className="font-semibold text-slate-900">{fmtUSD(cents)}</span>
+            <span className="font-semibold text-white">{fmtUSD(cents)}</span>
             {label ? (
               <>
-                {" "}to <span className="font-semibold text-slate-900">{label}</span>
+                {" "}to <span className="font-semibold text-white">{label}</span>
               </>
             ) : null}{" "}
             has been received.
@@ -428,7 +428,7 @@ function BackLink({ onClick }: { onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition hover:text-slate-900"
+      className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-white/45 transition hover:text-white"
     >
       <ArrowLeft size={15} /> Back
     </button>
