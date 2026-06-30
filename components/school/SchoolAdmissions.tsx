@@ -38,10 +38,10 @@ export default function SchoolAdmissions() {
               <ArrowRight size={14} strokeWidth={2.5} />
             </a>
             <a
-              href="#"
+              href={`mailto:${s.contacts.email}?subject=Admission%20Form%20Request`}
               className="flex items-center justify-between gap-4 border-x border-b border-white/30 bg-white/10 px-6 py-3 text-[11px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-white/20"
             >
-              Download Admission Form
+              Request Admission Form
               <Download size={13} strokeWidth={2.5} />
             </a>
             <p className="mt-3 text-center text-[10px] uppercase tracking-[0.22em] text-white/60">
@@ -215,10 +215,10 @@ export default function SchoolAdmissions() {
                   <ArrowRight size={14} strokeWidth={2.5} />
                 </Link>
                 <a
-                  href="#"
+                  href={`mailto:${s.contacts.email}?subject=Admission%20Form%20Request`}
                   className="flex items-center gap-2 border-2 border-[#0b2545] px-6 py-[10px] text-[11px] font-bold uppercase tracking-[0.22em] text-[#0b2545] transition hover:bg-[#0b2545] hover:text-white"
                 >
-                  Download Form (PDF)
+                  Request Form by Email
                   <Download size={13} strokeWidth={2.5} />
                 </a>
               </div>

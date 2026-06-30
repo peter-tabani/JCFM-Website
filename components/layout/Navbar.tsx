@@ -289,7 +289,7 @@ export default function Navbar() {
               Portals
             </p>
             {[
-              { label: "Donor Portal", href: "/login/donors" },
+              { label: "Donor Portal", href: "/donors/portal" },
               { label: "Parent Portal", href: "/login/parents" },
               { label: "Staff Portal", href: "/login/staff" },
               { label: "Alumni Portal", href: "/login/alumni" },

@@ -120,7 +120,7 @@ export default function AdminOverview() {
             title="Recent Activity"
             action={
               <Link
-                href="#"
+                href="/admin/donations"
                 className="text-[10px] font-bold uppercase tracking-tight text-slate-500 hover:text-slate-900"
               >
                 View All →
@@ -186,7 +186,7 @@ export default function AdminOverview() {
               title="Upcoming"
               action={
                 <Link
-                  href="#"
+                  href="/admin/events"
                   className="text-[10px] font-bold uppercase tracking-tight text-slate-500 hover:text-slate-900"
                 >
                   Full Calendar →

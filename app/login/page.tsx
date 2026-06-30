@@ -229,7 +229,7 @@ function LoginInner() {
                   Password
                 </label>
                 <a
-                  href="#"
+                  href="mailto:coordinator@jcfm.org?subject=Password%20reset%20request"
                   className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#a8201a] transition hover:text-[#0b2545]"
                 >
                   Forgot?

@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import {
   GraduationCap,
   Users,
@@ -133,11 +132,6 @@ export default function AdminSchool() {
           <Card
             kicker="Admissions"
             title="Recent Applications"
-            action={
-              <Link href="#" className="text-[10px] font-bold uppercase tracking-[0.22em] text-slate-500 hover:text-slate-900">
-                View All →
-              </Link>
-            }
             padded={false}
           >
             <ul className="divide-y divide-slate-200">
