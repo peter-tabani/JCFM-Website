@@ -68,7 +68,7 @@ export default async function PublicProjectDetail({
           </div>
           <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
             <div
-              className="h-full rounded-full bg-[#d97706]"
+              className="h-full rounded-full bg-[#7c3aed]"
               style={{ width: `${Math.max(3, pct)}%` }}
             />
           </div>
@@ -87,8 +87,8 @@ export default async function PublicProjectDetail({
             <ol className="mt-4 space-y-4 border-l-2 border-slate-100 pl-5">
               {project.milestones.map((m, i) => (
                 <li key={i} className="relative">
-                  <span className="absolute -left-[27px] top-1 flex h-4 w-4 items-center justify-center rounded-full border-2 border-[#d97706] bg-white" />
-                  <p className="text-xs font-semibold text-[#d97706]">{m.date}</p>
+                  <span className="absolute -left-[27px] top-1 flex h-4 w-4 items-center justify-center rounded-full border-2 border-[#7c3aed] bg-white" />
+                  <p className="text-xs font-semibold text-[#7c3aed]">{m.date}</p>
                   <p className="font-semibold text-slate-900">{m.title}</p>
                   <p className="mt-0.5 text-sm leading-6 text-slate-600">{m.body}</p>
                 </li>
@@ -104,7 +104,7 @@ export default async function PublicProjectDetail({
           <>
             <Link
               href={`/donate?step=amount&designation=${project.id}`}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#d97706] py-4 font-semibold text-white transition hover:bg-[#b45309]"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#7c3aed] py-4 font-semibold text-white transition hover:bg-[#6d28d9]"
             >
               <Heart size={18} /> Support this project
             </Link>

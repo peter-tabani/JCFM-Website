@@ -19,7 +19,7 @@ export default function OrderSummary({
         {onEdit && (
           <button
             onClick={onEdit}
-            className="inline-flex items-center gap-1 text-xs font-semibold text-[#d97706] hover:underline"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-[#7c3aed] hover:underline"
           >
             <Pencil size={12} /> Edit
           </button>

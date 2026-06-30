@@ -176,7 +176,7 @@ export default function MyDonations() {
                       value={q}
                       onChange={(e) => setQ(e.target.value)}
                       placeholder="Search a gift or reference"
-                      className="h-10 w-full rounded-full border border-slate-200 bg-white pl-9 pr-4 text-[13px] outline-none transition focus:border-blue-500"
+                      className="h-10 w-full rounded-full border border-slate-200 bg-white pl-9 pr-4 text-[13px] outline-none transition focus:border-violet-500"
                     />
                   </div>
 
@@ -185,7 +185,7 @@ export default function MyDonations() {
                     onChange={(e) =>
                       setStatus(e.target.value as "All" | MyDonation["status"])
                     }
-                    className="h-10 rounded-full border border-slate-200 bg-white px-4 text-[12px] font-semibold text-slate-700 outline-none focus:border-blue-500"
+                    className="h-10 rounded-full border border-slate-200 bg-white px-4 text-[12px] font-semibold text-slate-700 outline-none focus:border-violet-500"
                   >
                     <option value="All">All statuses</option>
                     <option value="succeeded">Received</option>
@@ -196,7 +196,7 @@ export default function MyDonations() {
                   <select
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
-                    className="h-10 rounded-full border border-slate-200 bg-white px-4 text-[12px] font-semibold text-slate-700 outline-none focus:border-blue-500"
+                    className="h-10 rounded-full border border-slate-200 bg-white px-4 text-[12px] font-semibold text-slate-700 outline-none focus:border-violet-500"
                   >
                     <option value="All">All years</option>
                     {years.map((y) => (
@@ -251,7 +251,7 @@ export default function MyDonations() {
                               key={d.id}
                               className="grid grid-cols-[auto_1fr_auto] items-start gap-4 px-5 py-4"
                             >
-                              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-800">
+                              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-violet-50 text-violet-800">
                                 <Icon size={16} strokeWidth={2} />
                               </div>
                               <div className="min-w-0">

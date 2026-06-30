@@ -39,8 +39,8 @@ const tiers = [
     description:
       "Covers exercise books, pens, pencils and basic stationery for one child for a full month.",
     icon: <BookOpen size={24} />,
-    color: "border-orange-200 bg-orange-50",
-    badge: "bg-[#d97706] text-white",
+    color: "border-violet-200 bg-violet-50",
+    badge: "bg-[#7c3aed] text-white",
     items: ["Exercise books", "Pens & pencils", "A ruler & eraser", "A school bag"],
   },
   {
@@ -62,8 +62,8 @@ const tiers = [
     description:
       "Completely covers one child's education — tuition, meals, uniform, supplies and more.",
     icon: <GraduationCap size={24} />,
-    color: "border-orange-200 bg-orange-50",
-    badge: "bg-[#d97706] text-white",
+    color: "border-violet-200 bg-violet-50",
+    badge: "bg-[#7c3aed] text-white",
     items: ["Full school tuition", "All meals & uniform", "All stationery", "Extra tuition support"],
   },
 ];
@@ -125,7 +125,7 @@ export default function DonorsPage() {
 
         <div className="relative mx-auto max-w-[1400px] px-4 lg:px-6">
           <div className="max-w-3xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-2 text-sm font-semibold text-orange-300">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-violet-400/30 bg-violet-400/10 px-4 py-2 text-sm font-semibold text-violet-300">
               <Globe size={15} />
               Open to International Donors
             </div>
@@ -133,7 +133,7 @@ export default function DonorsPage() {
             <h1 className="hero-title mb-6 text-5xl font-medium leading-tight md:text-7xl">
               Every Child
               <br />
-              <span className="text-[#d97706]">Deserves</span> to
+              <span className="text-[#7c3aed]">Deserves</span> to
               <br />
               Learn.
             </h1>
@@ -155,7 +155,7 @@ export default function DonorsPage() {
             <div className="flex flex-wrap gap-4">
               <a
                 href="#sponsor"
-                className="inline-flex items-center gap-3 rounded-full bg-[#d97706] px-8 py-4 font-semibold text-white transition hover:bg-[#b45309]"
+                className="inline-flex items-center gap-3 rounded-full bg-[#7c3aed] px-8 py-4 font-semibold text-white transition hover:bg-[#6d28d9]"
               >
                 <Heart size={18} />
                 Sponsor a Child
@@ -173,12 +173,12 @@ export default function DonorsPage() {
       </section>
 
       {/* ── Impact Stats ── */}
-      <section className="border-b border-slate-100 bg-[#fffaf2] py-12">
+      <section className="border-b border-slate-100 bg-[#f5f3ff] py-12">
         <div className="mx-auto max-w-[1400px] px-4 lg:px-6">
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
             {impactStats.map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#d97706]/10 text-[#d97706]">
+                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#7c3aed]/10 text-[#7c3aed]">
                   {stat.icon}
                 </div>
                 <p className="text-3xl font-bold text-slate-900 md:text-4xl">{stat.number}</p>
@@ -193,7 +193,7 @@ export default function DonorsPage() {
       <section className="bg-white py-20">
         <div className="mx-auto max-w-[1400px] px-4 lg:px-6">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#d97706]">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#7c3aed]">
               Our Story
             </p>
             <h2 className="hero-title mb-8 text-4xl leading-tight text-slate-900 md:text-5xl">
@@ -232,7 +232,7 @@ export default function DonorsPage() {
                 <strong>Matuga Girls</strong> — proof that when you invest in a
                 child, the returns are extraordinary.
               </p>
-              <div className="rounded-2xl border-l-4 border-[#d97706] bg-[#fffaf2] p-5">
+              <div className="rounded-2xl border-l-4 border-[#7c3aed] bg-[#f5f3ff] p-5">
                 <p className="text-base italic leading-8 text-slate-700">
                   "Our goal is that 75% of our learners are fully sponsored —
                   the fortunate and less fortunate, educated together, as equals."
@@ -250,7 +250,7 @@ export default function DonorsPage() {
       <section className="bg-[#0f172a] py-20 text-white">
         <div className="mx-auto max-w-[1400px] px-4 lg:px-6">
           <div className="mb-12 text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-orange-300">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-violet-300">
               Full Transparency
             </p>
             <h2 className="hero-title text-4xl leading-tight md:text-5xl">
@@ -270,7 +270,7 @@ export default function DonorsPage() {
               { pct: "15%", label: "Tuition & Support", desc: "Covers tuition fees, extra lessons and guidance counselling." },
             ].map((item) => (
               <div key={item.label} className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center">
-                <p className="mb-2 text-4xl font-bold text-[#d97706]">{item.pct}</p>
+                <p className="mb-2 text-4xl font-bold text-[#7c3aed]">{item.pct}</p>
                 <p className="mb-2 font-semibold text-white">{item.label}</p>
                 <p className="text-sm leading-7 text-white/60">{item.desc}</p>
               </div>
@@ -283,7 +283,7 @@ export default function DonorsPage() {
       <section id="sponsor" className="bg-white py-20">
         <div className="mx-auto max-w-[1400px] px-4 lg:px-6">
           <div className="mb-12 text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#d97706]">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#7c3aed]">
               Monthly Giving
             </p>
             <h2 className="hero-title text-4xl leading-tight text-slate-900 md:text-5xl">
@@ -299,14 +299,14 @@ export default function DonorsPage() {
             {tiers.map((tier) => (
               <div
                 key={tier.name}
-                className={`relative rounded-3xl border-2 p-8 ${tier.color} ${tier.featured ? "ring-2 ring-[#d97706] ring-offset-2" : ""}`}
+                className={`relative rounded-3xl border-2 p-8 ${tier.color} ${tier.featured ? "ring-2 ring-[#7c3aed] ring-offset-2" : ""}`}
               >
                 {tier.featured && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-[#d97706] px-4 py-1 text-xs font-bold uppercase tracking-wider text-white">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-[#7c3aed] px-4 py-1 text-xs font-bold uppercase tracking-wider text-white">
                     Most Popular
                   </div>
                 )}
-                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#d97706]/10 text-[#d97706]">
+                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#7c3aed]/10 text-[#7c3aed]">
                   {tier.icon}
                 </div>
                 <span className={`mb-3 inline-block rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${tier.badge}`}>
@@ -318,14 +318,14 @@ export default function DonorsPage() {
                 <ul className="mb-8 space-y-2">
                   {tier.items.map((item) => (
                     <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
-                      <ShieldCheck size={14} className="shrink-0 text-[#d97706]" />
+                      <ShieldCheck size={14} className="shrink-0 text-[#7c3aed]" />
                       {item}
                     </li>
                   ))}
                 </ul>
                 <a
                   href="#contact-director"
-                  className="block w-full rounded-full bg-[#d97706] py-3 text-center font-semibold text-white transition hover:bg-[#b45309]"
+                  className="block w-full rounded-full bg-[#7c3aed] py-3 text-center font-semibold text-white transition hover:bg-[#6d28d9]"
                 >
                   Get Started
                 </a>
@@ -336,10 +336,10 @@ export default function DonorsPage() {
       </section>
 
       {/* ── One-Time Donations ── */}
-      <section className="bg-[#fffaf2] py-20">
+      <section className="bg-[#f5f3ff] py-20">
         <div className="mx-auto max-w-[1400px] px-4 lg:px-6">
           <div className="mb-12 text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#d97706]">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#7c3aed]">
               One-Time Gift
             </p>
             <h2 className="hero-title text-4xl leading-tight text-slate-900 md:text-5xl">
@@ -351,9 +351,9 @@ export default function DonorsPage() {
               <a
                 key={t.amount}
                 href="#contact-director"
-                className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-[#d97706] hover:shadow-md"
+                className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-[#7c3aed] hover:shadow-md"
               >
-                <span className="text-2xl font-bold text-[#d97706] group-hover:scale-110 transition-transform">
+                <span className="text-2xl font-bold text-[#7c3aed] group-hover:scale-110 transition-transform">
                   {t.amount}
                 </span>
                 <p className="text-sm leading-6 text-slate-600">{t.desc}</p>
@@ -368,7 +368,7 @@ export default function DonorsPage() {
         <div className="mx-auto max-w-[1400px] px-4 lg:px-6">
           <div className="grid gap-12 md:grid-cols-2 md:items-center">
             <div>
-              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#d97706]">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#7c3aed]">
                 In-Kind Donations
               </p>
               <h2 className="hero-title mb-6 text-4xl leading-tight text-slate-900">
@@ -382,13 +382,13 @@ export default function DonorsPage() {
               <ul className="grid grid-cols-2 gap-3">
                 {supplies.map((s) => (
                   <li key={s} className="flex items-center gap-2 text-sm text-slate-700">
-                    <ShieldCheck size={14} className="shrink-0 text-[#d97706]" />
+                    <ShieldCheck size={14} className="shrink-0 text-[#7c3aed]" />
                     {s}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="rounded-3xl border border-slate-200 bg-[#fffaf2] p-8">
+            <div className="rounded-3xl border border-slate-200 bg-[#f5f3ff] p-8">
               <p className="mb-4 font-semibold text-slate-900">To donate supplies:</p>
               <ol className="space-y-4">
                 {[
@@ -398,7 +398,7 @@ export default function DonorsPage() {
                   "Receive a confirmation and thank-you from the school",
                 ].map((step, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm leading-7 text-slate-600">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#d97706] text-xs font-bold text-white">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#7c3aed] text-xs font-bold text-white">
                       {i + 1}
                     </span>
                     {step}
@@ -421,7 +421,7 @@ export default function DonorsPage() {
       <section className="bg-[#0f172a] py-20 text-white">
         <div className="mx-auto max-w-[1400px] px-4 lg:px-6">
           <div className="mb-12 text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-orange-300">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-violet-300">
               For Organisations
             </p>
             <h2 className="hero-title text-4xl leading-tight md:text-5xl">
@@ -440,21 +440,21 @@ export default function DonorsPage() {
                 key={tier.name}
                 className={`rounded-3xl border p-8 ${
                   tier.featured
-                    ? "border-[#d97706] bg-[#d97706]/10"
+                    ? "border-[#7c3aed] bg-[#7c3aed]/10"
                     : "border-white/10 bg-white/5"
                 }`}
               >
                 {tier.featured && (
-                  <span className="mb-4 inline-block rounded-full bg-[#d97706] px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
+                  <span className="mb-4 inline-block rounded-full bg-[#7c3aed] px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
                     Recommended
                   </span>
                 )}
                 <p className="mb-1 text-2xl font-bold text-white">{tier.name}</p>
-                <p className="mb-6 text-[#d97706]">{tier.amount}</p>
+                <p className="mb-6 text-[#7c3aed]">{tier.amount}</p>
                 <ul className="space-y-3">
                   {tier.perks.map((perk) => (
                     <li key={perk} className="flex items-start gap-2 text-sm leading-6 text-white/75">
-                      <ShieldCheck size={14} className="mt-0.5 shrink-0 text-[#d97706]" />
+                      <ShieldCheck size={14} className="mt-0.5 shrink-0 text-[#7c3aed]" />
                       {perk}
                     </li>
                   ))}
@@ -472,11 +472,11 @@ export default function DonorsPage() {
       </section>
 
       {/* ── Donor Portal CTA ── */}
-      <section className="bg-[#fffaf2] py-16">
+      <section className="bg-[#f5f3ff] py-16">
         <div className="mx-auto max-w-[1400px] px-4 lg:px-6">
           <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl bg-[#0f172a] text-white">
             <div className="p-8 md:p-12">
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#d97706]/20 text-[#d97706]">
+              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#7c3aed]/20 text-[#7c3aed]">
                 <Building2 size={28} />
               </div>
               <h2 className="hero-title mb-4 text-3xl leading-tight md:text-4xl">
@@ -489,7 +489,7 @@ export default function DonorsPage() {
               </p>
               <Link
                 href="/donors/portal"
-                className="inline-flex items-center gap-3 rounded-full bg-[#d97706] px-8 py-4 font-semibold text-white transition hover:bg-[#b45309]"
+                className="inline-flex items-center gap-3 rounded-full bg-[#7c3aed] px-8 py-4 font-semibold text-white transition hover:bg-[#6d28d9]"
               >
                 Go to Donor Portal
                 <ArrowRight size={18} />
@@ -504,7 +504,7 @@ export default function DonorsPage() {
         <div className="mx-auto max-w-[1400px] px-4 lg:px-6">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
             <div>
-              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#d97706]">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#7c3aed]">
                 Get in Touch
               </p>
               <h2 className="hero-title mb-6 text-4xl leading-tight text-slate-900">
@@ -518,37 +518,37 @@ export default function DonorsPage() {
               </p>
 
               <div className="space-y-5">
-                <div className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-[#fffaf2] p-5">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#d97706]/10 text-[#d97706]">
+                <div className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-[#f5f3ff] p-5">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#7c3aed]/10 text-[#7c3aed]">
                     <Mail size={22} />
                   </div>
                   <div>
                     <p className="font-semibold text-slate-900">Email the Director</p>
                     <a
                       href="mailto:excellentkenya@gmail.com"
-                      className="text-sm text-[#d97706] hover:underline"
+                      className="text-sm text-[#7c3aed] hover:underline"
                     >
                       excellentkenya@gmail.com
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-[#fffaf2] p-5">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#d97706]/10 text-[#d97706]">
+                <div className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-[#f5f3ff] p-5">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#7c3aed]/10 text-[#7c3aed]">
                     <Globe size={22} />
                   </div>
                   <div>
                     <p className="font-semibold text-slate-900">International Donors</p>
                     <a
                       href="mailto:excellentkenya@gmail.com"
-                      className="text-sm text-[#d97706] hover:underline"
+                      className="text-sm text-[#7c3aed] hover:underline"
                     >
                       excellentkenya@gmail.com
                     </a>
                   </div>
                 </div>
 
-                <div className="rounded-2xl border border-slate-200 bg-[#fffaf2] p-5">
+                <div className="rounded-2xl border border-slate-200 bg-[#f5f3ff] p-5">
                   <p className="mb-1 font-semibold text-slate-900">Trust & Transparency</p>
                   <p className="text-sm leading-7 text-slate-600">
                     Fountain of Hope Academy operates with full commitment to

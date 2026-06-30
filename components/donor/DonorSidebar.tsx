@@ -59,7 +59,7 @@ export default function DonorSidebar({
       {/* Brand */}
       <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
         <Link href="/donors/portal/dashboard" className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-blue-800 text-sm font-bold text-blue-900">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-violet-800 text-sm font-bold text-violet-900">
             F
           </div>
           <div>
@@ -89,10 +89,10 @@ export default function DonorSidebar({
               <img
                 src={user.image}
                 alt={user.name || "Donor"}
-                className="h-10 w-10 rounded-full border-2 border-blue-200"
+                className="h-10 w-10 rounded-full border-2 border-violet-200"
               />
             ) : (
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-800">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-violet-100 text-sm font-bold text-violet-800">
                 {(user.name?.[0] || "D").toUpperCase()}
               </div>
             )}
@@ -126,21 +126,21 @@ export default function DonorSidebar({
                       onClick={onClose}
                       className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 transition ${
                         active
-                          ? "bg-blue-50 text-blue-900"
+                          ? "bg-violet-50 text-violet-900"
                           : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                       }`}
                     >
                       <Icon
                         size={16}
                         strokeWidth={2}
-                        className={active ? "text-blue-800" : "text-slate-400 group-hover:text-slate-700"}
+                        className={active ? "text-violet-800" : "text-slate-400 group-hover:text-slate-700"}
                       />
                       <div className="min-w-0">
                         <p className="text-[13px] font-semibold leading-tight">{it.label}</p>
                         {it.sub && (
                           <p
                             className={`mt-0.5 truncate text-[10.5px] leading-tight ${
-                              active ? "text-blue-800/70" : "text-slate-400"
+                              active ? "text-violet-800/70" : "text-slate-400"
                             }`}
                           >
                             {it.sub}
@@ -162,7 +162,7 @@ export default function DonorSidebar({
           href="mailto:info@jcfm.org"
           className="flex items-center gap-3 rounded-xl bg-slate-50 px-3 py-2.5 transition hover:bg-slate-100"
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-blue-800">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-violet-800">
             <HelpCircle size={15} strokeWidth={2} />
           </div>
           <div>

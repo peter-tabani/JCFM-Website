@@ -85,7 +85,7 @@ export default function DonorContactForm() {
         </p>
         <button
           onClick={() => setStatus("idle")}
-          className="mt-8 rounded-full bg-[#d97706] px-8 py-3 font-semibold text-white hover:bg-[#b45309]"
+          className="mt-8 rounded-full bg-[#7c3aed] px-8 py-3 font-semibold text-white hover:bg-[#6d28d9]"
         >
           Send Another Message
         </button>
@@ -197,7 +197,7 @@ export default function DonorContactForm() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d97706] px-8 py-4 text-base font-semibold text-white transition hover:bg-[#b45309] disabled:opacity-60"
+          className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#7c3aed] px-8 py-4 text-base font-semibold text-white transition hover:bg-[#6d28d9] disabled:opacity-60"
         >
           {status === "sending" ? (
             <><Loader2 size={18} className="animate-spin" /> Sending...</>

@@ -18,7 +18,7 @@ export default function DonorAuthGuard({ children }: { children: React.ReactNode
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-50">
         <div className="text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border-2 border-blue-800 text-base font-bold text-blue-900">
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border-2 border-violet-800 text-base font-bold text-violet-900">
             F
           </div>
           <p className="text-sm text-slate-500">Loading your portal…</p>

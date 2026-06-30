@@ -196,7 +196,7 @@ function StripeForm({
       <button
         type="submit"
         disabled={!stripe || submitting}
-        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#d97706] py-4 font-semibold text-white transition hover:bg-[#b45309] disabled:opacity-60"
+        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#7c3aed] py-4 font-semibold text-white transition hover:bg-[#6d28d9] disabled:opacity-60"
       >
         {submitting ? (
           <>

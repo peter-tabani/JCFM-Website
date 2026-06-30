@@ -43,10 +43,10 @@ export default function DonorTopbar({
               <img
                 src={user.image}
                 alt={user.name || "Donor"}
-                className="h-8 w-8 rounded-full border border-blue-200"
+                className="h-8 w-8 rounded-full border border-violet-200"
               />
             ) : (
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-[12px] font-bold text-blue-800">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-violet-100 text-[12px] font-bold text-violet-800">
                 {initial}
               </div>
             )}

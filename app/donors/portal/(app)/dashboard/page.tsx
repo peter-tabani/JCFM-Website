@@ -113,13 +113,13 @@ export default function DonorDashboard() {
                 >
                   {/* Post header — small title on top */}
                   <div className="flex items-center gap-3 px-4 py-3">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-800">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-violet-50 text-violet-800">
                       <Heart size={16} strokeWidth={2.25} />
                     </div>
                     <div className="min-w-0 flex-1">
                       <Link
                         href={`/donors/portal/projects/${p.id}`}
-                        className="block truncate text-[14px] font-semibold leading-tight text-slate-900 hover:text-blue-800"
+                        className="block truncate text-[14px] font-semibold leading-tight text-slate-900 hover:text-violet-800"
                       >
                         {p.title}
                       </Link>
@@ -152,14 +152,14 @@ export default function DonorDashboard() {
                         <span>{p.donors} donors</span>
                       </div>
                       <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
-                        <div className="h-full rounded-full bg-[#d97706]" style={{ width: `${Math.max(3, pct)}%` }} />
+                        <div className="h-full rounded-full bg-[#7c3aed]" style={{ width: `${Math.max(3, pct)}%` }} />
                       </div>
                     </div>
 
                     <div className="flex items-center gap-2 pt-1">
                       <Link
                         href={`/donate?step=amount&designation=${p.id}`}
-                        className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-full bg-[#d97706] px-5 font-semibold text-white transition hover:bg-[#b45309]"
+                        className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-full bg-[#7c3aed] px-5 font-semibold text-white transition hover:bg-[#6d28d9]"
                       >
                         <Heart size={16} /> Donate
                       </Link>

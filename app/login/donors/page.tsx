@@ -11,7 +11,7 @@ export default function DonorsLogin() {
         {/* Back Navigation */}
         <Link
           href="/"
-          className="mb-8 flex items-center gap-2 text-sm font-medium text-slate-500 transition hover:text-[#d97706]"
+          className="mb-8 flex items-center gap-2 text-sm font-medium text-slate-500 transition hover:text-[#7c3aed]"
         >
           <ArrowLeft size={16} />
           Back to Main Site
@@ -19,7 +19,7 @@ export default function DonorsLogin() {
 
         {/* Header */}
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#d97706] text-2xl font-bold text-[#d97706]">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#7c3aed] text-2xl font-bold text-[#7c3aed]">
             K
           </div>
           <h1 className="mb-2 text-2xl font-bold text-slate-900">Donor Portal</h1>
@@ -40,7 +40,7 @@ export default function DonorsLogin() {
               </div>
               <input
                 type="email"
-                className="block w-full rounded-xl border border-slate-300 bg-white py-3 pl-10 pr-3 text-sm text-slate-900 outline-none transition focus:border-[#d97706] focus:ring-1 focus:ring-[#d97706]"
+                className="block w-full rounded-xl border border-slate-300 bg-white py-3 pl-10 pr-3 text-sm text-slate-900 outline-none transition focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]"
                 
               />
             </div>
@@ -56,7 +56,7 @@ export default function DonorsLogin() {
               </div>
               <input
                 type="password"
-                className="block w-full rounded-xl border border-slate-300 bg-white py-3 pl-10 pr-3 text-sm text-slate-900 outline-none transition focus:border-[#d97706] focus:ring-1 focus:ring-[#d97706]"
+                className="block w-full rounded-xl border border-slate-300 bg-white py-3 pl-10 pr-3 text-sm text-slate-900 outline-none transition focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]"
                 
               />
             </div>
@@ -66,11 +66,11 @@ export default function DonorsLogin() {
             <label className="flex items-center gap-2">
               <input
                 type="checkbox"
-                className="h-4 w-4 rounded border-slate-300 text-[#d97706] focus:ring-[#d97706]"
+                className="h-4 w-4 rounded border-slate-300 text-[#7c3aed] focus:ring-[#7c3aed]"
               />
               <span className="text-sm text-slate-600">Remember me</span>
             </label>
-            <a href="mailto:info@jcfm.org?subject=Donor%20Portal%20password%20reset" className="text-sm font-medium text-[#d97706] hover:text-[#b45309]">
+            <a href="mailto:info@jcfm.org?subject=Donor%20Portal%20password%20reset" className="text-sm font-medium text-[#7c3aed] hover:text-[#6d28d9]">
               Forgot password?
             </a>
           </div>

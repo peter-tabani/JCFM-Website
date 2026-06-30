@@ -163,9 +163,9 @@ function CauseStep({ onSelect }: { onSelect: (slug: string) => void }) {
       {/* General fund — highlighted, skip straight to giving */}
       <button
         onClick={() => onSelect(GENERAL_FUND.slug)}
-        className="mt-6 flex w-full items-start gap-4 rounded-2xl border-2 border-[#d97706] bg-[#fffaf2] p-5 text-left transition hover:bg-[#fff3e0]"
+        className="mt-6 flex w-full items-start gap-4 rounded-2xl border-2 border-[#7c3aed] bg-[#f5f3ff] p-5 text-left transition hover:bg-[#ede9fe]"
       >
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#d97706]/15 text-[#d97706]">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#7c3aed]/15 text-[#7c3aed]">
           <Heart size={20} />
         </div>
         <div className="min-w-0 flex-1">
@@ -174,7 +174,7 @@ function CauseStep({ onSelect }: { onSelect: (slug: string) => void }) {
             {GENERAL_FUND.blurb}
           </p>
         </div>
-        <ArrowRight size={18} className="mt-1 shrink-0 text-[#d97706]" />
+        <ArrowRight size={18} className="mt-1 shrink-0 text-[#7c3aed]" />
       </button>
 
       <p className="mt-8 mb-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
@@ -198,7 +198,7 @@ function CauseStep({ onSelect }: { onSelect: (slug: string) => void }) {
               </button>
               <Link
                 href={`/donate/projects/${c.slug}`}
-                className="text-sm font-semibold text-[#d97706] hover:underline"
+                className="text-sm font-semibold text-[#7c3aed] hover:underline"
               >
                 Learn more
               </Link>
@@ -277,7 +277,7 @@ function AmountStep({
               }}
               className={`rounded-2xl border-2 py-5 text-xl font-bold transition ${
                 active
-                  ? "border-[#d97706] bg-[#fffaf2] text-[#d97706]"
+                  ? "border-[#7c3aed] bg-[#f5f3ff] text-[#7c3aed]"
                   : "border-slate-200 bg-white text-slate-900 hover:border-slate-300"
               }`}
             >
@@ -307,7 +307,7 @@ function AmountStep({
               setError("");
             }}
             placeholder="0"
-            className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-8 pr-4 text-lg outline-none transition focus:border-[#d97706] focus:ring-1 focus:ring-[#d97706]"
+            className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-8 pr-4 text-lg outline-none transition focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]"
           />
         </div>
       </div>
@@ -318,7 +318,7 @@ function AmountStep({
 
       <button
         onClick={submit}
-        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#d97706] py-4 font-semibold text-white transition hover:bg-[#b45309]"
+        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#7c3aed] py-4 font-semibold text-white transition hover:bg-[#6d28d9]"
       >
         Continue <ArrowRight size={18} />
       </button>
@@ -367,7 +367,7 @@ function AccountStep({
 
       <Link
         href={loginHref}
-        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#d97706] py-4 font-semibold text-white transition hover:bg-[#b45309]"
+        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#7c3aed] py-4 font-semibold text-white transition hover:bg-[#6d28d9]"
       >
         <UserCircle2 size={18} />
         Create account or sign in

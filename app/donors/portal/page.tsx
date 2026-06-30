@@ -149,9 +149,9 @@ function DonorPortalInner() {
 
       {/* ── Left Branding Panel ── */}
       <div className="relative hidden flex-col justify-between overflow-hidden bg-[#0f172a] p-12 lg:flex lg:w-[42%]">
-        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, #d97706 1px, transparent 0)", backgroundSize: "32px 32px" }} />
+        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, #7c3aed 1px, transparent 0)", backgroundSize: "32px 32px" }} />
         <Link href="/" className="relative flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#d97706] text-sm font-bold text-[#d97706]">F</div>
+          <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#7c3aed] text-sm font-bold text-[#7c3aed]">F</div>
           <div>
             <p className="font-bold text-white">Fountain of Hope Academy</p>
             <p className="text-xs text-white/40">Donor Portal</p>
@@ -159,12 +159,12 @@ function DonorPortalInner() {
         </Link>
 
         <div className="relative">
-          <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#d97706]/20 text-[#d97706]">
+          <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#7c3aed]/20 text-[#7c3aed]">
             <Heart size={28} />
           </div>
           <h1 className="hero-title mb-4 text-4xl font-medium leading-tight text-white">
             Your giving<br />
-            <span className="text-[#d97706]">changes lives</span><br />
+            <span className="text-[#7c3aed]">changes lives</span><br />
             in Likoni.
           </h1>
           <p className="mb-8 text-base leading-8 text-white/55">
@@ -177,7 +177,7 @@ function DonorPortalInner() {
               { n: "10+", l: "National\nAlumni" },
             ].map((s) => (
               <div key={s.l} className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
-                <p className="text-xl font-bold text-[#d97706]">{s.n}</p>
+                <p className="text-xl font-bold text-[#7c3aed]">{s.n}</p>
                 <p className="mt-1 whitespace-pre-line text-xs leading-4 text-white/50">{s.l}</p>
               </div>
             ))}
@@ -192,7 +192,7 @@ function DonorPortalInner() {
 
           {/* Mobile logo */}
           <Link href="/" className="mb-8 flex items-center gap-2 lg:hidden">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#d97706] text-sm font-bold text-[#d97706]">F</div>
+            <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#7c3aed] text-sm font-bold text-[#7c3aed]">F</div>
             <div>
               <p className="font-bold text-slate-800">Fountain of Hope Academy Donor Portal</p>
               <p className="text-xs text-slate-400">Support children through giving</p>
@@ -201,8 +201,8 @@ function DonorPortalInner() {
 
           {/* Existing account notice */}
           {existingAccount && (
-            <div className="mb-5 flex items-start gap-3 rounded-2xl border border-[#d97706]/30 bg-[#fffaf2] p-4">
-              <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#d97706]" />
+            <div className="mb-5 flex items-start gap-3 rounded-2xl border border-[#7c3aed]/30 bg-[#f5f3ff] p-4">
+              <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#7c3aed]" />
               <div>
                 <p className="text-sm font-bold text-slate-900">Welcome back! 👋</p>
                 <p className="text-xs leading-6 text-slate-600">
@@ -295,7 +295,7 @@ function DonorPortalInner() {
                 <button
                   type="submit"
                   disabled={loginLoading}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#d97706] py-4 font-semibold text-white hover:bg-[#b45309] disabled:opacity-60"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#7c3aed] py-4 font-semibold text-white hover:bg-[#6d28d9] disabled:opacity-60"
                 >
                   {loginLoading
                     ? <><Loader2 size={17} className="animate-spin" /> Signing in...</>
@@ -305,7 +305,7 @@ function DonorPortalInner() {
 
               <p className="mt-5 text-center text-sm text-slate-500">
                 No account?{" "}
-                <button onClick={() => setTab("register")} className="font-semibold text-[#d97706] hover:underline">
+                <button onClick={() => setTab("register")} className="font-semibold text-[#7c3aed] hover:underline">
                   Create one free →
                 </button>
               </p>
@@ -327,7 +327,7 @@ function DonorPortalInner() {
                     {regPhone && <>A welcome SMS has been sent to <strong>{regPhone}</strong>.</>}{" "}
                     Taking you to your dashboard...
                   </p>
-                  <Loader2 size={20} className="mt-4 animate-spin text-[#d97706]" />
+                  <Loader2 size={20} className="mt-4 animate-spin text-[#7c3aed]" />
                 </div>
               ) : (
                 <>
@@ -406,7 +406,7 @@ function DonorPortalInner() {
                     <button
                       type="submit"
                       disabled={regLoading}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#d97706] py-4 font-semibold text-white hover:bg-[#b45309] disabled:opacity-60"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#7c3aed] py-4 font-semibold text-white hover:bg-[#6d28d9] disabled:opacity-60"
                     >
                       {regLoading
                         ? <><Loader2 size={17} className="animate-spin" /> Creating account...</>
@@ -418,7 +418,7 @@ function DonorPortalInner() {
 
                   <p className="mt-5 text-center text-sm text-slate-500">
                     Already have an account?{" "}
-                    <button onClick={() => setTab("login")} className="font-semibold text-[#d97706] hover:underline">
+                    <button onClick={() => setTab("login")} className="font-semibold text-[#7c3aed] hover:underline">
                       Sign in →
                     </button>
                   </p>
@@ -428,7 +428,7 @@ function DonorPortalInner() {
           )}
 
           <p className="mt-8 text-center text-xs text-slate-400">
-            <Link href="/" className="hover:text-[#d97706]">← Back to the main website</Link>
+            <Link href="/" className="hover:text-[#7c3aed]">← Back to the main website</Link>
           </p>
         </div>
       </div>

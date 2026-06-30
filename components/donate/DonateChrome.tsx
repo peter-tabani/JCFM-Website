@@ -19,7 +19,7 @@ export default function DonateChrome({
         <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
           <Link
             href={backHref}
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 transition hover:text-[#d97706]"
+            className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 transition hover:text-[#7c3aed]"
           >
             <ArrowLeft size={16} />
             {backLabel}
@@ -64,7 +64,7 @@ export function Stepper({
             <div
               className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[11px] font-bold transition ${
                 active
-                  ? "bg-[#d97706] text-white"
+                  ? "bg-[#7c3aed] text-white"
                   : done
                     ? "bg-emerald-500 text-white"
                     : "bg-slate-200 text-slate-500"

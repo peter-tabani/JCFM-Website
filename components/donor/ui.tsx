@@ -12,7 +12,7 @@ import { categories, type CategoryKey } from "@/data/donor";
 // language, larger tap targets — designed for non-tech users.
 // ─────────────────────────────────────────────────────────
 
-const ACCENT = "#1e40af"; // blue-700 — keeps continuity with the portal
+const ACCENT = "#5b21b6"; // blue-700 — keeps continuity with the portal
 
 // ── Page header ───────────────────────────────────────────
 export function PageHeader({
@@ -31,7 +31,7 @@ export function PageHeader({
       <div className="mx-auto flex max-w-[1280px] flex-col gap-4 px-5 py-7 md:flex-row md:items-end md:justify-between md:px-8 md:py-9">
         <div>
           {eyebrow && (
-            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-blue-800">
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-violet-800">
               {eyebrow}
             </p>
           )}
@@ -66,7 +66,7 @@ export function Stat({
 }) {
   const tones: Record<string, string> = {
     slate: "bg-slate-50 text-slate-700",
-    navy: "bg-blue-50 text-blue-800",
+    navy: "bg-violet-50 text-violet-800",
     emerald: "bg-emerald-50 text-emerald-700",
     rose: "bg-rose-50 text-rose-700",
     sky: "bg-sky-50 text-sky-700",
@@ -109,7 +109,7 @@ export function Card({
         <header className="flex items-center justify-between gap-4 border-b border-slate-100 px-5 py-4">
           <div>
             {eyebrow && (
-              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-800">
+              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-violet-800">
                 {eyebrow}
               </p>
             )}
@@ -139,7 +139,7 @@ type BtnProps = {
 
 export function PrimaryButton({ icon: Icon, href, onClick, type = "button", children }: BtnProps) {
   const cls =
-    "inline-flex items-center gap-2 rounded-full bg-blue-700 px-5 py-2.5 text-[13px] font-semibold text-white transition hover:bg-blue-800";
+    "inline-flex items-center gap-2 rounded-full bg-violet-700 px-5 py-2.5 text-[13px] font-semibold text-white transition hover:bg-violet-800";
   if (href)
     return (
       <Link href={href} className={cls}>
@@ -203,12 +203,12 @@ export function Progress({
           <span className="font-mono text-slate-500">
             KSh {value.toLocaleString("en-KE")} <span className="text-slate-400">/ {goal.toLocaleString("en-KE")}</span>
           </span>
-          <span className="font-bold text-blue-800">{pct}%</span>
+          <span className="font-bold text-violet-800">{pct}%</span>
         </div>
       )}
       <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-700 transition-all"
+          className="h-full rounded-full bg-gradient-to-r from-violet-500 to-violet-700 transition-all"
           style={{ width: `${pct}%` }}
         />
       </div>
@@ -230,7 +230,7 @@ export function Empty({
 }) {
   return (
     <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-10 text-center">
-      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-blue-800">
+      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-violet-50 text-violet-800">
         <Icon size={20} strokeWidth={2} />
       </div>
       <p className="mt-4 text-base font-semibold text-slate-900">{title}</p>
@@ -245,7 +245,7 @@ export function StatusPill({ status }: { status: "received" | "reconciled" | "pe
   const map = {
     received: "bg-emerald-50 text-emerald-700 border-emerald-200",
     reconciled: "bg-sky-50 text-sky-700 border-sky-200",
-    pending: "bg-blue-50 text-blue-800 border-blue-200",
+    pending: "bg-violet-50 text-violet-800 border-violet-200",
   } as const;
   const label = { received: "Received", reconciled: "Reconciled", pending: "Pending" }[status];
   return (
@@ -262,7 +262,7 @@ export function SeeMore({ href, children }: { href: string; children: ReactNode 
   return (
     <Link
       href={href}
-      className="inline-flex items-center gap-1 text-[12px] font-semibold text-blue-800 hover:text-blue-900"
+      className="inline-flex items-center gap-1 text-[12px] font-semibold text-violet-800 hover:text-violet-900"
     >
       {children} <ArrowRight size={13} strokeWidth={2.25} />
     </Link>
