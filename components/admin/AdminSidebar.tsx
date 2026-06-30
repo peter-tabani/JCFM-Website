@@ -7,8 +7,9 @@ import {
   LayoutDashboard,
   MapPin,
   Mic2,
-  BookOpenText,
+  Calendar,
   Users,
+  UserSquare,
   Banknote,
   GraduationCap,
   Settings,
@@ -26,8 +27,9 @@ const PRIMARY: NavItem[] = [
 const MINISTRY: NavItem[] = [
   { label: "Branches", href: "/admin/branches", icon: MapPin },
   { label: "Sermons", href: "/admin/sermons", icon: Mic2 },
-  { label: "Stories", href: "/admin/stories", icon: BookOpenText },
+  { label: "Events", href: "/admin/events", icon: Calendar },
   { label: "Members", href: "/admin/members", icon: Users },
+  { label: "Leadership", href: "/admin/team", icon: UserSquare },
 ];
 
 const FINANCE: NavItem[] = [

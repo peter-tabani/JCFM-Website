@@ -7,7 +7,6 @@ import {
   HandHeart,
   Sprout,
   FolderHeart,
-  Newspaper,
   Compass,
   UserCircle2,
   X,
@@ -39,12 +38,6 @@ const SECTIONS: { title: string; items: NavItem[] }[] = [
     ],
   },
   {
-    title: "Updates",
-    items: [
-      { href: "/donors/portal/stories", label: "Stories & Progress", icon: Newspaper, sub: "Before & after, milestones" },
-    ],
-  },
-  {
     title: "Account",
     items: [
       { href: "/donors/portal/account", label: "My Profile", icon: UserCircle2 },
@@ -62,16 +55,16 @@ export default function DonorSidebar({
   const pathname = usePathname();
 
   return (
-    <aside className="flex h-full flex-col border-r border-slate-200 bg-white">
+    <aside className="flex h-full flex-col border-r border-white/10 bg-[#0f1626]">
       {/* Brand */}
-      <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
+      <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
         <Link href="/donors/portal/dashboard" className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-blue-800 text-sm font-bold text-blue-900">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-violet-400 text-sm font-bold text-violet-300">
             F
           </div>
           <div>
-            <p className="text-[13px] font-bold leading-none text-slate-900">Fountain of Hope</p>
-            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-slate-400">
+            <p className="text-[13px] font-bold leading-none text-white">Fountain of Hope</p>
+            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-white/35">
               Donor & Sponsor Portal
             </p>
           </div>
@@ -79,7 +72,7 @@ export default function DonorSidebar({
         {onClose && (
           <button
             onClick={onClose}
-            className="rounded-full p-1.5 text-slate-400 hover:bg-slate-50 hover:text-slate-700 lg:hidden"
+            className="rounded-full p-1.5 text-white/35 hover:bg-white/[0.03] hover:text-white/70 lg:hidden"
             aria-label="Close menu"
           >
             <X size={16} />
@@ -89,25 +82,25 @@ export default function DonorSidebar({
 
       {/* Donor card */}
       {user && (
-        <div className="border-b border-slate-100 px-5 py-4">
+        <div className="border-b border-white/10 px-5 py-4">
           <div className="flex items-center gap-3">
             {user.image ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={user.image}
                 alt={user.name || "Donor"}
-                className="h-10 w-10 rounded-full border-2 border-blue-200"
+                className="h-10 w-10 rounded-full border-2 border-violet-200"
               />
             ) : (
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-800">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-violet-600/25 text-sm font-bold text-violet-200">
                 {(user.name?.[0] || "D").toUpperCase()}
               </div>
             )}
             <div className="min-w-0">
-              <p className="truncate text-[13px] font-semibold text-slate-900">
+              <p className="truncate text-[13px] font-semibold text-white">
                 {user.name || "Friend of Fountain of Hope"}
               </p>
-              <p className="truncate text-[11px] text-slate-500">{user.email}</p>
+              <p className="truncate text-[11px] text-white/45">{user.email}</p>
             </div>
           </div>
         </div>
@@ -117,7 +110,7 @@ export default function DonorSidebar({
       <nav className="flex-1 overflow-y-auto px-3 py-4">
         {SECTIONS.map((section) => (
           <div key={section.title} className="mb-5">
-            <p className="px-3 pb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">
+            <p className="px-3 pb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white/35">
               {section.title}
             </p>
             <ul className="space-y-0.5">
@@ -133,21 +126,21 @@ export default function DonorSidebar({
                       onClick={onClose}
                       className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 transition ${
                         active
-                          ? "bg-blue-50 text-blue-900"
-                          : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                          ? "bg-violet-600/20 text-white"
+                          : "text-white/60 hover:bg-white/[0.03] hover:text-white"
                       }`}
                     >
                       <Icon
                         size={16}
                         strokeWidth={2}
-                        className={active ? "text-blue-800" : "text-slate-400 group-hover:text-slate-700"}
+                        className={active ? "text-violet-300" : "text-white/35 group-hover:text-white/70"}
                       />
                       <div className="min-w-0">
                         <p className="text-[13px] font-semibold leading-tight">{it.label}</p>
                         {it.sub && (
                           <p
                             className={`mt-0.5 truncate text-[10.5px] leading-tight ${
-                              active ? "text-blue-800/70" : "text-slate-400"
+                              active ? "text-violet-200/70" : "text-white/35"
                             }`}
                           >
                             {it.sub}
@@ -164,17 +157,17 @@ export default function DonorSidebar({
       </nav>
 
       {/* Help footer */}
-      <div className="border-t border-slate-100 px-5 py-4">
+      <div className="border-t border-white/10 px-5 py-4">
         <a
           href="mailto:info@jcfm.org"
-          className="flex items-center gap-3 rounded-xl bg-slate-50 px-3 py-2.5 transition hover:bg-slate-100"
+          className="flex items-center gap-3 rounded-xl bg-white/[0.03] px-3 py-2.5 transition hover:bg-white/[0.06]"
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-blue-800">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-violet-600/25 text-violet-300">
             <HelpCircle size={15} strokeWidth={2} />
           </div>
           <div>
-            <p className="text-[12px] font-semibold text-slate-900">Need a hand?</p>
-            <p className="text-[10.5px] text-slate-500">Email the office for help</p>
+            <p className="text-[12px] font-semibold text-white">Need a hand?</p>
+            <p className="text-[10.5px] text-white/45">Email the office for help</p>
           </div>
         </a>
       </div>

@@ -35,7 +35,7 @@ const STATUS_TONE: Record<string, string> = {
   active: "bg-amber-100 text-amber-800",
   "in-progress": "bg-sky-100 text-sky-800",
   "near-complete": "bg-emerald-100 text-emerald-800",
-  complete: "bg-slate-200 text-slate-700",
+  complete: "bg-slate-200 text-white/70",
 };
 
 export default function ProjectsBrowse() {
@@ -96,7 +96,7 @@ export default function ProjectsBrowse() {
             className={`rounded-full border px-4 py-1.5 text-[12px] font-semibold transition ${
               cat === "All"
                 ? "border-slate-900 bg-slate-900 text-white"
-                : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
+                : "border-white/10 bg-[#0f1626] text-white/60 hover:border-white/15"
             }`}
           >
             All categories
@@ -111,7 +111,7 @@ export default function ProjectsBrowse() {
                 className={`rounded-full border px-4 py-1.5 text-[12px] font-semibold transition ${
                   active
                     ? `${c.tone}`
-                    : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
+                    : "border-white/10 bg-[#0f1626] text-white/60 hover:border-white/15"
                 }`}
               >
                 {c.label}
@@ -122,12 +122,12 @@ export default function ProjectsBrowse() {
 
         {/* Search */}
         <div className="relative max-w-md">
-          <Search size={14} strokeWidth={2} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Search size={14} strokeWidth={2} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/35" />
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search projects"
-            className="h-10 w-full rounded-full border border-slate-200 bg-white pl-9 pr-4 text-[13px] outline-none transition focus:border-amber-400"
+            className="h-10 w-full rounded-full border border-white/10 bg-[#0f1626] pl-9 pr-4 text-[13px] outline-none transition focus:border-amber-400"
           />
         </div>
 
@@ -136,7 +136,7 @@ export default function ProjectsBrowse() {
           <Card>
             <div className="py-10 text-center">
               <FolderHeart size={28} className="mx-auto text-slate-300" />
-              <p className="mt-3 text-[13px] text-slate-500">No projects match this filter.</p>
+              <p className="mt-3 text-[13px] text-white/45">No projects match this filter.</p>
             </div>
           </Card>
         ) : grouped ? (
@@ -150,8 +150,8 @@ export default function ProjectsBrowse() {
                       <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] text-amber-700">
                         Category
                       </p>
-                      <h2 className="mt-1 text-xl font-bold text-slate-900">{c.label}</h2>
-                      <p className="mt-1 text-[13px] text-slate-500">{c.tagline}</p>
+                      <h2 className="mt-1 text-xl font-bold text-white">{c.label}</h2>
+                      <p className="mt-1 text-[13px] text-white/45">{c.tagline}</p>
                     </div>
                     <button
                       onClick={() => setCat(key)}
@@ -186,7 +186,7 @@ function ProjectCard({ p }: { p: (typeof projects)[number] }) {
   return (
     <Link
       href={`/donors/portal/projects/${p.id}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:border-amber-200"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0f1626] transition hover:-translate-y-0.5 hover:border-amber-200"
     >
       <div className="relative">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -205,20 +205,20 @@ function ProjectCard({ p }: { p: (typeof projects)[number] }) {
         </div>
       </div>
       <div className="flex min-w-0 flex-1 flex-col p-5">
-        <h3 className="text-base font-bold text-slate-900 group-hover:text-amber-700">
+        <h3 className="text-base font-bold text-white group-hover:text-amber-700">
           {p.title}
         </h3>
-        <p className="mt-1 line-clamp-2 text-[13px] leading-6 text-slate-500">
+        <p className="mt-1 line-clamp-2 text-[13px] leading-6 text-white/45">
           {p.shortDesc}
         </p>
         <div className="mt-4">
           <Progress value={p.raised} goal={p.goal} />
-          <div className="mt-2 flex items-center justify-between text-[11px] text-slate-500">
+          <div className="mt-2 flex items-center justify-between text-[11px] text-white/45">
             <span className="inline-flex items-center gap-1">
               <Users size={11} strokeWidth={2} /> {p.donors} donors
             </span>
             <span>
-              <span className="font-mono font-semibold text-slate-700">
+              <span className="font-mono font-semibold text-white/70">
                 {fmtKSh(p.goal - p.raised)}
               </span>{" "}
               still needed

@@ -1,8 +1,10 @@
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
+import About from "@/components/sections/About";
 import UpcomingEvents from "@/components/sections/UpcomingEvents";
 import ChurchLife from "@/components/sections/ChurchLife";
-import Stories from "@/components/sections/Stories";
+import Branches from "@/components/sections/Branches";
+import Sermons from "@/components/sections/Sermons";
 import MediaGallery from "@/components/sections/MediaGallery";
 import AcademyCallout from "@/components/sections/TwoPillars";
 import Newsletter from "@/components/sections/Newsletter";
@@ -13,20 +15,26 @@ export default function HomePage() {
       {/* Church identity, motto & soft Academy link */}
       <Hero />
 
-      {/* Instagram-style poster rail for Bishop uploads */}
+      {/* About the ministry (#about) */}
+      <About />
+
+      {/* Instagram-style poster rail for Bishop uploads (#events) */}
       <UpcomingEvents />
+
+      {/* Sunday services & weekly schedule (#church) */}
+      <ChurchLife />
+
+      {/* Branch network across Kenya (#branches) */}
+      <Branches />
+
+      {/* Published sermons (#sermons) */}
+      <Sermons />
+
+      {/* Images & video gallery (#gallery) */}
+      <MediaGallery />
 
       {/* Email subscription — JCFM & school updates */}
       <Newsletter />
-
-      {/* Sunday services, ministries, sermon preview */}
-      <ChurchLife />
-
-      {/* Voices from the branches — witness, no ask */}
-      <Stories />
-
-      {/* Images & video gallery */}
-      <MediaGallery />
 
       {/* Small callout for Fountain of Hope Academy */}
       <AcademyCallout />

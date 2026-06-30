@@ -1,54 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
   Eye, EyeOff, ArrowRight, Loader2,
   CheckCircle2, Heart,
 } from "lucide-react";
 
-// ── Donor storage helpers ─────────────────────────────
-type StoredDonor = {
-  name: string;
-  email: string;
-  phone: string;
-  password: string;
-  smsSent: boolean;
-  joinedAt: string;
-};
-
-const DONORS_STORAGE_KEY = "fha_donors";
-
-const getDonors = (): StoredDonor[] => {
-  if (typeof window === "undefined") return [];
-  try { return JSON.parse(localStorage.getItem(DONORS_STORAGE_KEY) || "[]"); }
-  catch { return []; }
-};
-
-const saveDonors = (donors: StoredDonor[]) =>
-  localStorage.setItem(DONORS_STORAGE_KEY, JSON.stringify(donors));
-
-const findByEmail = (email: string) =>
-  getDonors().find((d) => d.email?.toLowerCase() === email.toLowerCase());
-
-const findByPhone = (phone: string) => {
-  const clean = phone.replace(/\s/g, "").replace(/^0/, "+254");
-  return getDonors().find(
-    (d) => d.phone?.replace(/\s/g, "").replace(/^0/, "+254") === clean
-  );
-};
-
-const findByLoginId = (id: string) =>
-  id.match(/^\+?[\d\s]{7,}$/) ? findByPhone(id) : findByEmail(id);
-
 export default function DonorPortalPage() {
+  return (
+    <Suspense fallback={null}>
+      <DonorPortalInner />
+    </Suspense>
+  );
+}
+
+function DonorPortalInner() {
   const router = useRouter();
+  const search = useSearchParams();
+  // Where to go after auth — the donate flow passes ?callbackUrl=/donate/...
+  const callbackUrl = search.get("callbackUrl") || "/donors/portal/dashboard";
+
   const [tab, setTab] = useState<"login" | "register">("login");
 
   // Login
-  const [loginId, setLoginId] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [showLoginPass, setShowLoginPass] = useState(false);
   const [loginLoading, setLoginLoading] = useState(false);
@@ -69,7 +47,7 @@ export default function DonorPortalPage() {
 
   const handleGoogle = async () => {
     setGoogleLoading(true);
-    await signIn("google", { callbackUrl: "/donors/portal/dashboard" });
+    await signIn("google", { callbackUrl });
   };
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -78,28 +56,16 @@ export default function DonorPortalPage() {
     setLoginError("");
     setExistingAccount(false);
 
-    const donor = findByLoginId(loginId);
-    if (!donor) {
-      setLoginError("No account found with that email or phone number.");
-      setLoginLoading(false);
-      return;
-    }
-    if (donor.password !== loginPassword) {
-      setLoginError("Incorrect password. Please try again.");
-      setLoginLoading(false);
-      return;
-    }
-
     const result = await signIn("credentials", {
-      email: donor.email || donor.phone,
+      email: loginEmail.toLowerCase().trim(),
       password: loginPassword,
       redirect: false,
     });
 
     if (result?.ok) {
-      router.push("/donors/portal/dashboard");
+      router.push(callbackUrl);
     } else {
-      setLoginError("Sign in failed. Please try again.");
+      setLoginError("Incorrect email or password. Please try again.");
       setLoginLoading(false);
     }
   };
@@ -109,64 +75,69 @@ export default function DonorPortalPage() {
     setRegError("");
 
     if (!regName.trim()) { setRegError("Please enter your full name."); return; }
-    if (!regEmail && !regPhone) { setRegError("Please enter an email or phone number."); return; }
+    if (!regEmail.trim()) { setRegError("Please enter your email address."); return; }
     if (regPassword !== regConfirm) { setRegError("Passwords do not match."); return; }
-    if (regPassword.length < 6) { setRegError("Password must be at least 6 characters."); return; }
-
-    const existingByEmail = regEmail ? findByEmail(regEmail) : null;
-    const existingByPhone = regPhone ? findByPhone(regPhone) : null;
-
-    if (existingByEmail || existingByPhone) {
-      setExistingAccount(true);
-      setTab("login");
-      setLoginId(regEmail || regPhone);
-      return;
-    }
+    if (regPassword.length < 8) { setRegError("Password must be at least 8 characters."); return; }
 
     setRegLoading(true);
     try {
-      const donors = getDonors();
-      const newDonor: StoredDonor = {
-        name: regName,
-        email: regEmail,
-        phone: regPhone,
-        password: regPassword,
-        smsSent: false,
-        joinedAt: new Date().toISOString(),
-      };
-      donors.push(newDonor);
-      saveDonors(donors);
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: regName,
+          email: regEmail,
+          phone: regPhone,
+          password: regPassword,
+        }),
+      });
 
-      if (regEmail) {
-        await fetch("/api/donor-welcome", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name: regName, email: regEmail }),
-        });
+      if (res.status === 409) {
+        // Account already exists — switch them to sign in.
+        setExistingAccount(true);
+        setTab("login");
+        setLoginEmail(regEmail);
+        setRegLoading(false);
+        return;
       }
 
-      if (regPhone && !newDonor.smsSent) {
-        const smsRes = await fetch("/api/donor-sms", {
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setRegError(data.error || "Something went wrong. Please try again.");
+        setRegLoading(false);
+        return;
+      }
+
+      // Best-effort welcome messages (non-blocking for sign-in).
+      fetch("/api/donor-welcome", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: regName, email: regEmail }),
+      }).catch(() => {});
+      if (regPhone) {
+        fetch("/api/donor-sms", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name: regName, phone: regPhone }),
-        });
-        if (smsRes.ok) {
-          const updated = getDonors().map((d) =>
-            d.phone === regPhone ? { ...d, smsSent: true } : d
-          );
-          saveDonors(updated);
-        }
+        }).catch(() => {});
       }
 
-      await signIn("credentials", {
-        email: regEmail || regPhone,
+      const result = await signIn("credentials", {
+        email: regEmail.toLowerCase().trim(),
         password: regPassword,
         redirect: false,
       });
 
+      if (!result?.ok) {
+        setRegError("Account created, but sign-in failed. Please sign in.");
+        setTab("login");
+        setLoginEmail(regEmail);
+        setRegLoading(false);
+        return;
+      }
+
       setRegSuccess(true);
-      setTimeout(() => router.push("/donors/portal/dashboard"), 2500);
+      setTimeout(() => router.push(callbackUrl), 2000);
     } catch {
       setRegError("Something went wrong. Please try again.");
       setRegLoading(false);
@@ -178,9 +149,9 @@ export default function DonorPortalPage() {
 
       {/* ── Left Branding Panel ── */}
       <div className="relative hidden flex-col justify-between overflow-hidden bg-[#0f172a] p-12 lg:flex lg:w-[42%]">
-        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, #d97706 1px, transparent 0)", backgroundSize: "32px 32px" }} />
+        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, #7c3aed 1px, transparent 0)", backgroundSize: "32px 32px" }} />
         <Link href="/" className="relative flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#d97706] text-sm font-bold text-[#d97706]">F</div>
+          <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#7c3aed] text-sm font-bold text-[#7c3aed]">F</div>
           <div>
             <p className="font-bold text-white">Fountain of Hope Academy</p>
             <p className="text-xs text-white/40">Donor Portal</p>
@@ -188,12 +159,12 @@ export default function DonorPortalPage() {
         </Link>
 
         <div className="relative">
-          <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#d97706]/20 text-[#d97706]">
+          <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#7c3aed]/20 text-[#7c3aed]">
             <Heart size={28} />
           </div>
           <h1 className="hero-title mb-4 text-4xl font-medium leading-tight text-white">
             Your giving<br />
-            <span className="text-[#d97706]">changes lives</span><br />
+            <span className="text-[#7c3aed]">changes lives</span><br />
             in Likoni.
           </h1>
           <p className="mb-8 text-base leading-8 text-white/55">
@@ -206,7 +177,7 @@ export default function DonorPortalPage() {
               { n: "10+", l: "National\nAlumni" },
             ].map((s) => (
               <div key={s.l} className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
-                <p className="text-xl font-bold text-[#d97706]">{s.n}</p>
+                <p className="text-xl font-bold text-[#7c3aed]">{s.n}</p>
                 <p className="mt-1 whitespace-pre-line text-xs leading-4 text-white/50">{s.l}</p>
               </div>
             ))}
@@ -216,25 +187,25 @@ export default function DonorPortalPage() {
       </div>
 
       {/* ── Right Form Panel ── */}
-      <div className="flex flex-1 items-center justify-center bg-white px-5 py-10 sm:px-8">
+      <div className="flex flex-1 items-center justify-center bg-[#0f1626] px-5 py-10 sm:px-8">
         <div className="w-full max-w-md">
 
           {/* Mobile logo */}
           <Link href="/" className="mb-8 flex items-center gap-2 lg:hidden">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#d97706] text-sm font-bold text-[#d97706]">F</div>
+            <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#7c3aed] text-sm font-bold text-[#7c3aed]">F</div>
             <div>
-              <p className="font-bold text-slate-800">Fountain of Hope Academy Donor Portal</p>
-              <p className="text-xs text-slate-400">Support children through giving</p>
+              <p className="font-bold text-white/90">Fountain of Hope Academy Donor Portal</p>
+              <p className="text-xs text-white/35">Support children through giving</p>
             </div>
           </Link>
 
           {/* Existing account notice */}
           {existingAccount && (
-            <div className="mb-5 flex items-start gap-3 rounded-2xl border border-[#d97706]/30 bg-[#fffaf2] p-4">
-              <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#d97706]" />
+            <div className="mb-5 flex items-start gap-3 rounded-2xl border border-[#7c3aed]/30 bg-[#f5f3ff] p-4">
+              <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#7c3aed]" />
               <div>
-                <p className="text-sm font-bold text-slate-900">Welcome back! 👋</p>
-                <p className="text-xs leading-6 text-slate-600">
+                <p className="text-sm font-bold text-white">Welcome back! 👋</p>
+                <p className="text-xs leading-6 text-white/60">
                   You already have an account. We have switched you to sign in — just enter your password below.
                 </p>
               </div>
@@ -242,16 +213,16 @@ export default function DonorPortalPage() {
           )}
 
           {/* Tabs */}
-          <div className="mb-7 flex rounded-2xl border border-slate-200 bg-slate-50 p-1">
+          <div className="mb-7 flex rounded-2xl border border-white/10 bg-white/[0.03] p-1">
             <button
               onClick={() => { setTab("login"); setLoginError(""); setExistingAccount(false); }}
-              className={`flex-1 rounded-xl py-2.5 text-sm font-semibold transition ${tab === "login" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"}`}
+              className={`flex-1 rounded-xl py-2.5 text-sm font-semibold transition ${tab === "login" ? "bg-[#0f1626] text-white shadow-sm" : "text-white/45"}`}
             >
               Sign In
             </button>
             <button
               onClick={() => { setTab("register"); setRegError(""); setExistingAccount(false); }}
-              className={`flex-1 rounded-xl py-2.5 text-sm font-semibold transition ${tab === "register" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"}`}
+              className={`flex-1 rounded-xl py-2.5 text-sm font-semibold transition ${tab === "register" ? "bg-[#0f1626] text-white shadow-sm" : "text-white/45"}`}
             >
               Create Account
             </button>
@@ -261,7 +232,7 @@ export default function DonorPortalPage() {
           <button
             onClick={handleGoogle}
             disabled={googleLoading}
-            className="mb-5 flex w-full items-center justify-center gap-3 rounded-full border-2 border-slate-200 bg-white py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 disabled:opacity-60"
+            className="mb-5 flex w-full items-center justify-center gap-3 rounded-full border-2 border-white/10 bg-[#0f1626] py-3.5 text-sm font-semibold text-white/70 shadow-sm transition hover:bg-white/[0.03] disabled:opacity-60"
           >
             {googleLoading ? <Loader2 size={18} className="animate-spin" /> : (
               <svg width="18" height="18" viewBox="0 0 48 48">
@@ -277,7 +248,7 @@ export default function DonorPortalPage() {
           {/* Divider */}
           <div className="mb-5 flex items-center gap-3">
             <div className="h-px flex-1 bg-slate-200" />
-            <span className="text-xs font-medium text-slate-400">or continue with email / phone</span>
+            <span className="text-xs font-medium text-white/35">or continue with email / phone</span>
             <div className="h-px flex-1 bg-slate-200" />
           </div>
 
@@ -286,12 +257,13 @@ export default function DonorPortalPage() {
             <>
               <form onSubmit={handleLogin} className="space-y-4">
                 <div>
-                  <label className="label">Email or Phone Number</label>
+                  <label className="label">Email Address</label>
                   <input
                     required
-                    value={loginId}
-                    onChange={(e) => setLoginId(e.target.value)}
-  
+                    type="email"
+                    value={loginEmail}
+                    onChange={(e) => setLoginEmail(e.target.value)}
+                    autoComplete="email"
                     className="input"
                   />
                 </div>
@@ -309,7 +281,7 @@ export default function DonorPortalPage() {
                     <button
                       type="button"
                       onClick={() => setShowLoginPass((s) => !s)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-white/35 hover:text-white/60"
                     >
                       {showLoginPass ? <EyeOff size={16} /> : <Eye size={16} />}
                     </button>
@@ -323,7 +295,7 @@ export default function DonorPortalPage() {
                 <button
                   type="submit"
                   disabled={loginLoading}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#d97706] py-4 font-semibold text-white hover:bg-[#b45309] disabled:opacity-60"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#7c3aed] py-4 font-semibold text-white hover:bg-[#6d28d9] disabled:opacity-60"
                 >
                   {loginLoading
                     ? <><Loader2 size={17} className="animate-spin" /> Signing in...</>
@@ -331,9 +303,9 @@ export default function DonorPortalPage() {
                 </button>
               </form>
 
-              <p className="mt-5 text-center text-sm text-slate-500">
+              <p className="mt-5 text-center text-sm text-white/45">
                 No account?{" "}
-                <button onClick={() => setTab("register")} className="font-semibold text-[#d97706] hover:underline">
+                <button onClick={() => setTab("register")} className="font-semibold text-[#7c3aed] hover:underline">
                   Create one free →
                 </button>
               </p>
@@ -348,14 +320,14 @@ export default function DonorPortalPage() {
                   <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 text-green-600">
                     <CheckCircle2 size={40} />
                   </div>
-                  <h3 className="hero-title mb-3 text-3xl text-slate-900">You&apos;re in!</h3>
-                  <p className="max-w-sm text-sm leading-8 text-slate-600">
+                  <h3 className="hero-title mb-3 text-3xl text-white">You&apos;re in!</h3>
+                  <p className="max-w-sm text-sm leading-8 text-white/60">
                     Welcome, <strong>{regName}</strong>!{" "}
                     {regEmail && <>A welcome email is heading to <strong>{regEmail}</strong>.</>}{" "}
                     {regPhone && <>A welcome SMS has been sent to <strong>{regPhone}</strong>.</>}{" "}
                     Taking you to your dashboard...
                   </p>
-                  <Loader2 size={20} className="mt-4 animate-spin text-[#d97706]" />
+                  <Loader2 size={20} className="mt-4 animate-spin text-[#7c3aed]" />
                 </div>
               ) : (
                 <>
@@ -371,31 +343,27 @@ export default function DonorPortalPage() {
                       />
                     </div>
 
-                    <div className="rounded-xl bg-slate-50 px-4 py-3 text-xs leading-6 text-slate-500">
-                      You can register with <strong>email</strong>, <strong>phone</strong>, or <strong>both</strong>. At least one is required.
-                    </div>
-
                     <div>
-                      <label className="label">Email Address</label>
+                      <label className="label">Email Address *</label>
                       <input
+                        required
                         type="email"
                         value={regEmail}
                         onChange={(e) => setRegEmail(e.target.value)}
-                        
+                        autoComplete="email"
                         className="input"
                       />
                     </div>
 
                     <div>
-                      <label className="label">Phone Number</label>
+                      <label className="label">Phone Number (optional)</label>
                       <input
                         type="tel"
                         value={regPhone}
                         onChange={(e) => setRegPhone(e.target.value)}
-                        
+                        autoComplete="tel"
                         className="input"
                       />
-                      
                     </div>
 
                     <div>
@@ -406,13 +374,13 @@ export default function DonorPortalPage() {
                           type={showRegPass ? "text" : "password"}
                           value={regPassword}
                           onChange={(e) => setRegPassword(e.target.value)}
-                          placeholder="Min. 6 characters"
+                          placeholder="Min. 8 characters"
                           className="input pr-11"
                         />
                         <button
                           type="button"
                           onClick={() => setShowRegPass((s) => !s)}
-                          className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"
+                          className="absolute right-4 top-1/2 -translate-y-1/2 text-white/35"
                         >
                           {showRegPass ? <EyeOff size={16} /> : <Eye size={16} />}
                         </button>
@@ -438,7 +406,7 @@ export default function DonorPortalPage() {
                     <button
                       type="submit"
                       disabled={regLoading}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#d97706] py-4 font-semibold text-white hover:bg-[#b45309] disabled:opacity-60"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#7c3aed] py-4 font-semibold text-white hover:bg-[#6d28d9] disabled:opacity-60"
                     >
                       {regLoading
                         ? <><Loader2 size={17} className="animate-spin" /> Creating account...</>
@@ -448,9 +416,9 @@ export default function DonorPortalPage() {
                     
                   </form>
 
-                  <p className="mt-5 text-center text-sm text-slate-500">
+                  <p className="mt-5 text-center text-sm text-white/45">
                     Already have an account?{" "}
-                    <button onClick={() => setTab("login")} className="font-semibold text-[#d97706] hover:underline">
+                    <button onClick={() => setTab("login")} className="font-semibold text-[#7c3aed] hover:underline">
                       Sign in →
                     </button>
                   </p>
@@ -459,8 +427,8 @@ export default function DonorPortalPage() {
             </>
           )}
 
-          <p className="mt-8 text-center text-xs text-slate-400">
-            <Link href="/" className="hover:text-[#d97706]">← Back to the main website</Link>
+          <p className="mt-8 text-center text-xs text-white/35">
+            <Link href="/" className="hover:text-[#7c3aed]">← Back to the main website</Link>
           </p>
         </div>
       </div>

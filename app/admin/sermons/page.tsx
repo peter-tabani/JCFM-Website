@@ -1,165 +1,216 @@
 "use client";
 
-import { useState } from "react";
-import {
-  Mic2,
-  Upload,
-  Search,
-  Play,
-  FileText,
-  Calendar,
-  Pencil,
-  Trash2,
-  Eye,
-  Filter,
-  Download,
-  Clock,
-} from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { Mic2, Upload, Play, Calendar, Trash2, Loader2, FileText } from "lucide-react";
+import { siteData } from "@/data/site";
 import {
   PageHeader,
   StatCard,
   Card,
   StatusPill,
   PrimaryButton,
-  GhostButton,
 } from "@/components/admin/ui";
+import { FormModal, Field, SelectField, TextareaField } from "@/components/admin/AdminForm";
 
-const SERMONS = [
-  { id: "S-142", title: "Walking by Faith", series: "Hebrews 11", preacher: "Bishop Nelson Barasa", branch: "HQ Nzoia", date: "21 Apr 2026", duration: "42:18", status: "published" as const, plays: 312 },
-  { id: "S-141", title: "The Lord is my Shepherd", series: "Psalms Reborn", preacher: "Pst. Sarah Wekesa", branch: "HQ Nzoia", date: "14 Apr 2026", duration: "38:05", status: "published" as const, plays: 248 },
-  { id: "S-140", title: "Light in dark places", series: "Standalone", preacher: "Pst. Festas Soita", branch: "Mombasa", date: "14 Apr 2026", duration: "45:22", status: "published" as const, plays: 134 },
-  { id: "S-139", title: "Carrying one another", series: "One Body", preacher: "Pst. Irene Wafula", branch: "HQ Nzoia", date: "07 Apr 2026", duration: "36:40", status: "published" as const, plays: 198 },
-  { id: "S-138", title: "When the harvest comes", series: "Parables", preacher: "Rev. Hosea Mabonga", branch: "Tembelela", date: "07 Apr 2026", duration: "41:11", status: "published" as const, plays: 102 },
-  { id: "S-DR3", title: "From mourning to dancing", series: "Sermon Series", preacher: "Bishop Nelson Barasa", branch: "HQ Nzoia", date: "—", duration: "—", status: "draft" as const, plays: 0 },
-  { id: "S-DR2", title: "The unseen God", series: "Hebrews 11", preacher: "Pst. Sarah Wekesa", branch: "HQ Nzoia", date: "—", duration: "—", status: "draft" as const, plays: 0 },
-  { id: "S-DR1", title: "Awaiting upload", series: "Mid-week study", preacher: "Pst. Wycliffe Simiyu", branch: "Mang'ana", date: "—", duration: "—", status: "scheduled" as const, plays: 0 },
-];
+type Sermon = {
+  id: string;
+  title: string;
+  series: string | null;
+  preacher: string;
+  branch: string | null;
+  date: string | null;
+  status: "published" | "draft" | "scheduled";
+  mediaUrl: string | null;
+};
+
+const statusTone = (s: Sermon["status"]) =>
+  s === "published" ? "success" : s === "draft" ? "warn" : "info";
+const statusLabel = (s: Sermon["status"]) =>
+  s === "published" ? "Live" : s === "draft" ? "Draft" : "Scheduled";
+const fmtDate = (iso: string | null) =>
+  iso ? new Date(iso).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }) : "—";
 
 export default function AdminSermons() {
-  const [q, setQ] = useState("");
-  const [tab, setTab] = useState<"all" | "published" | "draft" | "scheduled">("all");
+  const [sermons, setSermons] = useState<Sermon[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const filtered = SERMONS.filter((s) => {
-    if (tab !== "all" && s.status !== tab) return false;
-    const t = q.toLowerCase();
-    return !t || s.title.toLowerCase().includes(t) || s.preacher.toLowerCase().includes(t) || s.branch.toLowerCase().includes(t);
-  });
+  const load = useCallback(() => {
+    setLoading(true);
+    fetch("/api/admin/sermons")
+      .then((r) => r.json())
+      .then((d) => setSermons(d.sermons ?? []))
+      .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    load();
+  }, [load]);
 
   const counts = {
-    all: SERMONS.length,
-    published: SERMONS.filter((s) => s.status === "published").length,
-    draft: SERMONS.filter((s) => s.status === "draft").length,
-    scheduled: SERMONS.filter((s) => s.status === "scheduled").length,
+    all: sermons.length,
+    published: sermons.filter((s) => s.status === "published").length,
+    draft: sermons.filter((s) => s.status === "draft").length,
+    scheduled: sermons.filter((s) => s.status === "scheduled").length,
   };
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSaving(true);
+    setError(null);
+    const fd = new FormData(e.currentTarget);
+    const payload = Object.fromEntries(fd.entries());
+    const res = await fetch("/api/admin/sermons", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    setSaving(false);
+    if (!res.ok) {
+      const d = await res.json().catch(() => ({}));
+      setError(d.error || "Could not save the sermon.");
+      return;
+    }
+    setOpen(false);
+    load();
+  }
+
+  async function handleDelete(id: string) {
+    if (!confirm("Delete this sermon? This cannot be undone.")) return;
+    await fetch(`/api/admin/sermons/${id}`, { method: "DELETE" });
+    load();
+  }
 
   return (
     <div>
       <PageHeader
         kicker="Ministry · Sermons"
         title="Sermon Library"
-        description="Upload, edit, and publish sermons across the network. Audio, video, transcripts and notes are all kept here."
+        description="Add and manage sermons across the network. Saved to the database."
         actions={
-          <>
-            <PrimaryButton icon={Upload}>Upload Sermon</PrimaryButton>
-            <GhostButton icon={Download}>Export CSV</GhostButton>
-          </>
+          <PrimaryButton icon={Upload} onClick={() => { setError(null); setOpen(true); }}>
+            Add Sermon
+          </PrimaryButton>
         }
       />
 
       <div className="mx-auto max-w-[1400px] space-y-6 px-5 py-7 md:px-8 md:py-10">
-        {/* Stats */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard icon={Mic2} label="Total Sermons" value={String(counts.all)} sub={`${counts.published} live · ${counts.draft} drafts`} />
-          <StatCard icon={Play} label="Plays · 30 days" value="2,148" sub="HQ + branches" delta={{ value: "+18%", up: true }} />
-          <StatCard icon={Clock} label="Avg. Duration" value="40:32" sub="Across last 10" />
-          <StatCard icon={FileText} label="With Transcripts" value="64" sub={`of ${counts.published}`} />
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+          <StatCard icon={Mic2} label="Total Sermons" value={String(counts.all)} sub={`${counts.published} live`} />
+          <StatCard icon={Play} label="Published" value={String(counts.published)} sub="On the public site" />
+          <StatCard icon={FileText} label="Drafts" value={String(counts.draft)} sub="Not yet live" />
+          <StatCard icon={Calendar} label="Scheduled" value={String(counts.scheduled)} sub="Queued" />
         </div>
 
-        {/* Tabs + search */}
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div className="flex flex-wrap gap-0 border border-slate-200 bg-white">
-            {(["all", "published", "draft", "scheduled"] as const).map((t) => (
-              <button
-                key={t}
-                onClick={() => setTab(t)}
-                className={`flex items-center gap-2 border-r border-slate-200 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.22em] transition last:border-r-0 ${
-                  tab === t ? "bg-slate-900 text-white" : "text-slate-900 hover:bg-slate-50"
-                }`}
-              >
-                {t}
-                <span className={`rounded-sm px-1.5 py-0.5 text-white ${tab === t ? "bg-slate-900" : "bg-slate-50 text-slate-600"}`}>
-                  {counts[t]}
-                </span>
-              </button>
-            ))}
+        {loading ? (
+          <div className="flex items-center justify-center py-16 text-slate-400">
+            <Loader2 className="animate-spin" />
           </div>
-
-          <div className="flex flex-wrap items-center gap-2">
-            <div className="relative w-full md:w-[300px]">
-              <Search size={14} strokeWidth={2} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-              <input
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                placeholder="Search sermons or preachers"
-                className="h-10 w-full border border-slate-200 bg-white pl-9 pr-4 text-[13px] outline-none focus:border-slate-900"
-              />
+        ) : sermons.length === 0 ? (
+          <div className="rounded-lg border border-dashed border-slate-200 bg-white p-10 text-center">
+            <p className="text-[14px] font-semibold text-slate-900">No sermons yet</p>
+            <p className="mt-1 text-[13px] text-slate-500">Add your first sermon to get started.</p>
+          </div>
+        ) : (
+          <>
+            {/* Mobile cards */}
+            <div className="space-y-3 md:hidden">
+              {sermons.map((s) => (
+                <div key={s.id} className="rounded-lg border border-slate-200 bg-white p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="text-[15px] font-semibold text-slate-900">{s.title}</p>
+                      {s.series && <p className="text-[11px] uppercase tracking-wide text-slate-500">{s.series}</p>}
+                      <p className="mt-1 text-[13px] text-slate-600">{s.preacher}</p>
+                      <p className="text-[12px] text-slate-500">{[s.branch, fmtDate(s.date)].filter(Boolean).join(" · ")}</p>
+                    </div>
+                    <StatusPill label={statusLabel(s.status)} tone={statusTone(s.status)} />
+                  </div>
+                  <div className="mt-3 flex justify-end border-t border-slate-100 pt-3">
+                    <button onClick={() => handleDelete(s.id)} className="inline-flex min-h-[40px] items-center gap-1.5 rounded-md px-3 text-[12px] font-medium text-rose-600 hover:bg-rose-50">
+                      <Trash2 size={14} /> Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
-            <button className="flex h-10 items-center gap-2 border border-slate-200 bg-white px-3 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-900 hover:bg-slate-50">
-              <Filter size={12} strokeWidth={2.25} />
-              Filter
-            </button>
-          </div>
-        </div>
 
-        {/* Sermon table */}
-        <Card kicker="Catalogue" title={`${filtered.length} sermon${filtered.length === 1 ? "" : "s"}`} padded={false}>
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse text-left">
-              <thead>
-                <tr className="border-b-2 border-slate-900 bg-white">
-                  {["Ref.", "Title & Series", "Preacher", "Branch", "Date", "Duration", "Plays", "Status", ""].map((h, i) => (
-                    <th key={i} className="px-4 py-3 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-900">{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {filtered.map((s, i) => (
-                  <tr key={s.id} className={`${i % 2 === 0 ? "bg-white" : "bg-slate-50"} group hover:bg-slate-50`}>
-                    <td className="px-4 py-3.5 font-mono text-[11px] text-slate-500">{s.id}</td>
-                    <td className="px-4 py-3.5">
-                      <p className="text-[14px] font-semibold text-slate-900">{s.title}</p>
-                      <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-slate-500">{s.series}</p>
-                    </td>
-                    <td className="px-4 py-3.5 text-[13px] text-slate-700">{s.preacher}</td>
-                    <td className="px-4 py-3.5 text-[12px] text-slate-500">{s.branch}</td>
-                    <td className="px-4 py-3.5 text-[12px] text-slate-500">{s.date}</td>
-                    <td className="px-4 py-3.5 font-mono text-[12px] text-slate-600">{s.duration}</td>
-                    <td className="px-4 py-3.5 font-mono text-[13px] text-slate-900">{s.plays || "—"}</td>
-                    <td className="px-4 py-3.5">
-                      <StatusPill
-                        label={s.status === "published" ? "Live" : s.status === "draft" ? "Draft" : "Scheduled"}
-                        tone={s.status === "published" ? "success" : s.status === "draft" ? "warn" : "info"}
-                      />
-                    </td>
-                    <td className="px-4 py-3.5 text-right">
-                      <div className="inline-flex items-center gap-0 opacity-0 transition group-hover:opacity-100">
-                        <button className="flex h-8 w-8 items-center justify-center border border-slate-200 bg-white text-slate-500 hover:text-slate-900" title="Preview"><Eye size={13} strokeWidth={2} /></button>
-                        <button className="flex h-8 w-8 items-center justify-center border border-l-0 border-slate-200 bg-white text-slate-500 hover:text-slate-900" title="Edit"><Pencil size={13} strokeWidth={2} /></button>
-                        <button className="flex h-8 w-8 items-center justify-center border border-l-0 border-slate-200 bg-white text-slate-500 hover:text-slate-500" title="Delete"><Trash2 size={13} strokeWidth={2} /></button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-                {filtered.length === 0 && (
-                  <tr>
-                    <td colSpan={9} className="px-4 py-10 text-center text-[13px] italic text-slate-400">No sermons match this filter.</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </Card>
+            {/* Desktop table */}
+            <Card kicker="Catalogue" title={`${sermons.length} sermon${sermons.length === 1 ? "" : "s"}`} padded={false} className="hidden md:block">
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse text-left">
+                  <thead>
+                    <tr className="border-b-2 border-slate-900 bg-white">
+                      {["Title & Series", "Preacher", "Branch", "Date", "Status", ""].map((h, i) => (
+                        <th key={i} className="px-4 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-900">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {sermons.map((s, i) => (
+                      <tr key={s.id} className={i % 2 === 0 ? "bg-white" : "bg-slate-50"}>
+                        <td className="px-4 py-3.5">
+                          <p className="text-[14px] font-semibold text-slate-900">{s.title}</p>
+                          {s.series && <p className="text-[11px] uppercase tracking-[0.18em] text-slate-500">{s.series}</p>}
+                        </td>
+                        <td className="px-4 py-3.5 text-[13px] text-slate-700">{s.preacher}</td>
+                        <td className="px-4 py-3.5 text-[12px] text-slate-500">{s.branch ?? "—"}</td>
+                        <td className="px-4 py-3.5 text-[12px] text-slate-500">{fmtDate(s.date)}</td>
+                        <td className="px-4 py-3.5"><StatusPill label={statusLabel(s.status)} tone={statusTone(s.status)} /></td>
+                        <td className="px-4 py-3.5 text-right">
+                          <button onClick={() => handleDelete(s.id)} className="flex h-8 w-8 items-center justify-center rounded-md text-slate-500 hover:bg-rose-50 hover:text-rose-600" title="Delete">
+                            <Trash2 size={14} strokeWidth={2} />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Card>
+          </>
+        )}
       </div>
+
+      <FormModal title="Add Sermon" open={open} onClose={() => setOpen(false)}>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <Field label="Title" name="title" required placeholder="e.g. Walking by Faith" />
+          <Field label="Preacher" name="preacher" required placeholder="e.g. Bishop Nelson Barasa" />
+          <Field label="Series" name="series" placeholder="e.g. Hebrews 11" />
+          <SelectField
+            label="Branch"
+            name="branch"
+            defaultValue=""
+            options={[{ value: "", label: "— none —" }, ...siteData.branches.map((b) => ({ value: b.name, label: b.name }))]}
+          />
+          <Field label="Date" name="date" type="date" />
+          <SelectField
+            label="Status"
+            name="status"
+            required
+            defaultValue="published"
+            options={[
+              { value: "published", label: "Published (live)" },
+              { value: "draft", label: "Draft" },
+              { value: "scheduled", label: "Scheduled" },
+            ]}
+          />
+          <Field label="Media link (audio/video)" name="mediaUrl" placeholder="https://…" />
+          <TextareaField label="Notes" name="notes" placeholder="Optional summary or notes" />
+
+          {error && <p className="rounded-md bg-rose-50 p-3 text-[13px] text-rose-600">{error}</p>}
+
+          <button
+            type="submit"
+            disabled={saving}
+            className="inline-flex min-h-[46px] w-full items-center justify-center gap-2 rounded-md bg-slate-900 px-4 font-medium text-white transition hover:bg-slate-800 disabled:opacity-60"
+          >
+            {saving ? <><Loader2 size={16} className="animate-spin" /> Saving…</> : "Save Sermon"}
+          </button>
+        </form>
+      </FormModal>
     </div>
   );
 }

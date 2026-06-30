@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import {
   MapPin,
@@ -10,7 +11,6 @@ import {
   PlusCircle,
   ArrowRight,
   Mic,
-  BookOpenText,
   Banknote as BanknoteIcon,
   UserPlus,
   Calendar,
@@ -18,15 +18,19 @@ import {
   Activity,
 } from "lucide-react";
 import { siteData } from "@/data/site";
-import { PageHeader, StatCard, Card, StatusPill, PrimaryButton, GhostButton } from "@/components/admin/ui";
+import { PageHeader, StatCard, Card, StatusPill, PrimaryButton, GhostButton, SampleDataBadge } from "@/components/admin/ui";
+
+const fmtUSD = (cents: number) =>
+  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(cents / 100);
+
+type AdminStats = { members: number; sermonsPublished: number; sermonsTotal: number; givingMonthCents: number };
 
 const ACTIVITY = [
-  { t: "2 min ago", who: "Pst. Sarah Wekesa", what: "Approved testimony", target: "“God restored our home”", tone: "success" as const },
   { t: "1 hr ago", who: "Bishop N. Barasa", what: "Published sermon", target: "“Walking by faith — Hebrews 11”", tone: "info" as const },
   { t: "3 hr ago", who: "Office HQ", what: "Logged donation", target: "KSh 25,000 · Water Project", tone: "success" as const },
   { t: "Yesterday", who: "Pst. Festas Soita", what: "Updated branch", target: "Mombasa · Jomvu", tone: "neutral" as const },
   { t: "2 days ago", who: "School Office", what: "Marked fees received", target: "12 pupils · Term 2", tone: "success" as const },
-  { t: "3 days ago", who: "Pst. Irene Wafula", what: "Submitted testimony", target: "Awaiting review", tone: "warn" as const },
+  { t: "3 days ago", who: "Pst. Sarah Wekesa", what: "Added member", target: "Tembelela branch", tone: "success" as const },
 ];
 
 const UPCOMING = [
@@ -39,6 +43,14 @@ const UPCOMING = [
 export default function AdminOverview() {
   const { data } = useSession();
   const firstName = (data?.user?.name || "Friend").split(" ")[0];
+  const [stats, setStats] = useState<AdminStats | null>(null);
+
+  useEffect(() => {
+    fetch("/api/admin/stats")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => d && setStats(d))
+      .catch(() => {});
+  }, []);
   const greeting = (() => {
     const h = new Date().getHours();
     if (h < 12) return "Good morning";
@@ -79,27 +91,26 @@ export default function AdminOverview() {
             icon={Users}
             accent="gold"
             label="Members on Roll"
-            value="528"
-            sub="Across 5 counties"
-            delta={{ value: "+24 (30d)", up: true }}
+            value={stats ? String(stats.members) : "—"}
+            sub="In the directory"
           />
           <StatCard
             icon={Mic2}
             accent="green"
             label="Sermons Published"
-            value="142"
-            sub="3 awaiting upload"
-            delta={{ value: "+6 (30d)", up: true }}
+            value={stats ? String(stats.sermonsPublished) : "—"}
+            sub={stats ? `${stats.sermonsTotal} total` : "Live on the site"}
           />
           <StatCard
             icon={Banknote}
             accent="red"
             label="Giving · This Month"
-            value="KSh 248,500"
-            sub="Tithes · Offerings · Projects"
-            delta={{ value: "+12%", up: true }}
+            value={stats ? fmtUSD(stats.givingMonthCents) : "—"}
+            sub="Online gifts (USD)"
           />
         </div>
+
+        <SampleDataBadge note="the activity feed, calendar and per-branch attendance numbers below are still sample data." />
 
         {/* ── Two-col layout ── */}
         <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
@@ -109,7 +120,7 @@ export default function AdminOverview() {
             title="Recent Activity"
             action={
               <Link
-                href="#"
+                href="/admin/donations"
                 className="text-[10px] font-bold uppercase tracking-tight text-slate-500 hover:text-slate-900"
               >
                 View All →
@@ -148,7 +159,6 @@ export default function AdminOverview() {
               <ul className="divide-y divide-slate-200">
                 {[
                   { icon: Mic, label: "Upload Sermon", href: "/admin/sermons", note: "Audio · Video · Notes" },
-                  { icon: BookOpenText, label: "Approve a Testimony", href: "/admin/stories", note: "3 awaiting review" },
                   { icon: UserPlus, label: "Add a Member", href: "/admin/members", note: "Choose a branch" },
                   { icon: BanknoteIcon, label: "Record a Donation", href: "/admin/donations", note: "Tithe · Offering · Project" },
                 ].map((q) => (
@@ -176,7 +186,7 @@ export default function AdminOverview() {
               title="Upcoming"
               action={
                 <Link
-                  href="#"
+                  href="/admin/events"
                   className="text-[10px] font-bold uppercase tracking-tight text-slate-500 hover:text-slate-900"
                 >
                   Full Calendar →

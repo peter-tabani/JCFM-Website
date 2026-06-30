@@ -126,9 +126,9 @@ export default function AdmissionsForm() {
         <div className="grid grid-cols-1 gap-3">
           <a
             href="mailto:excellentkenya@gmail.com?subject=Admissions Enquiry – Fountain of Hope Academy"
-            className="flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-[#fffaf2] py-4 font-semibold text-slate-800 shadow-sm active:scale-95"
+            className="flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-[#f5f3ff] py-4 font-semibold text-slate-800 shadow-sm active:scale-95"
           >
-            <Mail size={20} className="text-[#d97706]" />
+            <Mail size={20} className="text-[#7c3aed]" />
             Email: excellentkenya@gmail.com
           </a>
         </div>
@@ -140,13 +140,13 @@ export default function AdmissionsForm() {
             className="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-slate-900"
           >
             <span>How to Join Fountain of Hope Academy — 5 Steps</span>
-            {stepsOpen ? <ChevronUp size={18} className="text-[#d97706]" /> : <ChevronDown size={18} className="text-[#d97706]" />}
+            {stepsOpen ? <ChevronUp size={18} className="text-[#7c3aed]" /> : <ChevronDown size={18} className="text-[#7c3aed]" />}
           </button>
           {stepsOpen && (
             <ol className="divide-y divide-slate-100 border-t border-slate-100">
               {steps.map((s) => (
                 <li key={s.num} className="flex items-start gap-4 px-5 py-4">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#d97706] text-sm font-bold text-white">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#7c3aed] text-sm font-bold text-white">
                     {s.num}
                   </span>
                   <div>
@@ -186,7 +186,7 @@ export default function AdmissionsForm() {
               </p>
               <button
                 onClick={() => setStatus("idle")}
-                className="mt-8 rounded-full bg-[#d97706] px-8 py-3 font-semibold text-white hover:bg-[#b45309]"
+                className="mt-8 rounded-full bg-[#7c3aed] px-8 py-3 font-semibold text-white hover:bg-[#6d28d9]"
               >
                 Submit Another Application
               </button>
@@ -196,7 +196,7 @@ export default function AdmissionsForm() {
 
               {/* Parent / Guardian */}
               <fieldset>
-                <legend className="mb-5 flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#d97706]">
+                <legend className="mb-5 flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#7c3aed]">
                   <User size={15} /> Parent / Guardian Details
                 </legend>
                 <div className="grid gap-5 sm:grid-cols-2">
@@ -239,7 +239,7 @@ export default function AdmissionsForm() {
 
               {/* Child Details */}
               <fieldset>
-                <legend className="mb-5 flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#d97706]">
+                <legend className="mb-5 flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#7c3aed]">
                   <BookOpen size={15} /> Child / Learner Details
                 </legend>
                 <div className="grid gap-5 sm:grid-cols-2">
@@ -309,7 +309,7 @@ export default function AdmissionsForm() {
 
               {/* Additional Info */}
               <fieldset>
-                <legend className="mb-5 flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#d97706]">
+                <legend className="mb-5 flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#7c3aed]">
                   <FileText size={15} /> Additional Information
                 </legend>
                 <div className="grid gap-5">
@@ -363,7 +363,7 @@ export default function AdmissionsForm() {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d97706] px-8 py-4 text-base font-semibold text-white transition hover:bg-[#b45309] disabled:opacity-60"
+                className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#7c3aed] px-8 py-4 text-base font-semibold text-white transition hover:bg-[#6d28d9] disabled:opacity-60"
               >
                 {status === "sending" ? (
                   <>
@@ -385,15 +385,15 @@ export default function AdmissionsForm() {
         <div className="hidden lg:flex lg:flex-col lg:gap-5">
           <a
             href="mailto:excellentkenya@gmail.com?subject=Admissions Enquiry – Fountain of Hope Academy"
-            className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-[#fffaf2] p-6 shadow-sm transition hover:shadow-md"
+            className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-[#f5f3ff] p-6 shadow-sm transition hover:shadow-md"
           >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#d97706]/10 text-[#d97706]">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#7c3aed]/10 text-[#7c3aed]">
               <Mail size={24} />
             </div>
             <div>
               <p className="font-bold text-slate-900">Send an Email</p>
               <p className="text-sm text-slate-500">We reply within 1–2 days</p>
-              <p className="mt-1 text-sm font-semibold text-[#d97706]">excellentkenya@gmail.com</p>
+              <p className="mt-1 text-sm font-semibold text-[#7c3aed]">excellentkenya@gmail.com</p>
             </div>
           </a>
 
@@ -405,7 +405,7 @@ export default function AdmissionsForm() {
             <ol className="space-y-4">
               {steps.map((s) => (
                 <li key={s.num} className="flex items-start gap-3">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#d97706] text-xs font-bold text-white">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#7c3aed] text-xs font-bold text-white">
                     {s.num}
                   </span>
                   <div>
@@ -437,7 +437,7 @@ export default function AdmissionsForm() {
       <div className="fixed bottom-0 left-0 right-0 z-50 flex border-t border-slate-200 bg-white shadow-2xl lg:hidden">
         <a
           href="mailto:excellentkenya@gmail.com?subject=Admissions Enquiry – Fountain of Hope Academy"
-          className="flex flex-1 flex-col items-center justify-center gap-1 bg-[#d97706] py-3 text-white active:opacity-80"
+          className="flex flex-1 flex-col items-center justify-center gap-1 bg-[#7c3aed] py-3 text-white active:opacity-80"
         >
           <Mail size={22} />
           <span className="text-xs font-bold">Email Us</span>

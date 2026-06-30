@@ -23,7 +23,7 @@ function Shell({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div className="flex min-h-screen bg-[#080b16] text-white">
       {/* Desktop sidebar */}
       <div className="hidden lg:block lg:w-[260px] lg:shrink-0">
         <div className="fixed left-0 top-0 h-screen w-[260px]">

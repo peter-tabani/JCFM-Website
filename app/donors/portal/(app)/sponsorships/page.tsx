@@ -67,10 +67,10 @@ export default function MySponsorships() {
                 <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] text-amber-700">
                   Children
                 </p>
-                <h2 className="mt-1 text-xl font-bold text-slate-900">
+                <h2 className="mt-1 text-xl font-bold text-white">
                   Children you sponsor
                 </h2>
-                <p className="mt-1 max-w-xl text-[13px] text-slate-500">
+                <p className="mt-1 max-w-xl text-[13px] text-white/45">
                   You support these children through monthly giving — fees, uniform,
                   meals, books and a steady, watchful presence.
                 </p>
@@ -81,7 +81,7 @@ export default function MySponsorships() {
               {childSponsorships.map((s) => (
                 <article
                   key={s.id}
-                  className="overflow-hidden rounded-2xl border border-slate-200 bg-white"
+                  className="overflow-hidden rounded-2xl border border-white/10 bg-[#0f1626]"
                 >
                   <div className="relative">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -95,23 +95,23 @@ export default function MySponsorships() {
                     </div>
                   </div>
                   <div className="p-5">
-                    <h3 className="text-lg font-bold text-slate-900">{s.title}</h3>
-                    <p className="mt-0.5 text-[13px] text-slate-500">{s.subtitle}</p>
+                    <h3 className="text-lg font-bold text-white">{s.title}</h3>
+                    <p className="mt-0.5 text-[13px] text-white/45">{s.subtitle}</p>
 
                     {s.child && (
                       <>
-                        <div className="mt-4 grid grid-cols-3 gap-3 rounded-xl border border-slate-100 bg-slate-50 p-3 text-center">
+                        <div className="mt-4 grid grid-cols-3 gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-center">
                           <div>
-                            <p className="text-[10px] uppercase tracking-wider text-slate-400">Age</p>
-                            <p className="mt-0.5 text-[14px] font-bold text-slate-900">{s.child.age}</p>
+                            <p className="text-[10px] uppercase tracking-wider text-white/35">Age</p>
+                            <p className="mt-0.5 text-[14px] font-bold text-white">{s.child.age}</p>
                           </div>
                           <div>
-                            <p className="text-[10px] uppercase tracking-wider text-slate-400">Class</p>
-                            <p className="mt-0.5 text-[14px] font-bold text-slate-900">{s.child.grade}</p>
+                            <p className="text-[10px] uppercase tracking-wider text-white/35">Class</p>
+                            <p className="mt-0.5 text-[14px] font-bold text-white">{s.child.grade}</p>
                           </div>
                           <div>
-                            <p className="text-[10px] uppercase tracking-wider text-slate-400">Since</p>
-                            <p className="mt-0.5 text-[14px] font-bold text-slate-900">{s.startedOn}</p>
+                            <p className="text-[10px] uppercase tracking-wider text-white/35">Since</p>
+                            <p className="mt-0.5 text-[14px] font-bold text-white">{s.startedOn}</p>
                           </div>
                         </div>
 
@@ -122,28 +122,28 @@ export default function MySponsorships() {
                       </>
                     )}
 
-                    <div className="mt-4 flex items-end justify-between border-t border-slate-100 pt-4">
+                    <div className="mt-4 flex items-end justify-between border-t border-white/10 pt-4">
                       <div>
-                        <p className="text-[10.5px] uppercase tracking-wider text-slate-500">
+                        <p className="text-[10.5px] uppercase tracking-wider text-white/45">
                           Your monthly gift
                         </p>
-                        <p className="mt-0.5 font-mono text-base font-bold text-slate-900">
+                        <p className="mt-0.5 font-mono text-base font-bold text-white">
                           {fmtKSh(s.monthly || 0)}
                         </p>
-                        <p className="mt-0.5 text-[11px] text-slate-500">
+                        <p className="mt-0.5 text-[11px] text-white/45">
                           Total to date:{" "}
-                          <span className="font-mono font-semibold text-slate-700">
+                          <span className="font-mono font-semibold text-white/70">
                             {fmtKSh(s.totalGivenToDate)}
                           </span>
                         </p>
                       </div>
-                      <Link
-                        href="#"
-                        className="inline-flex items-center gap-1.5 rounded-full bg-amber-600 px-4 py-2 text-[12px] font-semibold text-white hover:bg-amber-700"
+                      <a
+                        href="mailto:info@jcfm.org?subject=Note%20for%20my%20sponsored%20child"
+                        className="inline-flex items-center gap-1.5 rounded-full bg-violet-600 px-4 py-2 text-[12px] font-semibold text-white hover:bg-violet-700"
                       >
                         <Mail size={12} strokeWidth={2.25} />
                         Write a Note
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </article>
@@ -159,10 +159,10 @@ export default function MySponsorships() {
               <p className="text-[10.5px] font-bold uppercase tracking-[0.18em] text-amber-700">
                 Projects
               </p>
-              <h2 className="mt-1 text-xl font-bold text-slate-900">
+              <h2 className="mt-1 text-xl font-bold text-white">
                 Projects you're backing
               </h2>
-              <p className="mt-1 max-w-xl text-[13px] text-slate-500">
+              <p className="mt-1 max-w-xl text-[13px] text-white/45">
                 Multi-stage work that takes time and many hands. Open each to see
                 where it stands today, with photos and milestones.
               </p>
@@ -182,12 +182,12 @@ export default function MySponsorships() {
                       />
                       <div className="flex min-w-0 flex-1 flex-col p-5">
                         <CategoryPill category={s.category} />
-                        <h3 className="mt-2 text-base font-bold text-slate-900">
+                        <h3 className="mt-2 text-base font-bold text-white">
                           {s.title}
                         </h3>
-                        <p className="mt-1 text-[12px] text-slate-500">
+                        <p className="mt-1 text-[12px] text-white/45">
                           You've given{" "}
-                          <span className="font-semibold text-slate-700">
+                          <span className="font-semibold text-white/70">
                             {fmtKSh(s.totalGivenToDate)}
                           </span>{" "}
                           since {s.startedOn}.

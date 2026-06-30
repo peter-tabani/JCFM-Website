@@ -20,7 +20,7 @@ export default function SecondaryPage() {
       {/* ── Hero ── */}
       <section className="bg-[#0f172a] px-4 py-14 text-white md:py-20 lg:px-6">
         <div className="mx-auto max-w-[1400px]">
-          <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-[#d97706]">
+          <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-[#7c3aed]">
             Grade 7 – 9
           </p>
           <h1 className="hero-title mb-4 text-4xl font-medium leading-tight md:text-5xl">
@@ -35,7 +35,7 @@ export default function SecondaryPage() {
             <a
               href="/docs/secondary-fee-structure.pdf"
               download
-              className="inline-flex items-center gap-2 rounded-full bg-[#d97706] px-6 py-3 text-sm font-bold text-white hover:bg-[#b45309] transition"
+              className="inline-flex items-center gap-2 rounded-full bg-[#7c3aed] px-6 py-3 text-sm font-bold text-white hover:bg-[#6d28d9] transition"
             >
               <Download size={16} /> Download Fee Structure
             </a>
@@ -50,7 +50,7 @@ export default function SecondaryPage() {
       </section>
 
       {/* ── What we know ── */}
-      <section className="bg-[#fffaf2] px-4 py-16 lg:px-6">
+      <section className="bg-[#f5f3ff] px-4 py-16 lg:px-6">
         <div className="mx-auto max-w-[1400px]">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
@@ -75,7 +75,7 @@ export default function SecondaryPage() {
         <div className="mx-auto max-w-[1400px]">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
             <div>
-              <p className="mb-2 text-sm font-bold uppercase tracking-[0.3em] text-[#d97706]">
+              <p className="mb-2 text-sm font-bold uppercase tracking-[0.3em] text-[#7c3aed]">
                 Entry Requirements
               </p>
               <h2 className="hero-title mb-6 text-3xl text-slate-900">
@@ -89,16 +89,16 @@ export default function SecondaryPage() {
                   "Passport-size photo of learner",
                 ].map((req, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#d97706]" />
+                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#7c3aed]" />
                     <p className="text-sm leading-7 text-slate-600">{req}</p>
                   </div>
                 ))}
               </div>
-              <div className="mt-8 rounded-2xl border border-slate-200 bg-[#fffaf2] p-5">
+              <div className="mt-8 rounded-2xl border border-slate-200 bg-[#f5f3ff] p-5">
                 <p className="text-sm leading-7 text-slate-600">
                   Visit our office along Approved-Shelleybeach Road, Likoni
                   or email{" "}
-                  <a href="mailto:info@fountainofhope.ac.ke" className="font-semibold text-[#d97706]">
+                  <a href="mailto:info@fountainofhope.ac.ke" className="font-semibold text-[#7c3aed]">
                     info@fountainofhope.ac.ke
                   </a>{" "}
                   for admission details.
@@ -107,8 +107,8 @@ export default function SecondaryPage() {
             </div>
 
             {/* Fee download */}
-            <div className="rounded-3xl border border-[#d97706]/30 bg-[#fffaf2] p-8">
-              <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-[#d97706]">Fees</p>
+            <div className="rounded-3xl border border-[#7c3aed]/30 bg-[#f5f3ff] p-8">
+              <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-[#7c3aed]">Fees</p>
               <h3 className="hero-title mb-3 text-2xl text-slate-900">Junior Secondary Fee Structure</h3>
               <p className="mb-6 text-sm leading-8 text-slate-600">
                 Download the current fee structure for full details on tuition
@@ -118,15 +118,15 @@ export default function SecondaryPage() {
               <a
                 href="/docs/secondary-fee-structure.pdf"
                 download
-                className="mb-3 flex items-center justify-center gap-2 rounded-full bg-[#d97706] px-6 py-3.5 font-bold text-white hover:bg-[#b45309] transition"
+                className="mb-3 flex items-center justify-center gap-2 rounded-full bg-[#7c3aed] px-6 py-3.5 font-bold text-white hover:bg-[#6d28d9] transition"
               >
                 <Download size={18} /> Download Fee Structure PDF
               </a>
               <a
                 href="mailto:info@fountainofhope.ac.ke?subject=Junior%20Secondary%20Fees%20Enquiry"
-                className="flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3.5 font-bold text-slate-700 hover:border-[#d97706] transition"
+                className="flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3.5 font-bold text-slate-700 hover:border-[#7c3aed] transition"
               >
-                <Mail size={18} className="text-[#d97706]" /> Email the Office
+                <Mail size={18} className="text-[#7c3aed]" /> Email the Office
               </a>
             </div>
           </div>
@@ -147,7 +147,7 @@ export default function SecondaryPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link href="/admissions" className="inline-flex items-center gap-2 rounded-full bg-[#d97706] px-6 py-3 text-sm font-bold text-white hover:bg-[#b45309] transition">
+              <Link href="/admissions" className="inline-flex items-center gap-2 rounded-full bg-[#7c3aed] px-6 py-3 text-sm font-bold text-white hover:bg-[#6d28d9] transition">
                 Apply Now <ArrowRight size={15} />
               </Link>
               <a href="mailto:info@fountainofhope.ac.ke" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-bold text-white hover:bg-white/10 transition">

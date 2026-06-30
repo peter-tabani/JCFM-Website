@@ -19,6 +19,7 @@ import {
   StatusPill,
   PrimaryButton,
   GhostButton,
+  SampleDataBadge,
 } from "@/components/admin/ui";
 import { MapPin, Users as UsersIcon, Building2, Calendar } from "lucide-react";
 
@@ -62,6 +63,8 @@ export default function AdminBranches() {
       />
 
       <div className="mx-auto max-w-[1400px] space-y-6 px-5 py-7 md:px-8 md:py-10">
+        <SampleDataBadge note="branch directory and attendance figures are placeholders for now." />
+
         {/* Stats */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatCard icon={MapPin} accent="navy" label="Total Branches" value={String(branches.length)} sub="HQ + 8 daughter churches" />
@@ -86,8 +89,43 @@ export default function AdminBranches() {
           </p>
         </div>
 
-        {/* Table */}
-        <Card kicker="Directory" title="All Branches" padded={false}>
+        {/* Mobile cards */}
+        <div className="space-y-3 md:hidden">
+          {filtered.map((b, i) => (
+            <div key={b.name} className="rounded-lg border border-slate-200 bg-white p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="text-[15px] font-semibold text-slate-900">
+                    {b.name}
+                    {b.isHq && (
+                      <span className="ml-2 rounded border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-tight text-slate-500">
+                        HQ
+                      </span>
+                    )}
+                  </p>
+                  <p className="mt-0.5 text-[13px] text-slate-600">{b.pastor}</p>
+                  <p className="mt-0.5 text-[12px] text-slate-500">{b.location}</p>
+                </div>
+                <StatusPill label={b.status === "active" ? "Active" : "Planting"} tone={b.status === "active" ? "success" : "warn"} />
+              </div>
+              <div className="mt-3 flex items-center justify-between border-t border-slate-100 pt-3 text-[12px]">
+                <a href={`tel:${b.phone}`} className="inline-flex items-center gap-1 text-slate-600">
+                  <Phone size={12} strokeWidth={2} />
+                  {b.phone}
+                </a>
+                <span className="font-mono text-slate-900">{b.members} members</span>
+              </div>
+            </div>
+          ))}
+          {filtered.length === 0 && (
+            <p className="rounded-lg border border-dashed border-slate-200 bg-white px-4 py-8 text-center text-[13px] italic text-slate-400">
+              No branches match &ldquo;{q}&rdquo;.
+            </p>
+          )}
+        </div>
+
+        {/* Table (md+) */}
+        <Card kicker="Directory" title="All Branches" padded={false} className="hidden md:block">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse text-left">
               <thead>

@@ -1,6 +1,9 @@
-// Ministry admin allowlist.
-// Until a real user database is wired in, these emails unlock /admin.
-// Add/remove emails here to grant or revoke dashboard access.
+// Ministry admin allowlist (role bootstrap).
+//
+// Accounts now live in the database (see prisma/schema.prisma). This list
+// decides which emails are granted the `admin` role when they first sign up
+// or sign in with Google. Existing users' roles are not changed here — edit
+// the database (or re-run the seed) to change an established account's role.
 export const ADMIN_EMAILS = [
   "admin@jcfm.org",
   "bishop@jcfm.org",
@@ -11,11 +14,3 @@ export function isAdminEmail(email?: string | null): boolean {
   if (!email) return false;
   return ADMIN_EMAILS.includes(email.toLowerCase() as (typeof ADMIN_EMAILS)[number]);
 }
-
-// Demo credentials shown on the login page while there is no DB.
-// Any non-empty password is accepted for these emails.
-export const DEMO_ADMIN = {
-  email: "admin@jcfm.org",
-  name: "Bishop Nelson Barasa",
-  role: "admin" as const,
-};

@@ -20,8 +20,8 @@ const requirements = [
       "Passport photo of child",
       "Parent/guardian ID copy",
     ],
-    badge: "bg-[#2563eb] text-white",
-    border: "border-blue-200 bg-blue-50",
+    badge: "bg-[#7c3aed] text-white",
+    border: "border-violet-200 bg-violet-50",
   },
   {
     level: "Primary (Grade 1–6)",
@@ -100,7 +100,7 @@ export default function AdmissionsPage() {
       <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-[1400px] px-4 lg:px-6">
           <div className="mb-10 max-w-2xl">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#2563eb]">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-[#7c3aed]">
               What You Need
             </p>
             <h2 className="hero-title text-3xl leading-tight text-slate-900 md:text-5xl">
@@ -164,7 +164,7 @@ export default function AdmissionsPage() {
             </div>
             <p className="mt-5 text-sm text-slate-500">
               For the full fee structure, visit our office or email{" "}
-              <a href="mailto:info@fountainofhope.ac.ke" className="font-semibold text-[#2563eb]">
+              <a href="mailto:info@fountainofhope.ac.ke" className="font-semibold text-[#7c3aed]">
                 info@fountainofhope.ac.ke
               </a>
             </p>
