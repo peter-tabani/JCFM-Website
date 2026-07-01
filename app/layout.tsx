@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Montserrat, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/components/AuthProvider";
-import NavigationLock from "@/components/NavigationLock";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -27,9 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${montserrat.variable} ${playfair.variable}`}>
-        <NavigationLock>
-          <AuthProvider>{children}</AuthProvider>
-        </NavigationLock>
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );
