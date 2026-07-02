@@ -20,8 +20,13 @@ import { fmtUSD } from "@/lib/donations";
 const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
 const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
+// Only treat keys as real when they aren't the .env.example placeholders,
+// so donors see a clear "add your keys" notice rather than a payment error.
+const STRIPE_READY = !!STRIPE_PK && /^pk_(test|live)_/.test(STRIPE_PK) && !STRIPE_PK.includes("xxx");
+const PAYPAL_READY = !!PAYPAL_CLIENT_ID && !PAYPAL_CLIENT_ID.includes("xxx") && PAYPAL_CLIENT_ID.length > 12;
+
 // Load Stripe once at module scope.
-const stripePromise = STRIPE_PK ? loadStripe(STRIPE_PK) : null;
+const stripePromise = STRIPE_READY ? loadStripe(STRIPE_PK!) : null;
 
 type Method = "stripe" | "paypal";
 
@@ -237,7 +242,7 @@ function PayPalSection({
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
-  if (!PAYPAL_CLIENT_ID) {
+  if (!PAYPAL_READY) {
     return <ConfigNotice provider="PayPal" />;
   }
 
@@ -245,7 +250,7 @@ function PayPalSection({
     <div>
       {error && <ErrorNotice message={error} className="mb-4" />}
       <PayPalScriptProvider
-        options={{ clientId: PAYPAL_CLIENT_ID, currency: "USD", intent: "capture" }}
+        options={{ clientId: PAYPAL_CLIENT_ID!, currency: "USD", intent: "capture" }}
       >
         <PayPalButtons
           style={{ layout: "vertical", shape: "pill", label: "donate" }}

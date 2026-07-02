@@ -9,7 +9,9 @@ export const PAYPAL_BASE =
     : "https://api-m.sandbox.paypal.com";
 
 export function paypalConfigured(): boolean {
-  return Boolean(process.env.PAYPAL_CLIENT_ID && process.env.PAYPAL_CLIENT_SECRET);
+  const id = process.env.PAYPAL_CLIENT_ID ?? "";
+  const secret = process.env.PAYPAL_CLIENT_SECRET ?? "";
+  return id.length > 12 && secret.length > 12 && !id.includes("xxx") && !secret.includes("xxx");
 }
 
 // OAuth2 client-credentials token. Short-lived; we fetch per request, which is
