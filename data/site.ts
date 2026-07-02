@@ -88,10 +88,8 @@ export const siteData = {
       { label: "About", href: "/school#about" },
       { label: "Programs", href: "/school#programs" },
       { label: "Why Us", href: "/school#why" },
-      { label: "School Life", href: "/school#life" },
       { label: "Faculty", href: "/school#faculty" },
       { label: "Admissions", href: "/school#admissions" },
-      { label: "Gallery", href: "/school#gallery" },
       { label: "Contact", href: "/school#contact" },
     ],
     programs: [

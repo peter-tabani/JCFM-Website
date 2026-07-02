@@ -51,50 +51,6 @@ export default function SchoolAdmissions() {
         </div>
       </div>
 
-      {/* ── Steps ── */}
-      <div className="border-b border-[#d4d0c4] bg-[#f8f6ee]">
-        <div className="mx-auto max-w-[1400px] px-5 py-12 sm:px-6 md:py-20">
-          <div className="mb-10 text-center md:mb-14">
-            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#15803d]">
-              Four Simple Steps
-            </p>
-            <h3 className="mt-3 font-serif text-2xl font-semibold uppercase tracking-wide text-[#0b2545] md:text-4xl">
-              How to Apply
-            </h3>
-            <div className="mx-auto mt-5 h-[2px] w-16 bg-[#c9a961]" />
-          </div>
-
-          <div className="grid grid-cols-1 gap-0 border border-[#d4d0c4] bg-white md:grid-cols-2 lg:grid-cols-4">
-            {s.admissionSteps.map((st, i) => (
-              <div
-                key={st.n}
-                className={`flex flex-col p-6 md:p-7 ${
-                  i % 2 === 1 ? "md:border-l md:border-[#d4d0c4]" : ""
-                } ${i < 2 ? "md:border-b md:border-[#d4d0c4]" : ""} lg:[&:nth-child(2)]:border-l lg:[&:nth-child(3)]:border-l lg:[&:nth-child(4)]:border-l lg:[&:nth-child(2)]:border-[#d4d0c4] lg:[&:nth-child(3)]:border-[#d4d0c4] lg:[&:nth-child(4)]:border-[#d4d0c4] lg:[&:nth-child(-n+4)]:border-b-0 ${
-                  i < s.admissionSteps.length - 1 ? "border-b border-[#d4d0c4] md:[&:nth-child(2)]:border-b lg:border-b-0" : ""
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <span className="flex h-12 w-12 items-center justify-center border-2 border-[#15803d] bg-[#15803d] font-serif text-base font-bold text-white">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-slate-400">
-                    {st.n}
-                  </p>
-                </div>
-                <h4 className="mt-5 font-serif text-lg font-semibold uppercase tracking-wide text-[#0b2545]">
-                  {st.title}
-                </h4>
-                <div className="mt-3 h-[2px] w-10 bg-[#c9a961]" />
-                <p className="mt-4 text-[13px] leading-7 text-slate-600">
-                  {st.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* ── Requirements + Fees ── */}
       <div className="bg-white">
         <div className="mx-auto max-w-[1400px] px-5 py-12 sm:px-6 md:py-20">

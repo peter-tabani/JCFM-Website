@@ -4,10 +4,8 @@ import SchoolHero from "@/components/school/SchoolHero";
 import SchoolAbout from "@/components/school/SchoolAbout";
 import SchoolPrograms from "@/components/school/SchoolPrograms";
 import SchoolWhy from "@/components/school/SchoolWhy";
-import SchoolLife from "@/components/school/SchoolLife";
 import SchoolFaculty from "@/components/school/SchoolFaculty";
 import SchoolAdmissions from "@/components/school/SchoolAdmissions";
-import SchoolGallery from "@/components/school/SchoolGallery";
 import SchoolTestimonials from "@/components/school/SchoolTestimonials";
 import SchoolContact from "@/components/school/SchoolContact";
 import SchoolFooter from "@/components/school/SchoolFooter";
@@ -26,10 +24,8 @@ export default function SchoolPage() {
       <SchoolAbout />
       <SchoolPrograms />
       <SchoolWhy />
-      <SchoolLife />
       <SchoolFaculty />
       <SchoolAdmissions />
-      <SchoolGallery />
       <SchoolTestimonials />
       <SchoolContact />
       <SchoolFooter />
