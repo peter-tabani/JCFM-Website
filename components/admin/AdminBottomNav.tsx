@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Mic2, Users, Banknote, Menu } from "lucide-react";
+import { LayoutDashboard, Images, Users, Banknote, Menu } from "lucide-react";
 
 // Mobile-only bottom tab bar. The primary destinations for phone use, plus a
 // "Menu" button that opens the full navigation drawer. Hidden on lg+ where the
 // fixed sidebar takes over.
 const TABS = [
   { label: "Home", href: "/admin", icon: LayoutDashboard, exact: true },
-  { label: "Sermons", href: "/admin/sermons", icon: Mic2 },
+  { label: "Media", href: "/admin/media", icon: Images },
   { label: "Members", href: "/admin/members", icon: Users },
   { label: "Giving", href: "/admin/donations", icon: Banknote },
 ];

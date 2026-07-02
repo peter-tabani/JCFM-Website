@@ -12,10 +12,10 @@ export async function GET() {
   const now = new Date();
   const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
 
-  const [members, sermonsPublished, sermonsTotal, monthGifts] = await Promise.all([
+  const [members, mediaPublished, mediaTotal, monthGifts] = await Promise.all([
     prisma.member.count(),
-    prisma.sermon.count({ where: { status: "published" } }),
-    prisma.sermon.count(),
+    prisma.mediaItem.count({ where: { published: true } }),
+    prisma.mediaItem.count(),
     prisma.donation.findMany({
       where: { status: "succeeded", createdAt: { gte: monthStart } },
       select: { amountCents: true },
@@ -26,8 +26,8 @@ export async function GET() {
 
   return NextResponse.json({
     members,
-    sermonsPublished,
-    sermonsTotal,
+    mediaPublished,
+    mediaTotal,
     givingMonthCents,
   });
 }

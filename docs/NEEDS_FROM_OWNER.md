@@ -8,7 +8,7 @@ see `docs/PAYMENTS_SETUP.md`.
 Sign in at `/login` as an admin, then add real data — it saves to the database
 and (where wired) shows on the public site:
 
-- **Sermons** (`/admin/sermons`) — add/list/delete. *(Not shown publicly yet — see §3.)*
+- **Life at JCFM** (`/admin/media`) — upload photos **and videos (including sermons)**; each shows in the "Life at JCFM" gallery on the home page, where visitors click a thumbnail to open a watch screen with next/prev arrows. Choose Photo or Video, give a title + category, and paste an image URL or a YouTube/Vimeo link.
 - **Members** (`/admin/members`) — private directory; **not** shown publicly.
 - **Events** (`/admin/events`) — published events appear on the **home page**
   "Upcoming Events" section. Until you add events, the section shows the 3

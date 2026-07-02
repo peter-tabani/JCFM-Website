@@ -4,7 +4,6 @@ import About from "@/components/sections/About";
 import UpcomingEvents from "@/components/sections/UpcomingEvents";
 import ChurchLife from "@/components/sections/ChurchLife";
 import Branches from "@/components/sections/Branches";
-import Sermons from "@/components/sections/Sermons";
 import MediaGallery from "@/components/sections/MediaGallery";
 import AcademyCallout from "@/components/sections/TwoPillars";
 import Newsletter from "@/components/sections/Newsletter";
@@ -27,10 +26,7 @@ export default function HomePage() {
       {/* Branch network across Kenya (#branches) */}
       <Branches />
 
-      {/* Published sermons (#sermons) */}
-      <Sermons />
-
-      {/* Images & video gallery (#gallery) */}
+      {/* Life at JCFM — admin-uploaded photos, videos & sermons (#gallery) */}
       <MediaGallery />
 
       {/* Email subscription — JCFM & school updates */}

@@ -6,11 +6,11 @@ import { useSession } from "next-auth/react";
 import {
   MapPin,
   Users,
-  Mic2,
+  Images,
   Banknote,
   PlusCircle,
   ArrowRight,
-  Mic,
+  ImagePlus,
   Banknote as BanknoteIcon,
   UserPlus,
   Calendar,
@@ -23,10 +23,10 @@ import { PageHeader, StatCard, Card, StatusPill, PrimaryButton, GhostButton, Sam
 const fmtUSD = (cents: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(cents / 100);
 
-type AdminStats = { members: number; sermonsPublished: number; sermonsTotal: number; givingMonthCents: number };
+type AdminStats = { members: number; mediaPublished: number; mediaTotal: number; givingMonthCents: number };
 
 const ACTIVITY = [
-  { t: "1 hr ago", who: "Bishop N. Barasa", what: "Published sermon", target: "“Walking by faith — Hebrews 11”", tone: "info" as const },
+  { t: "1 hr ago", who: "Bishop N. Barasa", what: "Uploaded a video", target: "“Walking by faith — Hebrews 11”", tone: "info" as const },
   { t: "3 hr ago", who: "Office HQ", what: "Logged donation", target: "KSh 25,000 · Water Project", tone: "success" as const },
   { t: "Yesterday", who: "Pst. Festas Soita", what: "Updated branch", target: "Mombasa · Jomvu", tone: "neutral" as const },
   { t: "2 days ago", who: "School Office", what: "Marked fees received", target: "12 pupils · Term 2", tone: "success" as const },
@@ -66,8 +66,8 @@ export default function AdminOverview() {
         description="A quick view of the Ministry today — branches, members, sermons published, and giving for the current month."
         actions={
           <>
-            <PrimaryButton href="/admin/sermons" icon={PlusCircle}>
-              New Sermon
+            <PrimaryButton href="/admin/media" icon={ImagePlus}>
+              Add to Life at JCFM
             </PrimaryButton>
             <GhostButton href="/admin/donations" icon={BanknoteIcon}>
               Log Donation
@@ -95,11 +95,11 @@ export default function AdminOverview() {
             sub="In the directory"
           />
           <StatCard
-            icon={Mic2}
+            icon={Images}
             accent="green"
-            label="Sermons Published"
-            value={stats ? String(stats.sermonsPublished) : "—"}
-            sub={stats ? `${stats.sermonsTotal} total` : "Live on the site"}
+            label="Life at JCFM"
+            value={stats ? String(stats.mediaPublished) : "—"}
+            sub={stats ? `${stats.mediaTotal} uploaded` : "Photos & videos"}
           />
           <StatCard
             icon={Banknote}
@@ -158,7 +158,7 @@ export default function AdminOverview() {
             <Card kicker="Shortcuts" title="Quick Actions" padded={false}>
               <ul className="divide-y divide-slate-200">
                 {[
-                  { icon: Mic, label: "Upload Sermon", href: "/admin/sermons", note: "Audio · Video · Notes" },
+                  { icon: ImagePlus, label: "Upload to Life at JCFM", href: "/admin/media", note: "Photos · Videos · Sermons" },
                   { icon: UserPlus, label: "Add a Member", href: "/admin/members", note: "Choose a branch" },
                   { icon: BanknoteIcon, label: "Record a Donation", href: "/admin/donations", note: "Tithe · Offering · Project" },
                 ].map((q) => (

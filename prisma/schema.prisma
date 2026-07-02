@@ -39,6 +39,11 @@ enum MemberStatus {
   inactive
 }
 
+enum MediaType {
+  image
+  video
+}
+
 model User {
   id           String     @id @default(cuid())
   name         String?
@@ -113,6 +118,21 @@ model TeamMember {
   updatedAt DateTime @updatedAt
 
   @@index([sortOrder])
+}
+
+// "Life at JCFM" gallery — images and videos (incl. sermons) uploaded by admin.
+model MediaItem {
+  id        String    @id @default(cuid())
+  type      MediaType
+  title     String
+  category  String    @default("Worship")
+  url       String
+  thumbnail String?
+  published Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([published, createdAt])
 }
 
 model Donation {

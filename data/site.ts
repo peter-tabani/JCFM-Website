@@ -36,11 +36,10 @@ export const siteData = {
   navLinks: [
     { label: "Home", href: "/" },
     { label: "About", href: "/#about" },
-    { label: "Our Journey", href: "/journey" },
     { label: "Mission Trips", href: "/mission-trips" },
     { label: "Branches", href: "/#branches" },
     { label: "Church Life", href: "/#church" },
-    { label: "Sermons", href: "/#sermons" },
+    { label: "Sermons", href: "/#gallery" },
     { label: "Academy", href: "/school" },
     { label: "Donate", href: "/donate" },
     { label: "Contact", href: "/#contact" },

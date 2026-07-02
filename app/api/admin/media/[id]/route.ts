@@ -12,6 +12,6 @@ export async function DELETE(
   if (!admin) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
   const { id } = await params;
-  await prisma.sermon.deleteMany({ where: { id } });
+  await prisma.mediaItem.deleteMany({ where: { id } });
   return NextResponse.json({ ok: true });
 }

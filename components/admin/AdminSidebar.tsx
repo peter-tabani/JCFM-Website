@@ -6,7 +6,7 @@ import { signOut } from "next-auth/react";
 import {
   LayoutDashboard,
   MapPin,
-  Mic2,
+  Images,
   Calendar,
   Users,
   UserSquare,
@@ -26,7 +26,7 @@ const PRIMARY: NavItem[] = [
 
 const MINISTRY: NavItem[] = [
   { label: "Branches", href: "/admin/branches", icon: MapPin },
-  { label: "Sermons", href: "/admin/sermons", icon: Mic2 },
+  { label: "Life at JCFM", href: "/admin/media", icon: Images },
   { label: "Events", href: "/admin/events", icon: Calendar },
   { label: "Members", href: "/admin/members", icon: Users },
   { label: "Leadership", href: "/admin/team", icon: UserSquare },
