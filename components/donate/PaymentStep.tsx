@@ -25,15 +25,21 @@ const stripePromise = STRIPE_PK ? loadStripe(STRIPE_PK) : null;
 
 type Method = "stripe" | "paypal";
 
+export type GuestInfo = { email: string; name: string } | null;
+
 export default function PaymentStep({
   designation,
   label,
   amountCents,
+  image,
+  guest,
   onBack,
 }: {
   designation: string;
   label: string;
   amountCents: number;
+  image: string;
+  guest: GuestInfo;
   onBack: () => void;
 }) {
   const [method, setMethod] = useState<Method>("stripe");
@@ -62,7 +68,7 @@ export default function PaymentStep({
         Complete your donation
       </h1>
 
-      <OrderSummary label={label} amountCents={amountCents} />
+      <OrderSummary label={label} amountCents={amountCents} image={image} />
 
       {/* Method switch */}
       <div className="mt-6 flex rounded-2xl border border-white/10 bg-white/[0.03] p-1">
@@ -94,11 +100,13 @@ export default function PaymentStep({
             amountCents={amountCents}
             designation={designation}
             returnUrl={doneUrl}
+            guest={guest}
           />
         ) : (
           <PayPalSection
             amountCents={amountCents}
             designation={designation}
+            guest={guest}
           />
         )}
       </div>
@@ -111,10 +119,12 @@ function StripeSection({
   amountCents,
   designation,
   returnUrl,
+  guest,
 }: {
   amountCents: number;
   designation: string;
   returnUrl: string;
+  guest: GuestInfo;
 }) {
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -126,7 +136,11 @@ function StripeSection({
     fetch("/api/donations/stripe", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: amountCents, designation }),
+      body: JSON.stringify({
+        amount: amountCents,
+        designation,
+        ...(guest ? { email: guest.email, name: guest.name } : {}),
+      }),
     })
       .then(async (res) => {
         const data = await res.json().catch(() => ({}));
@@ -137,7 +151,7 @@ function StripeSection({
     return () => {
       active = false;
     };
-  }, [amountCents, designation]);
+  }, [amountCents, designation, guest]);
 
   if (!stripePromise) {
     return <ConfigNotice provider="Stripe" />;
@@ -214,9 +228,11 @@ function StripeForm({
 function PayPalSection({
   amountCents,
   designation,
+  guest,
 }: {
   amountCents: number;
   designation: string;
+  guest: GuestInfo;
 }) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
@@ -238,7 +254,11 @@ function PayPalSection({
             const res = await fetch("/api/donations/paypal/create-order", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ amount: amountCents, designation }),
+              body: JSON.stringify({
+                amount: amountCents,
+                designation,
+                ...(guest ? { email: guest.email, name: guest.name } : {}),
+              }),
             });
             const data = await res.json().catch(() => ({}));
             if (!res.ok) throw new Error(data.error || "Could not start PayPal.");

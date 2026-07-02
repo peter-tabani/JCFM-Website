@@ -10,16 +10,11 @@ import {
 
 export const runtime = "nodejs";
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export async function POST(req: Request) {
-  const user = await getCurrentUser();
-  if (!user) {
-    return NextResponse.json({ error: "Please sign in to donate." }, { status: 401 });
-  }
   if (!paypalConfigured()) {
-    return NextResponse.json(
-      { error: "PayPal is not configured yet." },
-      { status: 503 }
-    );
+    return NextResponse.json({ error: "PayPal is not configured yet." }, { status: 503 });
   }
 
   let body: unknown;
@@ -28,16 +23,31 @@ export async function POST(req: Request) {
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
-  const { amount, designation } = (body ?? {}) as Record<string, unknown>;
+  const { amount, designation, email, name } = (body ?? {}) as Record<string, unknown>;
 
-  // Validate amount + designation SERVER-SIDE.
+  const user = await getCurrentUser();
+  let donorEmail: string | null;
+  let donorName: string | null;
+  if (user) {
+    donorEmail = user.email;
+    donorName = user.name ?? null;
+  } else {
+    const e = typeof email === "string" ? email.toLowerCase().trim() : "";
+    donorName = typeof name === "string" && name.trim() ? name.trim() : null;
+    if (!EMAIL_RE.test(e)) {
+      return NextResponse.json(
+        { error: "Please enter a valid email for your receipt." },
+        { status: 400 }
+      );
+    }
+    donorEmail = e;
+  }
+
   const amountCheck = validateAmountCents(amount);
   if (!amountCheck.ok) {
     return NextResponse.json({ error: amountCheck.error }, { status: 400 });
   }
-  const dest = resolveDesignation(
-    typeof designation === "string" ? designation : null
-  );
+  const dest = resolveDesignation(typeof designation === "string" ? designation : null);
   if (!dest) {
     return NextResponse.json(
       { error: "That project is not available for donations." },
@@ -46,14 +56,12 @@ export async function POST(req: Request) {
   }
 
   try {
-    const order = await createPayPalOrder(
-      amountCheck.cents,
-      `JCFM donation — ${dest.label}`
-    );
+    const order = await createPayPalOrder(amountCheck.cents, `JCFM donation — ${dest.label}`);
 
     await prisma.donation.create({
       data: {
-        userId: user.id,
+        userId: user?.id ?? null,
+        donorName,
         amountCents: amountCheck.cents,
         currency: CURRENCY,
         provider: "paypal",
@@ -61,7 +69,7 @@ export async function POST(req: Request) {
         status: "pending",
         designation: dest.designation,
         designationLabel: dest.label,
-        receiptEmail: user.email,
+        receiptEmail: donorEmail,
       },
     });
 

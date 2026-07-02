@@ -137,8 +137,11 @@ model MediaItem {
 
 model Donation {
   id           String          @id @default(cuid())
-  user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId       String
+  // Optional: null for guest donations made without an account.
+  user         User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId       String?
+  // Guest donor details (used when there is no account).
+  donorName    String?
   // Amount in the smallest currency unit (cents). Always validated server-side.
   amountCents  Int
   currency     String          @default("usd")

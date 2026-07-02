@@ -5,27 +5,26 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import {
-  Heart,
   ArrowRight,
   ArrowLeft,
   Loader2,
   CheckCircle2,
   UserCircle2,
+  UserRound,
+  ShieldCheck,
 } from "lucide-react";
-import DonateChrome, { Stepper } from "@/components/donate/DonateChrome";
+import DonateChrome from "@/components/donate/DonateChrome";
 import OrderSummary from "@/components/donate/OrderSummary";
-import PaymentStep from "@/components/donate/PaymentStep";
+import PaymentStep, { type GuestInfo } from "@/components/donate/PaymentStep";
 import {
   fundableCauses,
   resolveDesignation,
   validateAmountCents,
-  AMOUNT_PRESETS_USD,
+  causeImage,
   fmtUSD,
-  GENERAL_FUND,
 } from "@/lib/donations";
 
-const STEP_ORDER = ["cause", "amount", "account", "payment"] as const;
-const STEP_LABELS = ["Cause", "Amount", "Account", "Payment"];
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function DonatePage() {
   return (
@@ -38,20 +37,20 @@ export default function DonatePage() {
 function DonateWizard() {
   const router = useRouter();
   const search = useSearchParams();
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   const step = search.get("step") ?? "cause";
   const designationSlug = search.get("designation");
   const amountParam = search.get("amount");
 
-  const resolved = useMemo(
-    () => resolveDesignation(designationSlug),
-    [designationSlug]
-  );
+  const resolved = useMemo(() => resolveDesignation(designationSlug), [designationSlug]);
   const amountCheck = validateAmountCents(amountParam);
   const validAmount = amountCheck.ok ? amountCheck.cents : null;
+  const image = causeImage(designationSlug);
 
-  // Build a URL for the flow with merged params.
+  // Guest donor details (kept in memory; only set when someone chooses guest).
+  const [guest, setGuest] = useState<GuestInfo>(null);
+
   const buildUrl = (next: Record<string, string | null>) => {
     const params = new URLSearchParams(search.toString());
     for (const [k, v] of Object.entries(next)) {
@@ -60,10 +59,9 @@ function DonateWizard() {
     }
     return `/donate?${params.toString()}`;
   };
-  const goto = (next: Record<string, string | null>) =>
-    router.push(buildUrl(next));
+  const goto = (next: Record<string, string | null>) => router.push(buildUrl(next));
 
-  // ── Step guards ──
+  // Step guards
   useEffect(() => {
     if (step === "done") return;
     if ((step === "amount" || step === "account" || step === "payment") && !resolved) {
@@ -74,17 +72,12 @@ function DonateWizard() {
       router.replace(buildUrl({ step: "amount" }));
       return;
     }
-    // Auto-advance past the account step once signed in.
     if (step === "account" && status === "authenticated") {
       router.replace(buildUrl({ step: "payment" }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step, resolved, validAmount, status]);
 
-  const currentStepNumber =
-    STEP_ORDER.indexOf(step as (typeof STEP_ORDER)[number]) + 1;
-
-  // ── Confirmation (post-payment) ──
   if (step === "done") {
     return (
       <DonateChrome backHref="/donors/portal/dashboard" backLabel="Go to my dashboard">
@@ -95,47 +88,48 @@ function DonateWizard() {
 
   return (
     <DonateChrome>
-      {currentStepNumber > 0 && (
-        <Stepper steps={STEP_LABELS} current={currentStepNumber} />
+      {step === "cause" && (
+        <CauseStep onSelect={(slug) => goto({ step: "amount", designation: slug })} />
       )}
-
-      {step === "cause" && <CauseStep onSelect={(slug) => goto({ step: "amount", designation: slug })} />}
 
       {step === "amount" && resolved && (
         <AmountStep
           label={resolved.label}
+          image={image}
           initialCents={validAmount}
           onBack={() => goto({ step: "cause" })}
-          onContinue={(cents) =>
-            goto({ step: "account", amount: String(cents) })
-          }
+          onContinue={(cents) => goto({ step: "account", amount: String(cents) })}
         />
       )}
 
       {step === "account" && resolved && validAmount && (
         <AccountStep
           status={status}
-          userName={session?.user?.name ?? session?.user?.email ?? null}
           label={resolved.label}
+          image={image}
           amountCents={validAmount}
-          loginHref={`/donors/portal?callbackUrl=${encodeURIComponent(
-            buildUrl({ step: "payment" })
-          )}`}
+          loginHref={`/donors/portal?callbackUrl=${encodeURIComponent(buildUrl({ step: "payment" }))}`}
           onBack={() => goto({ step: "amount" })}
+          onGuest={(info) => {
+            setGuest(info);
+            goto({ step: "payment" });
+          }}
         />
       )}
 
-      {step === "payment" && resolved && validAmount && status === "authenticated" && (
+      {step === "payment" && resolved && validAmount && (status === "authenticated" || guest) && (
         <PaymentStep
           designation={resolved.designation}
           label={resolved.label}
           amountCents={validAmount}
+          image={image}
+          guest={guest}
           onBack={() => goto({ step: "amount" })}
         />
       )}
 
-      {step === "payment" && status !== "authenticated" && (
-        <div className="flex items-center justify-center py-16 text-white/35">
+      {step === "payment" && status !== "authenticated" && !guest && (
+        <div className="flex items-center justify-center py-16 text-white/40">
           <Loader2 className="animate-spin" />
         </div>
       )}
@@ -143,107 +137,91 @@ function DonateWizard() {
   );
 }
 
-// ──────────────────────────────────────────────────────────────
-// Step 1 — choose a cause
-// ──────────────────────────────────────────────────────────────
+// ── Step 1 · choose a cause (Instagram-style feed) ──
 function CauseStep({ onSelect }: { onSelect: (slug: string) => void }) {
   const causes = fundableCauses();
-  const projects = causes.filter((c) => c.slug !== "general");
+  const general = causes[0];
+  const projects = causes.slice(1);
 
   return (
     <div>
       <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
         What would you like to support?
       </h1>
-      <p className="mt-2 text-sm leading-7 text-white/60">
+      <p className="mt-2 text-sm leading-7 text-white/55">
         Give to a specific project, or let us direct your gift to where it&apos;s
         needed most across the church and school.
       </p>
 
-      {/* General fund — highlighted, skip straight to giving */}
+      {/* General fund — highlighted */}
       <button
-        onClick={() => onSelect(GENERAL_FUND.slug)}
-        className="mt-6 flex w-full items-start gap-4 rounded-2xl border-2 border-[#7c3aed] bg-[#f5f3ff] p-5 text-left transition hover:bg-[#ede9fe]"
+        onClick={() => onSelect(general.slug)}
+        className="group mt-6 block w-full overflow-hidden rounded-2xl border-2 border-[#7c3aed] bg-[#7c3aed]/10 text-left transition hover:bg-[#7c3aed]/15"
       >
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#7c3aed]/15 text-[#7c3aed]">
-          <Heart size={20} />
+        <div className="flex items-center gap-4 p-4">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#7c3aed]/25 text-violet-200">
+            <ShieldCheck size={22} />
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="font-semibold text-white">General Fund</p>
+            <p className="mt-0.5 text-[13px] leading-6 text-white/55">{general.blurb}</p>
+          </div>
+          <ArrowRight size={18} className="shrink-0 text-violet-300 transition group-hover:translate-x-1" />
         </div>
-        <div className="min-w-0 flex-1">
-          <p className="font-semibold text-white">General Fund</p>
-          <p className="mt-0.5 text-sm leading-6 text-white/60">
-            {GENERAL_FUND.blurb}
-          </p>
-        </div>
-        <ArrowRight size={18} className="mt-1 shrink-0 text-[#7c3aed]" />
       </button>
 
-      <p className="mt-8 mb-3 text-xs font-bold uppercase tracking-[0.18em] text-white/35">
+      <p className="mb-3 mt-8 text-[11px] font-bold uppercase tracking-[0.18em] text-white/35">
         Or support a project
       </p>
 
-      <ul className="space-y-3">
+      {/* Project feed — image, title, description */}
+      <div className="space-y-5">
         {projects.map((c) => (
-          <li
+          <article
             key={c.slug}
-            className="rounded-2xl border border-white/10 bg-[#0f1626] p-5"
+            className="overflow-hidden rounded-2xl border border-white/10 bg-[#0f1626]"
           >
-            <p className="font-semibold text-white">{c.label}</p>
-            <p className="mt-1 text-sm leading-6 text-white/60">{c.blurb}</p>
-            <div className="mt-4 flex items-center gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={c.image} alt={c.label} className="aspect-[16/10] w-full object-cover" />
+            <div className="p-5">
+              <h3 className="text-[17px] font-semibold text-white">{c.label}</h3>
+              <p className="mt-1.5 text-[13.5px] leading-6 text-white/55">{c.blurb}</p>
               <button
                 onClick={() => onSelect(c.slug)}
-                className="inline-flex items-center gap-2 rounded-full bg-[#0f172a] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#1e293b]"
+                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#7c3aed] py-3.5 font-semibold text-white transition hover:bg-[#6d28d9]"
               >
-                Support this <ArrowRight size={15} />
+                Support this <ArrowRight size={16} />
               </button>
-              <Link
-                href={`/donate/projects/${c.slug}`}
-                className="text-sm font-semibold text-[#7c3aed] hover:underline"
-              >
-                Learn more
-              </Link>
             </div>
-          </li>
+          </article>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
 
-// ──────────────────────────────────────────────────────────────
-// Step 2 — choose an amount
-// ──────────────────────────────────────────────────────────────
+// ── Step 2 · amount (image + free amount, no presets, no currency talk) ──
 function AmountStep({
   label,
+  image,
   initialCents,
   onBack,
   onContinue,
 }: {
   label: string;
+  image: string;
   initialCents: number | null;
   onBack: () => void;
   onContinue: (cents: number) => void;
 }) {
-  const presetCents = AMOUNT_PRESETS_USD.map((d) => d * 100);
-  const initialIsPreset = initialCents != null && presetCents.includes(initialCents);
-
-  const [selected, setSelected] = useState<number | null>(
-    initialIsPreset ? initialCents : null
-  );
-  const [custom, setCustom] = useState<string>(
-    initialCents != null && !initialIsPreset ? String(initialCents / 100) : ""
+  const [amount, setAmount] = useState<string>(
+    initialCents != null ? String(initialCents / 100) : ""
   );
   const [error, setError] = useState("");
 
-  const chosenCents = (): number | null => {
-    if (selected != null) return selected;
-    const dollars = Number(custom);
-    if (!Number.isFinite(dollars) || dollars <= 0) return null;
-    return Math.round(dollars * 100);
-  };
-
   const submit = () => {
-    const cents = chosenCents();
+    const dollars = Number(amount);
+    const cents = Number.isFinite(dollars) ? Math.round(dollars * 100) : NaN;
     const check = validateAmountCents(cents);
     if (!check.ok) {
       setError(check.error);
@@ -255,44 +233,21 @@ function AmountStep({
   return (
     <div>
       <BackLink onClick={onBack} />
-      <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-        How much would you like to give?
-      </h1>
-      <p className="mt-2 text-sm leading-7 text-white/60">
-        You&apos;re giving to <span className="font-semibold text-white">{label}</span>.
-        This is a one-time gift in US dollars.
-      </p>
 
-      <div className="mt-6 grid grid-cols-2 gap-3">
-        {AMOUNT_PRESETS_USD.map((d) => {
-          const cents = d * 100;
-          const active = selected === cents;
-          return (
-            <button
-              key={d}
-              onClick={() => {
-                setSelected(cents);
-                setCustom("");
-                setError("");
-              }}
-              className={`rounded-2xl border-2 py-5 text-xl font-bold transition ${
-                active
-                  ? "border-[#7c3aed] bg-[#f5f3ff] text-[#7c3aed]"
-                  : "border-white/10 bg-[#0f1626] text-white hover:border-white/15"
-              }`}
-            >
-              ${d}
-            </button>
-          );
-        })}
+      {/* Same image so the donor keeps seeing what they're giving to */}
+      <div className="overflow-hidden rounded-2xl border border-white/10">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={image} alt={label} className="h-44 w-full object-cover" />
       </div>
+      <p className="mt-3 text-[13px] uppercase tracking-[0.14em] text-white/40">You&apos;re giving to</p>
+      <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">{label}</h1>
 
-      <div className="mt-4">
-        <label className="mb-1.5 block text-sm font-medium text-white/70">
-          Or enter a custom amount
-        </label>
+      <label className="mt-6 block">
+        <span className="mb-2 block text-sm font-medium text-white/70">
+          How much would you like to give?
+        </span>
         <div className="relative">
-          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/35">
+          <span className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-2xl font-semibold text-white/50">
             $
           </span>
           <input
@@ -300,21 +255,19 @@ function AmountStep({
             inputMode="decimal"
             min="1"
             step="1"
-            value={custom}
+            autoFocus
+            value={amount}
             onChange={(e) => {
-              setCustom(e.target.value);
-              setSelected(null);
+              setAmount(e.target.value);
               setError("");
             }}
             placeholder="0"
-            className="w-full rounded-xl border border-white/15 bg-[#0f1626] py-3 pl-8 pr-4 text-lg outline-none transition focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]"
+            className="w-full rounded-2xl border border-white/15 bg-white/[0.04] py-5 pl-11 pr-5 text-3xl font-bold text-white outline-none transition focus:border-[#7c3aed]"
           />
         </div>
-      </div>
+      </label>
 
-      {error && (
-        <p className="mt-3 rounded-xl bg-red-50 p-3 text-sm text-red-600">{error}</p>
-      )}
+      {error && <p className="mt-3 rounded-xl bg-red-500/15 p-3 text-sm text-red-300">{error}</p>}
 
       <button
         onClick={submit}
@@ -326,62 +279,130 @@ function AmountStep({
   );
 }
 
-// ──────────────────────────────────────────────────────────────
-// Step 3 — account gate
-// ──────────────────────────────────────────────────────────────
+// ── Step 3 · account or guest ──
 function AccountStep({
   status,
-  userName,
   label,
+  image,
   amountCents,
   loginHref,
   onBack,
+  onGuest,
 }: {
   status: "loading" | "authenticated" | "unauthenticated";
-  userName: string | null;
   label: string;
+  image: string;
   amountCents: number;
   loginHref: string;
   onBack: () => void;
+  onGuest: (info: { email: string; name: string }) => void;
 }) {
+  const [showGuest, setShowGuest] = useState(false);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [error, setError] = useState("");
+
   if (status === "loading" || status === "authenticated") {
     return (
-      <div className="flex items-center justify-center py-16 text-white/35">
+      <div className="flex items-center justify-center py-16 text-white/40">
         <Loader2 className="animate-spin" />
       </div>
     );
   }
 
+  const continueGuest = () => {
+    if (!EMAIL_RE.test(email.trim())) {
+      setError("Please enter a valid email so we can send your receipt.");
+      return;
+    }
+    onGuest({ email: email.trim(), name: name.trim() });
+  };
+
   return (
     <div>
       <BackLink onClick={onBack} />
       <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-        Create an account to continue
+        How would you like to continue?
       </h1>
-      <p className="mt-2 text-sm leading-7 text-white/60">
-        Donations are tied to a free account so you get a dashboard with your
-        full giving history and receipts. It takes a moment.
-      </p>
 
-      <OrderSummary label={label} amountCents={amountCents} />
+      <OrderSummary label={label} amountCents={amountCents} image={image} />
 
-      <Link
-        href={loginHref}
-        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#7c3aed] py-4 font-semibold text-white transition hover:bg-[#6d28d9]"
-      >
-        <UserCircle2 size={18} />
-        Create account or sign in
-      </Link>
-      <p className="mt-3 text-center text-xs text-white/35">
-        You&apos;ll come right back here to finish your donation.
-      </p>
+      {/* Option 1 — account */}
+      <div className="mt-6 rounded-2xl border border-white/10 bg-[#0f1626] p-5">
+        <div className="flex items-start gap-3">
+          <UserCircle2 size={20} className="mt-0.5 shrink-0 text-violet-300" />
+          <div>
+            <p className="font-semibold text-white">Create an account (or sign in)</p>
+            <p className="mt-1 text-[13px] leading-6 text-white/55">
+              Get your own dashboard with every donation, receipts and the projects
+              you&apos;re supporting.
+            </p>
+          </div>
+        </div>
+        <Link
+          href={loginHref}
+          className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#7c3aed] py-3.5 font-semibold text-white transition hover:bg-[#6d28d9]"
+        >
+          Create account or sign in
+        </Link>
+      </div>
+
+      {/* Divider */}
+      <div className="my-5 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/30">
+        <span className="h-px flex-1 bg-white/10" /> or <span className="h-px flex-1 bg-white/10" />
+      </div>
+
+      {/* Option 2 — guest */}
+      <div className="rounded-2xl border border-white/10 bg-[#0f1626] p-5">
+        <div className="flex items-start gap-3">
+          <UserRound size={20} className="mt-0.5 shrink-0 text-white/60" />
+          <div>
+            <p className="font-semibold text-white">Continue as a guest</p>
+            <p className="mt-1 text-[13px] leading-6 text-white/55">
+              Give without an account. We&apos;ll email your receipt — you just
+              won&apos;t get a dashboard.
+            </p>
+          </div>
+        </div>
+
+        {!showGuest ? (
+          <button
+            onClick={() => setShowGuest(true)}
+            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/20 py-3.5 font-semibold text-white transition hover:bg-white/[0.06]"
+          >
+            Continue as guest
+          </button>
+        ) : (
+          <div className="mt-4 space-y-3">
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Your name (optional)"
+              className="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-[15px] text-white outline-none transition focus:border-[#7c3aed]"
+            />
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => { setEmail(e.target.value); setError(""); }}
+              placeholder="Email for your receipt"
+              autoComplete="email"
+              className="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-[15px] text-white outline-none transition focus:border-[#7c3aed]"
+            />
+            {error && <p className="rounded-xl bg-red-500/15 p-3 text-sm text-red-300">{error}</p>}
+            <button
+              onClick={continueGuest}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white py-3.5 font-semibold text-[#0f172a] transition hover:bg-white/90"
+            >
+              Continue to payment <ArrowRight size={16} />
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
 
-// ──────────────────────────────────────────────────────────────
-// Confirmation
-// ──────────────────────────────────────────────────────────────
+// ── Confirmation ──
 function Confirmation() {
   const search = useSearchParams();
   const label = search.get("label");
@@ -390,7 +411,7 @@ function Confirmation() {
 
   return (
     <div className="text-center">
-      <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 text-green-600">
+      <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400">
         <CheckCircle2 size={44} />
       </div>
       <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
@@ -402,28 +423,30 @@ function Confirmation() {
             Your donation of{" "}
             <span className="font-semibold text-white">{fmtUSD(cents)}</span>
             {label ? (
-              <>
-                {" "}to <span className="font-semibold text-white">{label}</span>
-              </>
+              <> to <span className="font-semibold text-white">{label}</span></>
             ) : null}{" "}
             has been received.
           </>
         ) : (
           <>Your donation has been received.</>
         )}{" "}
-        A record now appears in your dashboard.
+        A receipt is on its way to your email.
       </p>
-      <Link
-        href="/donors/portal/giving"
-        className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#0f172a] px-6 py-3.5 font-semibold text-white transition hover:bg-[#1e293b]"
-      >
-        View my giving history <ArrowRight size={17} />
-      </Link>
+      <div className="mt-7 flex flex-col items-center gap-3">
+        <Link
+          href="/donors/portal/giving"
+          className="inline-flex items-center gap-2 rounded-full bg-[#7c3aed] px-6 py-3.5 font-semibold text-white transition hover:bg-[#6d28d9]"
+        >
+          View my giving history <ArrowRight size={17} />
+        </Link>
+        <Link href="/" className="text-sm font-medium text-white/50 hover:text-white">
+          Back to the site
+        </Link>
+      </div>
     </div>
   );
 }
 
-// ── Small shared pieces ──
 function BackLink({ onClick }: { onClick: () => void }) {
   return (
     <button

@@ -21,13 +21,18 @@ export type Cause = {
   slug: string; // "general" or a project id
   label: string;
   blurb: string;
+  image: string;
 };
+
+// A warm, representative image for the general fund.
+export const GENERAL_IMAGE = "https://picsum.photos/seed/jcfm-where-needed/1200/800";
 
 export const GENERAL_FUND: Cause = {
   slug: "general",
-  label: "Where it's needed most",
+  label: "General Fund",
   blurb:
     "Let the ministry direct your gift to whatever is most urgent right now — across the church and the school.",
+  image: GENERAL_IMAGE,
 };
 
 // Causes a visitor can give to: the general fund plus every project that is
@@ -35,8 +40,14 @@ export const GENERAL_FUND: Cause = {
 export function fundableCauses(): Cause[] {
   const projectCauses: Cause[] = projects
     .filter((p) => p.status !== "complete")
-    .map((p) => ({ slug: p.id, label: p.title, blurb: p.shortDesc }));
+    .map((p) => ({ slug: p.id, label: p.title, blurb: p.shortDesc, image: p.hero }));
   return [GENERAL_FUND, ...projectCauses];
+}
+
+// The image to show for a chosen cause on later steps.
+export function causeImage(slug: string | null | undefined): string {
+  if (!slug || slug === "general") return GENERAL_IMAGE;
+  return projects.find((p) => p.id === slug)?.hero ?? GENERAL_IMAGE;
 }
 
 // Server-side resolution of a designation slug to a trusted label.

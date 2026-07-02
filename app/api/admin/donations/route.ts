@@ -39,7 +39,7 @@ export async function GET() {
     },
     donations: rows.map((d) => ({
       id: d.id,
-      donorName: d.user?.name ?? null,
+      donorName: d.user?.name ?? d.donorName ?? null,
       donorEmail: d.user?.email ?? d.receiptEmail ?? null,
       amountCents: d.amountCents,
       currency: d.currency,

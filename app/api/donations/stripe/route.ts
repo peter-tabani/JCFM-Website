@@ -10,13 +10,9 @@ import {
 
 export const runtime = "nodejs";
 
-export async function POST(req: Request) {
-  // 1. Auth required — accounts must exist before donating.
-  const user = await getCurrentUser();
-  if (!user) {
-    return NextResponse.json({ error: "Please sign in to donate." }, { status: 401 });
-  }
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+export async function POST(req: Request) {
   if (!stripeConfigured()) {
     return NextResponse.json(
       { error: "Payments are not configured yet. Please try again later." },
@@ -30,18 +26,34 @@ export async function POST(req: Request) {
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
-  const { amount, designation } = (body ?? {}) as Record<string, unknown>;
+  const { amount, designation, email, name } = (body ?? {}) as Record<string, unknown>;
 
-  // 2. Validate the amount SERVER-SIDE — never trust the client.
+  // Donor identity: signed-in account, or guest with an email for the receipt.
+  const user = await getCurrentUser();
+  let donorEmail: string;
+  let donorName: string | null;
+  if (user) {
+    donorEmail = user.email;
+    donorName = user.name ?? null;
+  } else {
+    donorEmail = typeof email === "string" ? email.toLowerCase().trim() : "";
+    donorName = typeof name === "string" && name.trim() ? name.trim() : null;
+    if (!EMAIL_RE.test(donorEmail)) {
+      return NextResponse.json(
+        { error: "Please enter a valid email for your receipt." },
+        { status: 400 }
+      );
+    }
+  }
+
+  // Validate the amount SERVER-SIDE — never trust the client.
   const amountCheck = validateAmountCents(amount);
   if (!amountCheck.ok) {
     return NextResponse.json({ error: amountCheck.error }, { status: 400 });
   }
 
-  // 3. Re-derive the designation label server-side.
-  const dest = resolveDesignation(
-    typeof designation === "string" ? designation : null
-  );
+  // Re-derive the designation label server-side.
+  const dest = resolveDesignation(typeof designation === "string" ? designation : null);
   if (!dest) {
     return NextResponse.json(
       { error: "That project is not available for donations." },
@@ -54,19 +66,18 @@ export async function POST(req: Request) {
       amount: amountCheck.cents,
       currency: CURRENCY,
       automatic_payment_methods: { enabled: true },
-      receipt_email: user.email,
+      receipt_email: donorEmail,
       metadata: {
-        userId: user.id,
+        userId: user?.id ?? "guest",
         designation: dest.designation,
         designationLabel: dest.label,
       },
     });
 
-    // 4. Store a pending donation keyed by the PaymentIntent id. The webhook
-    //    flips it to succeeded. providerRef is unique -> idempotent.
     await prisma.donation.create({
       data: {
-        userId: user.id,
+        userId: user?.id ?? null,
+        donorName,
         amountCents: amountCheck.cents,
         currency: CURRENCY,
         provider: "stripe",
@@ -74,7 +85,7 @@ export async function POST(req: Request) {
         status: "pending",
         designation: dest.designation,
         designationLabel: dest.label,
-        receiptEmail: user.email,
+        receiptEmail: donorEmail,
       },
     });
 

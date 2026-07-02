@@ -6,10 +6,6 @@ import { capturePayPalOrder, paypalConfigured } from "@/lib/paypal";
 export const runtime = "nodejs";
 
 export async function POST(req: Request) {
-  const user = await getCurrentUser();
-  if (!user) {
-    return NextResponse.json({ error: "Please sign in to donate." }, { status: 401 });
-  }
   if (!paypalConfigured()) {
     return NextResponse.json({ error: "PayPal is not configured yet." }, { status: 503 });
   }
@@ -25,13 +21,19 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Missing order id." }, { status: 400 });
   }
 
-  // Ownership check: the pending donation for this order must belong to the
-  // signed-in user. Prevents capturing an order created under another account.
   const donation = await prisma.donation.findUnique({
     where: { providerRef: orderId },
   });
-  if (!donation || donation.userId !== user.id) {
+  if (!donation) {
     return NextResponse.json({ error: "Order not found." }, { status: 404 });
+  }
+  // For account donations, the order must belong to the signed-in user.
+  // Guest donations (userId null) are captured by whoever holds the order id.
+  if (donation.userId) {
+    const user = await getCurrentUser();
+    if (!user || donation.userId !== user.id) {
+      return NextResponse.json({ error: "Order not found." }, { status: 404 });
+    }
   }
 
   try {
