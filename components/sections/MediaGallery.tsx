@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { X, Play, Images, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
-import { toEmbedUrl, videoThumb } from "@/lib/media";
+import { toEmbedUrl, videoThumb, isDirectVideo } from "@/lib/media";
 
 type GalleryItem = {
   type: "image" | "video";
@@ -166,6 +166,14 @@ export default function MediaGallery() {
             {active.type === "image" ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={active.src} alt={active.caption} className="mx-auto max-h-[80vh] w-full object-contain" />
+            ) : isDirectVideo(active.src) ? (
+              <video
+                src={active.src}
+                controls
+                autoPlay
+                playsInline
+                className="mx-auto max-h-[80vh] w-full bg-black"
+              />
             ) : (
               <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                 <iframe src={active.src} className="absolute inset-0 h-full w-full" allow="autoplay; fullscreen" allowFullScreen />

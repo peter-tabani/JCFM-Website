@@ -21,6 +21,11 @@ export function toEmbedUrl(url: string): string {
   return url;
 }
 
+// A direct video file (uploaded to /public), as opposed to a YouTube/Vimeo link.
+export function isDirectVideo(url: string): boolean {
+  return /\.(mp4|webm|mov|m4v|ogg|ogv)(\?.*)?$/i.test(url);
+}
+
 // A thumbnail for a video item: an explicit thumbnail, else a YouTube still.
 export function videoThumb(url: string, thumbnail?: string | null): string | null {
   if (thumbnail) return thumbnail;
