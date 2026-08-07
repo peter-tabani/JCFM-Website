@@ -2,8 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { siteData } from "@/data/site";
 
-const demoHeroImage =
-  "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=2400&q=85";
+const demoHeroImage = "/images/JCFM_Hero.jpg";
 
 export default function Hero() {
   return (
