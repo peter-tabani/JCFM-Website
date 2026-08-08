@@ -4,7 +4,11 @@ import Stripe from "stripe";
 // never exposed to the browser. Uses the library's pinned API version.
 const key = process.env.STRIPE_SECRET_KEY;
 
-export const stripe = new Stripe(key ?? "", {
+// A non-empty placeholder is used when the key is absent so that importing this
+// module never throws at build time (e.g. on Vercel before the key is added,
+// `new Stripe("")` would throw and fail the whole build). Real Stripe calls are
+// gated behind stripeConfigured(), so this placeholder never talks to Stripe.
+export const stripe = new Stripe(key || "sk_placeholder_build_only", {
   // Helpful in the Stripe dashboard's request logs.
   appInfo: { name: "JCFM Donations" },
 });
