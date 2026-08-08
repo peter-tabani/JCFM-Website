@@ -118,7 +118,7 @@ export default function Hero() {
         <div className="mx-auto grid max-w-[1600px] grid-cols-1 md:grid-cols-3">
           {[
             {
-              image: "/images/staff/together1.jpeg",
+              image: "/images/PeopleStandingAtAlter.jpg",
               title: "Worship With Us",
               cta: "Find a Branch",
               accent: "#dc2626",

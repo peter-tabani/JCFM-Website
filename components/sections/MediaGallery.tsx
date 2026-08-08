@@ -35,7 +35,7 @@ export default function MediaGallery() {
   const [dbItems, setDbItems] = useState<GalleryItem[] | null>(null);
   const [activeTag, setActiveTag] = useState("All");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [showMobileAll, setShowMobileAll] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     fetch("/api/media")
@@ -69,8 +69,10 @@ export default function MediaGallery() {
     [items, activeTag]
   );
 
-  const desktopVisible = filtered.slice(0, 8);
-  const mobileVisible = showMobileAll ? filtered : filtered.slice(0, 3);
+  // 6 boxes on desktop / 3 on mobile by default; the rest sit behind "See More".
+  const desktopVisible = expanded ? filtered : filtered.slice(0, 6);
+  const desktopHasMore = filtered.length > 6;
+  const mobileVisible = expanded ? filtered : filtered.slice(0, 3);
   const mobileHasMore = filtered.length > 3;
 
   const openLightbox = (idx: number) => setLightboxIndex(idx);
@@ -135,11 +137,11 @@ export default function MediaGallery() {
           ))}
           {mobileHasMore && (
             <button
-              onClick={() => setShowMobileAll((v) => !v)}
+              onClick={() => setExpanded((v) => !v)}
               className="mt-2 inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.22em] text-white transition hover:border-[#86efac] hover:text-[#86efac]"
             >
-              {showMobileAll ? "Show Less" : "See More"}
-              {showMobileAll ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+              {expanded ? "Show Less" : "See More"}
+              {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
             </button>
           )}
         </div>
@@ -150,6 +152,19 @@ export default function MediaGallery() {
             <GalleryCard key={idx} item={item} onClick={() => openLightbox(idx)} />
           ))}
         </div>
+
+        {/* See More (desktop) */}
+        {desktopHasMore && (
+          <div className="mt-8 hidden justify-center md:flex">
+            <button
+              onClick={() => setExpanded((v) => !v)}
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3 text-[11px] font-bold uppercase tracking-[0.22em] text-white transition hover:border-[#86efac] hover:text-[#86efac]"
+            >
+              {expanded ? "Show Less" : "See More"}
+              {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+            </button>
+          </div>
+        )}
       </div>
 
       {/* ── Lightbox (watch screen with arrows) ── */}
