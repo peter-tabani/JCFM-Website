@@ -69,9 +69,9 @@ export default function MediaGallery() {
     [items, activeTag]
   );
 
-  // 6 boxes on desktop / 3 on mobile by default; the rest sit behind "See More".
-  const desktopVisible = expanded ? filtered : filtered.slice(0, 6);
-  const desktopHasMore = filtered.length > 6;
+  // 8 boxes on desktop / 3 on mobile by default; the rest sit behind "See More".
+  const desktopVisible = expanded ? filtered : filtered.slice(0, 8);
+  const desktopHasMore = filtered.length > 8;
   const mobileVisible = expanded ? filtered : filtered.slice(0, 3);
   const mobileHasMore = filtered.length > 3;
 
