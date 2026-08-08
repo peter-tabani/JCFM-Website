@@ -21,7 +21,7 @@ export const siteData = {
     associate: { name: "Pst. Irene M. Wafula", role: "Associate Pastor" },
   },
   email: "info@jcfm.org",
-  hours: "Sundays · 9:00 AM – 1:00 PM",
+  hours: "Sundays · 9:00 AM - 1:00 PM",
   branches: [
     { name: "Nzoia (HQ)", pastor: "Bishop Nelson Barasa Wanjala & Pastor Sarah N Wekesa", location: "Nzoia, Bungoma", isHq: true },
     { name: "Tembelela", pastor: "Rev. Hosea Mabonga Simiyu", location: "Tembelela" },
@@ -96,7 +96,7 @@ export const siteData = {
       {
         code: "PG",
         name: "Playgroup & Pre-Primary",
-        ages: "Ages 3 – 5",
+        ages: "Ages 3 - 5",
         grades: "PP1 · PP2",
         desc: "A gentle, play-rich introduction to learning where little ones are loved, sung over and gradually prepared for Grade 1.",
         highlights: ["Phonics & numeracy", "Bible stories & songs", "Creative play & art", "Daily nap & snack"],
@@ -104,7 +104,7 @@ export const siteData = {
       {
         code: "LP",
         name: "Lower Primary",
-        ages: "Ages 6 – 8",
+        ages: "Ages 6 - 8",
         grades: "Grade 1 · 2 · 3",
         desc: "The foundation years. We build strong reading, writing, mathematics and Christian character through the CBC framework.",
         highlights: ["English & Kiswahili literacy", "Mathematical Activities", "Environmental Activities", "CRE & Life Skills"],
@@ -112,7 +112,7 @@ export const siteData = {
       {
         code: "UP",
         name: "Upper Primary",
-        ages: "Ages 9 – 11",
+        ages: "Ages 9 - 11",
         grades: "Grade 4 · 5 · 6",
         desc: "Pupils sharpen core competencies and discover talents in agriculture, science, creative arts and pre-tech studies.",
         highlights: ["Science & Technology", "Agriculture", "Creative Arts", "Home Science"],
@@ -120,7 +120,7 @@ export const siteData = {
       {
         code: "JSS",
         name: "Junior School",
-        ages: "Ages 12 – 14",
+        ages: "Ages 12 - 14",
         grades: "Grade 7 · 8 · 9",
         desc: "Junior School (CBC) deepens learning across pre-tech, social studies, integrated science and prepares learners for senior school pathways.",
         highlights: ["Integrated Science", "Pre-Technical Studies", "Business Studies", "Computer Science"],
@@ -130,7 +130,7 @@ export const siteData = {
       {
         n: "01",
         title: "Faith at the Centre",
-        desc: "Daily devotion, weekly chapel and biblical character formation are part of the school day &mdash; not extras.",
+        desc: "Daily devotion, weekly chapel and biblical character formation are part of the school day, not extras.",
       },
       {
         n: "02",
@@ -150,7 +150,7 @@ export const siteData = {
       {
         n: "05",
         title: "Talent Discovery",
-        desc: "Music, sports, drama, agriculture, ICT and creative arts &mdash; every learner is helped to find their gift.",
+        desc: "Music, sports, drama, agriculture, ICT and creative arts, every learner is helped to find their gift.",
       },
       {
         n: "06",
@@ -202,14 +202,14 @@ export const siteData = {
     ],
     fees: [
       { level: "Playgroup / PP1 / PP2", day: "KSh 6,500" },
-      { level: "Grade 1 – 3 (Lower Primary)", day: "KSh 8,000" },
-      { level: "Grade 4 – 6 (Upper Primary)", day: "KSh 9,000" },
-      { level: "Grade 7 – 9 (Junior School)", day: "KSh 10,500" },
+      { level: "Grade 1 - 3 (Lower Primary)", day: "KSh 8,000" },
+      { level: "Grade 4 - 6 (Upper Primary)", day: "KSh 9,000" },
+      { level: "Grade 7 - 9 (Junior School)", day: "KSh 10,500" },
     ],
     calendar: [
-      { term: "Term 1", dates: "Jan – Apr", note: "Opening service · Sports day" },
-      { term: "Term 2", dates: "May – Aug", note: "Cultural week · Mid-year exam" },
-      { term: "Term 3", dates: "Sep – Nov", note: "Prize-giving · Carol service" },
+      { term: "Term 1", dates: "Jan - Apr", note: "Opening service · Sports day" },
+      { term: "Term 2", dates: "May - Aug", note: "Cultural week · Mid-year exam" },
+      { term: "Term 3", dates: "Sep - Nov", note: "Prize-giving · Carol service" },
     ],
     testimonials: [
       {

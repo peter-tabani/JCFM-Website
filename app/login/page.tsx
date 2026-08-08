@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 
 /* ──────────────────────────────────────────────────────
-   Login — Ministry Administration
+   Login, Ministry Administration
    Single sign-in for ministry staff (Bishop, Coordinator,
    Pastors, Office).  Wires into NextAuth credentials +
    Google providers.  Demo mode accepts any password for the

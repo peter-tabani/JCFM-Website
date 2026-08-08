@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Support Our Children – Fountain of Hope Academy",
+  title: "Support Our Children - Fountain of Hope Academy",
   description:
     "Help us educate and care for vulnerable children in Likoni, Mombasa. Your donation changes lives.",
 };
@@ -60,7 +60,7 @@ const tiers = [
     amount: "$50 / month",
     amountKes: "≈ KSh 6,500",
     description:
-      "Completely covers one child's education — tuition, meals, uniform, supplies and more.",
+      "Completely covers one child's education, tuition, meals, uniform, supplies and more.",
     icon: <GraduationCap size={24} />,
     color: "border-violet-200 bg-violet-50",
     badge: "bg-[#7c3aed] text-white",
@@ -74,7 +74,7 @@ const oneTimeTiers = [
   { amount: "$250", desc: "Equips a classroom with new learning materials" },
   { amount: "$500", desc: "Sponsors a child's full term of education" },
   { amount: "$1,000", desc: "Funds classroom equipment and learning tools" },
-  { amount: "Custom", desc: "Give any amount — every contribution matters" },
+  { amount: "Custom", desc: "Give any amount, every contribution matters" },
 ];
 
 const corporateTiers = [
@@ -140,7 +140,7 @@ export default function DonorsPage() {
 
             <p className="mb-4 max-w-2xl text-lg leading-9 text-white/80">
               In 2008, Fountain of Hope Academy opened its doors in Likoni,
-              Mombasa — not just as a school, but as a lifeline. Founded with a
+              Mombasa, not just as a school, but as a lifeline. Founded with a
               heart for orphans and children from the most disadvantaged
               families, Fountain of Hope Academy set an ambitious goal: that
               75% of its learners would be fully sponsored.
@@ -148,7 +148,7 @@ export default function DonorsPage() {
             <p className="mb-10 max-w-2xl text-lg leading-9 text-white/80">
               Today, over <span className="font-bold text-white">250 children</span> who
               would otherwise have no access to education are sitting in
-              classrooms, learning, growing, and dreaming — because of donors
+              classrooms, learning, growing, and dreaming, because of donors
               like you.
             </p>
 
@@ -219,8 +219,7 @@ export default function DonorsPage() {
               </p>
               <p className="mb-5 text-base leading-9 text-slate-600">
                 They began with just <strong>25 fee-paying students</strong> and
-                <strong> 5 needy children</strong>. No fanfare, no large grants
-                — just determination. Over a decade later, more than
+                <strong> 5 needy children</strong>. No fanfare, no large grants, just determination. Over a decade later, more than
                 <strong> 250 sponsored children</strong> walk through those
                 gates every morning.
               </p>
@@ -229,16 +228,15 @@ export default function DonorsPage() {
                 competitive national schools including
                 <strong>Maranda High School</strong>,
                 <strong> Nyuki School</strong>, <strong>Kwale High</strong>, and
-                <strong>Matuga Girls</strong> — proof that when you invest in a
+                <strong>Matuga Girls</strong>. Proof that when you invest in a
                 child, the returns are extraordinary.
               </p>
               <div className="rounded-2xl border-l-4 border-[#7c3aed] bg-[#f5f3ff] p-5">
                 <p className="text-base italic leading-8 text-slate-700">
-                  "Our goal is that 75% of our learners are fully sponsored —
-                  the fortunate and less fortunate, educated together, as equals."
+                  "Our goal is that 75% of our learners are fully sponsored, the fortunate and less fortunate, educated together, as equals."
                 </p>
                 <p className="mt-3 text-sm font-semibold text-slate-500">
-                  — Mr. Noah Mweruphe, Director, Fountain of Hope Academy
+                  Mr. Noah Mweruphe, Director, Fountain of Hope Academy
                 </p>
               </div>
             </div>

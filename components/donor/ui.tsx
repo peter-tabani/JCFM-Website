@@ -9,10 +9,10 @@ import { categories, type CategoryKey } from "@/data/donor";
 // ─────────────────────────────────────────────────────────
 // Donor portal UI primitives.
 // Warmer than the admin: rounded, generous spacing, plain
-// language, larger tap targets — designed for non-tech users.
+// language, larger tap targets, designed for non-tech users.
 // ─────────────────────────────────────────────────────────
 
-const ACCENT = "#5b21b6"; // blue-700 — keeps continuity with the portal
+const ACCENT = "#5b21b6"; // blue-700, keeps continuity with the portal
 
 // ── Page header ───────────────────────────────────────────
 export function PageHeader({

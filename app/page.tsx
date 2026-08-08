@@ -26,10 +26,10 @@ export default function HomePage() {
       {/* Branch network across Kenya (#branches) */}
       <Branches />
 
-      {/* Life at JCFM — admin-uploaded photos, videos & sermons (#gallery) */}
+      {/* Life at JCFM, admin-uploaded photos, videos & sermons (#gallery) */}
       <MediaGallery />
 
-      {/* Email subscription — JCFM & school updates */}
+      {/* Email subscription, JCFM & school updates */}
       <Newsletter />
 
       {/* Small callout for Fountain of Hope Academy */}

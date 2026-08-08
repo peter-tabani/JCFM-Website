@@ -17,7 +17,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: "Missing fields" }, { status: 400 });
     }
 
-    // Format phone number — ensure it has country code
+    // Format phone number, ensure it has country code
     // If starts with 0, assume Kenya (+254)
     let formattedPhone = phone.trim();
     if (formattedPhone.startsWith("0")) {
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
     );
 
     await client.messages.create({
-      body: `Hello ${name}! 🎓 Welcome to the Fountain of Hope Academy donor family. You can now log in to your portal at any time to support our children in Likoni, Mombasa. Thank you for making a difference! — Fountain of Hope Academy`,
+      body: `Hello ${name}! 🎓 Welcome to the Fountain of Hope Academy donor family. You can now log in to your portal at any time to support our children in Likoni, Mombasa. Thank you for making a difference! Fountain of Hope Academy`,
       from: process.env.TWILIO_PHONE_NUMBER,
       to: formattedPhone,
     });

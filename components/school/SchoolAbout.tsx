@@ -27,9 +27,6 @@ export default function SchoolAbout() {
           </div>
 
           <div className="mt-8 text-center md:mt-10">
-            <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-[#a8201a]">
-              Document № FHA / ABT / 2008
-            </p>
             <h2 className="mt-3 font-serif text-[28px] font-semibold uppercase leading-[1.05] tracking-[0.03em] text-[#0b2545] sm:text-4xl md:text-5xl">
               A school where faith
               <br className="hidden sm:block" />
@@ -81,8 +78,7 @@ export default function SchoolAbout() {
                   the county.
                 </p>
                 <p>
-                  We exist for one reason: to walk with each child &mdash;
-                  intellectually, spiritually and socially &mdash; through the
+                  We exist for one reason: to walk with each child, intellectually, spiritually and socially, through the
                   most formative years of their life. We follow the Kenya
                   Competency-Based Curriculum (CBC) faithfully, with strong
                   emphasis on literacy, numeracy, ICT and life skills, and we
@@ -101,7 +97,7 @@ export default function SchoolAbout() {
             <p className="text-[15px] leading-7 text-slate-800 md:hidden">
               Founded in {s.founded} as the education arm of {s.parent},
               Fountain of Hope Academy serves learners on the JCFM compound in
-              Nzoia &mdash; following the Kenya CBC curriculum within a deeply
+              Nzoia, following the Kenya CBC curriculum within a deeply
               Christian environment.
             </p>
           </ReadMore>

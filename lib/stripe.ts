@@ -9,7 +9,7 @@ export const stripe = new Stripe(key ?? "", {
   appInfo: { name: "JCFM Donations" },
 });
 
-// True only when a REAL Stripe secret key is present — not the placeholder
+// True only when a REAL Stripe secret key is present, not the placeholder
 // from .env.example (sk_test_xxx). Prevents confusing "could not start payment"
 // errors before keys are pasted.
 export function stripeConfigured(): boolean {

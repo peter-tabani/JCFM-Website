@@ -72,7 +72,7 @@ const CHAPTERS: Chapter[] = [
     material: "Local materials · Iron sheet roof",
     title: "A Place to Gather",
     narrative:
-      "As the congregation grew, the community came together to build a more permanent meeting space. Through collective effort and the generosity of local supporters, a stronger structure took shape — a place where the church could gather, worship, and welcome more families into the fellowship.",
+      "As the congregation grew, the community came together to build a more permanent meeting space. Through collective effort and the generosity of local supporters, a stronger structure took shape, a place where the church could gather, worship, and welcome more families into the fellowship.",
     metric: [
       { k: "Worshippers", v: "35" },
       { k: "Sunday School", v: "Began" },
@@ -108,7 +108,7 @@ const CHAPTERS: Chapter[] = [
     material: "Iron-sheet sanctuary · Wooden benches",
     title: "The Land of Promise",
     narrative:
-      "A generous family gifted 1.5 acres of land in Nzoia to the ministry. An iron-sheet sanctuary was quickly built at the centre of the property, and soon after, Jesus Christ Founder Ministry was officially registered. For the first time, the work had a permanent home — a place to gather, grow, and serve the community.",
+      "A generous family gifted 1.5 acres of land in Nzoia to the ministry. An iron-sheet sanctuary was quickly built at the centre of the property, and soon after, Jesus Christ Founder Ministry was officially registered. For the first time, the work had a permanent home, a place to gather, grow, and serve the community.",
     metric: [
       { k: "Land", v: "1.5 acres" },
       { k: "Worshippers", v: "120" },
@@ -138,13 +138,13 @@ const CHAPTERS: Chapter[] = [
   },
   {
     n: "07",
-    year: "2019 – 2024",
+    year: "2019 - 2024",
     era: "The Multiplication",
     location: "5 counties · Bungoma to Mombasa",
     material: "9 daughter churches",
     title: "Daughter Churches",
     narrative:
-      "What began in Sikalame gradually extended across western Kenya and beyond — to Tembelela, Mang&apos;ana, Chesamisi, Mayanja, Chelekei, Kimilili, and even to Jomvu in Mombasa. Daughter churches were established one by one, each led by a faithful local pastor and rooted in the same faith that first gathered believers in Sikalame. A single church had become a network serving communities across five counties.",
+      "What began in Sikalame gradually extended across western Kenya and beyond, to Tembelela, Mang&apos;ana, Chesamisi, Mayanja, Chelekei, Kimilili, and even to Jomvu in Mombasa. Daughter churches were established one by one, each led by a faithful local pastor and rooted in the same faith that first gathered believers in Sikalame. A single church had become a network serving communities across five counties.",
     metric: [
       { k: "Branches", v: "9" },
       { k: "Counties", v: "5" },
@@ -215,7 +215,7 @@ export default function Journey() {
 
         {/* ── Timeline rail wrapper ── */}
         <div className="relative">
-          {/* Vertical rail — left on mobile, centered on desktop */}
+          {/* Vertical rail, left on mobile, centered on desktop */}
           <div
             aria-hidden
             className="absolute left-[27px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#a8201a] via-[#0b2545] to-[#15803d] lg:left-1/2 lg:-translate-x-1/2"
@@ -231,7 +231,7 @@ export default function Journey() {
                   key={c.n}
                   className="relative grid grid-cols-[56px_1fr] gap-5 lg:grid-cols-[1fr_56px_1fr] lg:gap-8"
                 >
-                  {/* Left half (desktop) — only when not flipped, contains card */}
+                  {/* Left half (desktop), only when not flipped, contains card */}
                   {!flipped && (
                     <div className="hidden lg:block">
                       <ChapterCard chapter={c} accents={a} alignRight />
@@ -269,7 +269,7 @@ export default function Journey() {
                     </div>
                   )}
 
-                  {/* Right half (desktop) — only when flipped */}
+                  {/* Right half (desktop), only when flipped */}
                   {flipped && (
                     <div className="hidden" aria-hidden />
                   )}
@@ -395,7 +395,7 @@ function ChapterCard({
 }
 
 /* ──────────────────────────────────────────────────────
-   Final emotional CTA — The Next Chapter
+   Final emotional CTA, The Next Chapter
    ────────────────────────────────────────────────────── */
 function NextChapterCallout() {
   return (
@@ -422,7 +422,7 @@ function NextChapterCallout() {
           between counties. Scholarships for the next twenty-eight pupils.
         </p>
         <p className="mt-3 max-w-xl font-serif text-base italic text-[#c9a961] md:text-lg">
-          None of these will be done by us alone &mdash; and that, too, is
+          None of these will be done by us alone, and that, too, is
           part of the design.
         </p>
 
@@ -438,7 +438,7 @@ function NextChapterCallout() {
           <PathwayCard
             icon={Handshake}
             title="Partner"
-            desc="Walk alongside us as a long-term friend &mdash; through letters, visits or skill."
+            desc="Walk alongside us as a long-term friend, through letters, visits or skill."
             href="/#contact"
             cta="Become a Partner"
           />
@@ -455,7 +455,7 @@ function NextChapterCallout() {
         {/* Footnote */}
         <p className="mt-7 border-t border-white/15 pt-5 text-center font-serif text-[13px] italic text-white/70 md:mt-8 md:pt-6 md:text-sm">
           &ldquo;Unless the Lord builds the house, they labour in vain that
-          build it.&rdquo; &mdash; Psalm 127:1
+          build it.&rdquo; Psalm 127:1
         </p>
       </div>
     </div>

@@ -15,7 +15,7 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "Jesus Christ Founder Ministry",
-  description: "Jesus Christ Founder Ministry (JCFM) — a Christ-centred church community rooted in Nzoia, Bungoma, reaching across Kenya through faith, education, and outreach.",
+  description: "Jesus Christ Founder Ministry (JCFM), a Christ-centred church community rooted in Nzoia, Bungoma, reaching across Kenya through faith, education, and outreach.",
 };
 
 export default function RootLayout({

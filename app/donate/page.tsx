@@ -153,7 +153,7 @@ function CauseStep({ onSelect }: { onSelect: (slug: string) => void }) {
         needed most across the church and school.
       </p>
 
-      {/* General fund — highlighted */}
+      {/* General fund, highlighted */}
       <button
         onClick={() => onSelect(general.slug)}
         className="group mt-6 block w-full overflow-hidden rounded-2xl border-2 border-[#7c3aed] bg-[#7c3aed]/10 text-left transition hover:bg-[#7c3aed]/15"
@@ -174,7 +174,7 @@ function CauseStep({ onSelect }: { onSelect: (slug: string) => void }) {
         Or support a project
       </p>
 
-      {/* Project feed — image, title, description */}
+      {/* Project feed, image, title, description */}
       <div className="space-y-5">
         {projects.map((c) => (
           <article
@@ -327,7 +327,7 @@ function AccountStep({
 
       <OrderSummary label={label} amountCents={amountCents} image={image} />
 
-      {/* Option 1 — account */}
+      {/* Option 1, account */}
       <div className="mt-6 rounded-2xl border border-white/10 bg-[#0f1626] p-5">
         <div className="flex items-start gap-3">
           <UserCircle2 size={20} className="mt-0.5 shrink-0 text-violet-300" />
@@ -352,14 +352,14 @@ function AccountStep({
         <span className="h-px flex-1 bg-white/10" /> or <span className="h-px flex-1 bg-white/10" />
       </div>
 
-      {/* Option 2 — guest */}
+      {/* Option 2, guest */}
       <div className="rounded-2xl border border-white/10 bg-[#0f1626] p-5">
         <div className="flex items-start gap-3">
           <UserRound size={20} className="mt-0.5 shrink-0 text-white/60" />
           <div>
             <p className="font-semibold text-white">Continue as a guest</p>
             <p className="mt-1 text-[13px] leading-6 text-white/55">
-              Give without an account. We&apos;ll email your receipt — you just
+              Give without an account. We&apos;ll email your receipt, you just
               won&apos;t get a dashboard.
             </p>
           </div>

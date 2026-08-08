@@ -28,7 +28,7 @@ export default function VisionPage() {
       <PageHeader
         eyebrow="Future Vision"
         title="What we hope to build next."
-        description="Honest dreams with honest numbers. Nothing here has started yet — but each one could, with the right partner."
+        description="Honest dreams with honest numbers. Nothing here has started yet, but each one could, with the right partner."
         actions={
           <a
             href="mailto:excellentkenya@gmail.com?subject=A%20vision%20item%20I%27d%20like%20to%20discuss"

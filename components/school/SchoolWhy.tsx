@@ -19,7 +19,7 @@ export default function SchoolWhy() {
             Six Reasons Parents Choose Us
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-[14px] leading-7 text-white/70 md:mt-5 md:text-[15px] md:leading-8">
-            We are not the biggest school in the county &mdash; but we believe
+            We are not the biggest school in the county, but we believe
             we are one of the most caring, the most honest, and the most
             faithful to the calling.
           </p>

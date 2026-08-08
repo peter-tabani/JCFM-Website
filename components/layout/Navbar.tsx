@@ -20,7 +20,7 @@ const searchIndex = [
   { title: "Contact Us", desc: "Talk to the Ministry leadership", href: "/#contact", icon: <MapPin size={16} />, tags: ["contact", "location", "address", "nzoia", "bungoma", "talk"] },
   { title: "Email JCFM", desc: "info@jcfm.org", href: "mailto:info@jcfm.org", icon: <Mail size={16} />, tags: ["email", "mail", "write", "contact", "info"] },
   { title: "Headquarters", desc: "Nzoia, Bungoma County, Kenya", href: "/#contact", icon: <MapPin size={16} />, tags: ["location", "where", "address", "nzoia", "bungoma", "hq", "headquarters"] },
-  { title: "Sunday Service", desc: "Sundays · 9:00 AM – 1:00 PM", href: "/#church", icon: <BookOpen size={16} />, tags: ["hours", "time", "sunday", "service", "schedule", "when"] },
+  { title: "Sunday Service", desc: "Sundays · 9:00 AM - 1:00 PM", href: "/#church", icon: <BookOpen size={16} />, tags: ["hours", "time", "sunday", "service", "schedule", "when"] },
 ];
 
 const QUICK_SEARCHES = ["Church", "School", "Give", "Sermons", "Contact", "Ministries", "Admissions"];
@@ -175,7 +175,7 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Visit CTA — soft, non-transactional */}
+            {/* Visit CTA, soft, non-transactional */}
             <Link
               href="/#contact"
               className="flex shrink-0 items-center gap-2 border-l border-white/15 bg-[#7c3aed] px-6 py-[18px] text-[12px] font-bold uppercase tracking-[0.2em] text-white transition hover:bg-[#6d28d9]"

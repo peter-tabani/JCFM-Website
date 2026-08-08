@@ -12,7 +12,7 @@ export default function Footer() {
             Expanding the Kingdom, One Community at a Time
           </p>
           <p className="mt-4 leading-8 text-white/65">
-            Jesus Christ Founder Ministry — a Christ-centered ministry
+            Jesus Christ Founder Ministry, a Christ-centered ministry
             headquartered in Nzoia, Bungoma, with branches across Kenya.
           </p>
         </div>
@@ -37,7 +37,7 @@ export default function Footer() {
             <a href="mailto:info@jcfm.org" className="block transition hover:text-[#86efac]">
               info@jcfm.org
             </a>
-            <p>Sunday Service: 9:00 AM – 1:00 PM</p>
+            <p>Sunday Service: 9:00 AM - 1:00 PM</p>
           </div>
         </div>
 

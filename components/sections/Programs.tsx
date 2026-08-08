@@ -8,7 +8,7 @@ const programs = [
   {
     id: "ecde",
     title: "ECDE",
-    subtitle: "PP1 – PP2",
+    subtitle: "PP1 - PP2",
     image: "/images/programs/ecde.jpg",
     fallbackColor: "from-blue-600 to-indigo-500",
     description:
@@ -18,22 +18,22 @@ const programs = [
   {
     id: "primary",
     title: "Primary School",
-    subtitle: "Grade 1 – 6",
+    subtitle: "Grade 1 - 6",
     image: "/images/programs/primary.jpg",
     fallbackColor: "from-blue-700 to-blue-500",
     description:
       "A balanced CBC-based programme emphasising Mathematics, Science, Social Studies, Communication, and Biblical character formation. Learners are guided to grow academically and develop strong moral values rooted in faith.",
-    details: ["Grade 1 – 6", "CBC Curriculum", "KPSEA Assessment"],
+    details: ["Grade 1 - 6", "CBC Curriculum", "KPSEA Assessment"],
   },
   {
     id: "junior",
     title: "Junior Secondary",
-    subtitle: "Grade 7 – 9",
+    subtitle: "Grade 7 - 9",
     image: "/images/programs/junior.jpg",
     fallbackColor: "from-slate-700 to-slate-600",
     description:
       "Learner-centred preparation developing critical thinking, creativity, and responsibility. Assessed through the Kenya Junior Secondary Education Assessment (KJSEA), our alumni have joined top national schools.",
-    details: ["Grade 7 – 9", "CBC Curriculum", "KJSEA Assessment"],
+    details: ["Grade 7 - 9", "CBC Curriculum", "KJSEA Assessment"],
   },
   {
     id: "islamic",
@@ -58,7 +58,7 @@ function FlipCard({ program }: { program: typeof programs[0] }) {
       onMouseEnter={() => setFlipped(true)}
       onMouseLeave={() => setFlipped(false)}
     >
-      {/* Card wrapper — rotates */}
+      {/* Card wrapper, rotates */}
       <div
         className="relative h-full w-full transition-transform duration-700"
         style={{
@@ -161,13 +161,13 @@ export default function Programs() {
         {/* Header */}
         <div className="mb-14 text-center">
           <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-[#16a34a]">
-            Our Learning Path — CBC Curriculum
+            Our Learning Path, CBC Curriculum
           </p>
           <h2 className="hero-title text-4xl leading-tight text-slate-900 md:text-5xl">
             Programs for Every Stage of Growth
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base leading-8 text-slate-500">
-            From early childhood through Junior Secondary — tap or hover each
+            From early childhood through Junior Secondary, tap or hover each
             card to discover what we offer at JCFM School.
           </p>
         </div>

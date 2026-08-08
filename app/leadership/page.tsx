@@ -16,7 +16,7 @@ const FALLBACK: Leader[] = [
     tag: "Founder & Pastor",
     photo: "/images/staff/director.png",
     email: "info@jcfm.org",
-    quote: "Our calling is to build lives through Christ — in the church, in the classroom, and in the community.",
+    quote: "Our calling is to build lives through Christ, in the church, in the classroom, and in the community.",
     bio: "Rev. Noah Mweruphe is the visionary founder and senior pastor of Jesus Christ Founder Ministry. Since establishing JCFM in 2005, he has led a mission to build lives through Christ.",
   },
 ];

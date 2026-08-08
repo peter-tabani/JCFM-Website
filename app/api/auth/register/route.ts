@@ -40,7 +40,7 @@ export async function POST(req: Request) {
 
   const existing = await prisma.user.findUnique({ where: { email: cleanEmail } });
   if (existing) {
-    // Generic message — do not reveal whether it was OAuth vs password.
+    // Generic message, do not reveal whether it was OAuth vs password.
     return NextResponse.json(
       { error: "An account with that email already exists. Please sign in." },
       { status: 409 }

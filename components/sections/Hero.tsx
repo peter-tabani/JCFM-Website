@@ -106,7 +106,7 @@ export default function Hero() {
             Jesus Christ Founder Ministry is a Christ-centred family rooted in
             Nzoia, Bungoma and reaching across Kenya through nine growing
             branches. Since {siteData.founded} we have worshipped, served and
-            grown together — expanding the Kingdom of God, one community at a
+            grown together, expanding the Kingdom of God, one community at a
             time. Wherever you join us, there is a place for you here. You are
             welcome home.
           </p>
@@ -195,7 +195,7 @@ export default function Hero() {
               Kenya. What began as a few families gathering to worship is now a
               community of believers serving together. Whether you are looking
               for a church home, a school for your child, or just want to see
-              what God is doing here — you are welcome. We would love to meet
+              what God is doing here, you are welcome. We would love to meet
               you.
             </p>
             <div className="mt-8 flex flex-col items-start">

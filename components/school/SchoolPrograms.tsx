@@ -21,7 +21,7 @@ export default function SchoolPrograms() {
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-[14px] leading-7 text-slate-600 md:mt-5 md:text-[15px] md:leading-8">
             We deliver the full Kenya Competency-Based Curriculum (CBC) across
-            four progressive levels &mdash; each rooted in Christian values
+            four progressive levels, each rooted in Christian values
             and the love of the Lord.
           </p>
         </div>

@@ -6,8 +6,8 @@ import Link from "next/link";
 import { Download, ArrowRight, Mail, CheckCircle2 } from "lucide-react";
 
 export const metadata = {
-  title: "Junior Secondary – Fountain of Hope Academy",
-  description: "Junior Secondary School (Grade 7–9) at Fountain of Hope Academy, Likoni Mombasa. CBC curriculum. KJSEA. Download fee structure.",
+  title: "Junior Secondary - Fountain of Hope Academy",
+  description: "Junior Secondary School (Grade 7-9) at Fountain of Hope Academy, Likoni Mombasa. CBC curriculum. KJSEA. Download fee structure.",
 };
 
 export default function SecondaryPage() {
@@ -21,7 +21,7 @@ export default function SecondaryPage() {
       <section className="bg-[#0f172a] px-4 py-14 text-white md:py-20 lg:px-6">
         <div className="mx-auto max-w-[1400px]">
           <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-[#7c3aed]">
-            Grade 7 – 9
+            Grade 7 - 9
           </p>
           <h1 className="hero-title mb-4 text-4xl font-medium leading-tight md:text-5xl">
             Junior Secondary School
@@ -54,11 +54,11 @@ export default function SecondaryPage() {
         <div className="mx-auto max-w-[1400px]">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { label: "Grades", value: "Grade 7 – 9" },
+              { label: "Grades", value: "Grade 7 - 9" },
               { label: "Curriculum", value: "CBC (Competency-Based)" },
               { label: "Assessment", value: "KJSEA" },
               { label: "Current Highest Grade", value: "Grade 9" },
-              { label: "School Hours", value: "6:00 AM – 6:00 PM" },
+              { label: "School Hours", value: "6:00 AM - 6:00 PM" },
               { label: "Enquiries", value: "info@fountainofhope.ac.ke" },
             ].map((item) => (
               <div key={item.label} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -142,7 +142,7 @@ export default function SecondaryPage() {
               <p className="max-w-xl text-sm leading-8 text-white/60">
                 Fountain of Hope Academy Junior Secondary graduates have gained entry to competitive
                 national schools including Maranda High School, Nyuki School,
-                Kwale High and Matuga Girls — proof that excellence is possible
+                Kwale High and Matuga Girls, proof that excellence is possible
                 for every learner.
               </p>
             </div>

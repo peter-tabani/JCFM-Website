@@ -58,7 +58,7 @@ export default function AdminSettingsPage() {
       />
 
       <div className="px-5 pt-6 md:px-8">
-        <SampleDataBadge note="settings are not saved yet — changes here do not persist." />
+        <SampleDataBadge note="settings are not saved yet, changes here do not persist." />
       </div>
 
       <div className="grid gap-6 px-5 py-6 md:grid-cols-[240px_1fr] md:px-8 md:py-8">

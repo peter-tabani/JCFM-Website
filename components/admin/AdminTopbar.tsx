@@ -23,7 +23,7 @@ export default function AdminTopbar({
 
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-3 border-b border-slate-200 bg-white px-4 md:px-6">
-      {/* Left — mobile menu + date */}
+      {/* Left, mobile menu + date */}
       <div className="flex items-center gap-3">
         <button
           onClick={onOpenSidebar}
@@ -36,7 +36,7 @@ export default function AdminTopbar({
         <p className="hidden text-[12.5px] text-slate-500 md:block">{date}</p>
       </div>
 
-      {/* Middle — search */}
+      {/* Middle, search */}
       <div className="relative hidden max-w-md flex-1 md:block">
         <Search
           size={14}
@@ -53,7 +53,7 @@ export default function AdminTopbar({
         </kbd>
       </div>
 
-      {/* Right — notifications + user */}
+      {/* Right, notifications + user */}
       <div className="flex items-center gap-1.5">
         <button
           aria-label="Notifications"
@@ -95,7 +95,7 @@ export default function AdminTopbar({
                     {user?.name || "Administrator"}
                   </p>
                   <p className="mt-0.5 truncate text-[11.5px] text-slate-500">
-                    {user?.email || "—"}
+                    {user?.email || "-"}
                   </p>
                 </div>
                 <Link

@@ -136,7 +136,7 @@ export default function AdminSidebar({
               {user?.name || "Administrator"}
             </p>
             <p className="truncate text-[11px] text-slate-500">
-              {user?.email || "—"}
+              {user?.email || "-"}
             </p>
           </div>
         </div>

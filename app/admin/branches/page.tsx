@@ -53,7 +53,7 @@ export default function AdminBranches() {
       <PageHeader
         kicker="Ministry · Network"
         title="Branches"
-        description="Manage the nine-branch JCFM network across Kenya — assign pastors, update contacts, and track weekly attendance."
+        description="Manage the nine-branch JCFM network across Kenya, assign pastors, update contacts, and track weekly attendance."
         actions={
           <>
             <PrimaryButton icon={PlusCircle}>New Branch</PrimaryButton>

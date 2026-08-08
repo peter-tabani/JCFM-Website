@@ -26,7 +26,7 @@ const fmtUSD = (cents: number) =>
 type AdminStats = { members: number; mediaPublished: number; mediaTotal: number; givingMonthCents: number };
 
 const ACTIVITY = [
-  { t: "1 hr ago", who: "Bishop N. Barasa", what: "Uploaded a video", target: "“Walking by faith — Hebrews 11”", tone: "info" as const },
+  { t: "1 hr ago", who: "Bishop N. Barasa", what: "Uploaded a video", target: "“Walking by faith, Hebrews 11”", tone: "info" as const },
   { t: "3 hr ago", who: "Office HQ", what: "Logged donation", target: "KSh 25,000 · Water Project", tone: "success" as const },
   { t: "Yesterday", who: "Pst. Festas Soita", what: "Updated branch", target: "Mombasa · Jomvu", tone: "neutral" as const },
   { t: "2 days ago", who: "School Office", what: "Marked fees received", target: "12 pupils · Term 2", tone: "success" as const },
@@ -63,7 +63,7 @@ export default function AdminOverview() {
       <PageHeader
         kicker="Ministry Console · Overview"
         title={`${greeting}, ${firstName}.`}
-        description="A quick view of the Ministry today — branches, members, sermons published, and giving for the current month."
+        description="A quick view of the Ministry today, branches, members, sermons published, and giving for the current month."
         actions={
           <>
             <PrimaryButton href="/admin/media" icon={ImagePlus}>
@@ -91,21 +91,21 @@ export default function AdminOverview() {
             icon={Users}
             accent="gold"
             label="Members on Roll"
-            value={stats ? String(stats.members) : "—"}
+            value={stats ? String(stats.members) : "-"}
             sub="In the directory"
           />
           <StatCard
             icon={Images}
             accent="green"
             label="Life at JCFM"
-            value={stats ? String(stats.mediaPublished) : "—"}
+            value={stats ? String(stats.mediaPublished) : "-"}
             sub={stats ? `${stats.mediaTotal} uploaded` : "Photos & videos"}
           />
           <StatCard
             icon={Banknote}
             accent="red"
             label="Giving · This Month"
-            value={stats ? fmtUSD(stats.givingMonthCents) : "—"}
+            value={stats ? fmtUSD(stats.givingMonthCents) : "-"}
             sub="Online gifts (USD)"
           />
         </div>
@@ -268,7 +268,7 @@ export default function AdminOverview() {
                     <td className="px-5 py-3.5 text-[13px] text-slate-700">{b.pastor}</td>
                     <td className="px-5 py-3.5 text-[12px] text-slate-500">{b.location}</td>
                     <td className="px-5 py-3.5 text-right font-mono text-[13px] text-slate-900">
-                      {[120, 64, 58, 41, 49, 33, 38, 27, 98][i] ?? "—"}
+                      {[120, 64, 58, 41, 49, 33, 38, 27, 98][i] ?? "-"}
                     </td>
                     <td className="px-5 py-3.5 text-right">
                       <StatusPill label="Active" tone="success" />

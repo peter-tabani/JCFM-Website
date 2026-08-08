@@ -19,11 +19,11 @@ import { siteData } from "@/data/site";
 export const metadata = {
   title: "Mission Trips | Jesus Christ Founder Ministry",
   description:
-    "An invitation to come and serve in Kenya with Jesus Christ Founder Ministry — preaching, teaching, medical outreach, children's ministry, and home visits in Bungoma and across our branches.",
+    "An invitation to come and serve in Kenya with Jesus Christ Founder Ministry, preaching, teaching, medical outreach, children's ministry, and home visits in Bungoma and across our branches.",
 };
 
 // ─────────────────────────────────────────────────────────────
-// JCFM brand palette — matches the home page dark theme.
+// JCFM brand palette, matches the home page dark theme.
 // Backgrounds: #080b16 / black. Text: white. Accent: green #15803d.
 // Primary CTA: #7c3aed (hover #6d28d9). Light accent: #c4b5fd.
 // ─────────────────────────────────────────────────────────────
@@ -62,7 +62,7 @@ const TRIPS = [
   },
 ];
 
-// Add or remove photos here — just drop a file into /public/images
+// Add or remove photos here, just drop a file into /public/images
 // and add an entry below. The carousel slides through them automatically.
 const GALLERY = [
   {
@@ -113,7 +113,7 @@ export default function MissionTripsPage() {
     <main className="min-h-screen bg-[#080b16] text-white">
 
       {/* ─────────────────────────────────────────────────────────
-          1.  Hero banner — same as the JCFM home page hero:
+          1.  Hero banner, same as the JCFM home page hero:
               embedded nav, full-bleed image, dark overlay, CTAs.
           ───────────────────────────────────────────────────────── */}
       <section className="relative isolate min-h-screen overflow-hidden bg-[#0f172a]">
@@ -210,7 +210,7 @@ export default function MissionTripsPage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────
-          2.  Opening narrative — long flowing prose, single column.
+          2.  Opening narrative, long flowing prose, single column.
           ───────────────────────────────────────────────────────── */}
       <section className="border-b border-white/10 bg-[#080b16]">
         <div className="mx-auto max-w-[760px] px-6 py-16 md:py-24">
@@ -319,7 +319,7 @@ export default function MissionTripsPage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────
-          5.  Photo gallery — auto-sliding carousel of field moments.
+          5.  Photo gallery, auto-sliding carousel of field moments.
           ───────────────────────────────────────────────────────── */}
       <section className="border-b border-white/10 bg-black">
         <div className="mx-auto max-w-[1280px] px-6 py-16 md:py-20">
@@ -337,7 +337,7 @@ export default function MissionTripsPage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────
-          6.  Recent / featured trips — three cards.
+          6.  Recent / featured trips, three cards.
           ───────────────────────────────────────────────────────── */}
       <section className="border-b border-white/10 bg-[#080b16]">
         <div className="mx-auto max-w-[1180px] px-6 py-12 md:py-20">
@@ -378,7 +378,7 @@ export default function MissionTripsPage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────
-          7.  Application / contact — invitation block.
+          7.  Application / contact, invitation block.
           ───────────────────────────────────────────────────────── */}
       <section className="border-b border-white/10 bg-black">
         <div className="mx-auto max-w-[940px] px-6 py-14 text-center md:py-20">

@@ -46,7 +46,7 @@ export async function POST(req: Request) {
     }
   }
 
-  // Validate the amount SERVER-SIDE — never trust the client.
+  // Validate the amount SERVER-SIDE, never trust the client.
   const amountCheck = validateAmountCents(amount);
   if (!amountCheck.ok) {
     return NextResponse.json({ error: amountCheck.error }, { status: 400 });

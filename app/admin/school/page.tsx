@@ -23,16 +23,16 @@ import {
 
 const ENROLMENT_BY_LEVEL = [
   { code: "PG", level: "Playgroup & PP1/PP2", pupils: 38, capacity: 50 },
-  { code: "LP", level: "Lower Primary (G1–3)", pupils: 84, capacity: 90 },
-  { code: "UP", level: "Upper Primary (G4–6)", pupils: 76, capacity: 90 },
-  { code: "JSS", level: "Junior School (G7–9)", pupils: 42, capacity: 60 },
+  { code: "LP", level: "Lower Primary (G1-3)", pupils: 84, capacity: 90 },
+  { code: "UP", level: "Upper Primary (G4-6)", pupils: 76, capacity: 90 },
+  { code: "JSS", level: "Junior School (G7-9)", pupils: 42, capacity: 60 },
 ];
 
 const FEE_STATUS = [
   { level: "Playgroup / PP1 / PP2", expected: 247_000, collected: 232_500, balance: 14_500 },
-  { level: "Lower Primary (G1–3)", expected: 672_000, collected: 598_400, balance: 73_600 },
-  { level: "Upper Primary (G4–6)", expected: 684_000, collected: 605_500, balance: 78_500 },
-  { level: "Junior School (G7–9)", expected: 441_000, collected: 388_000, balance: 53_000 },
+  { level: "Lower Primary (G1-3)", expected: 672_000, collected: 598_400, balance: 73_600 },
+  { level: "Upper Primary (G4-6)", expected: 684_000, collected: 605_500, balance: 78_500 },
+  { level: "Junior School (G7-9)", expected: 441_000, collected: 388_000, balance: 53_000 },
 ];
 
 const APPLICATIONS = [
@@ -58,7 +58,7 @@ export default function AdminSchool() {
       <PageHeader
         kicker="Education Arm"
         title="Fountain of Hope Academy"
-        description="Oversight of the Ministry's school — enrolment, fees collection, applications, and staff. The school's own admin tools live at the school office."
+        description="Oversight of the Ministry's school, enrolment, fees collection, applications, and staff. The school's own admin tools live at the school office."
         actions={
           <>
             <PrimaryButton icon={PlusCircle}>Record Payment</PrimaryButton>

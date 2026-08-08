@@ -6,9 +6,9 @@ import Footer from "@/components/layout/Footer";
 import Journey from "@/components/sections/Journey";
 
 export const metadata: Metadata = {
-  title: "Our Journey — Jesus Christ Founder Ministry",
+  title: "Our Journey, Jesus Christ Founder Ministry",
   description:
-    "The story of Jesus Christ Founder Ministry — from a small gathering of believers in Sikalame to a network of churches and a school serving communities across Kenya.",
+    "The story of Jesus Christ Founder Ministry, from a small gathering of believers in Sikalame to a network of churches and a school serving communities across Kenya.",
 };
 
 export default function JourneyPage() {

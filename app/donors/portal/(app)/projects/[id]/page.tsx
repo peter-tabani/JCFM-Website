@@ -167,7 +167,7 @@ export default function ProjectDetail({
                 Before &amp; After
               </h2>
               <p className="mt-1 max-w-xl text-[13px] text-white/45">
-                What was, and what is — paid for by gifts like yours.
+                What was, and what is, paid for by gifts like yours.
               </p>
             </div>
             <div className="space-y-5">

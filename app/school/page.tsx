@@ -6,14 +6,13 @@ import SchoolPrograms from "@/components/school/SchoolPrograms";
 import SchoolWhy from "@/components/school/SchoolWhy";
 import SchoolFaculty from "@/components/school/SchoolFaculty";
 import SchoolAdmissions from "@/components/school/SchoolAdmissions";
-import SchoolTestimonials from "@/components/school/SchoolTestimonials";
 import SchoolContact from "@/components/school/SchoolContact";
 import SchoolFooter from "@/components/school/SchoolFooter";
 
 export const metadata: Metadata = {
-  title: "Fountain of Hope Academy — An Education Ministry of JCFM",
+  title: "Fountain of Hope Academy, An Education Ministry of JCFM",
   description:
-    "Fountain of Hope Academy — a faith-based, CBC-aligned day school in Nzoia, Bungoma. Playgroup, Primary and Junior School under the Jesus Christ Founder Ministry.",
+    "Fountain of Hope Academy, a faith-based, CBC-aligned day school in Nzoia, Bungoma. Playgroup, Primary and Junior School under the Jesus Christ Founder Ministry.",
 };
 
 export default function SchoolPage() {
@@ -26,7 +25,6 @@ export default function SchoolPage() {
       <SchoolWhy />
       <SchoolFaculty />
       <SchoolAdmissions />
-      <SchoolTestimonials />
       <SchoolContact />
       <SchoolFooter />
     </main>

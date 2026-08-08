@@ -39,7 +39,7 @@ export default function DonorDashboard() {
   const myDonations = data?.donations ?? [];
   const recentGifts = myDonations.slice(0, 3);
 
-  // Projects this donor has already supported (real data) — used for a badge.
+  // Projects this donor has already supported (real data), used for a badge.
   const supportedSlugs = new Set(
     myDonations
       .filter((d) => d.status === "succeeded" && d.designation !== "general")
@@ -54,7 +54,7 @@ export default function DonorDashboard() {
       <PageHeader
         eyebrow={`${greet()}, ${firstName}`}
         title="Your giving feed"
-        description="Browse the projects you can support — tap Donate on any post to give."
+        description="Browse the projects you can support, tap Donate on any post to give."
         actions={
           <>
             <PrimaryButton href="/donate" icon={HandHeart}>
@@ -111,7 +111,7 @@ export default function DonorDashboard() {
                   key={p.id}
                   className="overflow-hidden rounded-2xl border border-white/10 bg-[#0f1626] shadow-sm"
                 >
-                  {/* Post header — small title on top */}
+                  {/* Post header, small title on top */}
                   <div className="flex items-center gap-3 px-4 py-3">
                     <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-violet-50 text-violet-800">
                       <Heart size={16} strokeWidth={2.25} />

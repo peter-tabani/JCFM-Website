@@ -182,7 +182,7 @@ export default function AdminDonations() {
                       <tr key={r.id} className={i % 2 === 0 ? "bg-white" : "bg-slate-50"}>
                         <td className="px-4 py-3 text-[12px] text-slate-500">{fmtDate(r.createdAt)}</td>
                         <td className="px-4 py-3">
-                          <p className="text-[13px] font-semibold text-slate-900">{r.donorName || "—"}</p>
+                          <p className="text-[13px] font-semibold text-slate-900">{r.donorName || "-"}</p>
                           <p className="text-[11px] text-slate-500">{r.donorEmail}</p>
                         </td>
                         <td className="px-4 py-3 text-[12px] text-slate-600">{r.designationLabel}</td>

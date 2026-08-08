@@ -1,5 +1,5 @@
 // Minimal PayPal REST helpers (server-side only). We talk to PayPal's REST
-// API directly via fetch — no client secret ever reaches the browser.
+// API directly via fetch, no client secret ever reaches the browser.
 
 const ENV = process.env.PAYPAL_ENV === "live" ? "live" : "sandbox";
 

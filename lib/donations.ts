@@ -3,8 +3,7 @@ import { projects } from "@/data/donor";
 // ─────────────────────────────────────────────────────────────
 // Shared, server-trustworthy donation logic.
 // Used by both the donate flow (display) and the payment API routes
-// (validation). The client is NEVER trusted for amounts or labels —
-// the server re-derives the label from the designation slug and
+// (validation). The client is NEVER trusted for amounts or labels, // the server re-derives the label from the designation slug and
 // re-validates the amount here.
 // ─────────────────────────────────────────────────────────────
 
@@ -31,7 +30,7 @@ export const GENERAL_FUND: Cause = {
   slug: "general",
   label: "General Fund",
   blurb:
-    "Let the ministry direct your gift to whatever is most urgent right now — across the church and the school.",
+    "Let the ministry direct your gift to whatever is most urgent right now, across the church and the school.",
   image: GENERAL_IMAGE,
 };
 
@@ -51,7 +50,7 @@ export function causeImage(slug: string | null | undefined): string {
 }
 
 // Server-side resolution of a designation slug to a trusted label.
-// Returns null if the slug is unknown — callers must reject unknown slugs.
+// Returns null if the slug is unknown, callers must reject unknown slugs.
 export function resolveDesignation(
   slug: string | null | undefined
 ): { designation: string; label: string } | null {

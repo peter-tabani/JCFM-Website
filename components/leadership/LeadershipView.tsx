@@ -46,7 +46,7 @@ function LeaderModal({ leader, color, onClose }: { leader: Leader; color: string
           {leader.quote && (
             <div className="rounded-2xl border-l-4 border-[#7c3aed] bg-[#f5f3ff] px-5 py-4">
               <p className="text-sm italic leading-8 text-slate-700">&ldquo;{leader.quote}&rdquo;</p>
-              <p className="mt-2 text-xs font-bold text-[#7c3aed]">— {leader.name}</p>
+              <p className="mt-2 text-xs font-bold text-[#7c3aed]">{leader.name}</p>
             </div>
           )}
           <button onClick={onClose} className="w-full rounded-full bg-[#0f172a] py-3.5 text-sm font-bold text-white">Close</button>
@@ -101,7 +101,7 @@ export default function LeadershipView({ leaders }: { leaders: Leader[] }) {
                 {director.quote && (
                   <div className="rounded-2xl border-l-4 border-[#7c3aed] bg-[#f5f3ff] px-6 py-5">
                     <p className="text-base italic leading-8 text-slate-700">&ldquo;{director.quote}&rdquo;</p>
-                    <p className="mt-3 text-xs font-bold text-[#7c3aed]">— {director.name}</p>
+                    <p className="mt-3 text-xs font-bold text-[#7c3aed]">{director.name}</p>
                   </div>
                 )}
               </div>

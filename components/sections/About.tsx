@@ -34,7 +34,7 @@ export default function About() {
           {/* Double rule */}
           <div className="mt-8 border-t-2 border-b border-[#7c3aed] py-1 md:mt-10" />
 
-          {/* Compact factsheet — 4 facts */}
+          {/* Compact factsheet, 4 facts */}
           <dl className="grid grid-cols-1 gap-x-10 gap-y-2 px-2 py-5 sm:grid-cols-2">
             {FACTSHEET.map((item) => (
               <div
@@ -53,7 +53,7 @@ export default function About() {
 
           <div className="border-b border-t-2 border-[#7c3aed] py-1" />
 
-          {/* Tight, magnetic intro — single short paragraph */}
+          {/* Tight, magnetic intro, single short paragraph */}
           <div className="mt-8 mx-auto max-w-3xl text-center md:mt-10">
             <p className="font-serif text-[17px] leading-[1.75] text-white/78 first-letter:mr-2 first-letter:float-left first-letter:font-serif first-letter:text-[64px] first-letter:leading-[0.9] first-letter:font-semibold first-letter:text-[#c4b5fd] md:text-[19px] md:leading-[1.8]">
               From a humble beginning in a village called Sikalame in Bungoma to a

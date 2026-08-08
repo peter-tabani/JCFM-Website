@@ -22,8 +22,6 @@ export default function SchoolHero() {
             <span className="font-bold uppercase tracking-[0.18em] text-[#15803d]">
               Admissions Open
             </span>
-            <span className="hidden sm:inline">—</span>
-            <span>Term {new Date().getMonth() < 4 ? "1" : new Date().getMonth() < 8 ? "2" : "3"} intake now in progress · Limited slots per class.</span>
           </p>
           <Link
             href="/school#admissions"
@@ -97,7 +95,7 @@ export default function SchoolHero() {
                 &ldquo;{s.motoVerse.text}&rdquo;
               </p>
               <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.22em] text-[#15803d]">
-                — {s.motoVerse.ref}
+                {s.motoVerse.ref}
               </p>
             </div>
           </div>

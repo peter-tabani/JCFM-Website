@@ -71,7 +71,7 @@ export default function MySponsorships() {
                   Children you sponsor
                 </h2>
                 <p className="mt-1 max-w-xl text-[13px] text-white/45">
-                  You support these children through monthly giving — fees, uniform,
+                  You support these children through monthly giving, fees, uniform,
                   meals, books and a steady, watchful presence.
                 </p>
               </div>

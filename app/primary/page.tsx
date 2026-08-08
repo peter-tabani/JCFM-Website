@@ -6,8 +6,8 @@ import Link from "next/link";
 import { Download, ArrowRight, Mail } from "lucide-react";
 
 export const metadata = {
-  title: "Primary School – Fountain of Hope Academy",
-  description: "Primary School (Grade 1–6) at Fountain of Hope Academy, Likoni Mombasa. CBC curriculum. Download fee structure.",
+  title: "Primary School - Fountain of Hope Academy",
+  description: "Primary School (Grade 1-6) at Fountain of Hope Academy, Likoni Mombasa. CBC curriculum. Download fee structure.",
 };
 
 export default function PrimaryPage() {
@@ -21,14 +21,13 @@ export default function PrimaryPage() {
       <section className="bg-[#0f172a] px-4 py-14 text-white md:py-20 lg:px-6">
         <div className="mx-auto max-w-[1400px]">
           <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-[#7c3aed]">
-            Grade 1 – 6
+            Grade 1 - 6
           </p>
           <h1 className="hero-title mb-4 text-4xl font-medium leading-tight md:text-5xl">
             Primary School
           </h1>
           <p className="mb-8 max-w-xl text-base leading-8 text-white/60">
-            A CBC-based programme at Fountain of Hope Academy, Likoni —
-            nurturing learners from Grade 1 through Grade 6 in a disciplined,
+            A CBC-based programme at Fountain of Hope Academy, Likoni, nurturing learners from Grade 1 through Grade 6 in a disciplined,
             supportive environment.
           </p>
           <div className="flex flex-wrap gap-3">
@@ -54,11 +53,11 @@ export default function PrimaryPage() {
         <div className="mx-auto max-w-[1400px]">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { label: "Grades", value: "Grade 1 – 6" },
+              { label: "Grades", value: "Grade 1 - 6" },
               { label: "Curriculum", value: "CBC (Competency-Based)" },
-              { label: "School Type", value: "Day School — Mixed" },
-              { label: "Location", value: "Likoni – Shelley Beach, Mombasa" },
-              { label: "School Hours", value: "6:00 AM – 6:00 PM" },
+              { label: "School Type", value: "Day School, Mixed" },
+              { label: "Location", value: "Likoni - Shelley Beach, Mombasa" },
+              { label: "School Hours", value: "6:00 AM - 6:00 PM" },
               { label: "Enquiries", value: "info@fountainofhope.ac.ke" },
             ].map((item) => (
               <div key={item.label} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -106,7 +105,7 @@ export default function PrimaryPage() {
           <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="hero-title mb-1 text-2xl md:text-3xl">Ready to enrol in Primary?</h2>
-              <p className="text-sm text-white/60">Admissions are open for Grade 1–6. Apply today or visit our office.</p>
+              <p className="text-sm text-white/60">Admissions are open for Grade 1-6. Apply today or visit our office.</p>
             </div>
             <div className="flex flex-wrap gap-3">
               <Link href="/admissions" className="inline-flex items-center gap-2 rounded-full bg-[#7c3aed] px-6 py-3 text-sm font-bold text-white hover:bg-[#6d28d9] transition">

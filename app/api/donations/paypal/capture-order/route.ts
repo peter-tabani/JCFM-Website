@@ -41,7 +41,7 @@ export async function POST(req: Request) {
     const completed = result.status === "COMPLETED";
 
     // Mark succeeded immediately on a completed capture. The webhook also
-    // confirms this (idempotent — only flips pending rows).
+    // confirms this (idempotent, only flips pending rows).
     if (completed) {
       await prisma.donation.updateMany({
         where: { providerRef: orderId, status: "pending" },

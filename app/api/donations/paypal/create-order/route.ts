@@ -56,7 +56,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    const order = await createPayPalOrder(amountCheck.cents, `JCFM donation — ${dest.label}`);
+    const order = await createPayPalOrder(amountCheck.cents, `JCFM donation, ${dest.label}`);
 
     await prisma.donation.create({
       data: {

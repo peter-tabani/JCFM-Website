@@ -13,9 +13,9 @@ export const brand = {
     name: "Fountain of Hope Academy",
     shortName: "Fountain of Hope",
     motto: "Integrity · Courage · Excellence",
-    slogan: "We are led by the design established by God — God first.",
+    slogan: "We are led by the design established by God, God first.",
     vision:
-      "To build confidence and hope in a child — to foster a better tomorrow and a stronger relationship with the community at large.",
+      "To build confidence and hope in a child, to foster a better tomorrow and a stronger relationship with the community at large.",
     mission:
       "With a strong foundation in academics and spiritual guidance, we are committed to raising a dependable child with wholesome health and knowledge, living a stable, honest life.",
     colour: "navy",
@@ -216,8 +216,7 @@ export type Project = {
 };
 
 // Active projects are the five the owner named as currently being funded:
-// Infrastructure, Classrooms, Administration, Kitchen, Water Purification —
-// plus the feeding programme and a completed Bibles drive.
+// Infrastructure, Classrooms, Administration, Kitchen, Water Purification, // plus the feeding programme and a completed Bibles drive.
 export const projects: Project[] = [
   {
     id: "proj-classrooms",
@@ -281,7 +280,7 @@ export const projects: Project[] = [
     category: "buildings",
     shortDesc: "A proper kitchen so every pupil gets a hot meal, safely.",
     longDesc:
-      "Our cooks currently prepare meals in a small temporary shed. A real kitchen with a dining space will let us feed every pupil a hot, safe, dignified lunch every school day — and open the door to a wider feeding programme.",
+      "Our cooks currently prepare meals in a small temporary shed. A real kitchen with a dining space will let us feed every pupil a hot, safe, dignified lunch every school day, and open the door to a wider feeding programme.",
     hero: img("kitchen-render-1", 1400, 800),
     goal: 1_500_000,
     raised: 420_000,
@@ -307,7 +306,7 @@ export const projects: Project[] = [
     category: "community",
     shortDesc: "Clean, safe drinking water for every pupil and staff member.",
     longDesc:
-      "The water we currently use is not always safe to drink. A proper purification system — filters, UV, storage — will give the whole school clean drinking water and save us hundreds of hours a term currently spent boiling.",
+      "The water we currently use is not always safe to drink. A proper purification system, filters, UV, storage, will give the whole school clean drinking water and save us hundreds of hours a term currently spent boiling.",
     hero: img("water-purifier-1", 1400, 800),
     goal: 480_000,
     raised: 295_000,
@@ -334,7 +333,7 @@ export const projects: Project[] = [
     category: "buildings",
     shortDesc: "The small, unglamorous fixes that keep a school running well.",
     longDesc:
-      "The fence, the gate, pit latrines, the pathways, guttering, playground safety — none of these are \"projects\" on their own, but together they are what a school is. This fund keeps all of them in good order.",
+      "The fence, the gate, pit latrines, the pathways, guttering, playground safety, none of these are \"projects\" on their own, but together they are what a school is. This fund keeps all of them in good order.",
     hero: img("infra-fence-1", 1400, 800),
     goal: 600_000,
     raised: 128_000,
@@ -358,7 +357,7 @@ export const projects: Project[] = [
     category: "community",
     shortDesc: "A hot lunch for every pupil, every school day.",
     longDesc:
-      "Many of our pupils used to come to school without a meal. The feeding programme guarantees a hot lunch — maize, beans, vegetables and the occasional treat.",
+      "Many of our pupils used to come to school without a meal. The feeding programme guarantees a hot lunch, maize, beans, vegetables and the occasional treat.",
     hero: img("food-kitchen-1", 1400, 800),
     goal: 600_000,
     raised: 215_000,
@@ -382,7 +381,7 @@ export const projects: Project[] = [
     category: "missions",
     shortDesc: "A study Bible in the heart language of every new believer.",
     longDesc:
-      "Across our branches we welcomed 240 new believers last year. Each one receives a hard-backed study Bible — Swahili, English or their heart language — at their first communion.",
+      "Across our branches we welcomed 240 new believers last year. Each one receives a hard-backed study Bible, Swahili, English or their heart language, at their first communion.",
     hero: img("bible-stack-1", 1400, 800),
     goal: 240_000,
     raised: 240_000,
@@ -399,7 +398,7 @@ export const projects: Project[] = [
 ];
 
 // ── Vision (upcoming, fundable) ───────────────────────────
-// Everything below is a "not started yet" dream — real facilities
+// Everything below is a "not started yet" dream, real facilities
 // Fountain of Hope Academy hopes to add, reflecting what the
 // school currently does NOT have (only a playground today).
 export type VisionItem = {
@@ -421,7 +420,7 @@ export const visionItems: VisionItem[] = [
     category: "education",
     hero: img("future-science-lab-1", 1400, 800),
     blurb:
-      "The school teaches science from textbooks only. A real lab — benches, sinks, a store and basic apparatus — would change what our pupils can actually do and see.",
+      "The school teaches science from textbooks only. A real lab, benches, sinks, a store and basic apparatus, would change what our pupils can actually do and see.",
     bullets: [
       "One lab (8 m × 7 m) with six benches",
       "Apparatus set for Grades 4-8 experiments",
@@ -485,7 +484,7 @@ export const visionItems: VisionItem[] = [
     category: "buildings",
     hero: img("future-dorms-1", 1400, 800),
     blurb:
-      "We do not yet offer boarding. For pupils with difficult home lives, safe dormitories — boys' and girls' — would open up a different kind of future.",
+      "We do not yet offer boarding. For pupils with difficult home lives, safe dormitories, boys' and girls', would open up a different kind of future.",
     bullets: [
       "Boys' dorm: 48 beds",
       "Girls' dorm: 48 beds + matron's quarters",
@@ -501,7 +500,7 @@ export const visionItems: VisionItem[] = [
     category: "children",
     hero: img("future-children-1", 1400, 800),
     blurb:
-      "Twelve children currently on our waiting list — bright, willing, from homes that cannot quite stretch to school fees.",
+      "Twelve children currently on our waiting list, bright, willing, from homes that cannot quite stretch to school fees.",
     bullets: [
       "From KSh 5,000 / month / child",
       "Covers fees, uniform, books, lunch",
@@ -517,7 +516,7 @@ export const visionItems: VisionItem[] = [
     category: "education",
     hero: img("future-music-room-1", 1400, 800),
     blurb:
-      "Talent development is one of our four special programmes — but at the moment we have no dedicated space for it. Two small rooms would change everything.",
+      "Talent development is one of our four special programmes, but at the moment we have no dedicated space for it. Two small rooms would change everything.",
     bullets: [
       "Music room with a few keyboards and drums",
       "Art room with basic supplies",

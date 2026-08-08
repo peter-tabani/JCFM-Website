@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight, ArrowDownRight, type LucideIcon } from "lucide-react";
 
 /* ──────────────────────────────────────────────────────
-   Shared admin UI primitives — keeps pages terse.
+   Shared admin UI primitives, keeps pages terse.
    ────────────────────────────────────────────────────── */
 
 export function PageHeader({
@@ -199,7 +199,7 @@ export function SampleDataBadge({ note }: { note?: string }) {
       <span className="mt-0.5 inline-block h-2 w-2 shrink-0 rounded-full bg-amber-500" />
       <span>
         <span className="font-semibold uppercase tracking-wide">Sample data</span>
-        {" — "}
+        {", "}
         {note ?? "this section is not yet connected to the database."}
       </span>
     </div>

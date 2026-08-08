@@ -92,7 +92,7 @@ export default function AdminEvents() {
         ) : events.length === 0 ? (
           <div className="rounded-lg border border-dashed border-slate-200 bg-white p-10 text-center">
             <p className="text-[14px] font-semibold text-slate-900">No events yet</p>
-            <p className="mt-1 text-[13px] text-slate-500">Add an event — it will show on the public home page once published.</p>
+            <p className="mt-1 text-[13px] text-slate-500">Add an event, it will show on the public home page once published.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

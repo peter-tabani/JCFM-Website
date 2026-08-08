@@ -33,7 +33,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
 
   if (status === "unauthenticated") return null;
 
-  // Session present but not an admin — show a friendly block
+  // Session present but not an admin, show a friendly block
   if (data?.user?.role && data.user.role !== "admin") {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#f8f6ee] p-6">

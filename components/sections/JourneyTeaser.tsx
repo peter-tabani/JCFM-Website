@@ -77,7 +77,7 @@ export default function JourneyTeaser() {
             </p>
             <p className="mt-3 max-w-xl text-[14px] leading-7 text-white/70 md:text-[15px] md:leading-8">
               Through faith, prayer, and the generous support of many, Jesus
-              Christ Founder Ministry continues to expand its work — establishing
+              Christ Founder Ministry continues to expand its work, establishing
               churches, educating children, and serving communities in the name of
               the Lord.
             </p>
@@ -151,7 +151,7 @@ export default function JourneyTeaser() {
                   </p>
                   <p className="mt-1.5 font-serif text-base italic text-white md:text-lg">
                     The land of promise · the borrowed room · how the school
-                    was born &mdash; and how you can write the next chapter.
+                    was born, and how you can write the next chapter.
                   </p>
                   <span className="mt-3 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#86efac]">
                     Continue Reading <ArrowRight size={12} strokeWidth={2.5} />

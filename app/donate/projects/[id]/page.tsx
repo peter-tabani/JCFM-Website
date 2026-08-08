@@ -118,7 +118,7 @@ export default async function PublicProjectDetail({
         ) : (
           <div className="text-center">
             <p className="text-sm font-semibold text-white">
-              This project is fully funded — thank you!
+              This project is fully funded, thank you!
             </p>
             <Link
               href="/donate?step=cause"

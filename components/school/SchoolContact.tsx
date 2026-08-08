@@ -22,7 +22,7 @@ export default function SchoolContact() {
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-[14px] leading-7 text-slate-600 md:mt-5 md:text-[15px] md:leading-8">
             Whether you would like to enquire about admissions, book a campus
-            visit, or simply ask a question &mdash; the office is available
+            visit, or simply ask a question, the office is available
             Monday to Saturday.
           </p>
         </div>
@@ -134,9 +134,9 @@ export default function SchoolContact() {
                 Office Hours
               </p>
               <p className="mt-1 font-serif text-base font-semibold text-[#0b2545]">
-                Mon &ndash; Fri · 8:00 AM &ndash; 5:00 PM
+                Mon - Fri · 8:00 AM - 5:00 PM
               </p>
-              <p className="text-[12px] text-slate-600">Saturdays · 8:00 AM &ndash; 12:00 PM</p>
+              <p className="text-[12px] text-slate-600">Saturdays · 8:00 AM - 12:00 PM</p>
             </div>
           </div>
         </div>

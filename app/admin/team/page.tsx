@@ -148,8 +148,8 @@ export default function AdminTeam() {
             name="featured"
             defaultValue="no"
             options={[
-              { value: "no", label: "No — show in the team grid" },
-              { value: "yes", label: "Yes — feature prominently" },
+              { value: "no", label: "No, show in the team grid" },
+              { value: "yes", label: "Yes, feature prominently" },
             ]}
           />
           {error && <p className="rounded-md bg-rose-50 p-3 text-[13px] text-rose-600">{error}</p>}

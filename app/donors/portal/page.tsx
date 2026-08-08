@@ -20,7 +20,7 @@ export default function DonorPortalPage() {
 function DonorPortalInner() {
   const router = useRouter();
   const search = useSearchParams();
-  // Where to go after auth — the donate flow passes ?callbackUrl=/donate/...
+  // Where to go after auth, the donate flow passes ?callbackUrl=/donate/...
   const callbackUrl = search.get("callbackUrl") || "/donors/portal/dashboard";
 
   const [tab, setTab] = useState<"login" | "register">("login");
@@ -93,7 +93,7 @@ function DonorPortalInner() {
       });
 
       if (res.status === 409) {
-        // Account already exists — switch them to sign in.
+        // Account already exists, switch them to sign in.
         setExistingAccount(true);
         setTab("login");
         setLoginEmail(regEmail);
@@ -206,7 +206,7 @@ function DonorPortalInner() {
               <div>
                 <p className="text-sm font-bold text-white">Welcome back! 👋</p>
                 <p className="text-xs leading-6 text-white/60">
-                  You already have an account. We have switched you to sign in — just enter your password below.
+                  You already have an account. We have switched you to sign in, just enter your password below.
                 </p>
               </div>
             </div>

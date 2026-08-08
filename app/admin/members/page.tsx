@@ -183,7 +183,7 @@ export default function AdminMembers() {
                           <div className="flex flex-col">
                             {m.phone && <span className="font-mono">{m.phone}</span>}
                             {m.email && <span className="truncate">{m.email}</span>}
-                            {!m.phone && !m.email && <span className="text-slate-400">—</span>}
+                            {!m.phone && !m.email && <span className="text-slate-400">-</span>}
                           </div>
                         </td>
                         <td className="px-4 py-3"><StatusPill label={label(m.status)} tone={tone(m.status)} /></td>

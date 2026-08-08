@@ -1,10 +1,10 @@
 import { Calendar } from "lucide-react";
 
 const SCHEDULE = [
-  { day: "Sunday", time: "9:00 AM – 1:00 PM", activity: "Worship Service · Sunday School", primary: true },
-  { day: "Wednesday", time: "5:30 PM – 7:00 PM", activity: "Mid-Week Bible Study & Prayer" },
-  { day: "Friday", time: "5:00 PM – 7:00 PM", activity: "Youth Fellowship" },
-  { day: "Saturday", time: "9:00 AM – 12:00 PM", activity: "Women's Fellowship · Outreach" },
+  { day: "Sunday", time: "9:00 AM - 1:00 PM", activity: "Worship Service · Sunday School", primary: true },
+  { day: "Wednesday", time: "5:30 PM - 7:00 PM", activity: "Mid-Week Bible Study & Prayer" },
+  { day: "Friday", time: "5:00 PM - 7:00 PM", activity: "Youth Fellowship" },
+  { day: "Saturday", time: "9:00 AM - 12:00 PM", activity: "Women's Fellowship · Outreach" },
 ];
 
 export default function ChurchLife() {

@@ -52,7 +52,7 @@ export default function GetInvolved() {
 
       <div className="mx-auto max-w-[1400px] px-5 py-12 sm:px-6 md:py-20">
 
-        {/* Three doors — editorial columns, no hard CTA buttons */}
+        {/* Three doors, editorial columns, no hard CTA buttons */}
         <div className="grid grid-cols-1 divide-y divide-white/10 border-y border-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
           {DOORS.map((d) => (
             <div key={d.title} className="group flex flex-col bg-white/[0.03] p-8 transition hover:bg-white/[0.06] md:p-10">

@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 // Bootstraps an initial admin account so you can sign in to /admin after the
-// database is created. Idempotent — safe to run more than once.
+// database is created. Idempotent, safe to run more than once.
 //
 // Run with:  npx prisma db seed
 // Override the defaults with env vars:
@@ -43,32 +43,32 @@ async function main() {
           featured: true,
           sortOrder: 0,
           email: "info@jcfm.org",
-          quote: "Our calling is to build lives through Christ — in the church, in the classroom, and in the community.",
-          bio: "Rev. Noah Mweruphe is the visionary founder and senior pastor of Jesus Christ Founder Ministry. Since establishing JCFM in 2005, he has led a mission to build lives through Christ — nurturing souls through worship and educating minds from early childhood through junior secondary.",
+          quote: "Our calling is to build lives through Christ, in the church, in the classroom, and in the community.",
+          bio: "Rev. Noah Mweruphe is the visionary founder and senior pastor of Jesus Christ Founder Ministry. Since establishing JCFM in 2005, he has led a mission to build lives through Christ, nurturing souls through worship and educating minds from early childhood through junior secondary.",
         },
         {
           name: "Mr. Julius Mwaro",
-          role: "Head of Institution — Primary School",
+          role: "Head of Institution, Primary School",
           tag: "Primary School",
           photo: "/images/staff/mwaro.png",
           sortOrder: 1,
           email: "info@jcfm.org",
           quote: "A strong primary foundation rooted in faith is the launchpad for everything a child will achieve in life.",
-          bio: "Mr. Julius Mwaro leads the Primary School (Grade 1–6), overseeing the Competency-Based Curriculum (CBC) and ensuring every learner achieves their full potential, with academic excellence and strong Biblical character going hand in hand.",
+          bio: "Mr. Julius Mwaro leads the Primary School (Grade 1-6), overseeing the Competency-Based Curriculum (CBC) and ensuring every learner achieves their full potential, with academic excellence and strong Biblical character going hand in hand.",
         },
         {
           name: "Mr. Idd Amani",
-          role: "Head of Institution — Junior Secondary",
+          role: "Head of Institution, Junior Secondary",
           tag: "Junior Secondary",
           photo: "/images/staff/idd.png",
           sortOrder: 2,
           email: "info@jcfm.org",
           quote: "Junior secondary is where young people discover who they are in Christ.",
-          bio: "Mr. Idd Amani leads the Junior Secondary School (Grade 7–9), preparing learners for the KJSEA. His focus is developing critical thinkers and responsible young adults grounded in Christian values.",
+          bio: "Mr. Idd Amani leads the Junior Secondary School (Grade 7-9), preparing learners for the KJSEA. His focus is developing critical thinkers and responsible young adults grounded in Christian values.",
         },
         {
           name: "Md. Phoebe N. Mulama",
-          role: "Head of Institution — Early Years",
+          role: "Head of Institution, Early Years",
           tag: "ECDE",
           photo: "/images/staff/pheobe.png",
           sortOrder: 3,
@@ -90,7 +90,7 @@ async function main() {
     });
     console.log("Seeded 5 leadership/team members.");
   } else {
-    console.log(`Team already has ${existingTeam} members — left untouched.`);
+    console.log(`Team already has ${existingTeam} members, left untouched.`);
   }
 }
 

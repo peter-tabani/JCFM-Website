@@ -80,7 +80,7 @@ export default function ProjectsBrowse() {
       <PageHeader
         eyebrow="Active Projects"
         title="Where help is needed today."
-        description="Browse the work currently underway. Each project shows you the goal, what's been raised, who benefits and where it stands — with photos."
+        description="Browse the work currently underway. Each project shows you the goal, what's been raised, who benefits and where it stands, with photos."
         actions={
           <GhostButton href="/donors/portal/vision" icon={Sparkles}>
             See What's Next

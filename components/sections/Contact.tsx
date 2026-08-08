@@ -48,7 +48,7 @@ export default function Contact() {
         <div className="mx-auto mb-14 max-w-3xl text-center">
           <p className="mx-auto max-w-2xl text-[15px] leading-8 text-white/66">
             Whether you would like to visit a service, ask about a branch, or
-            simply say hello &mdash; our pastoral team is happy to hear from
+            simply say hello, our pastoral team is happy to hear from
             you. Reach the office directly on any of the lines below.
           </p>
         </div>

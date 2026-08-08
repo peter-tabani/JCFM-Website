@@ -10,7 +10,7 @@ export default function Header() {
           <div className="flex h-20 w-20 shrink-0 items-center justify-center border border-slate-200 bg-white p-1.5">
             <img
               src="/images/logo.png"
-              alt="Jesus Christ Founder Ministry — Official Seal"
+              alt="Jesus Christ Founder Ministry, Official Seal"
               className="h-full w-full object-contain"
             />
           </div>
@@ -45,7 +45,7 @@ export default function Header() {
               <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">
                 Service Hours
               </p>
-              <p className="text-sm font-semibold text-[#4c1d95]">Sun 9:00 AM – 1:00 PM</p>
+              <p className="text-sm font-semibold text-[#4c1d95]">Sun 9:00 AM - 1:00 PM</p>
             </div>
           </div>
 

@@ -80,7 +80,7 @@ export default function AdminMedia() {
     <div>
       <PageHeader
         kicker="Content · Life at JCFM"
-        title="Life at JCFM — Media"
+        title="Life at JCFM, Media"
         description="Upload photos and videos (including sermons). Everything here shows in the 'Life at JCFM' gallery on the public site."
         actions={
           <>
@@ -105,7 +105,7 @@ export default function AdminMedia() {
         ) : items.length === 0 ? (
           <div className="rounded-lg border border-dashed border-slate-200 bg-white p-10 text-center">
             <p className="text-[14px] font-semibold text-slate-900">Nothing uploaded yet</p>
-            <p className="mt-1 text-[13px] text-slate-500">Upload a photo or video — it appears in Life at JCFM.</p>
+            <p className="mt-1 text-[13px] text-slate-500">Upload a photo or video, it appears in Life at JCFM.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -151,7 +151,7 @@ export default function AdminMedia() {
 
       <FormModal title="Upload to Life at JCFM" open={open} onClose={() => setOpen(false)}>
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Type toggle — what are you uploading? */}
+          {/* Type toggle, what are you uploading? */}
           <div>
             <span className="mb-1.5 block text-[12px] font-medium text-slate-700">What are you uploading?</span>
             <div className="flex rounded-md border border-slate-200 bg-slate-50 p-1">
@@ -172,7 +172,7 @@ export default function AdminMedia() {
             </div>
           </div>
 
-          <Field label="Title" name="title" required placeholder={type === "video" ? "e.g. Sunday Sermon — Walking by Faith" : "e.g. Sunday Worship Service"} />
+          <Field label="Title" name="title" required placeholder={type === "video" ? "e.g. Sunday Sermon, Walking by Faith" : "e.g. Sunday Worship Service"} />
           <SelectField
             label="Category"
             name="category"

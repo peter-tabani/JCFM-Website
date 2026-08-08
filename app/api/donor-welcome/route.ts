@@ -37,10 +37,10 @@ export async function POST(req: Request) {
             <div style="padding: 40px;">
               <h2 style="color: #0f172a; font-size: 24px; margin: 0 0 16px;">Welcome, ${name}! 🙏</h2>
               <p style="color: #475569; line-height: 1.8; margin: 0 0 16px;">
-                Thank you for joining our donor family. Your decision to support Fountain of Hope Academy means everything to us — and to the children who walk through our gates every morning.
+                Thank you for joining our donor family. Your decision to support Fountain of Hope Academy means everything to us, and to the children who walk through our gates every morning.
               </p>
               <p style="color: #475569; line-height: 1.8; margin: 0 0 32px;">
-                You can now log in to your donor portal to choose how you'd like to support us — whether by sponsoring a child, making a direct donation, or following our school's growth journey.
+                You can now log in to your donor portal to choose how you'd like to support us, whether by sponsoring a child, making a direct donation, or following our school's growth journey.
               </p>
 
               <!-- CTA -->
@@ -54,9 +54,9 @@ export async function POST(req: Request) {
               <!-- Quote -->
               <div style="border-left: 4px solid #d97706; background: #fffaf2; padding: 16px 20px; border-radius: 0 12px 12px 0; margin: 32px 0;">
                 <p style="color: #78350f; font-style: italic; margin: 0 0 8px; line-height: 1.8;">
-                  "Our goal is that 75% of our learners are fully sponsored — the fortunate and less fortunate, educated together, as equals."
+                  "Our goal is that 75% of our learners are fully sponsored, the fortunate and less fortunate, educated together, as equals."
                 </p>
-                <p style="color: #92400e; font-size: 13px; font-weight: 600; margin: 0;">— Mr. Noah Mweruphe, Director</p>
+                <p style="color: #92400e; font-size: 13px; font-weight: 600; margin: 0;">Mr. Noah Mweruphe, Director</p>
               </div>
 
               <p style="color: #475569; line-height: 1.8; margin: 24px 0 0;">
@@ -69,7 +69,7 @@ export async function POST(req: Request) {
             <div style="background: #f8fafc; padding: 24px 40px; border-top: 1px solid #e2e8f0;">
               <p style="color: #94a3b8; font-size: 12px; margin: 0; line-height: 1.8;">
                 Fountain of Hope Academy<br/>
-                Along Approved-Shelleybeach Road, Likoni – Shelley Beach, Mombasa<br/>
+                Along Approved-Shelleybeach Road, Likoni - Shelley Beach, Mombasa<br/>
                 <a href="mailto:excellentkenya@gmail.com" style="color: #d97706;">excellentkenya@gmail.com</a>
               </p>
             </div>

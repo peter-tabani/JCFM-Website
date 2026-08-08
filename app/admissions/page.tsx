@@ -6,14 +6,14 @@ import AdmissionsForm from "@/components/sections/AdmissionsForm";
 import { ArrowRight, CheckCircle2, Mail } from "lucide-react";
 
 export const metadata = {
-  title: "Admissions – Jesus Christ Founder Ministry",
+  title: "Admissions - Jesus Christ Founder Ministry",
   description:
-    "Apply for admission at JCFM School – Likoni, Mombasa. Open for ECDE, Primary, and Junior Secondary learners.",
+    "Apply for admission at JCFM School - Likoni, Mombasa. Open for ECDE, Primary, and Junior Secondary learners.",
 };
 
 const requirements = [
   {
-    level: "ECDE (PP1 – PP2)",
+    level: "ECDE (PP1 - PP2)",
     age: "3 years and above",
     docs: [
       "Birth certificate (copy)",
@@ -24,7 +24,7 @@ const requirements = [
     border: "border-violet-200 bg-violet-50",
   },
   {
-    level: "Primary (Grade 1–6)",
+    level: "Primary (Grade 1-6)",
     age: "As per CBC guidelines",
     docs: [
       "Birth certificate (copy)",
@@ -36,7 +36,7 @@ const requirements = [
     border: "border-slate-200 bg-slate-50",
   },
   {
-    level: "Junior Secondary (Grade 7–9)",
+    level: "Junior Secondary (Grade 7-9)",
     age: "As per CBC guidelines",
     docs: [
       "KPSEA certificate OR pass JCFM entry exam",
@@ -56,7 +56,7 @@ export default function AdmissionsPage() {
       <Header />
       <Navbar />
 
-      {/* ── Hero — compact on mobile ── */}
+      {/* ── Hero, compact on mobile ── */}
       <section className="relative overflow-hidden bg-[#1e3a5f] py-14 text-white md:py-24">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-15"
@@ -183,7 +183,7 @@ export default function AdmissionsPage() {
               Fill in Your Application
             </h2>
             <p className="mt-4 text-base leading-8 text-slate-600">
-              Complete the form and we'll get back to you within 1–2 business
+              Complete the form and we'll get back to you within 1-2 business
               days. On mobile? Use the Email button for instant help.
             </p>
           </div>
