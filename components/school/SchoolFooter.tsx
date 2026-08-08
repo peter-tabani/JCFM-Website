@@ -68,11 +68,6 @@ export default function SchoolFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/school#admissions" className="text-[13px] text-white/75 transition hover:text-white">
-                  Fees Structure
-                </Link>
-              </li>
-              <li>
                 <Link href="/school#admissions" className="inline-flex items-center gap-1 text-[13px] text-white/75 transition hover:text-white">
                   Admission Form <ArrowUpRight size={12} strokeWidth={2.25} />
                 </Link>
