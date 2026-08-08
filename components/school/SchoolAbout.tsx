@@ -28,7 +28,7 @@ export default function SchoolAbout() {
 
           <div className="mt-8 text-center md:mt-10">
             <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-[#a8201a]">
-              Document № FHA / ABT / 2014
+              Document № FHA / ABT / 2008
             </p>
             <h2 className="mt-3 font-serif text-[28px] font-semibold uppercase leading-[1.05] tracking-[0.03em] text-[#0b2545] sm:text-4xl md:text-5xl">
               A school where faith

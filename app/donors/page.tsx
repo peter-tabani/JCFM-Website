@@ -26,7 +26,7 @@ export const metadata = {
 
 const impactStats = [
   { number: "250+", label: "Sponsored Children", icon: <Heart size={22} /> },
-  { number: "2013", label: "Year Founded", icon: <Star size={22} /> },
+  { number: "2008", label: "Year Founded", icon: <Star size={22} /> },
   { number: "150+", label: "Fee-Paying Learners", icon: <Users size={22} /> },
   { number: "10+", label: "National School Alumni", icon: <GraduationCap size={22} /> },
 ];
@@ -139,7 +139,7 @@ export default function DonorsPage() {
             </h1>
 
             <p className="mb-4 max-w-2xl text-lg leading-9 text-white/80">
-              In 2013, Fountain of Hope Academy opened its doors in Likoni,
+              In 2008, Fountain of Hope Academy opened its doors in Likoni,
               Mombasa — not just as a school, but as a lifeline. Founded with a
               heart for orphans and children from the most disadvantaged
               families, Fountain of Hope Academy set an ambitious goal: that

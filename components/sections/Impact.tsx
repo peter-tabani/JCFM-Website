@@ -1,7 +1,7 @@
 const METRICS = [
-  { n: "2013", l: "The year it all began", sub: "Founded in Nzoia, Bungoma" },
+  { n: "2005", l: "The year it all began", sub: "Founded in Sitikho Sikalame, Bungoma" },
   { n: "9", l: "Branches across Kenya", sub: "From Nzoia HQ to Jomvu, Mombasa" },
-  { n: "12+", l: "Years of faithful service", sub: "Under Bishop Nelson Barasa" },
+  { n: "20+", l: "Years of faithful service", sub: "Under Bishop Nelson Barasa" },
   { n: "1", l: "Clean-water shallow well", sub: "Serving HQ, school & neighbours" },
   { n: "500+", l: "Worshippers every Sunday", sub: "Across all branches combined" },
   { n: "5", l: "Counties touched", sub: "Bungoma, Trans Nzoia, Mombasa & more" },

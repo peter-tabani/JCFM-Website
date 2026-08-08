@@ -24,7 +24,7 @@ import {
 import { MapPin, Users as UsersIcon, Building2, Calendar } from "lucide-react";
 
 const FAKE = [
-  { members: 120, weekly: 145, founded: "2013", status: "active" as const, phone: "+254 721 683 397" },
+  { members: 120, weekly: 145, founded: "2005", status: "active" as const, phone: "+254 721 683 397" },
   { members: 64, weekly: 71, founded: "2016", status: "active" as const, phone: "+254 720 111 222" },
   { members: 58, weekly: 62, founded: "2016", status: "active" as const, phone: "+254 720 222 333" },
   { members: 41, weekly: 48, founded: "2016", status: "active" as const, phone: "+254 720 333 444" },

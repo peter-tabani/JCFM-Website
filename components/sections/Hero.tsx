@@ -1,19 +1,14 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { siteData } from "@/data/site";
-
-const demoHeroImage = "/images/JCFM_Hero.jpg";
+import HeroSlideshow from "@/components/sections/HeroSlideshow";
 
 export default function Hero() {
   return (
     <>
       {/* ── Main banner ── */}
       <section className="relative isolate min-h-screen overflow-hidden bg-[#0f172a]">
-        <img
-          src={demoHeroImage}
-          alt="Church community worship gathering"
-          className="absolute inset-0 h-full w-full scale-[1.03] object-cover object-center brightness-[0.72] contrast-[1.06] saturate-[1.05]"
-        />
+        <HeroSlideshow />
         <div className="pointer-events-none absolute inset-0 bg-black/35" />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-black/85 via-black/45 to-transparent" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-black/65 to-transparent" />
@@ -137,7 +132,7 @@ export default function Hero() {
               href: "/mission-trips",
             },
             {
-              image: "/images/programs/junior.jpg",
+              image: "/images/fountain-of-hope-hero.jpg",
               title: siteData.schoolName,
               cta: "Visit the School",
               accent: "#fbbf24",

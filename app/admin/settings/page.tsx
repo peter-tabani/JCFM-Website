@@ -117,8 +117,8 @@ export default function AdminSettingsPage() {
                 <div className="grid gap-5 md:grid-cols-2">
                   <Field label="Ministry Name" defaultValue="Jesus Christ Founder Ministry" />
                   <Field label="Motto" defaultValue="In Christ Alone" />
-                  <Field label="Founded" defaultValue="2008" />
-                  <Field label="Headquarters" defaultValue="Kakamega, Kenya" />
+                  <Field label="Founded" defaultValue="2005" />
+                  <Field label="Headquarters" defaultValue="Nzoia, Bungoma, Kenya" />
                   <Field label="Primary Phone" defaultValue="+254 700 000 000" />
                   <Field label="Email" type="email" defaultValue="info@jcfm.org" />
                   <div className="md:col-span-2">

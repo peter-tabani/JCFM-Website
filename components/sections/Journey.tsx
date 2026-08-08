@@ -30,7 +30,7 @@ type Chapter = {
 const CHAPTERS: Chapter[] = [
   {
     n: "01",
-    year: "2008",
+    year: "2005",
     era: "The Beginning",
     location: "Sitikho Sikalame, Bungoma",
     material: "Simple structure · Thatch roof",
@@ -48,6 +48,24 @@ const CHAPTERS: Chapter[] = [
   },
   {
     n: "02",
+    year: "2008",
+    era: "Education Begins",
+    location: "Sitikho Sikalame · Church compound",
+    material: "4 classrooms · Cement & iron sheet",
+    title: "A School Was Born",
+    narrative:
+      "Responding to the need for quality Christian education in the community, Fountain of Hope Academy opened its doors with four classrooms, twenty-eight pupils, and three dedicated teachers. From the beginning, the school was founded on a commitment to teach every child in the fear of the Lord.",
+    metric: [
+      { k: "Founding pupils", v: "28" },
+      { k: "Teachers", v: "3" },
+      { k: "Classrooms", v: "4" },
+    ],
+    icon: GraduationCap,
+    image: "/images/staff/director.png",
+    accent: "gold",
+  },
+  {
+    n: "03",
     year: "2010",
     era: "The First Bricks",
     location: "Sikalame · Same compound",
@@ -65,7 +83,7 @@ const CHAPTERS: Chapter[] = [
     accent: "earth",
   },
   {
-    n: "03",
+    n: "04",
     year: "2012",
     era: "Outgrown Sikalame",
     location: "Nzoia Town, Bungoma · Rented",
@@ -83,7 +101,7 @@ const CHAPTERS: Chapter[] = [
     accent: "navy",
   },
   {
-    n: "04",
+    n: "05",
     year: "2013",
     era: "Ministry Founded",
     location: "Nzoia HQ · 1.5 acres",
@@ -101,7 +119,7 @@ const CHAPTERS: Chapter[] = [
     accent: "green",
   },
   {
-    n: "05",
+    n: "06",
     year: "2015",
     era: "A Permanent Sanctuary",
     location: "Nzoia HQ · Same compound",
@@ -117,24 +135,6 @@ const CHAPTERS: Chapter[] = [
     icon: Building2,
     image: "/images/stories/member-02.jpg",
     accent: "navy",
-  },
-  {
-    n: "06",
-    year: "2017",
-    era: "Education Begins",
-    location: "Nzoia HQ · Same compound",
-    material: "4 classrooms · Cement & iron sheet",
-    title: "A School Was Born",
-    narrative:
-      "Responding to the need for quality Christian education in the community, Fountain of Hope Academy opened its doors with four classrooms, twenty-eight pupils, and three dedicated teachers. From the beginning, the school was founded on a commitment to teach every child in the fear of the Lord.",
-    metric: [
-      { k: "Founding pupils", v: "28" },
-      { k: "Teachers", v: "3" },
-      { k: "Classrooms", v: "4" },
-    ],
-    icon: GraduationCap,
-    image: "/images/staff/director.png",
-    accent: "gold",
   },
   {
     n: "07",

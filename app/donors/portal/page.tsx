@@ -173,7 +173,7 @@ function DonorPortalInner() {
           <div className="grid grid-cols-3 gap-3">
             {[
               { n: "250+", l: "Children\nSponsored" },
-              { n: "2013", l: "Year\nFounded" },
+              { n: "2008", l: "Year\nFounded" },
               { n: "10+", l: "National\nAlumni" },
             ].map((s) => (
               <div key={s.l} className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">

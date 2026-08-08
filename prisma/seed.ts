@@ -44,7 +44,7 @@ async function main() {
           sortOrder: 0,
           email: "info@jcfm.org",
           quote: "Our calling is to build lives through Christ — in the church, in the classroom, and in the community.",
-          bio: "Rev. Noah Mweruphe is the visionary founder and senior pastor of Jesus Christ Founder Ministry. Since establishing JCFM in 2013, he has led a mission to build lives through Christ — nurturing souls through worship and educating minds from early childhood through junior secondary.",
+          bio: "Rev. Noah Mweruphe is the visionary founder and senior pastor of Jesus Christ Founder Ministry. Since establishing JCFM in 2005, he has led a mission to build lives through Christ — nurturing souls through worship and educating minds from early childhood through junior secondary.",
         },
         {
           name: "Mr. Julius Mwaro",

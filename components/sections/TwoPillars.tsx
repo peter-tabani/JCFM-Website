@@ -8,12 +8,12 @@ export default function TwoPillars() {
       id="academy-callout"
       className="relative overflow-hidden border-y border-white/10"
       style={{
-        backgroundImage: "url('https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&q=80')",
+        backgroundImage: "url('/images/fountain-of-hope-hero.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="absolute inset-0 bg-[#080b16]/88" />
+      <div className="absolute inset-0 bg-[#080b16]/72" />
       <div className="relative mx-auto max-w-[1400px] px-6 py-10 md:py-12">
         <div className="grid items-center gap-6 md:grid-cols-[auto_1fr_auto] md:gap-10">
 

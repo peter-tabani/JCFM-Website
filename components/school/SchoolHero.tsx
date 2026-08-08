@@ -37,10 +37,10 @@ export default function SchoolHero() {
       {/* ── Main banner ── */}
       <section className="relative overflow-hidden bg-[#0b2545]">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{ backgroundImage: "url('/images/hero/kecs-gate.webp')" }}
+          className="absolute inset-0 bg-cover bg-center opacity-45"
+          style={{ backgroundImage: "url('/images/fountain-of-hope-hero.jpg')" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0b2545] via-[#0b2545]/95 to-[#0b2545]/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0b2545] via-[#0b2545]/90 to-[#0b2545]/60" />
 
         <div className="relative mx-auto max-w-[1400px] px-5 py-12 sm:px-6 sm:py-16 md:py-24">
           <div className="max-w-4xl">
