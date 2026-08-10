@@ -89,6 +89,7 @@ export const siteData = {
       { label: "Programs", href: "/school#programs" },
       { label: "Why Us", href: "/school#why" },
       { label: "Faculty", href: "/school#faculty" },
+      { label: "Gallery", href: "/school#gallery" },
       { label: "Admissions", href: "/school#admissions" },
       { label: "Contact", href: "/school#contact" },
     ],

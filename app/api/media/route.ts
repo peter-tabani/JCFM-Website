@@ -4,10 +4,12 @@ import { prisma } from "@/lib/prisma";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-// Public: published media for the "Life at JCFM" gallery. No auth.
-export async function GET() {
+// Public: published media for a gallery. No auth.
+// ?section=church (Life at JCFM, default) or ?section=school (Fountain of Hope).
+export async function GET(req: Request) {
+  const section = new URL(req.url).searchParams.get("section") ?? "church";
   const media = await prisma.mediaItem.findMany({
-    where: { published: true },
+    where: { published: true, section },
     orderBy: { createdAt: "desc" },
     take: 60,
   });

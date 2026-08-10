@@ -5,6 +5,7 @@ import SchoolAbout from "@/components/school/SchoolAbout";
 import SchoolPrograms from "@/components/school/SchoolPrograms";
 import SchoolWhy from "@/components/school/SchoolWhy";
 import SchoolFaculty from "@/components/school/SchoolFaculty";
+import SchoolMediaGallery from "@/components/school/SchoolMediaGallery";
 import SchoolAdmissions from "@/components/school/SchoolAdmissions";
 import SchoolContact from "@/components/school/SchoolContact";
 import SchoolFooter from "@/components/school/SchoolFooter";
@@ -24,6 +25,7 @@ export default function SchoolPage() {
       <SchoolPrograms />
       <SchoolWhy />
       <SchoolFaculty />
+      <SchoolMediaGallery />
       <SchoolAdmissions />
       <SchoolContact />
       <SchoolFooter />

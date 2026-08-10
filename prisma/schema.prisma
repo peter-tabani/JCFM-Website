@@ -126,6 +126,9 @@ model MediaItem {
   type      MediaType
   title     String
   category  String    @default("Worship")
+  // Which public gallery this belongs to: "church" (Life at JCFM) or
+  // "school" (Fountain of Hope Academy). Keeps the two galleries separate.
+  section   String    @default("church")
   url       String
   thumbnail String?
   published Boolean   @default(true)

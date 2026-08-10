@@ -6,6 +6,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const TYPES = ["image", "video"] as const;
+const SECTIONS = ["church", "school"] as const;
 
 export async function GET() {
   const admin = await getAdmin();
@@ -30,6 +31,10 @@ export async function POST(req: Request) {
   const title = String(body.title ?? "").trim();
   const category = String(body.category ?? "Worship").trim() || "Worship";
   const url = String(body.url ?? "").trim();
+  const sectionRaw = String(body.section ?? "church");
+  const section = SECTIONS.includes(sectionRaw as (typeof SECTIONS)[number])
+    ? sectionRaw
+    : "church";
 
   if (!TYPES.includes(type as (typeof TYPES)[number])) {
     return NextResponse.json({ error: "Choose image or video." }, { status: 400 });
@@ -47,6 +52,7 @@ export async function POST(req: Request) {
       type: type as (typeof TYPES)[number],
       title,
       category,
+      section,
       url,
       thumbnail: body.thumbnail ? String(body.thumbnail).trim() : null,
       published: body.published === false ? false : true,
