@@ -89,6 +89,42 @@ const GALLERY = [
     src: "/images/staff/blevins1.jpeg",
     alt: "Spending time with the children",
   },
+  {
+    src: "/images/blevinswithbishop.jpg",
+    alt: "A visiting friend with Bishop Nelson Barasa",
+  },
+  {
+    src: "/images/beckyvisitor.jpg",
+    alt: "A visiting friend with the JCFM family",
+  },
+  {
+    src: "/images/visitorsonMudchurch.jpg",
+    alt: "Visiting the original mud-walled church in Bungoma",
+  },
+  {
+    src: "/images/visitorsonMudchurch2.jpg",
+    alt: "At the mud church with the local congregation",
+  },
+  {
+    src: "/images/church-visitor-board-meeting.jpg",
+    alt: "Church and visitor board meeting",
+  },
+  {
+    src: "/images/visitorswalkingwithbagsinrestuarant.jpg",
+    alt: "Welcoming the visiting team",
+  },
+  {
+    src: "/images/allvisitorsmasaimara.jpg",
+    alt: "The visiting team at the Masai Mara",
+  },
+  {
+    src: "/images/3visitorsstandingMasaimara.jpg",
+    alt: "Visitors at the Masai Mara reserve",
+  },
+  {
+    src: "/images/visitorscarsmasaimara.jpg",
+    alt: "On safari at the Masai Mara",
+  },
 ];
 
 const TESTIMONIALS = [
