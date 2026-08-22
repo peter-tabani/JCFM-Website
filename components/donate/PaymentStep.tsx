@@ -1,36 +1,32 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { loadStripe } from "@stripe/stripe-js";
-import {
-  Elements,
-  PaymentElement,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js";
-import {
-  PayPalScriptProvider,
-  PayPalButtons,
-} from "@paypal/react-paypal-js";
-import { ArrowLeft, CreditCard, Loader2, AlertCircle } from "lucide-react";
+import Script from "next/script";
+import { ArrowLeft, Loader2, AlertCircle, Smartphone } from "lucide-react";
 import OrderSummary from "@/components/donate/OrderSummary";
 import { fmtUSD } from "@/lib/donations";
-
-const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
-const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
-
-// Only treat keys as real when they aren't the .env.example placeholders,
-// so donors see a clear "add your keys" notice rather than a payment error.
-const STRIPE_READY = !!STRIPE_PK && /^pk_(test|live)_/.test(STRIPE_PK) && !STRIPE_PK.includes("xxx");
-const PAYPAL_READY = !!PAYPAL_CLIENT_ID && !PAYPAL_CLIENT_ID.includes("xxx") && PAYPAL_CLIENT_ID.length > 12;
-
-// Load Stripe once at module scope.
-const stripePromise = STRIPE_READY ? loadStripe(STRIPE_PK!) : null;
-
-type Method = "stripe" | "paypal";
+import { INTASEND_PUBLIC_KEY, INTASEND_LIVE, intasendConfigured } from "@/lib/intasend";
 
 export type GuestInfo = { email: string; name: string } | null;
+
+// IntaSend's InlineJS widget attaches to any element with class
+// "intaSendPayButton" and reads the data-* attributes below.
+type IntaSendInstance = {
+  on: (
+    event: "COMPLETE" | "FAILED" | "IN-PROGRESS",
+    cb: (results: unknown) => void
+  ) => IntaSendInstance;
+};
+type IntaSendConstructor = new (config: {
+  publicAPIKey: string;
+  live: boolean;
+}) => IntaSendInstance;
+declare global {
+  interface Window {
+    IntaSend?: IntaSendConstructor;
+  }
+}
 
 export default function PaymentStep({
   designation,
@@ -47,12 +43,22 @@ export default function PaymentStep({
   guest: GuestInfo;
   onBack: () => void;
 }) {
-  const [method, setMethod] = useState<Method>("stripe");
+  const router = useRouter();
+  const configured = intasendConfigured();
 
-  // The URL the donor lands on after a successful payment.
+  const [apiRef, setApiRef] = useState<string | null>(null);
+  const [comment, setComment] = useState(`JCFM Donation - ${label}`);
+  const [prepError, setPrepError] = useState<string | null>(null);
+  const [sdkReady, setSdkReady] = useState(false);
+  const [sdkFailed, setSdkFailed] = useState(false);
+  const [status, setStatus] = useState<"idle" | "in-progress" | "failed">("idle");
+  const initialized = useRef(false);
+
+  const amountUsd = amountCents / 100;
+
+  // Where the donor lands after a successful gift (the Confirmation step).
   const doneUrl = useMemo(() => {
-    const base =
-      typeof window !== "undefined" ? window.location.origin : "";
+    const base = typeof window !== "undefined" ? window.location.origin : "";
     const params = new URLSearchParams({
       step: "done",
       label,
@@ -60,6 +66,46 @@ export default function PaymentStep({
     });
     return `${base}/donate?${params.toString()}`;
   }, [label, amountCents]);
+
+  // Record a PENDING donation server-side and get the api_ref for the widget.
+  useEffect(() => {
+    if (!configured) return;
+    let active = true;
+    setPrepError(null);
+    setApiRef(null);
+    fetch("/api/donations/intasend", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: amountCents,
+        designation,
+        ...(guest ? { email: guest.email, name: guest.name } : {}),
+      }),
+    })
+      .then(async (res) => {
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || "Could not start giving.");
+        if (active) {
+          setApiRef(data.apiRef);
+          if (data.comment) setComment(data.comment);
+        }
+      })
+      .catch((e) => active && setPrepError(e.message));
+    return () => {
+      active = false;
+    };
+  }, [amountCents, designation, guest, configured]);
+
+  // Wire up the IntaSend widget once the SDK and api_ref are both ready.
+  useEffect(() => {
+    if (!sdkReady || !window.IntaSend || initialized.current || !apiRef || !INTASEND_PUBLIC_KEY)
+      return;
+    initialized.current = true;
+    new window.IntaSend({ publicAPIKey: INTASEND_PUBLIC_KEY, live: INTASEND_LIVE })
+      .on("COMPLETE", () => router.push(doneUrl))
+      .on("IN-PROGRESS", () => setStatus("in-progress"))
+      .on("FAILED", () => setStatus("failed"));
+  }, [sdkReady, apiRef, router, doneUrl]);
 
   return (
     <div>
@@ -75,226 +121,64 @@ export default function PaymentStep({
 
       <OrderSummary label={label} amountCents={amountCents} image={image} />
 
-      {/* Method switch */}
-      <div className="mt-6 flex rounded-2xl border border-white/10 bg-white/[0.03] p-1">
-        <button
-          onClick={() => setMethod("stripe")}
-          className={`flex flex-1 items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold transition ${
-            method === "stripe"
-              ? "bg-[#0f1626] text-white shadow-sm"
-              : "text-white/45"
-          }`}
-        >
-          <CreditCard size={15} /> Card / Cash App
-        </button>
-        <button
-          onClick={() => setMethod("paypal")}
-          className={`flex flex-1 items-center justify-center rounded-xl py-2.5 text-sm font-semibold transition ${
-            method === "paypal"
-              ? "bg-[#0f1626] text-white shadow-sm"
-              : "text-white/45"
-          }`}
-        >
-          PayPal
-        </button>
-      </div>
+      {!configured ? (
+        <div className="mt-6 rounded-xl bg-amber-50 p-4 text-sm leading-6 text-amber-800">
+          Online giving isn&apos;t set up yet. Add your IntaSend publishable key
+          (<code className="font-mono">NEXT_PUBLIC_INTASEND_PUBLISHABLE_KEY</code>)
+          to enable donations. See docs/PAYMENTS_SETUP.md.
+        </div>
+      ) : (
+        <div className="mt-6">
+          <Script
+            src="https://unpkg.com/intasend-checkout-sdk"
+            strategy="afterInteractive"
+            onLoad={() => setSdkReady(true)}
+            onError={() => setSdkFailed(true)}
+          />
 
-      <div className="mt-6">
-        {method === "stripe" ? (
-          <StripeSection
-            amountCents={amountCents}
-            designation={designation}
-            returnUrl={doneUrl}
-            guest={guest}
-          />
-        ) : (
-          <PayPalSection
-            amountCents={amountCents}
-            designation={designation}
-            guest={guest}
-          />
-        )}
-      </div>
+          {prepError && <ErrorNotice message={prepError} className="mb-4" />}
+
+          {(!apiRef || (!sdkReady && !sdkFailed)) && !prepError && <Spinner />}
+
+          {sdkFailed && (
+            <ErrorNotice message="Couldn't load the secure payment form. Please check your connection and try again." />
+          )}
+
+          {sdkReady && !sdkFailed && apiRef && (
+            <button
+              type="button"
+              className="intaSendPayButton flex w-full items-center justify-center gap-2 rounded-full bg-[#7c3aed] py-4 font-semibold text-white transition hover:bg-[#6d28d9]"
+              data-amount={amountUsd}
+              data-currency="USD"
+              data-api_ref={apiRef}
+              data-comment={comment}
+              data-redirect_url={doneUrl}
+            >
+              <Smartphone size={18} />
+              Give {fmtUSD(amountCents)} with M-Pesa, Card or Google Pay
+            </button>
+          )}
+
+          {status === "in-progress" && (
+            <div className="mt-4 flex items-center gap-2 rounded-xl border border-amber-300/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
+              <Loader2 size={16} className="shrink-0 animate-spin" />
+              Payment in progress. If you chose M-Pesa, check your phone to approve it.
+            </div>
+          )}
+          {status === "failed" && (
+            <ErrorNotice message="The payment didn't go through. Please try again." className="mt-4" />
+          )}
+
+          <p className="mt-4 text-center text-[12px] leading-6 text-white/40">
+            Secured by IntaSend. Your card and M-Pesa details never touch our
+            servers.
+          </p>
+        </div>
+      )}
     </div>
   );
 }
 
-// ── Stripe (cards + Cash App Pay via the Payment Element) ──
-function StripeSection({
-  amountCents,
-  designation,
-  returnUrl,
-  guest,
-}: {
-  amountCents: number;
-  designation: string;
-  returnUrl: string;
-  guest: GuestInfo;
-}) {
-  const [clientSecret, setClientSecret] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    let active = true;
-    setError(null);
-    setClientSecret(null);
-    fetch("/api/donations/stripe", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        amount: amountCents,
-        designation,
-        ...(guest ? { email: guest.email, name: guest.name } : {}),
-      }),
-    })
-      .then(async (res) => {
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok) throw new Error(data.error || "Could not start payment.");
-        if (active) setClientSecret(data.clientSecret);
-      })
-      .catch((e) => active && setError(e.message));
-    return () => {
-      active = false;
-    };
-  }, [amountCents, designation, guest]);
-
-  if (!stripePromise) {
-    return <ConfigNotice provider="Stripe" />;
-  }
-  if (error) {
-    return <ErrorNotice message={error} />;
-  }
-  if (!clientSecret) {
-    return <Spinner />;
-  }
-
-  return (
-    <Elements
-      stripe={stripePromise}
-      options={{ clientSecret, appearance: { theme: "night", labels: "floating" } }}
-    >
-      <StripeForm returnUrl={returnUrl} amountCents={amountCents} />
-    </Elements>
-  );
-}
-
-function StripeForm({
-  returnUrl,
-  amountCents,
-}: {
-  returnUrl: string;
-  amountCents: number;
-}) {
-  const stripe = useStripe();
-  const elements = useElements();
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!stripe || !elements) return;
-    setSubmitting(true);
-    setError(null);
-
-    const { error: confirmError } = await stripe.confirmPayment({
-      elements,
-      confirmParams: { return_url: returnUrl },
-    });
-
-    // If we reach here, the redirect didn't happen → show the error.
-    if (confirmError) {
-      setError(confirmError.message || "Payment failed. Please try again.");
-      setSubmitting(false);
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <PaymentElement />
-      {error && <ErrorNotice message={error} className="mt-4" />}
-      <button
-        type="submit"
-        disabled={!stripe || submitting}
-        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#7c3aed] py-4 font-semibold text-white transition hover:bg-[#6d28d9] disabled:opacity-60"
-      >
-        {submitting ? (
-          <>
-            <Loader2 size={18} className="animate-spin" /> Processing…
-          </>
-        ) : (
-          <>Donate {fmtUSD(amountCents)}</>
-        )}
-      </button>
-    </form>
-  );
-}
-
-// ── PayPal ──
-function PayPalSection({
-  amountCents,
-  designation,
-  guest,
-}: {
-  amountCents: number;
-  designation: string;
-  guest: GuestInfo;
-}) {
-  const router = useRouter();
-  const [error, setError] = useState<string | null>(null);
-
-  if (!PAYPAL_READY) {
-    return <ConfigNotice provider="PayPal" />;
-  }
-
-  return (
-    <div>
-      {error && <ErrorNotice message={error} className="mb-4" />}
-      <PayPalScriptProvider
-        options={{ clientId: PAYPAL_CLIENT_ID!, currency: "USD", intent: "capture" }}
-      >
-        <PayPalButtons
-          style={{ layout: "vertical", shape: "pill", label: "donate" }}
-          createOrder={async () => {
-            setError(null);
-            const res = await fetch("/api/donations/paypal/create-order", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                amount: amountCents,
-                designation,
-                ...(guest ? { email: guest.email, name: guest.name } : {}),
-              }),
-            });
-            const data = await res.json().catch(() => ({}));
-            if (!res.ok) throw new Error(data.error || "Could not start PayPal.");
-            return data.orderId;
-          }}
-          onApprove={async (data) => {
-            const res = await fetch("/api/donations/paypal/capture-order", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ orderId: data.orderID }),
-            });
-            const result = await res.json().catch(() => ({}));
-            if (!res.ok || !result.ok) {
-              setError(result.error || "PayPal payment could not be completed.");
-              return;
-            }
-            const params = new URLSearchParams({
-              step: "done",
-              label: result.designationLabel ?? "",
-              amount: String(result.amountCents ?? amountCents),
-            });
-            router.push(`/donate?${params.toString()}`);
-          }}
-          onError={() => setError("Something went wrong with PayPal. Please try again.")}
-        />
-      </PayPalScriptProvider>
-    </div>
-  );
-}
-
-// ── Small shared UI ──
 function Spinner() {
   return (
     <div className="flex items-center justify-center py-10 text-white/35">
@@ -316,15 +200,6 @@ function ErrorNotice({
     >
       <AlertCircle size={16} className="mt-0.5 shrink-0" />
       {message}
-    </div>
-  );
-}
-
-function ConfigNotice({ provider }: { provider: string }) {
-  return (
-    <div className="rounded-xl bg-amber-50 p-4 text-sm leading-6 text-amber-800">
-      {provider} isn&apos;t configured yet. Add the {provider} keys to your
-      environment (see docs/PAYMENTS_SETUP.md) to enable this payment method.
     </div>
   );
 }

@@ -26,7 +26,7 @@ type AdminDonation = {
   donorEmail: string | null;
   amountCents: number;
   currency: string;
-  provider: "stripe" | "paypal";
+  provider: "stripe" | "paypal" | "intasend";
   status: "pending" | "succeeded" | "failed";
   designationLabel: string;
   createdAt: string;
@@ -37,7 +37,8 @@ type Totals = { monthCents: number; lifetimeCents: number; succeededCount: numbe
 const fmtUSD = (cents: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: cents % 100 === 0 ? 0 : 2 }).format(cents / 100);
 const fmtDate = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
-const providerLabel = (p: string) => (p === "paypal" ? "PayPal" : "Card / Cash App");
+const providerLabel = (p: string) =>
+  p === "paypal" ? "PayPal" : p === "intasend" ? "M-Pesa / Card" : "Card";
 const statusTone = (s: AdminDonation["status"]) => (s === "succeeded" ? "success" : s === "pending" ? "warn" : "danger");
 const statusLabel = (s: AdminDonation["status"]) => (s === "succeeded" ? "Received" : s === "pending" ? "Pending" : "Failed");
 
@@ -46,7 +47,7 @@ export default function AdminDonations() {
   const [totals, setTotals] = useState<Totals | null>(null);
   const [loading, setLoading] = useState(true);
   const [q, setQ] = useState("");
-  const [provider, setProvider] = useState<"All" | "stripe" | "paypal">("All");
+  const [provider, setProvider] = useState<"All" | "stripe" | "paypal" | "intasend">("All");
   const [status, setStatus] = useState<"All" | AdminDonation["status"]>("All");
 
   const load = useCallback(() => {
@@ -104,13 +105,13 @@ export default function AdminDonations() {
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           <StatCard icon={Banknote} label="Received · This Month" value={fmtUSD(totals?.monthCents ?? 0)} sub="Completed gifts" />
           <StatCard icon={Receipt} label="Lifetime Giving" value={fmtUSD(totals?.lifetimeCents ?? 0)} sub="All completed gifts" />
-          <StatCard icon={CreditCard} label="Completed Gifts" value={String(totals?.succeededCount ?? 0)} sub="Card · Cash App · PayPal" />
+          <StatCard icon={CreditCard} label="Completed Gifts" value={String(totals?.succeededCount ?? 0)} sub="M-Pesa · Card · IntaSend" />
           <StatCard icon={Clock} label="Pending" value={String(totals?.pendingCount ?? 0)} sub="Awaiting confirmation" />
         </div>
 
         <div className="flex items-start gap-2 rounded-md border border-slate-200 bg-slate-50 px-3 py-2.5 text-[12px] leading-5 text-slate-600">
           <Info size={14} className="mt-0.5 shrink-0 text-slate-500" />
-          Donations are recorded automatically from the online giving flow (Stripe &amp; PayPal). Amounts are in US dollars.
+          Donations are recorded automatically from the online giving flow (IntaSend, M-Pesa &amp; card). Amounts are in US dollars.
         </div>
 
         {/* Toolbar */}
@@ -126,8 +127,9 @@ export default function AdminDonations() {
           </div>
           <select value={provider} onChange={(e) => setProvider(e.target.value as typeof provider)} className="min-h-[44px] rounded-md border border-slate-200 bg-white px-3 text-[13px] font-medium text-slate-900 outline-none focus:border-slate-900">
             <option value="All">All methods</option>
-            <option value="stripe">Card / Cash App</option>
+            <option value="intasend">M-Pesa / Card</option>
             <option value="paypal">PayPal</option>
+            <option value="stripe">Card (legacy)</option>
           </select>
           <select value={status} onChange={(e) => setStatus(e.target.value as typeof status)} className="min-h-[44px] rounded-md border border-slate-200 bg-white px-3 text-[13px] font-medium text-slate-900 outline-none focus:border-slate-900">
             <option value="All">All statuses</option>

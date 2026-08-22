@@ -27,7 +27,8 @@ import {
 } from "@/components/donor/useMyDonations";
 
 const providerIcon = (p: string) => (p === "paypal" ? Wallet : CreditCard);
-const providerLabel = (p: string) => (p === "paypal" ? "PayPal" : "Card / Cash App");
+const providerLabel = (p: string) =>
+  p === "paypal" ? "PayPal" : p === "intasend" ? "M-Pesa / Card" : "Card";
 
 function DonationStatusPill({ status }: { status: MyDonation["status"] }) {
   const map = {

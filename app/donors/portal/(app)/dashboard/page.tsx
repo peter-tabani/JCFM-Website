@@ -85,7 +85,7 @@ export default function DonorDashboard() {
                   <div className="min-w-0">
                     <p className="truncate text-[13px] font-semibold text-white">{g.designationLabel}</p>
                     <p className="text-[11px] text-white/45">
-                      {fmtDate(g.createdAt)} · {g.provider === "paypal" ? "PayPal" : "Card / Cash App"}
+                      {fmtDate(g.createdAt)} · {g.provider === "paypal" ? "PayPal" : g.provider === "intasend" ? "M-Pesa / Card" : "Card"}
                       {g.status === "pending" ? " · pending" : ""}
                     </p>
                   </div>

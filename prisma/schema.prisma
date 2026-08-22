@@ -25,6 +25,7 @@ enum DonationStatus {
 enum PaymentProvider {
   stripe
   paypal
+  intasend
 }
 
 enum SermonStatus {

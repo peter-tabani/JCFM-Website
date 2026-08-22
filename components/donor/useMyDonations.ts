@@ -6,7 +6,7 @@ export type MyDonation = {
   id: string;
   amountCents: number;
   currency: string;
-  provider: "stripe" | "paypal";
+  provider: "stripe" | "paypal" | "intasend";
   status: "pending" | "succeeded" | "failed";
   designation: string;
   designationLabel: string;
