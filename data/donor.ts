@@ -1,11 +1,54 @@
 // ─────────────────────────────────────────────────────────
-// Mock data for the Donor / Sponsor portal.
-// In production, swap these for queries against your API.
-// Images use picsum with seeds for stable, royalty-free demo art.
+// Data for the Donor / Sponsor portal and the public donate flow.
 // ─────────────────────────────────────────────────────────
 
-const img = (seed: string, w = 1200, h = 800) =>
-  `https://picsum.photos/seed/${seed}/${w}/${h}`;
+// Real ministry/school photos (committed under /public/images), chosen by the
+// seed keyword so each project/gallery shows a fitting picture instead of a
+// stock placeholder. Swap individual images for exact project photos anytime.
+const IMG_POOL = {
+  food: [
+    "/images/childreneating.jpg",
+    "/images/childrenlineforfood.jpg",
+    "/images/childrendrinkinguji.jpg",
+  ],
+  classroom: [
+    "/images/childreniclas.jpg",
+    "/images/oldclassrooms.jpg",
+    "/images/SundaySchoolSeatedLesson.jpg",
+  ],
+  faith: [
+    "/images/PeopleStandingAtAlter.jpg",
+    "/images/PeopleSittingInChurch.jpg",
+    "/images/SundaySchoolSeated.jpg",
+  ],
+  children: [
+    "/images/childrenout.jpg",
+    "/images/childreniclas.jpg",
+    "/images/SundaySchoolSeated.jpg",
+  ],
+  campus: [
+    "/images/fountain-of-hope-hero.jpg",
+    "/images/oldclassrooms.jpg",
+    "/images/PeopleStandingOutsideChurch.jpg",
+  ],
+};
+
+function hashSeed(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+  return h;
+}
+
+const img = (seed: string, _w = 1200, _h = 800): string => {
+  const s = seed.toLowerCase();
+  let list: string[];
+  if (/(food|kitchen|eat|serv|meal)/.test(s)) list = IMG_POOL.food;
+  else if (/(class|admin|library|lab|computer|build|construct|found|wall|roof|dorm|music|book)/.test(s)) list = IMG_POOL.classroom;
+  else if (/(bible|church|faith|worship)/.test(s)) list = IMG_POOL.faith;
+  else if (/(child|portrait|pupil|aaliyah|brian)/.test(s)) list = IMG_POOL.children;
+  else list = IMG_POOL.campus;
+  return list[hashSeed(seed) % list.length];
+};
 
 // ── Brand (from owner) ────────────────────────────────────
 export const brand = {

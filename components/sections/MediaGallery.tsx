@@ -14,12 +14,12 @@ type GalleryItem = {
 
 // Fallback shown only until the admin uploads media (Admin → Life at JCFM).
 const FALLBACK_ITEMS: GalleryItem[] = [
-  { type: "image", src: "https://images.unsplash.com/photo-1438232992991-995b671e4668?w=800&q=80", thumb: "https://images.unsplash.com/photo-1438232992991-995b671e4668?w=400&q=70", caption: "Sunday Worship Service", tag: "Worship" },
-  { type: "image", src: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=800&q=80", thumb: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=400&q=70", caption: "Prayer & Intercession", tag: "Prayer" },
-  { type: "image", src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80", thumb: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&q=70", caption: "Children's Sunday School", tag: "Children" },
-  { type: "image", src: "https://images.unsplash.com/photo-1543269664-7eef42226a21?w=800&q=80", thumb: "https://images.unsplash.com/photo-1543269664-7eef42226a21?w=400&q=70", caption: "Community Outreach", tag: "Outreach" },
-  { type: "image", src: "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&q=80", thumb: "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=400&q=70", caption: "Women's Fellowship", tag: "Fellowship" },
-  { type: "image", src: "https://images.unsplash.com/photo-1510519138101-570d1dca3d66?w=800&q=80", thumb: "https://images.unsplash.com/photo-1510519138101-570d1dca3d66?w=400&q=70", caption: "Youth Ministry", tag: "Youth" },
+  { type: "image", src: "/images/PeopleStandingAtAlter.jpg", thumb: "/images/PeopleStandingAtAlter.jpg", caption: "Sunday Worship Service", tag: "Worship" },
+  { type: "image", src: "/images/PeopleSittingInChurch.jpg", thumb: "/images/PeopleSittingInChurch.jpg", caption: "Gathered Together", tag: "Worship" },
+  { type: "image", src: "/images/SundaySchoolSeated.jpg", thumb: "/images/SundaySchoolSeated.jpg", caption: "Children's Sunday School", tag: "Children" },
+  { type: "image", src: "/images/PeopleStandingOutsideChurch.jpg", thumb: "/images/PeopleStandingOutsideChurch.jpg", caption: "Fellowship After Service", tag: "Fellowship" },
+  { type: "image", src: "/images/hero-1.jpg", thumb: "/images/hero-1.jpg", caption: "Our Church Family", tag: "Fellowship" },
+  { type: "image", src: "/images/hero-3.jpg", thumb: "/images/hero-3.jpg", caption: "Reaching Our Community", tag: "Outreach" },
 ];
 
 type ApiMedia = {
@@ -87,7 +87,7 @@ export default function MediaGallery() {
       <div
         className="relative flex h-[340px] items-center justify-center overflow-hidden md:h-[440px]"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1438232992991-995b671e4668?w=1600&q=80')",
+          backgroundImage: "url('/images/hero-2.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",

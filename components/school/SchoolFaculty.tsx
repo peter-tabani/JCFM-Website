@@ -1,5 +1,12 @@
 import { siteData } from "@/data/site";
 
+// Initials from a name, e.g. "Rael H. Wafula" -> "RW".
+function initials(name: string): string {
+  const parts = name.replace(/\./g, "").trim().split(/\s+/);
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
 export default function SchoolFaculty() {
   const s = siteData.school;
 
@@ -11,7 +18,7 @@ export default function SchoolFaculty() {
           <div className="flex items-center justify-center gap-3">
             <span className="h-[1px] w-12 bg-[#0b2545] md:w-16" />
             <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#15803d]">
-              Our Faculty
+              Our Team
             </p>
             <span className="h-[1px] w-12 bg-[#0b2545] md:w-16" />
           </div>
@@ -19,79 +26,36 @@ export default function SchoolFaculty() {
             Teachers Who Teach &amp; Care
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-[14px] leading-7 text-slate-600 md:mt-5 md:text-[15px] md:leading-8">
-            Every teacher at Fountain of Hope is registered, trained and
-            personally interviewed for both academic competence and Christian
-            character.
+            The people who look after your child every day, from the classroom
+            to the kitchen and the gate, at Fountain of Hope Academy.
           </p>
         </div>
 
-        {/* Mobile: swipe-snap row */}
-        <div className="md:hidden">
-          <div className="flex items-center justify-between border-b border-[#d4d0c4] pb-2">
-            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#0b2545]">
-              {s.faculty.length} Educators
-            </p>
-            <p className="text-[10px] uppercase tracking-[0.22em] text-slate-500">
-              Swipe →
-            </p>
-          </div>
-          <div className="-mx-5 mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
-            {s.faculty.map((f) => (
-              <article
-                key={f.name}
-                className="flex w-[72vw] shrink-0 snap-center flex-col border-2 border-[#d4d0c4] bg-white"
-              >
-                <div
-                  className="h-56 w-full bg-[#0b2545] bg-cover bg-top"
-                  style={{ backgroundImage: `url('${f.photo}')` }}
-                  role="img"
-                  aria-label={f.name}
-                />
-                <div className="h-[3px] w-full bg-[#15803d]" />
-                <div className="flex flex-1 flex-col p-5">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#15803d]">
-                    {f.role}
-                  </p>
-                  <p className="mt-1.5 font-serif text-base font-semibold text-[#0b2545]">
-                    {f.name}
-                  </p>
-                  <p className="mt-3 border-t border-[#d4d0c4] pt-3 text-[12px] text-slate-600">
-                    {f.subject}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
+        <div className="mb-5 flex items-center justify-between border-b border-[#d4d0c4] pb-2">
+          <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#0b2545]">
+            {s.faculty.length} Team Members
+          </p>
         </div>
 
-        {/* Desktop: 3-col grid */}
-        <div className="hidden grid-cols-2 gap-0 border border-[#d4d0c4] bg-white md:grid lg:grid-cols-3">
+        {/* Roster */}
+        <div className="grid grid-cols-1 gap-0 overflow-hidden border border-[#d4d0c4] bg-white sm:grid-cols-2 lg:grid-cols-3">
           {s.faculty.map((f, i) => (
             <article
               key={f.name}
-              className={`group flex flex-col p-6 transition hover:bg-[#f8f6ee] ${
-                i % 2 === 1 ? "md:border-l md:border-[#d4d0c4]" : ""
-              } ${i < s.faculty.length - 2 ? "md:border-b md:border-[#d4d0c4]" : ""} lg:[&:nth-child(3n+2)]:border-l lg:[&:nth-child(3n+3)]:border-l lg:[&:nth-child(3n+1)]:border-l-0 lg:[&:nth-child(3n+2)]:border-[#d4d0c4] lg:[&:nth-child(3n+3)]:border-[#d4d0c4] lg:[&:nth-child(-n+3)]:border-b lg:[&:nth-child(-n+3)]:border-[#d4d0c4]`}
+              className={`flex items-center gap-4 p-5 transition hover:bg-[#f8f6ee] ${
+                i % 2 === 1 ? "sm:border-l sm:border-[#d4d0c4]" : ""
+              } ${i < s.faculty.length - 1 ? "border-b border-[#d4d0c4]" : ""} lg:[&:nth-child(3n+1)]:border-l-0 lg:[&:not(:nth-child(3n+1))]:border-l lg:[&:not(:nth-child(3n+1))]:border-[#d4d0c4]`}
             >
-              <div className="flex gap-5">
-                <div
-                  className="h-28 w-24 shrink-0 border-2 border-[#15803d] bg-[#0b2545] bg-cover bg-top"
-                  style={{ backgroundImage: `url('${f.photo}')` }}
-                  role="img"
-                  aria-label={f.name}
-                />
-                <div className="min-w-0 flex-1">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#15803d]">
-                    {f.role}
-                  </p>
-                  <p className="mt-1.5 font-serif text-lg font-semibold leading-tight text-[#0b2545]">
-                    {f.name}
-                  </p>
-                  <div className="mt-3 h-[2px] w-10 bg-[#c9a961]" />
-                  <p className="mt-3 text-[12px] leading-6 text-slate-600">
-                    {f.subject}
-                  </p>
-                </div>
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 border-[#15803d] bg-[#0b2545] font-serif text-[15px] font-semibold text-[#c9a961]">
+                {initials(f.name)}
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#15803d]">
+                  {f.role}
+                </p>
+                <p className="mt-1 font-serif text-base font-semibold leading-tight text-[#0b2545]">
+                  {f.name}
+                </p>
               </div>
             </article>
           ))}

@@ -24,7 +24,7 @@ export type Cause = {
 };
 
 // A warm, representative image for the general fund.
-export const GENERAL_IMAGE = "https://picsum.photos/seed/jcfm-where-needed/1200/800";
+export const GENERAL_IMAGE = "/images/PeopleStandingOutsideChurch.jpg";
 
 export const GENERAL_FUND: Cause = {
   slug: "general",

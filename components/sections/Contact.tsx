@@ -21,7 +21,7 @@ export default function Contact() {
       <div
         className="relative flex h-[200px] items-center justify-center overflow-hidden md:h-[260px]"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1543269664-7eef42226a21?w=1600&q=80')",
+          backgroundImage: "url('/images/PeopleStandingOutsideChurch.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center 30%",
           backgroundAttachment: "fixed",

@@ -32,7 +32,7 @@ export default function GetInvolved() {
       <div
         className="relative h-[240px] w-full overflow-hidden md:h-[320px]"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1510519138101-570d1dca3d66?w=1600&q=80')",
+          backgroundImage: "url('/images/PeopleSittingInChurch.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center 60%",
           backgroundAttachment: "fixed",
