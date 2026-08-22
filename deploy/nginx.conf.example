@@ -1,0 +1,124 @@
+# Nginx reverse proxy for the Next.js app (systemd service, port 3000).
+#
+# Installed automatically by deploy.sh on first deploy ONLY — if
+# /etc/nginx/sites-available/jcfm already exists, deploy.sh leaves it
+# alone so it doesn't clobber certbot's HTTPS edits on redeploy.
+#
+# deploy.sh replaces __DOMAIN__ with the real domain before installing.
+#
+# Manual one-time step once DNS points here and plain HTTP works:
+#   sudo certbot --nginx -d __DOMAIN__
+# (certbot rewrites this file in place to add the certificate/redirect —
+# that's exactly why redeploys must not overwrite it.)
+
+# Zone names are namespaced (jcfm_notify, jcfm_paypal — not notify/paypal)
+# since this nginx instance may also be serving other sites (e.g.
+# smart-auction) with their own limit_req_zone directives — zone names
+# must be unique server-wide.
+limit_req_zone $binary_remote_addr zone=jcfm_notify:10m rate=5r/m;
+# PayPal order create/capture — kept even though PayPal is no longer wired
+# into any page (see .env.example) in case those routes are ever revived.
+limit_req_zone $binary_remote_addr zone=jcfm_paypal:10m rate=20r/m;
+# IntaSend checkout creation (unauthenticated, same reasoning as PayPal
+# above) and the webhook IntaSend itself calls back on every payment state
+# change — that one's authenticated by the shared challenge string
+# (INTASEND_WEBHOOK_CHALLENGE) rather than a login, so it's rate-limited
+# too, just generously enough not to drop legitimate retries.
+limit_req_zone $binary_remote_addr zone=jcfm_intasend:10m rate=30r/m;
+
+# www -> bare domain, permanent redirect (both plain HTTP and, once
+# certbot has issued a cert covering the www SAN, HTTPS too). Keeps every
+# page's rel=canonical, the sitemap, and what's actually served all
+# agreeing on ONE host — otherwise search engines see two copies of the
+# same site and have to guess which is authoritative.
+server {
+    listen 80;
+    server_name www.__DOMAIN__;
+    return 301 https://__DOMAIN__$request_uri;
+}
+
+server {
+    listen 80;
+    server_name __DOMAIN__;
+
+    # Defense in depth: Next.js's own server only ever serves files that
+    # are actually under public/ or one of its defined routes, so `.env`,
+    # `.git`, `package.json` etc. are NOT reachable through the Node
+    # process the way they would be on a raw PHP/Apache docroot. This
+    # block is a second layer in case that ever changes (a future static
+    # export, a misconfigured rewrite, etc.) — cheap to have, never wrong.
+    location ~ /\.(?!well-known) {
+        deny all;
+    }
+    location ~* /(package(-lock)?\.json|next\.config\.(ts|js|mjs)|tsconfig\.json)$ {
+        deny all;
+    }
+
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+    # Static assets — let Nginx serve them directly and cache aggressively.
+    location /_next/static/ {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_cache_valid 200 60m;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+    }
+
+    location /images/ {
+        proxy_pass http://127.0.0.1:3000;
+        add_header Cache-Control "public, max-age=86400";
+    }
+
+    # Unauthenticated notification endpoints — throttle to reduce abuse
+    # (spam email/SMS at the site's expense). Adjust rate as needed.
+    location ~ ^/api/(donor-welcome|donor-sms)$ {
+        limit_req zone=jcfm_notify burst=3 nodelay;
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # PayPal order create/capture — real money touches these, so throttle
+    # them too even though they're lower-abuse-value than the notify
+    # endpoints (a scripted flood here just fails against PayPal's own
+    # API, but it's still needless load + noisy logs).
+    location ~ ^/api/paypal/(create-order|capture-order)$ {
+        limit_req zone=jcfm_paypal burst=5 nodelay;
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # IntaSend checkout creation + webhook (real money) and the fx-rate
+    # display lookup the donate button calls on page load.
+    location ~ ^/api/intasend/(create-checkout|webhook|fx-rate)$ {
+        limit_req zone=jcfm_intasend burst=10 nodelay;
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    client_max_body_size 10M;
+}

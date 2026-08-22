@@ -1,0 +1,143 @@
+import { Mail, MapPin, Clock } from "lucide-react";
+import { siteData } from "@/data/site";
+
+const LEADERSHIP = [
+  { ...siteData.contacts.bishop, accent: "navy" as const },
+  { ...siteData.contacts.coordinator, accent: "gold" as const },
+  { ...siteData.contacts.associate, accent: "red" as const },
+];
+
+const ACCENTS: Record<string, { bar: string; chip: string; chipText: string }> = {
+  navy: { bar: "bg-[#4c1d95]", chip: "bg-[#4c1d95]", chipText: "text-white" },
+  gold: { bar: "bg-[#15803d]", chip: "bg-[#15803d]", chipText: "text-white" },
+  red: { bar: "bg-[#dc2626]", chip: "bg-[#dc2626]", chipText: "text-white" },
+};
+
+export default function Contact() {
+  return (
+    <section id="contact" className="border-b border-white/10 bg-[#080b16]">
+
+      {/* Hero banner */}
+      <div
+        className="relative flex h-[200px] items-center justify-center overflow-hidden md:h-[260px]"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1543269664-7eef42226a21?w=1600&q=80')",
+          backgroundSize: "cover",
+          backgroundPosition: "center 30%",
+          backgroundAttachment: "fixed",
+        }}
+      >
+        <div className="absolute inset-0 bg-[#080b16]/85" />
+        <div className="relative z-10 text-center px-4">
+          <div className="flex items-center justify-center gap-3">
+            <span className="h-[1px] w-16 bg-[#86efac]" />
+            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#86efac]">
+              Office of the Ministry
+            </p>
+            <span className="h-[1px] w-16 bg-[#86efac]" />
+          </div>
+          <h2 className="mt-4 font-serif text-3xl font-semibold uppercase leading-tight tracking-[0.02em] text-white md:text-5xl">
+            Talk With Us
+          </h2>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-[1400px] px-5 py-12 sm:px-6 md:py-16">
+
+        {/* Sub-header */}
+        <div className="mx-auto mb-14 max-w-3xl text-center">
+          <p className="mx-auto max-w-2xl text-[15px] leading-8 text-white/66">
+            Whether you would like to visit a service, ask about a branch, or
+            simply say hello &mdash; our pastoral team is happy to hear from
+            you. Reach the office directly on any of the lines below.
+          </p>
+        </div>
+
+        {/* Leadership trio */}
+        <div className="grid grid-cols-1 gap-0 border border-white/10 bg-[#0f172a] shadow-[0_22px_55px_rgba(0,0,0,0.35)] md:grid-cols-3 md:divide-x md:divide-white/10">
+          {LEADERSHIP.map((p) => {
+            const a = ACCENTS[p.accent];
+            return (
+              <div key={p.name} className="flex flex-col">
+                <div className={`h-[3px] w-full ${a.bar}`} />
+                <div className="flex flex-1 flex-col p-7 md:p-9">
+                  <span className={`inline-flex w-fit items-center px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.22em] ${a.chip} ${a.chipText}`}>
+                    {p.role}
+                  </span>
+                  <p className="mt-5 font-serif text-2xl font-semibold uppercase leading-tight tracking-wide text-white">
+                    {p.name}
+                  </p>
+                  <div className="my-4 h-[2px] w-10 bg-[#15803d]" />
+                  <div className="mt-auto flex flex-col gap-0">
+                    <a
+                      href={`mailto:${siteData.email}`}
+                      className="flex items-center justify-between gap-3 border border-[#7c3aed]/70 bg-white/[0.04] px-4 py-3 text-[13px] font-semibold text-[#c4b5fd] transition hover:bg-[#7c3aed] hover:text-white"
+                    >
+                      <span className="flex items-center gap-3">
+                        <Mail size={14} strokeWidth={2.25} />
+                        Email the Office
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Office details strip */}
+        <div className="mt-10 grid grid-cols-1 divide-y divide-white/10 border border-white/10 bg-white/[0.04] md:grid-cols-3 md:divide-x md:divide-y-0">
+          <a
+            href={siteData.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-start gap-4 p-6 transition hover:bg-white/[0.03]"
+          >
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#15803d] bg-[#15803d] text-white">
+              <MapPin size={18} strokeWidth={1.75} />
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#15803d]">
+                Headquarters
+              </p>
+              <p className="mt-1 font-serif text-base font-semibold text-white hover:text-[#fbbf24]">
+                {siteData.location}
+              </p>
+              <p className="text-[12px] text-white/52">Republic of Kenya · Get Directions</p>
+            </div>
+          </a>
+
+          <div className="flex items-start gap-4 p-6">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#4c1d95] bg-[#4c1d95] text-white">
+              <Mail size={18} strokeWidth={1.75} />
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#dc2626]">
+                Email
+              </p>
+              <a href={`mailto:${siteData.email}`} className="mt-1 block font-serif text-base font-semibold text-white hover:text-[#fbbf24]">
+                {siteData.email}
+              </a>
+              <p className="text-[12px] text-white/52">We reply within 48 hours</p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4 p-6">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#15803d] bg-[#15803d] text-white">
+              <Clock size={18} strokeWidth={1.75} />
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#15803d]">
+                Sunday Service
+              </p>
+              <p className="mt-1 font-serif text-base font-semibold text-white">
+                {siteData.hours}
+              </p>
+              <p className="text-[12px] text-white/52">At HQ &amp; every branch</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
