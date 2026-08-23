@@ -18,7 +18,7 @@ const searchIndex = [
   { title: "Ministries", desc: "Youth, children, women & outreach", href: "/#ministries", icon: <Users size={16} />, tags: ["ministries", "youth", "children", "women", "outreach"] },
   { title: "Sermons", desc: "Watch or listen to past messages", href: "/#sermons", icon: <Radio size={16} />, tags: ["sermons", "messages", "preaching", "watch", "listen", "media"] },
   { title: "Contact Us", desc: "Talk to the Ministry leadership", href: "/#contact", icon: <MapPin size={16} />, tags: ["contact", "location", "address", "nzoia", "bungoma", "talk"] },
-  { title: "Email JCFM", desc: "info@jcfm.org", href: "mailto:info@jcfm.org", icon: <Mail size={16} />, tags: ["email", "mail", "write", "contact", "info"] },
+  { title: "Email JCFM", desc: "info@jcfm.online", href: "mailto:info@jcfm.online", icon: <Mail size={16} />, tags: ["email", "mail", "write", "contact", "info"] },
   { title: "Headquarters", desc: "Nzoia, Bungoma County, Kenya", href: "/#contact", icon: <MapPin size={16} />, tags: ["location", "where", "address", "nzoia", "bungoma", "hq", "headquarters"] },
   { title: "Sunday Service", desc: "Sundays · 9:00 AM - 1:00 PM", href: "/#church", icon: <BookOpen size={16} />, tags: ["hours", "time", "sunday", "service", "schedule", "when"] },
 ];
@@ -263,7 +263,7 @@ export default function Navbar() {
 
         <div className="flex-1 overflow-y-auto">
           <div className="border-b border-slate-200">
-            <a href="mailto:info@jcfm.org" onClick={() => setDrawerOpen(false)} className="flex items-center justify-center gap-2 bg-[#4c1d95] py-4 text-white">
+            <a href="mailto:info@jcfm.online" onClick={() => setDrawerOpen(false)} className="flex items-center justify-center gap-2 bg-[#4c1d95] py-4 text-white">
               <Mail size={16} /><span className="text-xs font-bold uppercase tracking-wider">Email Us</span>
             </a>
           </div>

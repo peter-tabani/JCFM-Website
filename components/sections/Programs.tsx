@@ -141,7 +141,7 @@ function FlipCard({ program }: { program: typeof programs[0] }) {
           </div>
 
           <Link
-            href="/admissions"
+            href="/school#admissions"
             onClick={(e) => e.stopPropagation()}
             className="inline-flex items-center gap-2 rounded-full bg-[#2563eb] px-5 py-2.5 text-xs font-bold text-white hover:bg-[#1d4ed8] transition"
           >

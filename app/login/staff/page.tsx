@@ -61,7 +61,7 @@ export default function StaffLogin() {
         {/* Footer Links */}
         <div className="mt-5 flex items-center justify-between px-2">
           <a
-            href="mailto:info@jcfm.org?subject=Staff%20Portal%20password%20reset"
+            href="mailto:info@jcfm.online?subject=Staff%20Portal%20password%20reset"
             className="text-sm font-medium text-[#00695c] hover:underline"
           >
             Reset Password

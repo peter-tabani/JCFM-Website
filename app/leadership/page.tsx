@@ -11,13 +11,31 @@ export const dynamic = "force-dynamic";
 // never renders empty.
 const FALLBACK: Leader[] = [
   {
-    name: "Rev. Noah Mweruphe",
-    role: "Senior Pastor & Founder",
-    tag: "Founder & Pastor",
-    photo: "/images/staff/director.png",
-    email: "info@jcfm.org",
-    quote: "Our calling is to build lives through Christ, in the church, in the classroom, and in the community.",
-    bio: "Rev. Noah Mweruphe is the visionary founder and senior pastor of Jesus Christ Founder Ministry. Since establishing JCFM in 2005, he has led a mission to build lives through Christ.",
+    name: "Bishop Nelson Barasa Wanjala",
+    role: "General Overseer & Founder",
+    tag: "Founder",
+    photo: null,
+    email: "info@jcfm.online",
+    quote: null,
+    bio: "Bishop Nelson Barasa Wanjala is the founder and General Overseer of Jesus Christ Founder Ministry, which began in Sitikho Sikalame in 2005 and has grown into a network of branches across Kenya.",
+  },
+  {
+    name: "Pastor Sarah N Wekesa",
+    role: "Co-Founder & Pastor",
+    tag: "Co-Founder",
+    photo: null,
+    email: "info@jcfm.online",
+    quote: null,
+    bio: "Pastor Sarah N Wekesa co-founded Jesus Christ Founder Ministry and serves in pastoral leadership alongside Bishop Nelson.",
+  },
+  {
+    name: "Rael H. Wafula",
+    role: "Head Teacher, Fountain of Hope Academy",
+    tag: "Head Teacher",
+    photo: null,
+    email: "info@jcfm.online",
+    quote: null,
+    bio: "Rael H. Wafula is the Head Teacher of Fountain of Hope Academy, leading teaching and learning across the school.",
   },
 ];
 

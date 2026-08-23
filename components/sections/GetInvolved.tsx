@@ -13,7 +13,7 @@ const DOORS = [
     label: "For the Parent",
     title: "Let Your Child Belong Here",
     body: "From the first day a child walks through our gate, we treat them as our own.",
-    link: { text: "Visit the school", href: "/admissions" },
+    link: { text: "Visit the school", href: "/school" },
   },
   {
     num: "III.",

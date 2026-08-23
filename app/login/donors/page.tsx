@@ -70,7 +70,7 @@ export default function DonorsLogin() {
               />
               <span className="text-sm text-slate-600">Remember me</span>
             </label>
-            <a href="mailto:info@jcfm.org?subject=Donor%20Portal%20password%20reset" className="text-sm font-medium text-[#7c3aed] hover:text-[#6d28d9]">
+            <a href="mailto:info@jcfm.online?subject=Donor%20Portal%20password%20reset" className="text-sm font-medium text-[#7c3aed] hover:text-[#6d28d9]">
               Forgot password?
             </a>
           </div>

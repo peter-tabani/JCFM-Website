@@ -31,7 +31,7 @@ export default function VisionPage() {
         description="Honest dreams with honest numbers. Nothing here has started yet, but each one could, with the right partner."
         actions={
           <a
-            href="mailto:excellentkenya@gmail.com?subject=A%20vision%20item%20I%27d%20like%20to%20discuss"
+            href="mailto:info@jcfm.online?subject=A%20vision%20item%20I%27d%20like%20to%20discuss"
             className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-2.5 text-[13px] font-semibold text-white transition hover:bg-emerald-700"
           >
             <Mail size={15} strokeWidth={2.25} />
@@ -148,7 +148,7 @@ export default function VisionPage() {
                       Help start this
                     </PrimaryButton>
                     <a
-                      href={`mailto:excellentkenya@gmail.com?subject=${encodeURIComponent(`I'd like to discuss "${v.title}"`)}`}
+                      href={`mailto:info@jcfm.online?subject=${encodeURIComponent(`I'd like to discuss "${v.title}"`)}`}
                       className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-4 py-2 text-[12px] font-semibold text-white/70 hover:bg-white/[0.03]"
                     >
                       <Mail size={12} strokeWidth={2.25} />

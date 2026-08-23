@@ -141,7 +141,7 @@ export default function AdminTeam() {
           <TextareaField label="Bio" name="bio" placeholder="A short paragraph about this person" />
           <TextareaField label="Quote" name="quote" placeholder="An optional quote" />
           <Field label="Photo URL" name="photo" placeholder="/images/staff/name.png or https://…" />
-          <Field label="Email" name="email" type="email" placeholder="info@jcfm.org" />
+          <Field label="Email" name="email" type="email" placeholder="info@jcfm.online" />
           <Field label="Sort order (lower = first)" name="sortOrder" type="number" defaultValue="10" />
           <SelectField
             label="Feature at the top?"

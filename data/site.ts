@@ -20,7 +20,7 @@ export const siteData = {
     coordinator: { name: "Pastor Sarah N Wekesa", role: "Co-Founder & Pastor" },
     associate: { name: "Pst. Irene M. Wafula", role: "Associate Pastor" },
   },
-  email: "info@jcfm.org",
+  email: "info@jcfm.online",
   hours: "Sundays · 9:00 AM - 1:00 PM",
   branches: [
     { name: "Nzoia (HQ)", pastor: "Bishop Nelson Barasa Wanjala & Pastor Sarah N Wekesa", location: "Nzoia, Bungoma", isHq: true },
@@ -81,7 +81,7 @@ export const siteData = {
       photo: "/images/staff/director.png",
     },
     contacts: {
-      email: "info@fountainofhope.ac.ke",
+      email: "info@jcfm.online",
     },
     schoolNav: [
       { label: "Home", href: "/school" },

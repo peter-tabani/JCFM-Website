@@ -159,7 +159,7 @@ export default function DonorSidebar({
       {/* Help footer */}
       <div className="border-t border-white/10 px-5 py-4">
         <a
-          href="mailto:info@jcfm.org"
+          href="mailto:info@jcfm.online"
           className="flex items-center gap-3 rounded-xl bg-white/[0.03] px-3 py-2.5 transition hover:bg-white/[0.06]"
         >
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-violet-600/25 text-violet-300">

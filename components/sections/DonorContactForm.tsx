@@ -189,7 +189,7 @@ export default function DonorContactForm() {
           <div className="flex items-center gap-3 rounded-xl bg-red-50 p-4 text-red-700">
             <AlertCircle size={18} />
             <p className="text-sm">
-              Something went wrong. Please email us directly at excellentkenya@gmail.com
+              Something went wrong. Please email us directly at info@jcfm.online
             </p>
           </div>
         )}

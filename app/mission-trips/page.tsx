@@ -227,7 +227,7 @@ export default function MissionTripsPage() {
 
             <div className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
-                href="mailto:info@jcfm.org"
+                href="mailto:info@jcfm.online"
                 className="inline-flex items-center justify-center gap-3 bg-[#7c3aed] px-8 py-4 text-[12px] font-bold uppercase tracking-[0.22em] text-white shadow-[0_18px_35px_rgba(15,23,42,0.28)] transition hover:bg-[#6d28d9]"
               >
                 Plan Your Visit
@@ -433,7 +433,7 @@ export default function MissionTripsPage() {
 
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
-              href="mailto:info@jcfm.org"
+              href="mailto:info@jcfm.online"
               className="inline-flex items-center justify-center bg-[#7c3aed] px-8 py-3 font-sans text-[13px] font-semibold uppercase tracking-[0.24em] text-white transition hover:bg-[#6d28d9]"
             >
               Email our missions team
@@ -441,7 +441,7 @@ export default function MissionTripsPage() {
           </div>
 
           <p className="mx-auto mt-6 max-w-[500px] font-serif text-[14px] leading-[1.9] text-white/66">
-            Write to us at <span className="font-semibold text-white">info@jcfm.org</span>.
+            Write to us at <span className="font-semibold text-white">info@jcfm.online</span>.
             Let us know how many people are coming and any practical needs so we
             can prepare well.
           </p>

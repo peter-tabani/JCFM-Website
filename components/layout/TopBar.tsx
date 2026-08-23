@@ -16,11 +16,11 @@ export default function TopBar() {
               Official Website
             </span>
             <a
-              href="mailto:info@jcfm.org"
+              href="mailto:info@jcfm.online"
               className="flex items-center gap-2 px-5 text-slate-600 transition hover:text-[#15803d]"
             >
               <Mail size={12} strokeWidth={2.25} />
-              info@jcfm.org
+              info@jcfm.online
             </a>
           </div>
 

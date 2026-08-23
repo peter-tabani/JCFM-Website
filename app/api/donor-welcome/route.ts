@@ -70,7 +70,7 @@ export async function POST(req: Request) {
               <p style="color: #94a3b8; font-size: 12px; margin: 0; line-height: 1.8;">
                 Fountain of Hope Academy<br/>
                 Along Approved-Shelleybeach Road, Likoni - Shelley Beach, Mombasa<br/>
-                <a href="mailto:excellentkenya@gmail.com" style="color: #d97706;">excellentkenya@gmail.com</a>
+                <a href="mailto:info@jcfm.online" style="color: #d97706;">info@jcfm.online</a>
               </p>
             </div>
           </div>

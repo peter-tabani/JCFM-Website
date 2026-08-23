@@ -523,10 +523,10 @@ export default function DonorsPage() {
                   <div>
                     <p className="font-semibold text-slate-900">Email the Director</p>
                     <a
-                      href="mailto:excellentkenya@gmail.com"
+                      href="mailto:info@jcfm.online"
                       className="text-sm text-[#7c3aed] hover:underline"
                     >
-                      excellentkenya@gmail.com
+                      info@jcfm.online
                     </a>
                   </div>
                 </div>
@@ -538,10 +538,10 @@ export default function DonorsPage() {
                   <div>
                     <p className="font-semibold text-slate-900">International Donors</p>
                     <a
-                      href="mailto:excellentkenya@gmail.com"
+                      href="mailto:info@jcfm.online"
                       className="text-sm text-[#7c3aed] hover:underline"
                     >
-                      excellentkenya@gmail.com
+                      info@jcfm.online
                     </a>
                   </div>
                 </div>

@@ -71,9 +71,9 @@ export default function LeadershipView({ leaders }: { leaders: Leader[] }) {
       <section className="bg-[#0f172a] px-4 py-14 text-white md:py-20 lg:px-6">
         <div className="mx-auto max-w-[1400px]">
           <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-[#7c3aed]">Our People</p>
-          <h1 className="hero-title mb-3 text-4xl font-medium leading-tight md:text-5xl">The Team Behind Fountain of Hope Academy</h1>
+          <h1 className="hero-title mb-3 text-4xl font-medium leading-tight md:text-5xl">The People Behind JCFM</h1>
           <p className="max-w-xl text-base leading-8 text-white/60">
-            Meet the dedicated leaders committed to providing quality education and care to every learner at Fountain of Hope Academy.
+            Meet the leaders of Jesus Christ Founder Ministry and Fountain of Hope Academy.
           </p>
         </div>
       </section>
@@ -112,7 +112,7 @@ export default function LeadershipView({ leaders }: { leaders: Leader[] }) {
             <>
               <div className="mb-8">
                 <p className="mb-2 text-sm font-bold uppercase tracking-[0.3em] text-[#7c3aed]">Leadership Team</p>
-                <h2 className="hero-title text-3xl text-slate-900">Heads of Institution</h2>
+                <h2 className="hero-title text-3xl text-slate-900">Ministry &amp; School Leaders</h2>
               </div>
               <div className="grid gap-6 md:grid-cols-2">
                 {team.map((member, idx) => (
@@ -188,7 +188,7 @@ export default function LeadershipView({ leaders }: { leaders: Leader[] }) {
               <p className="text-sm text-white/60">Fountain of Hope Academy is always looking for passionate educators who believe in our mission.</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <a href="mailto:excellentkenya@gmail.com?subject=Teaching Position Enquiry" className="inline-flex items-center gap-2 rounded-full bg-[#7c3aed] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#6d28d9]">
+              <a href="mailto:info@jcfm.online?subject=Teaching Position Enquiry" className="inline-flex items-center gap-2 rounded-full bg-[#7c3aed] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#6d28d9]">
                 <Mail size={15} /> Email the Director
               </a>
               <Link href="/#contact" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">

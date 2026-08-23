@@ -65,14 +65,14 @@ export const brand = {
     colourHex: "#1e3a8a", // blue-900-ish
   },
   ministry: {
-    name: "Jesus Christ Foundation Ministries",
+    name: "Jesus Christ Founder Ministry",
     colour: "purple",
     colourHex: "#6b21a8", // purple-800
   },
   director: {
     name: "Mr. Noah Mweruphe",
     whatsapp: "+254722916174",
-    email: "excellentkenya@gmail.com",
+    email: "info@jcfm.online",
   },
 };
 

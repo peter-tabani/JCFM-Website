@@ -34,8 +34,8 @@ export default function Footer() {
           <h5 className="mb-4 text-lg font-semibold text-white">Contact</h5>
           <div className="space-y-3 text-white/65">
             <p>Headquarters · Nzoia, Bungoma, Kenya</p>
-            <a href="mailto:info@jcfm.org" className="block transition hover:text-[#86efac]">
-              info@jcfm.org
+            <a href="mailto:info@jcfm.online" className="block transition hover:text-[#86efac]">
+              info@jcfm.online
             </a>
             <p>Sunday Service: 9:00 AM - 1:00 PM</p>
           </div>

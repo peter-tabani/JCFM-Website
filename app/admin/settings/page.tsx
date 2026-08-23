@@ -120,7 +120,7 @@ export default function AdminSettingsPage() {
                   <Field label="Founded" defaultValue="2005" />
                   <Field label="Headquarters" defaultValue="Nzoia, Bungoma, Kenya" />
                   <Field label="Primary Phone" defaultValue="+254 700 000 000" />
-                  <Field label="Email" type="email" defaultValue="info@jcfm.org" />
+                  <Field label="Email" type="email" defaultValue="info@jcfm.online" />
                   <div className="md:col-span-2">
                     <FieldArea
                       label="Mission Statement"
