@@ -182,14 +182,14 @@ export const siteData = {
     faculty: [
       { name: "Rael H. Wafula", role: "Head Teacher" },
       { name: "Christine Mbayaki", role: "Deputy Head Teacher" },
-      { name: "John Wanjana", role: "Senior Teacher" },
+      { name: "John Wanyama", role: "Senior Teacher" },
       { name: "Dorcas Wanjala", role: "Sports" },
       { name: "Nipher Kololi", role: "Sanitation & Academics" },
-      { name: "Esther Nekwa", role: "Pre-Primary 2" },
+      { name: "Esther Nelima", role: "Pre-Primary 2" },
       { name: "Roselyne Nasimiyu", role: "Pre-Primary 1" },
-      { name: "Abigail Wakhyama", role: "Grade 2" },
+      { name: "Abigail Wanyama", role: "Grade 2" },
       { name: "Agnes Sifuna", role: "Feeding Programme" },
-      { name: "Benard Wakenoba", role: "Security" },
+      { name: "Bernard Wabwoba", role: "Security" },
     ],
     admissionSteps: [
       { n: "Step 1", title: "Enquire", desc: "Call or visit the school office to request an information pack and confirm vacancy in the desired class." },
