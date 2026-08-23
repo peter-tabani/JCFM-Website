@@ -13,7 +13,7 @@ import SchoolFooter from "@/components/school/SchoolFooter";
 export const metadata: Metadata = {
   title: "Fountain of Hope Academy, An Education Ministry of JCFM",
   description:
-    "Fountain of Hope Academy, a faith-based, CBC-aligned day school in Nzoia, Bungoma. Playgroup, Primary and Junior School under the Jesus Christ Founder Ministry.",
+    "Fountain of Hope Academy, a faith-based, CBC-aligned day school in Nzoia, Bungoma. Baby Class to Grade 4 under the Jesus Christ Founder Ministry.",
 };
 
 export default function SchoolPage() {

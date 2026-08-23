@@ -17,12 +17,12 @@ export default function SchoolPrograms() {
             <span className="h-[1px] w-12 bg-[#15803d] md:w-16" />
           </div>
           <h2 className="mt-5 font-serif text-[28px] font-semibold uppercase leading-tight tracking-[0.02em] text-[#0b2545] sm:text-3xl md:text-5xl">
-            From Playgroup to Junior School
+            From Baby Class to Grade 4
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-[14px] leading-7 text-slate-600 md:mt-5 md:text-[15px] md:leading-8">
-            We deliver the full Kenya Competency-Based Curriculum (CBC) across
-            four progressive levels, each rooted in Christian values
-            and the love of the Lord.
+            We deliver the Kenya Competency-Based Curriculum (CBC) from Baby
+            Class through Grade 4, each level rooted in Christian values and the
+            love of the Lord, and growing year by year.
           </p>
         </div>
 
@@ -83,7 +83,7 @@ export default function SchoolPrograms() {
         </div>
 
         {/* Desktop: 4-column grid */}
-        <div className="hidden grid-cols-2 gap-0 border border-[#d4d0c4] bg-white md:grid lg:grid-cols-4">
+        <div className="hidden grid-cols-2 gap-0 border border-[#d4d0c4] bg-white md:grid lg:grid-cols-3">
           {s.programs.map((p, i) => (
             <article
               key={p.code}

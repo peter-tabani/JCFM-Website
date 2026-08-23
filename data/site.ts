@@ -70,7 +70,7 @@ export const siteData = {
     founded: "2008",
     location: "Nzoia, Bungoma County",
     type: "Day School · CBC Curriculum",
-    levels: "Playgroup · ECDE · Primary · Junior School",
+    levels: "Baby Class to Grade 4",
     motoVerse: {
       text: "Train up a child in the way he should go: and when he is old, he will not depart from it.",
       ref: "Proverbs 22:6",
@@ -95,10 +95,10 @@ export const siteData = {
     ],
     programs: [
       {
-        code: "PG",
-        name: "Playgroup & Pre-Primary",
+        code: "BC",
+        name: "Baby Class & Pre-Primary",
         ages: "Ages 3 - 5",
-        grades: "PP1 · PP2",
+        grades: "Baby Class · PP1 · PP2",
         desc: "A gentle, play-rich introduction to learning where little ones are loved, sung over and gradually prepared for Grade 1.",
         highlights: ["Phonics & numeracy", "Bible stories & songs", "Creative play & art", "Daily nap & snack"],
       },
@@ -111,20 +111,12 @@ export const siteData = {
         highlights: ["English & Kiswahili literacy", "Mathematical Activities", "Environmental Activities", "CRE & Life Skills"],
       },
       {
-        code: "UP",
+        code: "G4",
         name: "Upper Primary",
-        ages: "Ages 9 - 11",
-        grades: "Grade 4 · 5 · 6",
-        desc: "Pupils sharpen core competencies and discover talents in agriculture, science, creative arts and pre-tech studies.",
-        highlights: ["Science & Technology", "Agriculture", "Creative Arts", "Home Science"],
-      },
-      {
-        code: "JSS",
-        name: "Junior School",
-        ages: "Ages 12 - 14",
-        grades: "Grade 7 · 8 · 9",
-        desc: "Junior School (CBC) deepens learning across pre-tech, social studies, integrated science and prepares learners for senior school pathways.",
-        highlights: ["Integrated Science", "Pre-Technical Studies", "Business Studies", "Computer Science"],
+        ages: "Age 9",
+        grades: "Grade 4",
+        desc: "Pupils sharpen core competencies and discover talents in science, agriculture and the creative arts as the school grows year by year.",
+        highlights: ["Science & Technology", "Agriculture", "Creative Arts", "CRE & Life Skills"],
       },
     ],
     pillars: [
@@ -206,10 +198,9 @@ export const siteData = {
       "NEMIS / UPI number (if previously enrolled)",
     ],
     fees: [
-      { level: "Playgroup / PP1 / PP2", day: "KSh 6,500" },
+      { level: "Baby Class / PP1 / PP2", day: "KSh 6,500" },
       { level: "Grade 1 - 3 (Lower Primary)", day: "KSh 8,000" },
-      { level: "Grade 4 - 6 (Upper Primary)", day: "KSh 9,000" },
-      { level: "Grade 7 - 9 (Junior School)", day: "KSh 10,500" },
+      { level: "Grade 4", day: "KSh 9,000" },
     ],
     calendar: [
       { term: "Term 1", dates: "Jan - Apr", note: "Opening service · Sports day" },
@@ -225,12 +216,12 @@ export const siteData = {
       {
         quote: "I love that I can play football, sing in the choir and still be top of my class. The teachers really care about us.",
         name: "Brenda C.",
-        role: "Pupil · Grade 6",
+        role: "Pupil · Grade 4",
       },
       {
         quote: "As a parent, the fees are honest, the food is good and my son is becoming a young man of faith. That is everything.",
         name: "Mr. Simiyu",
-        role: "Parent · Grade 7 (JSS)",
+        role: "Parent · Grade 3",
       },
     ],
   },

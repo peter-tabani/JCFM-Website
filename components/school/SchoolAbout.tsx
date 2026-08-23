@@ -72,10 +72,10 @@ export default function SchoolAbout() {
                 <p className="hidden md:block">
                   Fountain of Hope Academy was founded in {s.founded} as the
                   education arm of {s.parent}. What began as a small classroom
-                  block on the church compound in Nzoia, Bungoma, has grown
-                  into a full {s.levels.toLowerCase()} institution serving the
-                  surrounding community and welcoming day learners from across
-                  the county.
+                  block on the church compound in Nzoia, Bungoma, now serves
+                  learners from Baby Class to Grade 4, welcoming day learners
+                  from across the surrounding community and growing year by
+                  year.
                 </p>
                 <p>
                   We exist for one reason: to walk with each child, intellectually, spiritually and socially, through the

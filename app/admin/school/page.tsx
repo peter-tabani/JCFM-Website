@@ -22,24 +22,22 @@ import {
 } from "@/components/admin/ui";
 
 const ENROLMENT_BY_LEVEL = [
-  { code: "PG", level: "Playgroup & PP1/PP2", pupils: 38, capacity: 50 },
+  { code: "BC", level: "Baby Class & PP1/PP2", pupils: 38, capacity: 50 },
   { code: "LP", level: "Lower Primary (G1-3)", pupils: 84, capacity: 90 },
-  { code: "UP", level: "Upper Primary (G4-6)", pupils: 76, capacity: 90 },
-  { code: "JSS", level: "Junior School (G7-9)", pupils: 42, capacity: 60 },
+  { code: "G4", level: "Grade 4", pupils: 22, capacity: 40 },
 ];
 
 const FEE_STATUS = [
-  { level: "Playgroup / PP1 / PP2", expected: 247_000, collected: 232_500, balance: 14_500 },
+  { level: "Baby Class / PP1 / PP2", expected: 247_000, collected: 232_500, balance: 14_500 },
   { level: "Lower Primary (G1-3)", expected: 672_000, collected: 598_400, balance: 73_600 },
-  { level: "Upper Primary (G4-6)", expected: 684_000, collected: 605_500, balance: 78_500 },
-  { level: "Junior School (G7-9)", expected: 441_000, collected: 388_000, balance: 53_000 },
+  { level: "Grade 4", expected: 198_000, collected: 176_000, balance: 22_000 },
 ];
 
 const APPLICATIONS = [
   { id: "AP-046", name: "Aaliyah K.", level: "PP1", parent: "Mrs. Naliaka", date: "Today", status: "new" as const },
   { id: "AP-045", name: "Brian S.", level: "Grade 1", parent: "Mr. Wekesa", date: "Today", status: "review" as const },
-  { id: "AP-044", name: "Mercy N.", level: "Grade 5", parent: "Mr. Otieno", date: "Yesterday", status: "review" as const },
-  { id: "AP-043", name: "Joseph M.", level: "Grade 8 (JSS)", parent: "Mrs. Mulama", date: "2 days ago", status: "approved" as const },
+  { id: "AP-044", name: "Mercy N.", level: "Grade 4", parent: "Mr. Otieno", date: "Yesterday", status: "review" as const },
+  { id: "AP-043", name: "Joseph M.", level: "Grade 3", parent: "Mrs. Mulama", date: "2 days ago", status: "approved" as const },
   { id: "AP-042", name: "Naomi W.", level: "PP2", parent: "Mr. Simiyu", date: "3 days ago", status: "approved" as const },
 ];
 
