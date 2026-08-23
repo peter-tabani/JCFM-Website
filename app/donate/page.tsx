@@ -3,19 +3,14 @@
 import { Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useSession } from "next-auth/react";
 import {
   ArrowRight,
   ArrowLeft,
-  Loader2,
   CheckCircle2,
-  UserCircle2,
-  UserRound,
   ShieldCheck,
 } from "lucide-react";
 import DonateChrome from "@/components/donate/DonateChrome";
-import OrderSummary from "@/components/donate/OrderSummary";
-import PaymentStep, { type GuestInfo } from "@/components/donate/PaymentStep";
+import PaymentStep from "@/components/donate/PaymentStep";
 import {
   fundableCauses,
   resolveDesignation,
@@ -23,8 +18,6 @@ import {
   causeImage,
   fmtUSD,
 } from "@/lib/donations";
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function DonatePage() {
   return (
@@ -37,7 +30,6 @@ export default function DonatePage() {
 function DonateWizard() {
   const router = useRouter();
   const search = useSearchParams();
-  const { status } = useSession();
 
   const step = search.get("step") ?? "cause";
   const designationSlug = search.get("designation");
@@ -47,9 +39,6 @@ function DonateWizard() {
   const amountCheck = validateAmountCents(amountParam);
   const validAmount = amountCheck.ok ? amountCheck.cents : null;
   const image = causeImage(designationSlug);
-
-  // Guest donor details (kept in memory; only set when someone chooses guest).
-  const [guest, setGuest] = useState<GuestInfo>(null);
 
   const buildUrl = (next: Record<string, string | null>) => {
     const params = new URLSearchParams(search.toString());
@@ -61,22 +50,18 @@ function DonateWizard() {
   };
   const goto = (next: Record<string, string | null>) => router.push(buildUrl(next));
 
-  // Step guards
+  // Step guards, keep the flow short: cause -> amount -> payment.
   useEffect(() => {
     if (step === "done") return;
-    if ((step === "amount" || step === "account" || step === "payment") && !resolved) {
+    if ((step === "amount" || step === "payment") && !resolved) {
       router.replace("/donate?step=cause");
       return;
     }
-    if ((step === "account" || step === "payment") && !validAmount) {
+    if (step === "payment" && !validAmount) {
       router.replace(buildUrl({ step: "amount" }));
-      return;
-    }
-    if (step === "account" && status === "authenticated") {
-      router.replace(buildUrl({ step: "payment" }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [step, resolved, validAmount, status]);
+  }, [step, resolved, validAmount]);
 
   if (step === "done") {
     return (
@@ -98,40 +83,19 @@ function DonateWizard() {
           image={image}
           initialCents={validAmount}
           onBack={() => goto({ step: "cause" })}
-          onContinue={(cents) => goto({ step: "account", amount: String(cents) })}
+          onContinue={(cents) => goto({ step: "payment", amount: String(cents) })}
         />
       )}
 
-      {step === "account" && resolved && validAmount && (
-        <AccountStep
-          status={status}
-          label={resolved.label}
-          image={image}
-          amountCents={validAmount}
-          loginHref={`/donors/portal?callbackUrl=${encodeURIComponent(buildUrl({ step: "payment" }))}`}
-          onBack={() => goto({ step: "amount" })}
-          onGuest={(info) => {
-            setGuest(info);
-            goto({ step: "payment" });
-          }}
-        />
-      )}
-
-      {step === "payment" && resolved && validAmount && (status === "authenticated" || guest) && (
+      {step === "payment" && resolved && validAmount && (
         <PaymentStep
           designation={resolved.designation}
           label={resolved.label}
           amountCents={validAmount}
           image={image}
-          guest={guest}
+          guest={null}
           onBack={() => goto({ step: "amount" })}
         />
-      )}
-
-      {step === "payment" && status !== "authenticated" && !guest && (
-        <div className="flex items-center justify-center py-16 text-white/40">
-          <Loader2 className="animate-spin" />
-        </div>
       )}
     </DonateChrome>
   );
@@ -279,129 +243,6 @@ function AmountStep({
   );
 }
 
-// ── Step 3 · account or guest ──
-function AccountStep({
-  status,
-  label,
-  image,
-  amountCents,
-  loginHref,
-  onBack,
-  onGuest,
-}: {
-  status: "loading" | "authenticated" | "unauthenticated";
-  label: string;
-  image: string;
-  amountCents: number;
-  loginHref: string;
-  onBack: () => void;
-  onGuest: (info: { email: string; name: string }) => void;
-}) {
-  const [showGuest, setShowGuest] = useState(false);
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [error, setError] = useState("");
-
-  if (status === "loading" || status === "authenticated") {
-    return (
-      <div className="flex items-center justify-center py-16 text-white/40">
-        <Loader2 className="animate-spin" />
-      </div>
-    );
-  }
-
-  const continueGuest = () => {
-    if (!EMAIL_RE.test(email.trim())) {
-      setError("Please enter a valid email so we can send your receipt.");
-      return;
-    }
-    onGuest({ email: email.trim(), name: name.trim() });
-  };
-
-  return (
-    <div>
-      <BackLink onClick={onBack} />
-      <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-        How would you like to continue?
-      </h1>
-
-      <OrderSummary label={label} amountCents={amountCents} image={image} />
-
-      {/* Option 1, account */}
-      <div className="mt-6 rounded-2xl border border-white/10 bg-[#0f1626] p-5">
-        <div className="flex items-start gap-3">
-          <UserCircle2 size={20} className="mt-0.5 shrink-0 text-violet-300" />
-          <div>
-            <p className="font-semibold text-white">Create an account (or sign in)</p>
-            <p className="mt-1 text-[13px] leading-6 text-white/55">
-              Get your own dashboard with every donation, receipts and the projects
-              you&apos;re supporting.
-            </p>
-          </div>
-        </div>
-        <Link
-          href={loginHref}
-          className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#7c3aed] py-3.5 font-semibold text-white transition hover:bg-[#6d28d9]"
-        >
-          Create account or sign in
-        </Link>
-      </div>
-
-      {/* Divider */}
-      <div className="my-5 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/30">
-        <span className="h-px flex-1 bg-white/10" /> or <span className="h-px flex-1 bg-white/10" />
-      </div>
-
-      {/* Option 2, guest */}
-      <div className="rounded-2xl border border-white/10 bg-[#0f1626] p-5">
-        <div className="flex items-start gap-3">
-          <UserRound size={20} className="mt-0.5 shrink-0 text-white/60" />
-          <div>
-            <p className="font-semibold text-white">Continue as a guest</p>
-            <p className="mt-1 text-[13px] leading-6 text-white/55">
-              Give without an account. We&apos;ll email your receipt, you just
-              won&apos;t get a dashboard.
-            </p>
-          </div>
-        </div>
-
-        {!showGuest ? (
-          <button
-            onClick={() => setShowGuest(true)}
-            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/20 py-3.5 font-semibold text-white transition hover:bg-white/[0.06]"
-          >
-            Continue as guest
-          </button>
-        ) : (
-          <div className="mt-4 space-y-3">
-            <input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Your name (optional)"
-              className="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-[15px] text-white outline-none transition focus:border-[#7c3aed]"
-            />
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => { setEmail(e.target.value); setError(""); }}
-              placeholder="Email for your receipt"
-              autoComplete="email"
-              className="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-[15px] text-white outline-none transition focus:border-[#7c3aed]"
-            />
-            {error && <p className="rounded-xl bg-red-500/15 p-3 text-sm text-red-300">{error}</p>}
-            <button
-              onClick={continueGuest}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white py-3.5 font-semibold text-[#0f172a] transition hover:bg-white/90"
-            >
-              Continue to payment <ArrowRight size={16} />
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
 // ── Confirmation ──
 function Confirmation() {
   const search = useSearchParams();
@@ -430,7 +271,7 @@ function Confirmation() {
         ) : (
           <>Your donation has been received.</>
         )}{" "}
-        A receipt is on its way to your email.
+        May the Lord bless you for your generosity.
       </p>
       <div className="mt-7 flex flex-col items-center gap-3">
         <Link

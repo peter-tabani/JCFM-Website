@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Flame, Building2, Network, ArrowRight, BookOpen } from "lucide-react";
 
 const PREVIEW = [
@@ -83,20 +82,17 @@ export default function JourneyTeaser() {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-0 md:mt-10">
-              <Link
-                href="/journey"
-                className="group flex items-center gap-3 bg-white px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.22em] text-[#4c1d95] transition hover:bg-[#f5f3ff] sm:px-8 sm:py-4"
+              <span
+                aria-disabled="true"
+                title="Coming soon"
+                className="flex cursor-not-allowed items-center gap-3 bg-white/50 px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.22em] text-[#4c1d95]/60 sm:px-8 sm:py-4"
               >
                 <BookOpen size={14} strokeWidth={2.5} />
                 Read the Full Story
-                <ArrowRight
-                  size={14}
-                  strokeWidth={2.5}
-                  className="transition group-hover:translate-x-1"
-                />
-              </Link>
+                <ArrowRight size={14} strokeWidth={2.5} />
+              </span>
               <p className="ml-0 mt-3 w-full text-[11px] uppercase tracking-[0.22em] text-white/55 sm:ml-5 sm:mt-0 sm:w-auto">
-                8 chapters · 4 min read
+                Coming soon
               </p>
             </div>
           </div>
@@ -142,9 +138,10 @@ export default function JourneyTeaser() {
                     +5
                   </span>
                 </div>
-                <Link
-                  href="/journey"
-                  className="block border-l-2 border-[#15803d] bg-[#15803d]/10 p-4 transition hover:bg-[#15803d]/20 md:p-5"
+                <div
+                  aria-disabled="true"
+                  title="Coming soon"
+                  className="block cursor-not-allowed border-l-2 border-[#15803d] bg-[#15803d]/10 p-4 opacity-70 md:p-5"
                 >
                   <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#86efac]">
                     Five more chapters
@@ -154,9 +151,9 @@ export default function JourneyTeaser() {
                     was born, and how you can write the next chapter.
                   </p>
                   <span className="mt-3 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#86efac]">
-                    Continue Reading <ArrowRight size={12} strokeWidth={2.5} />
+                    Coming Soon
                   </span>
-                </Link>
+                </div>
               </li>
             </ul>
           </div>

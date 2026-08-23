@@ -1,5 +1,4 @@
 import { ArrowRight, BookOpen } from "lucide-react";
-import Link from "next/link";
 import { siteData } from "@/data/site";
 
 const FACTSHEET = [
@@ -62,20 +61,20 @@ export default function About() {
               believe God is doing more.
             </p>
 
-            {/* Bridge to journey */}
-            <div className="mt-8 flex flex-col items-center justify-center gap-0 md:mt-10">
-              <Link
-                href="/journey"
-                className="group flex items-center gap-3 bg-[#7c3aed] px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#6d28d9] sm:px-8 sm:py-4"
+            {/* Bridge to journey — temporarily disabled until the page is refreshed */}
+            <div className="mt-8 flex flex-col items-center justify-center gap-2 md:mt-10">
+              <span
+                aria-disabled="true"
+                title="Coming soon"
+                className="flex cursor-not-allowed items-center gap-3 bg-[#7c3aed]/40 px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.22em] text-white/50 sm:px-8 sm:py-4"
               >
                 <BookOpen size={14} strokeWidth={2.25} />
                 Read Our Journey
-                <ArrowRight
-                  size={14}
-                  strokeWidth={2.5}
-                  className="transition group-hover:translate-x-1"
-                />
-              </Link>
+                <ArrowRight size={14} strokeWidth={2.5} />
+              </span>
+              <p className="text-[10px] uppercase tracking-[0.22em] text-white/40">
+                Coming soon
+              </p>
             </div>
           </div>
         </div>

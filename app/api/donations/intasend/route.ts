@@ -30,22 +30,26 @@ export async function POST(req: Request) {
   }
   const { amount, designation, email, name } = (body ?? {}) as Record<string, unknown>;
 
-  // Donor identity: signed-in account, or guest with an email for the receipt.
+  // Donor identity: signed-in account, or an anonymous guest. Guests are not
+  // asked for anything, giving is a straight, no-friction flow. If a guest
+  // happens to provide an email we keep it for the receipt; otherwise it stays
+  // null. We only reject an email that was typed but is clearly malformed.
   const user = await getCurrentUser();
-  let donorEmail: string;
+  let donorEmail: string | null;
   let donorName: string | null;
   if (user) {
     donorEmail = user.email;
     donorName = user.name ?? null;
   } else {
-    donorEmail = typeof email === "string" ? email.toLowerCase().trim() : "";
+    const typedEmail = typeof email === "string" ? email.toLowerCase().trim() : "";
     donorName = typeof name === "string" && name.trim() ? name.trim() : null;
-    if (!EMAIL_RE.test(donorEmail)) {
+    if (typedEmail && !EMAIL_RE.test(typedEmail)) {
       return NextResponse.json(
-        { error: "Please enter a valid email for your receipt." },
+        { error: "That email doesn't look right. Leave it blank to give anonymously." },
         { status: 400 }
       );
     }
+    donorEmail = typedEmail || null;
   }
 
   const amountCheck = validateAmountCents(amount);
