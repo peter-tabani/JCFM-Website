@@ -80,7 +80,7 @@ function DonateWizard() {
 
   if (step === "done") {
     return (
-      <DonateChrome backHref="/donors/portal/dashboard" backLabel="Go to my dashboard">
+      <DonateChrome backHref="/" backLabel="Back to site">
         <Confirmation />
       </DonateChrome>
     );
@@ -434,10 +434,10 @@ function Confirmation() {
       </p>
       <div className="mt-7 flex flex-col items-center gap-3">
         <Link
-          href="/donors/portal/giving"
+          href="/"
           className="inline-flex items-center gap-2 rounded-full bg-[#7c3aed] px-6 py-3.5 font-semibold text-white transition hover:bg-[#6d28d9]"
         >
-          View my giving history <ArrowRight size={17} />
+          Back to home <ArrowRight size={17} />
         </Link>
         <Link href="/" className="text-sm font-medium text-white/50 hover:text-white">
           Back to the site

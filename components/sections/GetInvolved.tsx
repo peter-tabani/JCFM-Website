@@ -20,7 +20,7 @@ const DOORS = [
     label: "For the Friend",
     title: "Walk Quietly Beside Us",
     body: "Pray, visit, or write. Every gesture of support is received with gratitude.",
-    link: { text: "Talk to us", href: "/donors/portal" },
+    link: { text: "Talk to us", href: "/#contact" },
   },
 ];
 

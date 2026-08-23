@@ -446,7 +446,7 @@ function NextChapterCallout() {
             icon={Heart}
             title="Give"
             desc="Sponsor a pupil, a project, or a season. Every shilling is accounted for."
-            href="/donors/portal"
+            href="/donate"
             cta="Donate"
             primary
           />
