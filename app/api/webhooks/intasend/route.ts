@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { timingSafeEqual } from "node:crypto";
+import { confirmIntaSendInvoice } from "@/lib/intasend-status";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -12,6 +14,7 @@ export const dynamic = "force-dynamic";
 // request is checked against it so no one can POST fake "donation completed"
 // events.
 type IntaSendWebhookPayload = {
+  topic?: string;
   invoice_id?: string;
   state?: "PENDING" | "PROCESSING" | "COMPLETE" | "FAILED" | "CANCELED" | "PARTIAL" | "RETRY";
   value?: string;
@@ -20,6 +23,13 @@ type IntaSendWebhookPayload = {
   api_ref?: string;
   challenge?: string;
 };
+
+function challengeMatches(actual: unknown, expected: string | undefined): boolean {
+  if (!expected || typeof actual !== "string") return false;
+  const received = Buffer.from(actual);
+  const secret = Buffer.from(expected);
+  return received.length === secret.length && timingSafeEqual(received, secret);
+}
 
 export async function POST(req: Request) {
   let body: IntaSendWebhookPayload;
@@ -30,14 +40,14 @@ export async function POST(req: Request) {
   }
 
   const expected = process.env.INTASEND_WEBHOOK_CHALLENGE;
-  if (!expected || body.challenge !== expected) {
+  if (!challengeMatches(body.challenge, expected)) {
     console.warn("IntaSend webhook: challenge mismatch, rejecting");
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   // Acknowledge every valid request, but only record when the payment
   // actually completed and we can match it to a pending donation.
-  if (body.state !== "COMPLETE" || !body.api_ref) {
+  if (body.topic !== "collection_event" || body.state !== "COMPLETE" || !body.api_ref || !body.invoice_id) {
     return NextResponse.json({ ok: true, recorded: false });
   }
 
@@ -52,17 +62,26 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true, recorded: true });
   }
 
-  // Reflect the actual amount/currency IntaSend reports where available.
-  const paid = Number(body.value ?? body.net_amount);
-  const amountCents =
-    Number.isFinite(paid) && paid > 0 ? Math.round(paid * 100) : donation.amountCents;
+  let verified: boolean;
+  try {
+    verified = await confirmIntaSendInvoice(body.invoice_id, {
+      apiRef: body.api_ref,
+      amountCents: donation.amountCents,
+      currency: donation.currency,
+    });
+  } catch {
+    // Non-2xx asks IntaSend to retry the webhook if its API was unavailable.
+    return NextResponse.json({ error: "Verification unavailable" }, { status: 503 });
+  }
+  if (!verified) {
+    console.warn("IntaSend webhook: invoice does not match pending donation");
+    return NextResponse.json({ ok: true, recorded: false });
+  }
 
-  await prisma.donation.update({
-    where: { providerRef: body.api_ref },
+  await prisma.donation.updateMany({
+    where: { providerRef: body.api_ref, status: "pending" },
     data: {
       status: "succeeded",
-      amountCents,
-      currency: (body.currency || donation.currency).toLowerCase(),
     },
   });
 

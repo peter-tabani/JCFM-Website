@@ -15,12 +15,15 @@ import {
 import Footer from "@/components/layout/Footer";
 import ImageCarousel from "@/components/ui/ImageCarousel";
 import { siteData } from "@/data/site";
+import { publicPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Mission Trips | Jesus Christ Founder Ministry",
+export const metadata = publicPageMetadata({
+  title: "Mission Trips to Kenya",
   description:
-    "An invitation to come and serve in Kenya with Jesus Christ Founder Ministry, preaching, teaching, medical outreach, children's ministry, and home visits in Bungoma and across our branches.",
-};
+    "Join Jesus Christ Founder Ministry in Kenya for worship, teaching, children's ministry and community outreach.",
+  path: "/mission-trips",
+  image: "/images/mission-trip.jpeg",
+});
 
 // ─────────────────────────────────────────────────────────────
 // JCFM brand palette, matches the home page dark theme.

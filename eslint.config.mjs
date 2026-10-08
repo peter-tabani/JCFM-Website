@@ -1,20 +1,17 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTypescript from "eslint-config-next/typescript";
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...nextVitals,
+  ...nextTypescript,
   {
     rules: {
       // Disable the apostrophe/quote escaping warning
       "react/no-unescaped-entities": "off",
+      // Existing data-fetch effects and inline admin menu helpers predate the
+      // newer React Compiler checks; keep the rest of the Next lint rules on.
+      "react-hooks/set-state-in-effect": "off",
+      "react-hooks/static-components": "off",
     },
   },
 ];

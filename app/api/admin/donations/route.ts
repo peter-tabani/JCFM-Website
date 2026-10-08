@@ -20,7 +20,7 @@ export async function GET() {
   let monthCents = 0;
   let lifetimeCents = 0;
   for (const d of rows) {
-    if (d.status !== "succeeded") continue;
+    if (d.status !== "succeeded" || d.currency.toLowerCase() !== "usd") continue;
     lifetimeCents += d.amountCents;
     if (
       d.createdAt.getFullYear() === now.getFullYear() &&

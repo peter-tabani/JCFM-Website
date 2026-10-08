@@ -8,8 +8,6 @@ import OrderSummary from "@/components/donate/OrderSummary";
 import { fmtUSD } from "@/lib/donations";
 import { INTASEND_PUBLIC_KEY, INTASEND_LIVE, intasendConfigured } from "@/lib/intasend";
 
-export type GuestInfo = { email: string; name: string } | null;
-
 // IntaSend's InlineJS widget attaches to any element with class
 // "intaSendPayButton" and reads the data-* attributes below.
 type IntaSendInstance = {
@@ -33,14 +31,12 @@ export default function PaymentStep({
   label,
   amountCents,
   image,
-  guest,
   onBack,
 }: {
   designation: string;
   label: string;
   amountCents: number;
   image: string;
-  guest: GuestInfo;
   onBack: () => void;
 }) {
   const router = useRouter();
@@ -59,13 +55,9 @@ export default function PaymentStep({
   // Where the donor lands after a successful gift (the Confirmation step).
   const doneUrl = useMemo(() => {
     const base = typeof window !== "undefined" ? window.location.origin : "";
-    const params = new URLSearchParams({
-      step: "done",
-      label,
-      amount: String(amountCents),
-    });
+    const params = new URLSearchParams({ step: "done", ref: apiRef ?? "" });
     return `${base}/donate?${params.toString()}`;
-  }, [label, amountCents]);
+  }, [apiRef]);
 
   // Record a PENDING donation server-side and get the api_ref for the widget.
   useEffect(() => {
@@ -79,7 +71,6 @@ export default function PaymentStep({
       body: JSON.stringify({
         amount: amountCents,
         designation,
-        ...(guest ? { email: guest.email, name: guest.name } : {}),
       }),
     })
       .then(async (res) => {
@@ -94,7 +85,7 @@ export default function PaymentStep({
     return () => {
       active = false;
     };
-  }, [amountCents, designation, guest, configured]);
+  }, [amountCents, designation, configured]);
 
   // Wire up the IntaSend widget once the SDK and api_ref are both ready.
   useEffect(() => {
@@ -123,9 +114,7 @@ export default function PaymentStep({
 
       {!configured ? (
         <div className="mt-6 rounded-xl bg-amber-50 p-4 text-sm leading-6 text-amber-800">
-          Online giving isn&apos;t set up yet. Add your IntaSend publishable key
-          (<code className="font-mono">NEXT_PUBLIC_INTASEND_PUBLISHABLE_KEY</code>)
-          to enable donations. See docs/PAYMENTS_SETUP.md.
+          Online giving is temporarily unavailable. Please try again later.
         </div>
       ) : (
         <div className="mt-6">
@@ -155,14 +144,14 @@ export default function PaymentStep({
               data-redirect_url={doneUrl}
             >
               <Smartphone size={18} />
-              Give {fmtUSD(amountCents)} with M-Pesa, Card or Google Pay
+              Give {fmtUSD(amountCents)} securely
             </button>
           )}
 
           {status === "in-progress" && (
             <div className="mt-4 flex items-center gap-2 rounded-xl border border-amber-300/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
               <Loader2 size={16} className="shrink-0 animate-spin" />
-              Payment in progress. If you chose M-Pesa, check your phone to approve it.
+              Payment in progress. Please complete the secure checkout.
             </div>
           )}
           {status === "failed" && (
@@ -170,8 +159,7 @@ export default function PaymentStep({
           )}
 
           <p className="mt-4 text-center text-[12px] leading-6 text-white/40">
-            Secured by IntaSend. Your card and M-Pesa details never touch our
-            servers.
+            Secured by IntaSend. Your card details never touch our servers.
           </p>
         </div>
       )}

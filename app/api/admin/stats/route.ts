@@ -17,7 +17,7 @@ export async function GET() {
     prisma.mediaItem.count({ where: { published: true } }),
     prisma.mediaItem.count(),
     prisma.donation.findMany({
-      where: { status: "succeeded", createdAt: { gte: monthStart } },
+      where: { status: "succeeded", currency: "usd", createdAt: { gte: monthStart } },
       select: { amountCents: true },
     }),
   ]);

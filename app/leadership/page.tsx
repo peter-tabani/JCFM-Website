@@ -4,6 +4,13 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import LeadershipView, { type Leader } from "@/components/leadership/LeadershipView";
 import { prisma } from "@/lib/prisma";
+import { publicPageMetadata } from "@/lib/seo";
+
+export const metadata = publicPageMetadata({
+  title: "Ministry and School Leadership",
+  description: "Meet the leaders serving Jesus Christ Founder Ministry and Fountain of Hope Academy in Kenya.",
+  path: "/leadership",
+});
 
 export const dynamic = "force-dynamic";
 

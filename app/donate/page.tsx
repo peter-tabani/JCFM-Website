@@ -12,7 +12,6 @@ import {
 import DonateChrome from "@/components/donate/DonateChrome";
 import PaymentStep from "@/components/donate/PaymentStep";
 import {
-  fundableCauses,
   resolveDesignation,
   validateAmountCents,
   causeImage,
@@ -31,7 +30,8 @@ function DonateWizard() {
   const router = useRouter();
   const search = useSearchParams();
 
-  const step = search.get("step") ?? "cause";
+  const requestedStep = search.get("step");
+  const step = requestedStep === "payment" || requestedStep === "done" ? requestedStep : "amount";
   const designationSlug = search.get("designation");
   const amountParam = search.get("amount");
 
@@ -50,11 +50,11 @@ function DonateWizard() {
   };
   const goto = (next: Record<string, string | null>) => router.push(buildUrl(next));
 
-  // Step guards, keep the flow short: cause -> amount -> payment.
+  // Only the confirmed general fund is live; donors go directly to amount.
   useEffect(() => {
     if (step === "done") return;
     if ((step === "amount" || step === "payment") && !resolved) {
-      router.replace("/donate?step=cause");
+      router.replace("/donate");
       return;
     }
     if (step === "payment" && !validAmount) {
@@ -73,16 +73,12 @@ function DonateWizard() {
 
   return (
     <DonateChrome>
-      {step === "cause" && (
-        <CauseStep onSelect={(slug) => goto({ step: "amount", designation: slug })} />
-      )}
-
       {step === "amount" && resolved && (
         <AmountStep
           label={resolved.label}
           image={image}
           initialCents={validAmount}
-          onBack={() => goto({ step: "cause" })}
+          onBack={() => router.push("/")}
           onContinue={(cents) => goto({ step: "payment", amount: String(cents) })}
         />
       )}
@@ -93,7 +89,6 @@ function DonateWizard() {
           label={resolved.label}
           amountCents={validAmount}
           image={image}
-          guest={null}
           onBack={() => goto({ step: "amount" })}
         />
       )}
@@ -101,70 +96,7 @@ function DonateWizard() {
   );
 }
 
-// ── Step 1 · choose a cause (Instagram-style feed) ──
-function CauseStep({ onSelect }: { onSelect: (slug: string) => void }) {
-  const causes = fundableCauses();
-  const general = causes[0];
-  const projects = causes.slice(1);
-
-  return (
-    <div>
-      <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-        What would you like to support?
-      </h1>
-      <p className="mt-2 text-sm leading-7 text-white/55">
-        Give to a specific project, or let us direct your gift to where it&apos;s
-        needed most across the church and school.
-      </p>
-
-      {/* General fund, highlighted */}
-      <button
-        onClick={() => onSelect(general.slug)}
-        className="group mt-6 block w-full overflow-hidden rounded-2xl border-2 border-[#7c3aed] bg-[#7c3aed]/10 text-left transition hover:bg-[#7c3aed]/15"
-      >
-        <div className="flex items-center gap-4 p-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#7c3aed]/25 text-violet-200">
-            <ShieldCheck size={22} />
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="font-semibold text-white">General Fund</p>
-            <p className="mt-0.5 text-[13px] leading-6 text-white/55">{general.blurb}</p>
-          </div>
-          <ArrowRight size={18} className="shrink-0 text-violet-300 transition group-hover:translate-x-1" />
-        </div>
-      </button>
-
-      <p className="mb-3 mt-8 text-[11px] font-bold uppercase tracking-[0.18em] text-white/35">
-        Or support a project
-      </p>
-
-      {/* Project feed, image, title, description */}
-      <div className="space-y-5">
-        {projects.map((c) => (
-          <article
-            key={c.slug}
-            className="overflow-hidden rounded-2xl border border-white/10 bg-[#0f1626]"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={c.image} alt={c.label} className="aspect-[16/10] w-full object-cover" />
-            <div className="p-5">
-              <h3 className="text-[17px] font-semibold text-white">{c.label}</h3>
-              <p className="mt-1.5 text-[13.5px] leading-6 text-white/55">{c.blurb}</p>
-              <button
-                onClick={() => onSelect(c.slug)}
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#7c3aed] py-3.5 font-semibold text-white transition hover:bg-[#6d28d9]"
-              >
-                Support this <ArrowRight size={16} />
-              </button>
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// ── Step 2 · amount (image + free amount, no presets, no currency talk) ──
+// Amount and then secure checkout.
 function AmountStep({
   label,
   image,
@@ -205,6 +137,7 @@ function AmountStep({
       </div>
       <p className="mt-3 text-[13px] uppercase tracking-[0.14em] text-white/40">You&apos;re giving to</p>
       <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">{label}</h1>
+      <p className="mt-2 text-sm leading-6 text-white/55">Support worship, outreach and Fountain of Hope Academy.</p>
 
       <label className="mt-6 block">
         <span className="mb-2 block text-sm font-medium text-white/70">
@@ -246,32 +179,61 @@ function AmountStep({
 // ── Confirmation ──
 function Confirmation() {
   const search = useSearchParams();
-  const label = search.get("label");
-  const amount = search.get("amount");
-  const cents = amount ? Number(amount) : null;
+  const ref = search.get("ref");
+  const [receipt, setReceipt] = useState<{
+    status: "pending" | "succeeded" | "failed";
+    amountCents: number;
+    currency: string;
+    designationLabel: string;
+  } | null>(null);
+  const [lookupFailed, setLookupFailed] = useState(false);
+
+  useEffect(() => {
+    if (!ref) return;
+    let active = true;
+    let checks = 0;
+    const check = async () => {
+      try {
+        const response = await fetch(`/api/donations/status?ref=${encodeURIComponent(ref)}`, { cache: "no-store" });
+        if (!response.ok) throw new Error("Status unavailable");
+        const data = await response.json();
+        if (active) setReceipt(data);
+        if (data.status !== "pending" || ++checks >= 10) clearInterval(timer);
+      } catch {
+        if (active) setLookupFailed(true);
+        clearInterval(timer);
+      }
+    };
+    const timer = setInterval(check, 3000);
+    void check();
+    return () => { active = false; clearInterval(timer); };
+  }, [ref]);
+
+  const confirmed = receipt?.status === "succeeded";
 
   return (
     <div className="text-center">
-      <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400">
-        <CheckCircle2 size={44} />
+      <div className={`mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full ${confirmed ? "bg-emerald-500/15 text-emerald-400" : "bg-amber-500/15 text-amber-300"}`}>
+        {confirmed ? <CheckCircle2 size={44} /> : <ShieldCheck size={40} />}
       </div>
       <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-        Thank you for your gift!
+        {confirmed ? "Thank you for your gift!" : "Thank you for giving"}
       </h1>
       <p className="mx-auto mt-3 max-w-sm text-sm leading-7 text-white/60">
-        {cents ? (
+        {confirmed ? (
           <>
             Your donation of{" "}
-            <span className="font-semibold text-white">{fmtUSD(cents)}</span>
-            {label ? (
-              <> to <span className="font-semibold text-white">{label}</span></>
-            ) : null}{" "}
+            <span className="font-semibold text-white">{fmtUSD(receipt.amountCents)}</span>
+            {" "}to <span className="font-semibold text-white">{receipt.designationLabel}</span>{" "}
             has been received.
           </>
+        ) : receipt?.status === "failed" ? (
+          <>Your payment was not completed. Please try again.</>
+        ) : !ref || lookupFailed ? (
+          <>We could not check this payment yet. Please contact us if you need help.</>
         ) : (
-          <>Your donation has been received.</>
-        )}{" "}
-        May the Lord bless you for your generosity.
+          <>Your payment is being verified. Please allow a little time for confirmation.</>
+        )}
       </p>
       <div className="mt-7 flex flex-col items-center gap-3">
         <Link

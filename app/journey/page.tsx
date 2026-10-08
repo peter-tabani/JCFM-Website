@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Our Journey, Jesus Christ Founder Ministry",
   description:
     "The story of Jesus Christ Founder Ministry, from a small gathering of believers in Sikalame to a network of churches and a school serving communities across Kenya.",
+  robots: { index: false, follow: false },
 };
 
 export default function JourneyPage() {

@@ -45,8 +45,9 @@ to the public yet. Say the word and I'll add those sections.
 
 ## 4. Donations
 
-- The admin **Donations** ledger is the **real** online giving (Stripe + PayPal),
-  read-only, in USD.
+- The admin **Donations** ledger reads confirmed IntaSend gifts. New online
+  donations are General Fund gifts in USD. Finish the production settings in
+  [PAYMENTS_SETUP.md](PAYMENTS_SETUP.md) before accepting real money.
 - **Manual/offline donation entry was not built** (not in scope). If you want to
   log cash/M-Pesa/bank gifts in the same ledger, I can add that.
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/components/AuthProvider";
+import { SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -14,8 +15,11 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Jesus Christ Founder Ministry",
-  description: "Jesus Christ Founder Ministry (JCFM), a Christ-centred church community rooted in Nzoia, Bungoma, reaching across Kenya through faith, education, and outreach.",
+  metadataBase: new URL(SITE_URL),
+  title: { default: SITE_NAME, template: `%s | ${SITE_NAME}` },
+  description: "Jesus Christ Founder Ministry is a church community in Kenya serving through worship, outreach and Fountain of Hope Academy.",
+  applicationName: SITE_NAME,
+  category: "religion",
 };
 
 export default function RootLayout({

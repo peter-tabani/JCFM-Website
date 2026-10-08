@@ -38,7 +38,7 @@ export default function DonateChrome({
       <footer className="border-t border-white/10 bg-[#0f1626] py-5">
         <p className="mx-auto max-w-3xl px-4 text-center text-xs text-white/35">
           Jesus Christ Founder Ministry · Payments processed securely by
-          IntaSend (M-Pesa, card &amp; Google Pay). Your details never touch our
+          IntaSend (card, Apple Pay or Google Pay where available). Your payment details never touch our
           servers.
         </p>
       </footer>

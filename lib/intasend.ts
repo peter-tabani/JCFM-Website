@@ -1,13 +1,12 @@
-// IntaSend config helpers. IntaSend is a CBK-licensed Kenyan payment gateway
-// (M-Pesa + card + Google Pay + Apple Pay). We use its client-side InlineJS
+// IntaSend config helpers. The current USD checkout offers cards and enabled
+// wallets. We use its client-side InlineJS
 // widget, which creates checkouts in the browser using the PUBLIC key, so the
 // key ships in the client bundle via a NEXT_PUBLIC_ var. Real donations are
 // recorded server-side by the webhook (app/api/webhooks/intasend), never
 // trusted from the browser.
 //
-// Why IntaSend and not PayPal/Stripe: PayPal permanently deactivated JCFM's
-// account (Kenya-based orgs are a high-risk category for them) and Stripe is
-// USD-card-only with no M-Pesa, which is how most Kenyan donors give.
+// The existing JCFM payment account uses IntaSend; keep one gateway rather
+// than adding new providers and setup costs.
 
 export const INTASEND_PUBLIC_KEY =
   process.env.NEXT_PUBLIC_INTASEND_PUBLISHABLE_KEY ?? "";

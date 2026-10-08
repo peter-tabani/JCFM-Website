@@ -36,9 +36,11 @@ type Totals = { monthCents: number; lifetimeCents: number; succeededCount: numbe
 
 const fmtUSD = (cents: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: cents % 100 === 0 ? 0 : 2 }).format(cents / 100);
+const fmtDonation = (cents: number, currency: string) =>
+  new Intl.NumberFormat("en-US", { style: "currency", currency: currency.toUpperCase() }).format(cents / 100);
 const fmtDate = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
 const providerLabel = (p: string) =>
-  p === "paypal" ? "PayPal" : p === "intasend" ? "M-Pesa / Card" : "Card";
+  p === "paypal" ? "PayPal" : p === "intasend" ? "IntaSend" : "Card";
 const statusTone = (s: AdminDonation["status"]) => (s === "succeeded" ? "success" : s === "pending" ? "warn" : "danger");
 const statusLabel = (s: AdminDonation["status"]) => (s === "succeeded" ? "Received" : s === "pending" ? "Pending" : "Failed");
 
@@ -77,9 +79,9 @@ export default function AdminDonations() {
   );
 
   function exportCsv() {
-    const header = ["Date", "Donor", "Email", "Designation", "Method", "Status", "Amount (USD)"];
+    const header = ["Date", "Donor", "Email", "Designation", "Method", "Status", "Amount", "Currency"];
     const lines = filtered.map((r) =>
-      [fmtDate(r.createdAt), r.donorName ?? "", r.donorEmail ?? "", r.designationLabel, providerLabel(r.provider), r.status, (r.amountCents / 100).toFixed(2)]
+      [fmtDate(r.createdAt), r.donorName ?? "", r.donorEmail ?? "", r.designationLabel, providerLabel(r.provider), r.status, (r.amountCents / 100).toFixed(2), r.currency.toUpperCase()]
         .map((v) => `"${String(v).replace(/"/g, '""')}"`)
         .join(",")
     );
@@ -103,15 +105,15 @@ export default function AdminDonations() {
 
       <div className="mx-auto max-w-[1400px] space-y-6 px-5 py-7 md:px-8 md:py-10">
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          <StatCard icon={Banknote} label="Received · This Month" value={fmtUSD(totals?.monthCents ?? 0)} sub="Completed gifts" />
-          <StatCard icon={Receipt} label="Lifetime Giving" value={fmtUSD(totals?.lifetimeCents ?? 0)} sub="All completed gifts" />
-          <StatCard icon={CreditCard} label="Completed Gifts" value={String(totals?.succeededCount ?? 0)} sub="M-Pesa · Card · IntaSend" />
+          <StatCard icon={Banknote} label="Received · This Month" value={fmtUSD(totals?.monthCents ?? 0)} sub="USD gifts only" />
+          <StatCard icon={Receipt} label="Lifetime Giving" value={fmtUSD(totals?.lifetimeCents ?? 0)} sub="USD gifts only" />
+          <StatCard icon={CreditCard} label="Completed Gifts" value={String(totals?.succeededCount ?? 0)} sub="IntaSend card and wallet checkout" />
           <StatCard icon={Clock} label="Pending" value={String(totals?.pendingCount ?? 0)} sub="Awaiting confirmation" />
         </div>
 
         <div className="flex items-start gap-2 rounded-md border border-slate-200 bg-slate-50 px-3 py-2.5 text-[12px] leading-5 text-slate-600">
           <Info size={14} className="mt-0.5 shrink-0 text-slate-500" />
-          Donations are recorded automatically from the online giving flow (IntaSend, M-Pesa &amp; card). Amounts are in US dollars.
+          Donations are recorded automatically from the IntaSend checkout after payment confirmation. New gifts are in US dollars; totals exclude any gifts in other currencies.
         </div>
 
         {/* Toolbar */}
@@ -127,7 +129,7 @@ export default function AdminDonations() {
           </div>
           <select value={provider} onChange={(e) => setProvider(e.target.value as typeof provider)} className="min-h-[44px] rounded-md border border-slate-200 bg-white px-3 text-[13px] font-medium text-slate-900 outline-none focus:border-slate-900">
             <option value="All">All methods</option>
-            <option value="intasend">M-Pesa / Card</option>
+            <option value="intasend">IntaSend</option>
             <option value="paypal">PayPal</option>
             <option value="stripe">Card (legacy)</option>
           </select>
@@ -157,7 +159,7 @@ export default function AdminDonations() {
                       <p className="text-[14px] font-semibold text-slate-900">{r.donorName || r.donorEmail || "Donor"}</p>
                       <p className="text-[12px] text-slate-500">{r.designationLabel}</p>
                     </div>
-                    <p className="font-mono text-[15px] font-bold text-slate-900">{fmtUSD(r.amountCents)}</p>
+                    <p className="font-mono text-[15px] font-bold text-slate-900">{fmtDonation(r.amountCents, r.currency)}</p>
                   </div>
                   <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-slate-100 pt-3 text-[11px] text-slate-500">
                     <span>{fmtDate(r.createdAt)}</span>
@@ -189,7 +191,7 @@ export default function AdminDonations() {
                         </td>
                         <td className="px-4 py-3 text-[12px] text-slate-600">{r.designationLabel}</td>
                         <td className="px-4 py-3 text-[12px] text-slate-500">{providerLabel(r.provider)}</td>
-                        <td className="px-4 py-3 text-right font-mono text-[14px] font-semibold text-slate-900">{fmtUSD(r.amountCents)}</td>
+                        <td className="px-4 py-3 text-right font-mono text-[14px] font-semibold text-slate-900">{fmtDonation(r.amountCents, r.currency)}</td>
                         <td className="px-4 py-3"><StatusPill label={statusLabel(r.status)} tone={statusTone(r.status)} /></td>
                       </tr>
                     ))}

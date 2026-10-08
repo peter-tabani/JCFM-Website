@@ -1,5 +1,3 @@
-import { projects } from "@/data/donor";
-
 // ─────────────────────────────────────────────────────────────
 // Shared, server-trustworthy donation logic.
 // Used by both the donate flow (display) and the payment API routes
@@ -34,19 +32,16 @@ export const GENERAL_FUND: Cause = {
   image: GENERAL_IMAGE,
 };
 
-// Causes a visitor can give to: the general fund plus every project that is
-// still open for funding (completed projects are not fundable).
+// Project information in data/donor.ts is sample content. Only the confirmed
+// general fund can receive public donations until real projects are approved.
 export function fundableCauses(): Cause[] {
-  const projectCauses: Cause[] = projects
-    .filter((p) => p.status !== "complete")
-    .map((p) => ({ slug: p.id, label: p.title, blurb: p.shortDesc, image: p.hero }));
-  return [GENERAL_FUND, ...projectCauses];
+  return [GENERAL_FUND];
 }
 
 // The image to show for a chosen cause on later steps.
 export function causeImage(slug: string | null | undefined): string {
-  if (!slug || slug === "general") return GENERAL_IMAGE;
-  return projects.find((p) => p.id === slug)?.hero ?? GENERAL_IMAGE;
+  void slug;
+  return GENERAL_IMAGE;
 }
 
 // Server-side resolution of a designation slug to a trusted label.
@@ -57,9 +52,7 @@ export function resolveDesignation(
   if (!slug || slug === "general") {
     return { designation: "general", label: "General Fund" };
   }
-  const project = projects.find((p) => p.id === slug && p.status !== "complete");
-  if (!project) return null;
-  return { designation: project.id, label: project.title };
+  return null;
 }
 
 // Validate a raw amount-in-cents value coming from the client.
