@@ -20,8 +20,8 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
 
   if (status === "loading") {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#f8f6ee]">
-        <div className="flex flex-col items-center gap-3 text-[#0b2545]">
+      <div className="flex min-h-screen items-center justify-center bg-[#080808] text-white">
+        <div className="flex flex-col items-center gap-3 text-white">
           <Loader2 size={24} className="animate-spin" strokeWidth={1.75} />
           <p className="text-[11px] font-bold uppercase tracking-[0.32em]">
             Verifying session…
@@ -36,15 +36,15 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   // Session present but not an admin, show a friendly block
   if (data?.user?.role && data.user.role !== "admin") {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#f8f6ee] p-6">
-        <div className="w-full max-w-md border-2 border-[#a8201a] bg-white p-8 text-center">
+      <div className="flex min-h-screen items-center justify-center bg-[#080808] p-6 text-white">
+        <div className="w-full max-w-md border border-red-900 bg-[#111111] p-8 text-center">
           <div className="mx-auto flex h-14 w-14 items-center justify-center border-2 border-[#a8201a] bg-[#a8201a]/10 text-[#a8201a]">
             <ShieldX size={22} strokeWidth={1.75} />
           </div>
           <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.4em] text-[#a8201a]">
             Access Denied
           </p>
-          <h2 className="mt-2 font-serif text-2xl font-semibold uppercase tracking-wide text-[#0b2545]">
+          <h2 className="mt-2 font-serif text-2xl font-semibold uppercase tracking-wide text-white">
             Not authorised
           </h2>
           <p className="mt-3 text-[13px] leading-7 text-slate-600">
@@ -54,7 +54,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
           </p>
           <Link
             href="/"
-            className="mt-6 inline-flex items-center gap-2 bg-[#0b2545] px-6 py-3 text-[11px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#0a1e3a]"
+            className="mt-6 inline-flex items-center gap-2 bg-white px-6 py-3 text-[11px] font-bold uppercase tracking-[0.22em] text-black transition hover:bg-neutral-200"
           >
             <ArrowLeft size={12} strokeWidth={2.5} />
             Back to Site

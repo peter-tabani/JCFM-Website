@@ -74,3 +74,118 @@ h3,
 .input::placeholder {
   color: #94a3b8;
 }
+
+/* Dark admin console theme. Scoped to /admin so the public site is unaffected. */
+[data-admin-theme="dark"] {
+  color-scheme: dark;
+  background: #080808;
+  color: #f5f5f5;
+}
+
+[data-admin-theme="dark"] [class~="bg-white"],
+[data-admin-theme="dark"] [class~="bg-white/95"] {
+  background-color: #111111 !important;
+}
+
+[data-admin-theme="dark"] [class~="bg-slate-50"],
+[data-admin-theme="dark"] [class~="bg-slate-100"],
+[data-admin-theme="dark"] [class~="bg-slate-200"] {
+  background-color: #171717 !important;
+}
+
+[data-admin-theme="dark"] [class~="bg-slate-900"] {
+  background-color: #242424 !important;
+}
+
+[data-admin-theme="dark"] [class~="bg-slate-800"] {
+  background-color: #303030 !important;
+}
+
+[data-admin-theme="dark"] [class*="text-slate-900"],
+[data-admin-theme="dark"] [class*="text-slate-800"],
+[data-admin-theme="dark"] [class*="text-slate-700"] {
+  color: #f5f5f5 !important;
+}
+
+[data-admin-theme="dark"] [class*="text-slate-600"] {
+  color: #d4d4d4 !important;
+}
+
+[data-admin-theme="dark"] [class*="text-slate-500"] {
+  color: #a3a3a3 !important;
+}
+
+[data-admin-theme="dark"] [class*="text-slate-400"] {
+  color: #858585 !important;
+}
+
+[data-admin-theme="dark"] [class*="text-slate-300"] {
+  color: #737373 !important;
+}
+
+[data-admin-theme="dark"] [class~="border-slate-100"],
+[data-admin-theme="dark"] [class~="border-slate-200"],
+[data-admin-theme="dark"] [class~="border-slate-300"] {
+  border-color: #303030 !important;
+}
+
+[data-admin-theme="dark"] [class~="border-slate-900"] {
+  border-color: #555555 !important;
+}
+
+[data-admin-theme="dark"] [class*="bg-amber-50"] {
+  background-color: #2a2110 !important;
+}
+
+[data-admin-theme="dark"] [class*="text-amber-800"] {
+  color: #fcd34d !important;
+}
+
+[data-admin-theme="dark"] [class*="bg-emerald-50"] {
+  background-color: #10251b !important;
+}
+
+[data-admin-theme="dark"] [class*="text-emerald-700"] {
+  color: #86efac !important;
+}
+
+[data-admin-theme="dark"] [class*="bg-rose-50"] {
+  background-color: #2b1519 !important;
+}
+
+[data-admin-theme="dark"] [class*="text-rose-700"] {
+  color: #fda4af !important;
+}
+
+[data-admin-theme="dark"] [class*="bg-sky-50"] {
+  background-color: #10212a !important;
+}
+
+[data-admin-theme="dark"] [class*="text-sky-700"] {
+  color: #7dd3fc !important;
+}
+
+[data-admin-theme="dark"] [class~="hover:bg-slate-50"]:hover,
+[data-admin-theme="dark"] [class~="hover:bg-slate-100"]:hover,
+[data-admin-theme="dark"] [class~="hover:bg-white"]:hover {
+  background-color: #242424 !important;
+}
+
+[data-admin-theme="dark"] input,
+[data-admin-theme="dark"] select,
+[data-admin-theme="dark"] textarea {
+  color-scheme: dark;
+}
+
+[data-admin-theme="dark"] input::placeholder,
+[data-admin-theme="dark"] textarea::placeholder {
+  color: #858585;
+}
+
+[data-admin-theme="dark"] table tbody tr:nth-child(even) {
+  background-color: #141414 !important;
+}
+
+[data-admin-theme="dark"] table tbody tr:nth-child(odd) {
+  background-color: #0d0d0d !important;
+}
