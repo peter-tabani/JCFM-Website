@@ -245,7 +245,7 @@ export default function UploadPhotos() {
                   aria-pressed={active}
                   className={`flex min-h-[76px] items-center gap-4 rounded-xl border px-5 py-4 text-left transition ${
                     active
-                      ? "border-white bg-white text-black"
+                      ? "border-white bg-[#252525] text-white"
                       : "border-white/15 bg-white/[0.04] text-white hover:border-white/45 hover:bg-white/[0.08]"
                   }`}
                 >
