@@ -47,14 +47,14 @@ async function main() {
           bio: "Bishop Nelson Barasa Wanjala is the founder and General Overseer of Jesus Christ Founder Ministry, which began in Sitikho Sikalame in 2005 and has grown into a network of branches across Kenya.",
         },
         {
-          name: "Pastor Sarah N Wekesa",
+          name: "Pastor Sarah Nangila Wekesa",
           role: "Co-Founder & Pastor",
           tag: "Co-Founder",
           photo: null,
           sortOrder: 1,
           email: "info@jcfm.online",
           quote: null,
-          bio: "Pastor Sarah N Wekesa co-founded Jesus Christ Founder Ministry and serves in pastoral leadership alongside Bishop Nelson, with a heart for women's and children's ministry.",
+          bio: "Pastor Sarah Nangila Wekesa co-founded Jesus Christ Founder Ministry and serves in pastoral leadership alongside Bishop Nelson, with a heart for women's and children's ministry.",
         },
         {
           name: "Pst. Irene M. Wafula",

@@ -179,7 +179,7 @@ export default function Hero() {
             <div className="absolute -left-3 -top-3 h-full w-full border border-[#15803d]/50" aria-hidden />
             <img
               src="/images/staff/B and P.png"
-              alt="Bishop Nelson Barasa Wanjala & Pastor Sarah N Wekesa"
+              alt="Bishop Nelson Barasa Wanjala and Pastor Sarah Nangila Wekesa"
               className="relative z-10 h-full w-full object-cover shadow-[0_25px_60px_rgba(0,0,0,0.55)]"
             />
           </div>
@@ -187,7 +187,7 @@ export default function Hero() {
           {/* Message */}
           <div className="text-left">
             <h2 className="font-serif text-[28px] font-semibold leading-tight tracking-[0.01em] text-white sm:text-[34px] lg:text-[40px]">
-              Meet Bishop Nelson Barasa and Pastor Sarah Wekesa
+              Meet Bishop Nelson Barasa Wanjala and Pastor Sarah Nangila Wekesa
             </h2>
             <div className="mt-5 h-px w-14 bg-[#15803d]" />
             <p className="mt-6 max-w-xl text-[15px] leading-[1.65] text-white/80">

@@ -256,7 +256,7 @@ export default function MissionTripsPage() {
           <p className="font-serif text-[19px] leading-[1.9] text-white/80 md:text-[20px] md:leading-[2]">
             Visits are arranged through{" "}
             <span className="text-[#c4b5fd]">Bishop Nelson Barasa Wanjala</span>{" "}
-            and Pastor Sarah N. Wekesa, and you are free to come with your own
+            and Pastor Sarah Nangila Wekesa, and you are free to come with your own
             plan for ministry. Many guests spend their days preaching in our
             branches, walking through the villages for evangelism, helping with
             medical outreach in the settlements, guiding and counselling young

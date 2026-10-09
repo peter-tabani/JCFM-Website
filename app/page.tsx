@@ -11,7 +11,7 @@ import { publicPageMetadata, SITE_URL } from "@/lib/seo";
 
 export const metadata = publicPageMetadata({
   title: "Jesus Christ Founder Ministry | Church, Outreach and School in Kenya",
-  description: "Explore worship, branches, community outreach and Fountain of Hope Academy at Jesus Christ Founder Ministry in Kenya.",
+  description: "Jesus Christ Founder Ministry in Kenya was founded by Bishop Nelson Barasa Wanjala and Pastor Sarah Nangila Wekesa. Explore worship, branches, outreach and Fountain of Hope Academy.",
   path: "",
 });
 
@@ -26,13 +26,49 @@ const churchSchema = {
   image: `${SITE_URL}/images/hero-1.jpg`,
   foundingDate: "2005",
   email: "info@jcfm.online",
+  founder: [
+    { "@id": `${SITE_URL}/#bishop-nelson-barasa-wanjala` },
+    { "@id": `${SITE_URL}/#pastor-sarah-nangila-wekesa` },
+  ],
   subOrganization: { "@id": `${SITE_URL}/school#school` },
 };
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
+  name: "Jesus Christ Founder Ministry",
+  alternateName: "JCFM",
+  url: SITE_URL,
+};
+
+const leaderSchemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${SITE_URL}/#bishop-nelson-barasa-wanjala`,
+    name: "Bishop Nelson Barasa Wanjala",
+    jobTitle: "Founder and General Overseer",
+    url: `${SITE_URL}/#bishop-nelson-barasa-wanjala`,
+    worksFor: { "@id": `${SITE_URL}/#church` },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${SITE_URL}/#pastor-sarah-nangila-wekesa`,
+    name: "Pastor Sarah Nangila Wekesa",
+    jobTitle: "Co-founder and Pastor",
+    url: `${SITE_URL}/#pastor-sarah-nangila-wekesa`,
+    worksFor: { "@id": `${SITE_URL}/#church` },
+  },
+];
 
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#080b16] text-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(churchSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(leaderSchemas) }} />
       {/* Church identity, motto & soft Academy link */}
       <Hero />
 

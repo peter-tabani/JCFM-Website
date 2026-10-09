@@ -7,8 +7,8 @@ import { prisma } from "@/lib/prisma";
 import { publicPageMetadata } from "@/lib/seo";
 
 export const metadata = publicPageMetadata({
-  title: "Ministry and School Leadership",
-  description: "Meet the leaders serving Jesus Christ Founder Ministry and Fountain of Hope Academy in Kenya.",
+  title: "Bishop Nelson Barasa Wanjala and Pastor Sarah Nangila Wekesa",
+  description: "Meet Bishop Nelson Barasa Wanjala, Pastor Sarah Nangila Wekesa and the leaders serving Jesus Christ Founder Ministry and Fountain of Hope Academy in Kenya.",
   path: "/leadership",
 });
 
@@ -27,13 +27,13 @@ const FALLBACK: Leader[] = [
     bio: "Bishop Nelson Barasa Wanjala is the founder and General Overseer of Jesus Christ Founder Ministry, which began in Sitikho Sikalame in 2005 and has grown into a network of branches across Kenya.",
   },
   {
-    name: "Pastor Sarah N Wekesa",
+    name: "Pastor Sarah Nangila Wekesa",
     role: "Co-Founder & Pastor",
     tag: "Co-Founder",
     photo: null,
     email: "info@jcfm.online",
     quote: null,
-    bio: "Pastor Sarah N Wekesa co-founded Jesus Christ Founder Ministry and serves in pastoral leadership alongside Bishop Nelson.",
+    bio: "Pastor Sarah Nangila Wekesa co-founded Jesus Christ Founder Ministry and serves in pastoral leadership alongside Bishop Nelson.",
   },
   {
     name: "Rael H. Wafula",
@@ -53,10 +53,10 @@ async function loadTeam(): Promise<Leader[]> {
     });
     if (rows.length === 0) return FALLBACK;
     return rows.map((r) => ({
-      name: r.name,
+      name: r.name === "Pastor Sarah N Wekesa" ? "Pastor Sarah Nangila Wekesa" : r.name,
       role: r.role,
       tag: r.tag,
-      bio: r.bio,
+      bio: r.bio.replaceAll("Pastor Sarah N Wekesa", "Pastor Sarah Nangila Wekesa"),
       quote: r.quote,
       photo: r.photo,
       email: r.email,

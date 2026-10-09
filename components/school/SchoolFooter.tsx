@@ -113,6 +113,16 @@ export default function SchoolFooter() {
             Visit Jesus Christ Founder Ministry
             <ArrowUpRight size={12} strokeWidth={2.5} />
           </Link>
+          <a
+            href="https://wa.me/254708905590?text=Hello%20Frank%2C%20I%20saw%20your%20work%20on%20the%20JCFM%20website%20and%20I%20am%20interested%20in%20working%20with%20you."
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Website developed by Peter Frank"
+            aria-label="Website developed by Peter Frank"
+            className="transition hover:text-white"
+          >
+            Website developed by PF
+          </a>
         </div>
       </div>
     </footer>

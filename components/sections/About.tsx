@@ -3,6 +3,7 @@ import { siteData } from "@/data/site";
 
 const FACTSHEET = [
   { k: "Founded By", v: siteData.generalOverseer },
+  { k: "Co-Founder", v: siteData.coLeader },
   { k: "Headquarters", v: "Nzoia, Bungoma County" },
   { k: "Branches", v: `${siteData.branches.length} · Across Kenya` },
 ];
@@ -60,6 +61,27 @@ export default function About() {
               of Jesus Christ Founder Ministry is, simply, a story of grace. And we
               believe God is doing more.
             </p>
+
+            <div className="mt-8 grid gap-4 text-left sm:grid-cols-2">
+              <div className="border border-white/10 bg-white/5 p-5">
+                <h3 id="bishop-nelson-barasa-wanjala" className="scroll-mt-24 font-serif text-lg text-white">
+                  Bishop Nelson Barasa Wanjala
+                </h3>
+                <p className="mt-2 text-sm leading-7 text-white/65">
+                  Founder and General Overseer of Jesus Christ Founder Ministry.
+                  He began the ministry in Sitikho Sikalame in 2005.
+                </p>
+              </div>
+              <div className="border border-white/10 bg-white/5 p-5">
+                <h3 id="pastor-sarah-nangila-wekesa" className="scroll-mt-24 font-serif text-lg text-white">
+                  Pastor Sarah Nangila Wekesa
+                </h3>
+                <p className="mt-2 text-sm leading-7 text-white/65">
+                  Co-founder and pastor of Jesus Christ Founder Ministry,
+                  serving alongside Bishop Nelson in pastoral leadership.
+                </p>
+              </div>
+            </div>
 
             {/* Bridge to journey — temporarily disabled until the page is refreshed */}
             <div className="mt-8 flex flex-col items-center justify-center gap-2 md:mt-10">
