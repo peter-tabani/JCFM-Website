@@ -8,14 +8,17 @@ import {
   Trash2,
   Eye,
   EyeOff,
-  ExternalLink,
   CheckCircle2,
   AlertCircle,
   X,
   UploadCloud,
+  Check,
+  Church,
+  GraduationCap,
+  Images,
+  TentTree,
 } from "lucide-react";
-import { PageHeader, GhostButton } from "@/components/admin/ui";
-import { MEDIA_CATEGORIES, MEDIA_SECTIONS, type MediaSection } from "@/lib/media";
+import { MEDIA_SECTIONS, type MediaSection } from "@/lib/media";
 
 type MediaItem = {
   id: string;
@@ -37,10 +40,14 @@ type Pending = {
   error?: string;
 };
 
-// Sections whose public display has category filters.
-const HAS_CATEGORY: MediaSection[] = ["church", "school"];
-
 const MAX_EDGE = 2400; // px, longest side after resizing
+
+const SECTION_ICONS = {
+  hero: Images,
+  church: Church,
+  school: GraduationCap,
+  missions: TentTree,
+} satisfies Record<MediaSection, typeof Images>;
 
 // Shrink large phone photos in the browser before upload so pages load fast.
 // Falls back to the original file if the browser can't decode it.
@@ -65,19 +72,8 @@ async function shrink(file: File): Promise<File> {
   }
 }
 
-function titleFromFile(name: string) {
-  return name
-    .replace(/\.[^.]+$/, "")
-    .replace(/[_-]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim()
-    .slice(0, 120) || "Photo";
-}
-
 export default function UploadPhotos() {
   const [section, setSection] = useState<MediaSection>("church");
-  const [category, setCategory] = useState<string>("Worship");
-  const [caption, setCaption] = useState("");
   const [pending, setPending] = useState<Pending[]>([]);
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<{ tone: "ok" | "err"; text: string } | null>(null);
@@ -169,8 +165,8 @@ export default function UploadPhotos() {
           body: JSON.stringify({
             type: "image",
             section,
-            title: caption.trim() || titleFromFile(p.file.name),
-            category: HAS_CATEGORY.includes(section) ? category : "Worship",
+            title: section === "school" ? "Academy photo" : section === "missions" ? "Mission photo" : "Ministry photo",
+            category: section === "school" ? "School" : section === "missions" ? "Outreach" : "Worship",
             url: blob.url,
             published: true,
           }),
@@ -196,7 +192,6 @@ export default function UploadPhotos() {
       prev.filter((x) => completed.has(x.id)).forEach((x) => URL.revokeObjectURL(x.preview));
       return prev.filter((x) => !completed.has(x.id));
     });
-    if (ok > 0) setCaption("");
     setNotice(
       failed === 0
         ? { tone: "ok", text: `${ok} photo${ok === 1 ? "" : "s"} added to ${current.label}. They are live now.` }
@@ -232,46 +227,34 @@ export default function UploadPhotos() {
   const waiting = pending.filter((p) => p.status !== "done").length;
 
   return (
-    <div>
-      <PageHeader
-        kicker="Content · Photos"
-        title="Upload Photos"
-        description="Choose where the photos should appear, select them, and upload. New photos show first in that section; the existing photos stay after them."
-        actions={
-          <GhostButton icon={ExternalLink} href={current.page}>
-            View section
-          </GhostButton>
-        }
-      />
+    <div className="min-h-[calc(100vh-56px)] bg-[#080808] text-white">
+      <div className="mx-auto max-w-[1000px] space-y-9 px-5 py-8 md:px-8 md:py-12">
+        <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">Upload photos</h1>
 
-      <div className="mx-auto max-w-[1100px] space-y-8 px-5 py-7 md:px-8 md:py-10">
-        {/* 1. Section */}
         <section>
-          <h2 className="mb-3 text-[13px] font-semibold uppercase tracking-wide text-slate-500">1 · Choose a section</h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {MEDIA_SECTIONS.map((s) => {
-              const count = items.filter((m) => m.section === s.key && m.type === "image").length;
               const active = s.key === section;
+              const Icon = SECTION_ICONS[s.key];
               return (
                 <button
                   key={s.key}
                   type="button"
                   onClick={() => setSection(s.key)}
                   disabled={busy}
-                  className={`rounded-lg border p-4 text-left transition ${
+                  aria-pressed={active}
+                  className={`flex min-h-[76px] items-center gap-4 rounded-xl border px-5 py-4 text-left transition ${
                     active
-                      ? "border-slate-900 bg-slate-900 text-white"
-                      : "border-slate-200 bg-white text-slate-900 hover:border-slate-400"
+                      ? "border-white bg-white text-black"
+                      : "border-white/15 bg-white/[0.04] text-white hover:border-white/45 hover:bg-white/[0.08]"
                   }`}
                 >
-                  <span className="flex items-center justify-between gap-2">
-                    <span className="text-[14px] font-semibold">{s.label}</span>
-                    <span className={`text-[11px] ${active ? "text-white/70" : "text-slate-400"}`}>
-                      {count} uploaded
-                    </span>
+                  <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg ${active ? "bg-black text-white" : "bg-white/10 text-white"}`}>
+                    <Icon size={21} />
                   </span>
-                  <span className={`mt-1 block text-[12px] leading-5 ${active ? "text-white/75" : "text-slate-500"}`}>
-                    {s.hint}
+                  <span className="flex-1 text-[15px] font-semibold">{s.label}</span>
+                  <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${active ? "bg-black text-white" : "border border-white/25 text-transparent"}`}>
+                    {active && <Check size={15} />}
                   </span>
                 </button>
               );
@@ -279,9 +262,7 @@ export default function UploadPhotos() {
           </div>
         </section>
 
-        {/* 2. Photos */}
         <section>
-          <h2 className="mb-3 text-[13px] font-semibold uppercase tracking-wide text-slate-500">2 · Select photos</h2>
           <div
             onDragOver={(e) => {
               e.preventDefault();
@@ -295,12 +276,14 @@ export default function UploadPhotos() {
             }}
             onClick={() => !busy && inputRef.current?.click()}
             className={`flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed px-6 py-10 text-center transition ${
-              dragging ? "border-slate-900 bg-slate-100" : "border-slate-300 bg-white hover:border-slate-500"
+              dragging ? "border-white bg-white/10" : "border-white/25 bg-white/[0.03] hover:border-white/60 hover:bg-white/[0.06]"
             }`}
           >
-            <UploadCloud size={30} className="text-slate-400" />
-            <p className="mt-3 text-[14px] font-semibold text-slate-900">Tap to choose photos, or drag them here</p>
-            <p className="mt-1 text-[12px] text-slate-500">You can pick several at once. JPG, PNG or WebP. Large photos are resized automatically.</p>
+            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-white">
+              <UploadCloud size={27} />
+            </span>
+            <p className="mt-4 text-base font-semibold text-white">Tap to choose photos, or drag them here</p>
+            <p className="mt-2 text-sm text-white/65">You can pick several at once.</p>
             <input
               ref={inputRef}
               type="file"
@@ -317,7 +300,7 @@ export default function UploadPhotos() {
           {pending.length > 0 && (
             <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
               {pending.map((p) => (
-                <div key={p.id} className="relative overflow-hidden rounded-lg border border-slate-200 bg-white">
+                <div key={p.id} className="relative overflow-hidden rounded-xl border border-white/15 bg-white/5">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={p.preview} alt="" className="aspect-square w-full object-cover" />
                   {p.status === "waiting" && !busy && (
@@ -336,7 +319,7 @@ export default function UploadPhotos() {
                     </div>
                   )}
                   {p.status === "error" && (
-                    <p className="flex items-start gap-1 bg-rose-50 p-2 text-[11px] leading-4 text-rose-600">
+                    <p className="flex items-start gap-1 bg-red-950 p-2 text-[11px] leading-4 text-red-200">
                       <AlertCircle size={12} className="mt-0.5 shrink-0" /> {p.error}
                     </p>
                   )}
@@ -346,82 +329,53 @@ export default function UploadPhotos() {
           )}
         </section>
 
-        {/* 3. Details + upload */}
         <section>
-          <h2 className="mb-3 text-[13px] font-semibold uppercase tracking-wide text-slate-500">3 · Upload</h2>
-          <div className="grid gap-4 rounded-lg border border-slate-200 bg-white p-5 sm:grid-cols-2">
-            <label className="block">
-              <span className="mb-1.5 block text-[12px] font-medium text-slate-700">Caption (optional)</span>
-              <input
-                value={caption}
-                onChange={(e) => setCaption(e.target.value)}
-                placeholder="e.g. Sunday Worship Service"
-                maxLength={120}
-                className="w-full rounded-md border border-slate-200 px-3 py-2.5 text-[14px] text-slate-900 outline-none focus:border-slate-500"
-              />
-              <span className="mt-1 block text-[11px] text-slate-400">Used for every photo in this batch. Leave blank to use the file names.</span>
-            </label>
-            {HAS_CATEGORY.includes(section) && (
-              <label className="block">
-                <span className="mb-1.5 block text-[12px] font-medium text-slate-700">Category</span>
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  className="w-full rounded-md border border-slate-200 bg-white px-3 py-2.5 text-[14px] text-slate-900 outline-none focus:border-slate-500"
-                >
-                  {MEDIA_CATEGORIES.map((c) => (
-                    <option key={c} value={c}>{c}</option>
-                  ))}
-                </select>
-              </label>
-            )}
-            <div className="sm:col-span-2">
-              {notice && (
+          <div>
+            {notice && (
                 <p
                   className={`mb-3 flex items-start gap-2 rounded-md p-3 text-[13px] ${
-                    notice.tone === "ok" ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-600"
+                    notice.tone === "ok" ? "bg-emerald-950 text-emerald-200" : "bg-red-950 text-red-200"
                   }`}
                 >
                   {notice.tone === "ok" ? <CheckCircle2 size={16} className="mt-0.5 shrink-0" /> : <AlertCircle size={16} className="mt-0.5 shrink-0" />}
                   {notice.text}
                 </p>
               )}
-              <button
+            <button
                 type="button"
                 onClick={uploadAll}
                 disabled={busy || waiting === 0}
-                className="inline-flex min-h-[46px] w-full items-center justify-center gap-2 rounded-md bg-slate-900 px-4 font-medium text-white transition hover:bg-slate-800 disabled:opacity-50"
+                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-white px-4 font-semibold text-black transition hover:bg-white/85 disabled:cursor-not-allowed disabled:opacity-40"
               >
                 {busy ? (
                   <><Loader2 size={16} className="animate-spin" /> Uploading…</>
                 ) : (
-                  <><ImagePlus size={16} /> {waiting > 0 ? `Upload ${waiting} photo${waiting === 1 ? "" : "s"} to ${current.label}` : "Select photos first"}</>
+                  <><ImagePlus size={16} /> {waiting > 0 ? `Upload ${waiting} photo${waiting === 1 ? "" : "s"}` : "Upload photos"}</>
                 )}
-              </button>
-            </div>
+            </button>
           </div>
         </section>
 
         {/* Existing uploads in this section */}
         <section>
-          <h2 className="mb-3 text-[13px] font-semibold uppercase tracking-wide text-slate-500">
-            Uploaded to {current.label}
+          <h2 className="mb-3 text-sm font-semibold text-white/85">
+            Photos in {current.label}
           </h2>
           {loading ? (
-            <div className="flex justify-center py-10 text-slate-400"><Loader2 className="animate-spin" /></div>
+            <div className="flex justify-center py-10 text-white/50"><Loader2 className="animate-spin" /></div>
           ) : inSection.length === 0 ? (
-            <p className="rounded-lg border border-dashed border-slate-200 bg-white p-6 text-center text-[13px] text-slate-500">
-              No uploads here yet. The section is showing its built-in photos.
+            <p className="rounded-xl border border-dashed border-white/15 p-6 text-center text-sm text-white/55">
+              No photos uploaded yet.
             </p>
           ) : (
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
               {inSection.map((m) => (
-                <div key={m.id} className="overflow-hidden rounded-lg border border-slate-200 bg-white">
+                <div key={m.id} className="overflow-hidden rounded-xl border border-white/15 bg-white/[0.04]">
                   <div className="relative">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={m.thumbnail || m.url}
-                      alt={m.title}
+                      alt="Uploaded photo"
                       className={`aspect-square w-full object-cover ${m.published ? "" : "opacity-40"}`}
                     />
                     {!m.published && (
@@ -429,17 +383,16 @@ export default function UploadPhotos() {
                     )}
                   </div>
                   <div className="p-2">
-                    <p className="truncate text-[12px] font-medium text-slate-800">{m.title}</p>
                     <div className="mt-1 flex justify-between">
                       <button
                         onClick={() => toggle(m)}
-                        className="inline-flex min-h-11 items-center gap-1 rounded px-2 text-[11px] font-medium text-slate-600 hover:bg-slate-100"
+                        className="inline-flex min-h-11 items-center gap-1 rounded px-2 text-[11px] font-medium text-white/75 hover:bg-white/10"
                       >
                         {m.published ? <><EyeOff size={13} /> Hide</> : <><Eye size={13} /> Show</>}
                       </button>
                       <button
                         onClick={() => remove(m)}
-                        className="inline-flex min-h-11 items-center gap-1 rounded px-2 text-[11px] font-medium text-rose-600 hover:bg-rose-50"
+                        className="inline-flex min-h-11 items-center gap-1 rounded px-2 text-[11px] font-medium text-red-300 hover:bg-red-950/60"
                       >
                         <Trash2 size={13} /> Delete
                       </button>
