@@ -66,7 +66,7 @@ function LoginForm() {
         <form onSubmit={onSubmit} className="space-y-5">
           <div>
             <label htmlFor="admin-email" className="mb-2 block text-sm text-white">
-              {mode === "admin" ? "Email" : "Phone number"}
+              {mode === "admin" ? "Developer email" : "Admin phone number"}
             </label>
             <div className="flex min-h-12 border border-white/20 bg-white/5 focus-within:border-white/60">
               <span className="flex w-12 shrink-0 items-center justify-center text-white/60" aria-hidden="true">
@@ -86,7 +86,7 @@ function LoginForm() {
 
           <div>
             <label htmlFor="admin-password" className="mb-2 block text-sm text-white">
-              {mode === "admin" ? "Password" : "PIN"}
+              {mode === "admin" ? "Developer password" : "Admin PIN"}
             </label>
             <div className="flex min-h-12 border border-white/20 bg-white/5 focus-within:border-white/60">
               <span className="flex w-12 shrink-0 items-center justify-center text-white/60" aria-hidden="true">
