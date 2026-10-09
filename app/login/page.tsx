@@ -3,7 +3,7 @@
 import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { AlertCircle, ArrowRight, Eye, EyeOff, Lock, Mail } from "lucide-react";
+import { AlertCircle, ArrowRight, Eye, EyeOff, Lock, Mail, Phone } from "lucide-react";
 
 export default function LoginPage() {
   return (
@@ -16,6 +16,7 @@ export default function LoginPage() {
 function LoginForm() {
   const search = useSearchParams();
   const callback = search.get("callbackUrl") || "/admin";
+  const [mode, setMode] = useState<"admin" | "staff">("admin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -28,20 +29,18 @@ function LoginForm() {
     setLoading(true);
 
     try {
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-        callbackUrl: callback,
-      });
+      const destination = mode === "admin" ? callback : "/staff/uploads";
+      const result = await signIn("credentials", mode === "admin"
+        ? { email, password, redirect: false, callbackUrl: destination }
+        : { phone: email, pin: password, redirect: false, callbackUrl: destination });
 
       if (result?.error) {
-        setError("Incorrect email or password. Please try again.");
+        setError(mode === "admin" ? "Incorrect email or password. Please try again." : "Phone number or PIN is incorrect, or this account is unavailable.");
         return;
       }
 
       if (result?.ok) {
-        window.location.href = result.url || callback;
+        window.location.href = result.url || destination;
       }
     } catch {
       setError("Sign in failed. Please try again.");
@@ -64,20 +63,29 @@ function LoginForm() {
         )}
 
         <form onSubmit={onSubmit} className="space-y-5">
+          <div className="grid grid-cols-2 border border-white/20 p-1">
+            <button type="button" onClick={() => { setMode("admin"); setEmail(""); setPassword(""); setError(null); }} className={`flex min-h-11 items-center justify-center gap-2 text-sm font-semibold transition ${mode === "admin" ? "bg-white text-black" : "text-white/65 hover:text-white"}`}>
+              <Lock size={15} /> Admin
+            </button>
+            <button type="button" onClick={() => { setMode("staff"); setEmail(""); setPassword(""); setError(null); }} className={`flex min-h-11 items-center justify-center gap-2 text-sm font-semibold transition ${mode === "staff" ? "bg-white text-black" : "text-white/65 hover:text-white"}`}>
+              <Phone size={15} /> Staff
+            </button>
+          </div>
           <div>
             <label htmlFor="admin-email" className="mb-2 block text-sm text-white">
-              Email
+              {mode === "admin" ? "Email" : "Phone number"}
             </label>
             <div className="flex min-h-12 border border-white/20 bg-white/5 focus-within:border-white/60">
               <span className="flex w-12 shrink-0 items-center justify-center text-white/60" aria-hidden="true">
-                <Mail size={18} />
+                {mode === "admin" ? <Mail size={18} /> : <Phone size={18} />}
               </span>
               <input
                 id="admin-email"
-                type="email"
+                type={mode === "admin" ? "email" : "tel"}
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                autoComplete="username"
+                autoComplete={mode === "admin" ? "username" : "tel"}
+                placeholder={mode === "staff" ? "+254 712 345 678" : undefined}
                 required
                 className="w-full bg-transparent px-3 text-base text-white outline-none"
               />
@@ -86,7 +94,7 @@ function LoginForm() {
 
           <div>
             <label htmlFor="admin-password" className="mb-2 block text-sm text-white">
-              Password
+              {mode === "admin" ? "Password" : "PIN"}
             </label>
             <div className="flex min-h-12 border border-white/20 bg-white/5 focus-within:border-white/60">
               <span className="flex w-12 shrink-0 items-center justify-center text-white/60" aria-hidden="true">
@@ -94,21 +102,25 @@ function LoginForm() {
               </span>
               <input
                 id="admin-password"
-                type={showPassword ? "text" : "password"}
+                type={mode === "staff" ? "password" : showPassword ? "text" : "password"}
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                autoComplete="current-password"
+                autoComplete={mode === "staff" ? "one-time-code" : "current-password"}
+                inputMode={mode === "staff" ? "numeric" : undefined}
+                maxLength={mode === "staff" ? 8 : undefined}
+                pattern={mode === "staff" ? "[0-9]{8}" : undefined}
+                placeholder={mode === "staff" ? "8-digit PIN" : undefined}
                 required
                 className="w-full bg-transparent px-3 text-base text-white outline-none"
               />
-              <button
+              {mode === "admin" && <button
                 type="button"
                 onClick={() => setShowPassword((visible) => !visible)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
                 className="flex min-h-12 w-12 shrink-0 items-center justify-center text-white/60 hover:text-white"
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
+              </button>}
             </div>
           </div>
 

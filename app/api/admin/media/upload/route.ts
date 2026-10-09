@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
-import { getAdmin } from "@/lib/requireAdmin";
+import { getPhotoUploader } from "@/lib/requirePhotoUploader";
 import { isMediaSection } from "@/lib/media";
 
 export const runtime = "nodejs";
@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 const MAX_BYTES = 20 * 1024 * 1024; // 20 MB per photo
 
 // Issues short-lived upload tokens so the browser can send photos straight to
-// Vercel Blob (avoids the ~4.5 MB serverless request limit). Only admins get a
+// Vercel Blob (avoids the ~4.5 MB serverless request limit). Admins and photo staff get a
 // token. The DB record is created afterwards by POST /api/admin/media.
 export async function POST(req: Request) {
   if (!process.env.BLOB_READ_WRITE_TOKEN) {
@@ -31,8 +31,8 @@ export async function POST(req: Request) {
       body,
       request: req,
       onBeforeGenerateToken: async (pathname) => {
-        const admin = await getAdmin();
-        if (!admin) throw new Error("Please sign in as an admin to upload.");
+        const uploader = await getPhotoUploader();
+        if (!uploader) throw new Error("Please sign in with an active uploader account.");
         const section = pathname.split("/")[1];
         if (!pathname.startsWith("media/") || !isMediaSection(section)) {
           throw new Error("Unknown section.");

@@ -6,7 +6,9 @@ import { prisma } from "@/lib/prisma";
 // Always reads from the DB so callers get the canonical record (id, role).
 export async function getCurrentUser() {
   const session = await getServerSession(authOptions);
+  const id = session?.user?.id;
   const email = session?.user?.email;
+  if (id) return prisma.user.findUnique({ where: { id } });
   if (!email) return null;
   return prisma.user.findUnique({ where: { email: email.toLowerCase() } });
 }

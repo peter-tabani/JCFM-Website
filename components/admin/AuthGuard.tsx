@@ -16,7 +16,10 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
       const cb = encodeURIComponent(pathname || "/admin");
       router.replace(`/login?callbackUrl=${cb}`);
     }
-  }, [status, pathname, router]);
+    if (status === "authenticated" && data?.user?.role === "staff") {
+      router.replace("/staff/uploads");
+    }
+  }, [status, pathname, router, data?.user?.role]);
 
   if (status === "loading") {
     return (
@@ -34,6 +37,8 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   if (status === "unauthenticated") return null;
 
   // Session present but not an admin, show a friendly block
+  if (data?.user?.role === "staff") return null;
+
   if (data?.user?.role && data.user.role !== "admin") {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#080808] p-6 text-white">

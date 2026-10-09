@@ -17,6 +17,7 @@ import {
   X,
   ExternalLink,
   Upload,
+  KeyRound,
 } from "lucide-react";
 
 type NavItem = { label: string; href: string; icon: React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }> };
@@ -43,6 +44,7 @@ const SCHOOL: NavItem[] = [
 ];
 
 const SYSTEM: NavItem[] = [
+  { label: "Staff access", href: "/admin/staff", icon: KeyRound },
   { label: "Settings", href: "/admin/settings", icon: Settings },
 ];
 
