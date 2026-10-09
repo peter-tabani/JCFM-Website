@@ -187,7 +187,7 @@ export default function Hero() {
           {/* Message */}
           <div className="text-left">
             <h2 className="font-serif text-[28px] font-semibold leading-tight tracking-[0.01em] text-white sm:text-[34px] lg:text-[40px]">
-              Meet Bishop Nelson Barasa Wanjala and Pastor Sarah Nangila Wekesa
+              Meet <span id="bishop-nelson-barasa-wanjala" className="scroll-mt-24">Bishop Nelson Barasa Wanjala</span> and <span id="pastor-sarah-nangila-wekesa" className="scroll-mt-24">Pastor Sarah Nangila Wekesa</span>
             </h2>
             <div className="mt-5 h-px w-14 bg-[#15803d]" />
             <p className="mt-6 max-w-xl text-[15px] leading-[1.65] text-white/80">
