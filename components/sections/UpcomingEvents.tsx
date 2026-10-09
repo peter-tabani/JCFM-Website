@@ -81,7 +81,7 @@ export default function UpcomingEvents() {
       <div className="mx-auto max-w-[1200px] px-5 py-14 sm:px-6 md:py-20">
         <div className="text-center">
           <h2 className="font-serif text-3xl font-semibold leading-tight text-white sm:text-4xl">
-            Upcoming Events
+            Events
           </h2>
           <div className="mx-auto mt-5 h-[2px] w-20 bg-[#15803d]" />
         </div>
