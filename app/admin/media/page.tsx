@@ -10,23 +10,19 @@ import {
   GhostButton,
 } from "@/components/admin/ui";
 import { FormModal, Field, SelectField } from "@/components/admin/AdminForm";
-import { MEDIA_CATEGORIES, videoThumb } from "@/lib/media";
+import { MEDIA_CATEGORIES, MEDIA_SECTIONS, sectionLabel, videoThumb } from "@/lib/media";
 
 type MediaItem = {
   id: string;
   type: "image" | "video";
   title: string;
   category: string;
-  section: "church" | "school";
+  section: string;
   url: string;
   thumbnail: string | null;
   published: boolean;
 };
 
-const SECTION_LABELS: Record<string, string> = {
-  church: "Life at JCFM",
-  school: "Fountain of Hope",
-};
 
 export default function AdminMedia() {
   const [items, setItems] = useState<MediaItem[]>([]);
@@ -94,8 +90,9 @@ export default function AdminMedia() {
           <>
             <GhostButton icon={ExternalLink} href="/#gallery">Life at JCFM</GhostButton>
             <GhostButton icon={ExternalLink} href="/school#gallery">Academy</GhostButton>
+            <GhostButton icon={ImagePlus} href="/admin/uploads">Upload photo files</GhostButton>
             <PrimaryButton icon={ImagePlus} onClick={() => { setError(null); setType("image"); setOpen(true); }}>
-              Upload
+              Add by link
             </PrimaryButton>
           </>
         }
@@ -164,7 +161,7 @@ export default function AdminMedia() {
                         <p className="truncate text-[14px] font-semibold text-slate-900">{m.title}</p>
                         <p className="text-[11px] uppercase tracking-wide text-slate-500">{m.category} · {m.type}</p>
                         <span className="mt-1 inline-block rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-600">
-                          {SECTION_LABELS[m.section] ?? m.section}
+                          {sectionLabel(m.section)}
                         </span>
                       </div>
                       <StatusPill label={m.published ? "Live" : "Hidden"} tone={m.published ? "success" : "neutral"} />
@@ -210,10 +207,7 @@ export default function AdminMedia() {
             name="section"
             required
             defaultValue={tab === "school" ? "school" : "church"}
-            options={[
-              { value: "church", label: "Life at JCFM (church home page)" },
-              { value: "school", label: "Fountain of Hope Academy (school page)" },
-            ]}
+            options={MEDIA_SECTIONS.map((s) => ({ value: s.key, label: s.label }))}
           />
           <Field label="Title" name="title" required placeholder={type === "video" ? "e.g. Sunday Sermon, Walking by Faith" : "e.g. Sunday Worship Service"} />
           <SelectField

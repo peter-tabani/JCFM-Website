@@ -12,7 +12,7 @@ type GalleryItem = {
   tag: string;
 };
 
-// Fallback shown only until the admin uploads media (Admin → Life at JCFM).
+// Built-in photos, always shown after any admin uploads.
 const FALLBACK_ITEMS: GalleryItem[] = [
   { type: "image", src: "/images/PeopleStandingAtAlter.jpg", thumb: "/images/PeopleStandingAtAlter.jpg", caption: "Sunday Worship Service", tag: "Worship" },
   { type: "image", src: "/images/PeopleSittingInChurch.jpg", thumb: "/images/PeopleSittingInChurch.jpg", caption: "Gathered Together", tag: "Worship" },
@@ -56,8 +56,16 @@ export default function MediaGallery() {
       .catch(() => setDbItems([]));
   }, []);
 
-  // Admin-uploaded media when present; otherwise the demo fallback.
-  const items = dbItems && dbItems.length > 0 ? dbItems : FALLBACK_ITEMS;
+  // Uploaded items first, then built-in photos. A photo already in the
+  // database should not appear a second time in the built-in list.
+  const items = useMemo(() => {
+    const seen = new Set<string>();
+    return [...(dbItems ?? []), ...FALLBACK_ITEMS].filter((item) => {
+      if (seen.has(item.src)) return false;
+      seen.add(item.src);
+      return true;
+    });
+  }, [dbItems]);
 
   const tags = useMemo(
     () => ["All", ...Array.from(new Set(items.map((i) => i.tag)))],

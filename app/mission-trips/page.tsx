@@ -13,7 +13,7 @@ import {
   Users,
 } from "lucide-react";
 import Footer from "@/components/layout/Footer";
-import ImageCarousel from "@/components/ui/ImageCarousel";
+import MissionGallery from "@/components/sections/MissionGallery";
 import { siteData } from "@/data/site";
 import { publicPageMetadata } from "@/lib/seo";
 
@@ -65,8 +65,8 @@ const TRIPS = [
   },
 ];
 
-// Add or remove photos here, just drop a file into /public/images
-// and add an entry below. The carousel slides through them automatically.
+// Built-in photos. New photos can be added from Admin → Upload Photos
+// (Mission Trips); uploads appear before these in the carousel.
 const GALLERY = [
   {
     src: "/images/mission-trip.jpeg",
@@ -368,7 +368,7 @@ export default function MissionTripsPage() {
             </h2>
             <div className="mx-auto mt-4 h-px w-12 bg-[#15803d]" />
           </div>
-          <ImageCarousel
+          <MissionGallery
             images={GALLERY}
             className="h-[280px] w-full sm:h-[380px] md:h-[480px] lg:h-[540px]"
           />

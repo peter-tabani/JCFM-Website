@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getAdmin } from "@/lib/requireAdmin";
+import { isMediaSection } from "@/lib/media";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const TYPES = ["image", "video"] as const;
-const SECTIONS = ["church", "school"] as const;
 
 export async function GET() {
   const admin = await getAdmin();
@@ -28,13 +28,11 @@ export async function POST(req: Request) {
   }
 
   const type = String(body.type ?? "");
-  const title = String(body.title ?? "").trim();
+  const title = String(body.title ?? "").trim().slice(0, 160);
   const category = String(body.category ?? "Worship").trim() || "Worship";
   const url = String(body.url ?? "").trim();
   const sectionRaw = String(body.section ?? "church");
-  const section = SECTIONS.includes(sectionRaw as (typeof SECTIONS)[number])
-    ? sectionRaw
-    : "church";
+  const section = isMediaSection(sectionRaw) ? sectionRaw : "church";
 
   if (!TYPES.includes(type as (typeof TYPES)[number])) {
     return NextResponse.json({ error: "Choose image or video." }, { status: 400 });

@@ -16,12 +16,14 @@ import {
   LogOut,
   X,
   ExternalLink,
+  Upload,
 } from "lucide-react";
 
 type NavItem = { label: string; href: string; icon: React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }> };
 
 const PRIMARY: NavItem[] = [
   { label: "Overview", href: "/admin", icon: LayoutDashboard },
+  { label: "Upload Photos", href: "/admin/uploads", icon: Upload },
 ];
 
 const MINISTRY: NavItem[] = [

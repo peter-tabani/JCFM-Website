@@ -58,16 +58,21 @@ export default function Footer() {
       <div className="mx-auto mt-12 max-w-[1400px] border-t border-white/10 px-4 pt-6 lg:px-6">
         <div className="flex flex-col gap-2 text-sm text-white/40 sm:flex-row sm:justify-between">
           <p> {new Date().getFullYear()} Jesus Christ Founder Ministry. All rights reserved.</p>
-          <a
-            href="https://wa.me/254708905590?text=Hello%20Frank%2C%20I%20saw%20your%20work%20on%20the%20JCFM%20website%20and%20I%20am%20interested%20in%20working%20with%20you."
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Website developed by Peter Frank"
-            aria-label="Website developed by Peter Frank"
-            className="transition hover:text-[#c4b5fd]"
-          >
-            Website developed by PF
-          </a>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <Link href="/admin/uploads" rel="nofollow" className="transition hover:text-[#c4b5fd]">
+              Upload photos
+            </Link>
+            <a
+              href="https://wa.me/254708905590?text=Hello%20Frank%2C%20I%20saw%20your%20work%20on%20the%20JCFM%20website%20and%20I%20am%20interested%20in%20working%20with%20you."
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Website developed by Peter Frank"
+              aria-label="Website developed by Peter Frank"
+              className="transition hover:text-[#c4b5fd]"
+            >
+              Website developed by PF
+            </a>
+          </div>
         </div>
       </div>
     </footer>

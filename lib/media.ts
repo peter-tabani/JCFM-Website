@@ -44,3 +44,24 @@ export const MEDIA_CATEGORIES = [
   "Fellowship",
   "School",
 ] as const;
+
+// Where an uploaded item appears on the public site. `section` is stored on
+// MediaItem as a plain string, so adding a section needs no DB migration.
+export const MEDIA_SECTIONS = [
+  { key: "hero", label: "Homepage hero slideshow", page: "/", hint: "Large rotating photos at the top of the homepage. Landscape photos work best." },
+  { key: "church", label: "Life at JCFM gallery", page: "/#gallery", hint: "The church photo gallery on the homepage." },
+  { key: "school", label: "Fountain of Hope gallery", page: "/school#gallery", hint: "The gallery on the school page." },
+  { key: "missions", label: "Mission Trips gallery", page: "/mission-trips", hint: "The “Moments from the field” slideshow on the mission trips page." },
+] as const;
+
+export type MediaSection = (typeof MEDIA_SECTIONS)[number]["key"];
+
+export const MEDIA_SECTION_KEYS = MEDIA_SECTIONS.map((s) => s.key) as readonly string[];
+
+export function isMediaSection(v: unknown): v is MediaSection {
+  return typeof v === "string" && MEDIA_SECTION_KEYS.includes(v);
+}
+
+export function sectionLabel(key: string): string {
+  return MEDIA_SECTIONS.find((s) => s.key === key)?.label ?? key;
+}

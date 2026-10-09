@@ -54,7 +54,15 @@ export default function SchoolMediaGallery() {
       .catch(() => setDbItems([]));
   }, []);
 
-  const items = dbItems && dbItems.length > 0 ? dbItems : FALLBACK_ITEMS;
+  // Uploaded items first, then the built-in photos.
+  const items = useMemo(() => {
+    const seen = new Set<string>();
+    return [...(dbItems ?? []), ...FALLBACK_ITEMS].filter((item) => {
+      if (seen.has(item.src)) return false;
+      seen.add(item.src);
+      return true;
+    });
+  }, [dbItems]);
 
   const tags = useMemo(
     () => ["All", ...Array.from(new Set(items.map((i) => i.tag)))],
