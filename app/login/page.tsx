@@ -16,7 +16,8 @@ export default function LoginPage() {
 function LoginForm() {
   const search = useSearchParams();
   const callback = search.get("callbackUrl") || "/admin";
-  const [mode, setMode] = useState<"admin" | "staff">("admin");
+  // Phone/PIN is the normal admin login for ministry leaders. Email is reserved for the developer.
+  const [mode, setMode] = useState<"admin" | "staff">("staff");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -63,14 +64,6 @@ function LoginForm() {
         )}
 
         <form onSubmit={onSubmit} className="space-y-5">
-          <div className="grid grid-cols-2 border border-white/20 p-1">
-            <button type="button" onClick={() => { setMode("admin"); setEmail(""); setPassword(""); setError(null); }} className={`flex min-h-11 items-center justify-center gap-2 text-sm font-semibold transition ${mode === "admin" ? "bg-white text-black" : "text-white/65 hover:text-white"}`}>
-              <Lock size={15} /> Admin
-            </button>
-            <button type="button" onClick={() => { setMode("staff"); setEmail(""); setPassword(""); setError(null); }} className={`flex min-h-11 items-center justify-center gap-2 text-sm font-semibold transition ${mode === "staff" ? "bg-white text-black" : "text-white/65 hover:text-white"}`}>
-              <Phone size={15} /> Staff
-            </button>
-          </div>
           <div>
             <label htmlFor="admin-email" className="mb-2 block text-sm text-white">
               {mode === "admin" ? "Email" : "Phone number"}
@@ -85,7 +78,6 @@ function LoginForm() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 autoComplete={mode === "admin" ? "username" : "tel"}
-                placeholder={mode === "staff" ? "07xx xxx xxx or +254 7xx xxx xxx" : undefined}
                 required
                 className="w-full bg-transparent px-3 text-base text-white outline-none"
               />
@@ -109,7 +101,6 @@ function LoginForm() {
                 inputMode={mode === "staff" ? "numeric" : undefined}
                 maxLength={mode === "staff" ? 8 : undefined}
                 pattern={mode === "staff" ? "[0-9]{8}" : undefined}
-                placeholder={mode === "staff" ? "8-digit PIN" : undefined}
                 required
                 className="w-full bg-transparent px-3 text-base text-white outline-none"
               />
@@ -132,6 +123,20 @@ function LoginForm() {
             {loading ? "Signing in…" : "Sign in"}
             {!loading && <ArrowRight size={17} />}
           </button>
+          <div className="pt-1 text-center">
+            <button
+              type="button"
+              onClick={() => {
+                setMode(mode === "staff" ? "admin" : "staff");
+                setEmail("");
+                setPassword("");
+                setError(null);
+              }}
+              className="min-h-11 px-2 text-sm text-white/75 underline underline-offset-4 hover:text-white"
+            >
+              {mode === "staff" ? "Login as developer" : "Back to admin login"}
+            </button>
+          </div>
         </form>
       </div>
     </main>
