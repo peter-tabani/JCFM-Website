@@ -85,7 +85,7 @@ function LoginForm() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 autoComplete={mode === "admin" ? "username" : "tel"}
-                placeholder={mode === "staff" ? "+254 712 345 678" : undefined}
+                placeholder={mode === "staff" ? "07xx xxx xxx or +254 7xx xxx xxx" : undefined}
                 required
                 className="w-full bg-transparent px-3 text-base text-white outline-none"
               />

@@ -82,7 +82,10 @@ h3,
   color: #f5f5f5;
 }
 
-[data-admin-theme="dark"] [class~="bg-white"],
+[data-admin-theme="dark"] [class~="bg-white"]:not([class~="text-black"]) {
+  background-color: #111111 !important;
+}
+
 [data-admin-theme="dark"] [class~="bg-white/95"] {
   background-color: #111111 !important;
 }

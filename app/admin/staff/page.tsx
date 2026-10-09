@@ -99,7 +99,7 @@ export default function StaffAccessPage() {
               <input value={name} onChange={(e) => setName(e.target.value)} required maxLength={100} autoComplete="name" className="mt-1.5 min-h-12 w-full rounded-lg border border-white/20 bg-black px-3 text-base text-white outline-none focus:border-white/70" />
             </label>
             <label className="block text-sm font-medium">Phone number
-              <input value={phone} onChange={(e) => setPhone(e.target.value)} required type="tel" autoComplete="tel" placeholder="+254 712 345 678" className="mt-1.5 min-h-12 w-full rounded-lg border border-white/20 bg-black px-3 text-base text-white outline-none focus:border-white/70" />
+              <input value={phone} onChange={(e) => setPhone(e.target.value)} required type="tel" autoComplete="tel" placeholder="07xx xxx xxx or +254 7xx xxx xxx" className="mt-1.5 min-h-12 w-full rounded-lg border border-white/20 bg-black px-3 text-base text-white outline-none focus:border-white/70" />
             </label>
             <button disabled={saving} className="flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-white px-4 font-semibold text-black hover:bg-neutral-200 disabled:opacity-60">
               {saving ? <Loader2 size={17} className="animate-spin" /> : <UserPlus size={17} />}
