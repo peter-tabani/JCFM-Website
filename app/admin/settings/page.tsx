@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import {
-  Settings,
   User,
   Bell,
   Shield,
@@ -31,11 +30,45 @@ export default function AdminSettingsPage() {
   const { data: session } = useSession();
   const [tab, setTab] = useState<TabKey>("profile");
   const [saved, setSaved] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordMessage, setPasswordMessage] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [passwordSaving, setPasswordSaving] = useState(false);
 
   function handleSave(e: React.FormEvent) {
     e.preventDefault();
     setSaved(true);
     setTimeout(() => setSaved(false), 2400);
+  }
+
+  async function handlePasswordChange(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setPasswordError("");
+    setPasswordMessage("");
+    if (newPassword !== confirmPassword) {
+      setPasswordError("The new passwords do not match.");
+      return;
+    }
+    setPasswordSaving(true);
+    try {
+      const response = await fetch("/api/admin/account/password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ currentPassword, newPassword }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Could not change the password.");
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+      setPasswordMessage("Password updated.");
+    } catch (err) {
+      setPasswordError(err instanceof Error ? err.message : "Could not change the password.");
+    } finally {
+      setPasswordSaving(false);
+    }
   }
 
   return (
@@ -93,7 +126,7 @@ export default function AdminSettingsPage() {
         </aside>
 
         {/* Content */}
-        <form onSubmit={handleSave} className="space-y-6">
+        <div className="space-y-6">
           {tab === "profile" && (
             <Card title="Administrator Profile" kicker="Account">
               <div className="grid gap-5 md:grid-cols-2">
@@ -165,12 +198,20 @@ export default function AdminSettingsPage() {
           {tab === "security" && (
             <>
               <Card title="Password" kicker="Authentication">
-                <div className="grid gap-5 md:grid-cols-2">
-                  <Field label="Current Password" type="password" placeholder="••••••••" />
-                  <div />
-                  <Field label="New Password" type="password" placeholder="••••••••" />
-                  <Field label="Confirm New Password" type="password" placeholder="••••••••" />
-                </div>
+                <form onSubmit={handlePasswordChange} className="space-y-4">
+                  {passwordError && <p role="alert" className="rounded-md border border-red-400/30 bg-red-950/50 p-3 text-sm text-red-200">{passwordError}</p>}
+                  {passwordMessage && <p role="status" className="rounded-md border border-emerald-400/30 bg-emerald-950/40 p-3 text-sm text-emerald-200">{passwordMessage}</p>}
+                  <div className="grid gap-5 md:grid-cols-2">
+                    <PasswordInput label="Current Password" value={currentPassword} onChange={setCurrentPassword} autoComplete="current-password" />
+                    <div className="hidden md:block" />
+                    <PasswordInput label="New Password" value={newPassword} onChange={setNewPassword} autoComplete="new-password" />
+                    <PasswordInput label="Confirm New Password" value={confirmPassword} onChange={setConfirmPassword} autoComplete="new-password" />
+                  </div>
+                  <p className="text-xs text-slate-500">Use at least 12 characters. The password is stored as a one-way hash.</p>
+                  <button type="submit" disabled={passwordSaving} className="min-h-11 rounded-md bg-white px-4 text-sm font-semibold text-black transition hover:bg-neutral-200 disabled:opacity-60">
+                    {passwordSaving ? "Updating…" : "Update password"}
+                  </button>
+                </form>
               </Card>
               <Card title="Two-Factor Authentication" kicker="Account Safety">
                 <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -272,17 +313,35 @@ export default function AdminSettingsPage() {
 
           <div className="flex items-center justify-end gap-3 border-t border-slate-200 pt-5">
             <GhostButton>Cancel</GhostButton>
-            <PrimaryButton type="submit" icon={Save}>
+            <PrimaryButton icon={Save} onClick={() => handleSave({ preventDefault: () => {} } as React.FormEvent)}>
               Save Changes
             </PrimaryButton>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
 }
 
 /* helpers */
+
+function PasswordInput({ label, value, onChange, autoComplete }: { label: string; value: string; onChange: (value: string) => void; autoComplete: string }) {
+  return (
+    <label className="block">
+      <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-slate-500">{label}</span>
+      <input
+        type="password"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        autoComplete={autoComplete}
+        required
+        minLength={label === "Current Password" ? 1 : 12}
+        maxLength={256}
+        className="mt-1.5 min-h-11 w-full border border-slate-200 bg-white px-3 py-2.5 text-[14px] text-slate-900 outline-none transition focus:border-slate-900"
+      />
+    </label>
+  );
+}
 
 function Field({
   label,
