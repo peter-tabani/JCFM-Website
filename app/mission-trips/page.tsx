@@ -52,7 +52,7 @@ const TRIPS = [
       "A preaching-focused visit across the Nzoia headquarters and our branches, with evening crusades and pastor encouragement.",
   },
   {
-    image: "/images/programs/primary.jpg",
+    image: "/images/SundaySchoolSeatedLesson.jpg",
     title: "School & Children's Trip",
     blurb:
       "Spend the trip at Fountain of Hope Academy. Read with the learners, lead chapel, sit with the teachers, and pour into the next generation.",
