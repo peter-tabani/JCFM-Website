@@ -27,5 +27,11 @@ export default function MissionGallery({
       .catch(() => {});
   }, []);
 
-  return <ImageCarousel images={[...uploads, ...images]} className={className} />;
+  return (
+    <ImageCarousel
+      images={[...uploads, ...images]}
+      className={className}
+      alwaysShowArrows
+    />
+  );
 }

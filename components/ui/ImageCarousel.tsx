@@ -19,10 +19,12 @@ export default function ImageCarousel({
   images,
   interval = 5000,
   className = "",
+  alwaysShowArrows = false,
 }: {
   images: CarouselImage[];
   interval?: number;
   className?: string;
+  alwaysShowArrows?: boolean;
 }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -81,7 +83,7 @@ export default function ImageCarousel({
             type="button"
             onClick={() => go(index - 1)}
             aria-label="Previous image"
-            className="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-white/30 bg-black/30 text-white opacity-0 backdrop-blur-sm transition hover:border-[#7c3aed] hover:bg-[#7c3aed] focus-visible:opacity-100 group-hover:opacity-100 md:left-5"
+            className={`absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-white/30 bg-black/50 text-white backdrop-blur-sm transition hover:border-[#7c3aed] hover:bg-[#7c3aed] md:left-5 ${alwaysShowArrows ? "opacity-100" : "opacity-0 focus-visible:opacity-100 group-hover:opacity-100"}`}
           >
             <ChevronLeft size={20} strokeWidth={2.25} />
           </button>
@@ -89,7 +91,7 @@ export default function ImageCarousel({
             type="button"
             onClick={() => go(index + 1)}
             aria-label="Next image"
-            className="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-white/30 bg-black/30 text-white opacity-0 backdrop-blur-sm transition hover:border-[#7c3aed] hover:bg-[#7c3aed] focus-visible:opacity-100 group-hover:opacity-100 md:right-5"
+            className={`absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-white/30 bg-black/50 text-white backdrop-blur-sm transition hover:border-[#7c3aed] hover:bg-[#7c3aed] md:right-5 ${alwaysShowArrows ? "opacity-100" : "opacity-0 focus-visible:opacity-100 group-hover:opacity-100"}`}
           >
             <ChevronRight size={20} strokeWidth={2.25} />
           </button>
